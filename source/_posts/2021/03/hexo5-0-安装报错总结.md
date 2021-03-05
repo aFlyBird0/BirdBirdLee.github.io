@@ -7,6 +7,55 @@ categories:
 	- CS
 ---
 
+## 部署与备份小总结
+
+经过我三次的 `hexo` 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署。
+
+<!-- more -->
+
+首先明确两点，`github` 展示的页面，不由自己掌管，也不用自己 `git push` 全部交由 `hexo g -d` 这个命令来完成，它会在 `/public` 文件夹中生成要部署的静态页面，然后复制到 `/.deploy_git` 文件夹中，再全部覆盖推到我们在 `/_config.yml`中设置的 分支，若设置的是 `master`，则文件内容是这样的：
+```yml
+deploy: 
+
+​	branch: master
+
+```
+
+我们要做的，是设置一个备份分支，如 `hexo` 分支，并在 `github` 中将其设置成默认分支，然后手动推到远程，`master` 和 `hexo`这两个分支没有关联，我们也只要维护 `hexo`分支来备份自己的文件。而 `master`分支下的静态文件的提交，由 `hexo g -d`来完成（是的这部分我说了两遍）
+
+有一点需要注意，在仓库界面，如果你建立的第一个分支不是静态文件所在的那个分支，要手动改回 `master`，即 `hexo` 分支。（一般情况最先建立的都是主分支，即静态文件分支，不用进行这个操作）
+
+![image-20210305214426331](https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png)
+
+我的操作流程是这样的：
+
+1. 先在本地把整个博客都搭好了，文件夹名字随意
+2. 在远程仓库建立 `用户名.github.io` 仓库，注意 `readme` 和 `.gitignore` 文件都不要
+3. 在本地博客目录下， `git init`，然后 `git remote add origin git@github.com:用户名/用户名.github.io.git` 与远程仓库建立联系
+4. 然后再把本地文件提交，推上去，再检出 `hexo` 分支，推上去，将 `hexo` 分支设置为默认分支
+5. 后面需要写文章的时候，用 `hexo new "文件名"`
+6. 部署和备份直接运行我去年写的脚本，将脚本复制到博客根目录下，`git bash` 键入：`sh auto_deploy.sh "github提交的commit"` 即可完成部署+备份
+
+```shell
+# 切回hexo, 以防万一
+git checkout hexo
+# 提交本地的
+git add .
+git commit -m "$1"
+# 提交到远程
+git push origin hexo
+# 到页面发布分支
+# git checkout master
+# 清理原html
+hexo clean
+# 生成，部署
+hexo g -d
+# 返回原文件分支
+# git checkout hexo		
+```
+
+
+
 ## 参考链接
 
 `hexo` 官方文档：[文档 | Hexo](https://hexo.io/zh-cn/docs/)
@@ -24,8 +73,6 @@ https://tang.su/2020/09/upgrade-hexo-to-5-0/#more)
 [Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林](http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/)
 
 [hexo博客next主题添加 评论功能_Mumu's Blogs-CSDN博客](https://blog.csdn.net/zhu_1997/article/details/87554975)
-
-<!-- more -->
 
 ## 报错
 
