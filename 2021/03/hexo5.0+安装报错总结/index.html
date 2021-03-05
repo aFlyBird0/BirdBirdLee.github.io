@@ -23,17 +23,19 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="参考链接hexo 官方文档：文档 | Hexo hexo 中 _posts 文件夹分类： 如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客 如何对hexo中的文章进行分类管理 | 大专栏 添加看板娘：Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客 https:&#x2F;&#x2F;tang.su&#x2F;2020&#x2F;09&#x2F;upgrade-hexo-to-5-0&#x2F;#more) H">
+<meta name="description" content="部署与备份小总结经过我三次的 hexo 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo5.0+安装报错总结">
 <meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="参考链接hexo 官方文档：文档 | Hexo hexo 中 _posts 文件夹分类： 如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客 如何对hexo中的文章进行分类管理 | 大专栏 添加看板娘：Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客 https:&#x2F;&#x2F;tang.su&#x2F;2020&#x2F;09&#x2F;upgrade-hexo-to-5-0&#x2F;#more) H">
+<meta property="og:description" content="部署与备份小总结经过我三次的 hexo 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png">
 <meta property="article:published_time" content="2021-03-05T08:33:10.000Z">
-<meta property="article:modified_time" content="2021-03-05T12:37:03.115Z">
+<meta property="article:modified_time" content="2021-03-05T13:53:20.596Z">
 <meta property="article:author" content="Bird">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png">
 
 
 <link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/">
@@ -186,7 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">2.</span> <span class="nav-text">报错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%80%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">报错一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">报错二</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%A4%87%E4%BB%BD%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">部署与备份小总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">3.</span> <span class="nav-text">报错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%80%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">报错一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BA%8C"><span class="nav-number">3.2.</span> <span class="nav-text">报错二</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,7 +284,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-03-05 16:33:10 / 修改时间：20:37:03" itemprop="dateCreated datePublished" datetime="2021-03-05T16:33:10+08:00">2021-03-05</time>
+      <time title="创建时间：2021-03-05 16:33:10 / 修改时间：21:53:20" itemprop="dateCreated datePublished" datetime="2021-03-05T16:33:10+08:00">2021-03-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -316,14 +318,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -334,7 +336,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><code>hexo</code> 官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">文档 | Hexo</a></p>
+        <h2 id="部署与备份小总结"><a href="#部署与备份小总结" class="headerlink" title="部署与备份小总结"></a>部署与备份小总结</h2><p>经过我三次的 <code>hexo</code> 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署。</p>
+<span id="more"></span>
+
+<p>首先明确两点，<code>github</code> 展示的页面，不由自己掌管，也不用自己 <code>git push</code> 全部交由 <code>hexo g -d</code> 这个命令来完成，它会在 <code>/public</code> 文件夹中生成要部署的静态页面，然后复制到 <code>/.deploy_git</code> 文件夹中，再全部覆盖推到我们在 <code>/_config.yml</code>中设置的 分支，若设置的是 <code>master</code>，则文件内容是这样的：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"></span><br><span class="line"><span class="string">​</span>	<span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们要做的，是设置一个备份分支，如 <code>hexo</code> 分支，并在 <code>github</code> 中将其设置成默认分支，然后手动推到远程，<code>master</code> 和 <code>hexo</code>这两个分支没有关联，我们也只要维护 <code>hexo</code>分支来备份自己的文件。而 <code>master</code>分支下的静态文件的提交，由 <code>hexo g -d</code>来完成（是的这部分我说了两遍）</p>
+<p>有一点需要注意，在仓库界面，如果你建立的第一个分支不是静态文件所在的那个分支，要手动改回 <code>master</code>，即 <code>hexo</code> 分支。（一般情况最先建立的都是主分支，即静态文件分支，不用进行这个操作）</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png" alt="image-20210305214426331"></p>
+<p>我的操作流程是这样的：</p>
+<ol>
+<li>先在本地把整个博客都搭好了，文件夹名字随意</li>
+<li>在远程仓库建立 <code>用户名.github.io</code> 仓库，注意 <code>readme</code> 和 <code>.gitignore</code> 文件都不要</li>
+<li>在本地博客目录下， <code>git init</code>，然后 <code>git remote add origin git@github.com:用户名/用户名.github.io.git</code> 与远程仓库建立联系</li>
+<li>然后再把本地文件提交，推上去，再检出 <code>hexo</code> 分支，推上去，将 <code>hexo</code> 分支设置为默认分支</li>
+<li>后面需要写文章的时候，用 <code>hexo new &quot;文件名&quot;</code></li>
+<li>部署和备份直接运行我去年写的脚本，将脚本复制到博客根目录下，<code>git bash</code> 键入：<code>sh auto_deploy.sh &quot;github提交的commit&quot;</code> 即可完成部署+备份</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;$1&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 到页面发布分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git checkout master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清理原html</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成，部署</span></span><br><span class="line">hexo g -d</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回原文件分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git checkout hexo</span>		</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><code>hexo</code> 官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">文档 | Hexo</a></p>
 <p><code>hexo</code> 中 <code>_posts</code> 文件夹分类：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/28/5e7e34ca352b3/">如何对hexo中的文章进行分类管理 | 大专栏</a></p>
@@ -342,8 +366,6 @@
 <p><a target="_blank" rel="noopener" href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">https://tang.su/2020/09/upgrade-hexo-to-5-0/#more</a>)</p>
 <p><a target="_blank" rel="noopener" href="http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/">Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_1997/article/details/87554975">hexo博客next主题添加 评论功能_Mumu’s Blogs-CSDN博客</a></p>
-<span id="more"></span>
-
 <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="报错一："><a href="#报错一：" class="headerlink" title="报错一："></a>报错一：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">FATAL &#123;</span><br><span class="line">  err: YAMLException: end of the stream or a document separator is expected (1:1)</span><br><span class="line"></span><br><span class="line">   1 | &#96;&#96;&#96;</span><br><span class="line">  -----^</span><br><span class="line">      at generateError (D:\Desktop\blog\node_modules\js-yaml\lib\loader.js:183:10)asap.js:40:19)</span><br><span class="line">      at flush </span><br><span class="line">      </span><br><span class="line">      ---------------中间省略---------------------</span><br><span class="line">      (internal&#x2F;process&#x2F;task_queues.js:75:11) &#123;</span><br><span class="line">    reason: &#39;end of the stream or a document separator is expected&#39;,</span><br><span class="line">    mark: &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;&#96;&#96;&#96;\n&#39;,</span><br><span class="line">      position: 0,</span><br><span class="line">      line: 0,</span><br><span class="line">      column: 0,</span><br><span class="line">      snippet: &#39; 1 | &#96;&#96;&#96;\n-----^&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>查阅资料得知，大部分情况为，<code>_config.yml</code> 文件下所有的 <code>:</code> 后，必须有空格，且只能有一个空格。于是我开始检查，利用编辑器搜索 <code>: </code>，高亮出符合内容的冒号，这样就能快速找出不符合要求的冒号。但是试了好几遍，没有找出不符合要求的，缓存清除一类的也不行。</p>
@@ -426,13 +448,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">10k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">9 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
