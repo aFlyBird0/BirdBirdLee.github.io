@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>使用frpMgr快速搭建内网穿透</title>
+    <url>/2020/04/%E4%BD%BF%E7%94%A8frpMgr%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a> </li>
+<li>利用管理面板自动安装 frp server</li>
+<li>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</li>
+<li>使用 <code>ssh</code> 访问</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="安装基于-frp-的内网穿透管理面板-frpMgr"><a href="#安装基于-frp-的内网穿透管理面板-frpMgr" class="headerlink" title="安装基于 frp 的内网穿透管理面板 frpMgr"></a>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a></h2><ul>
+<li><strong>安装</strong><ol>
+<li><p><strong>安装 docker 与 docker compose</strong></p>
+<ul>
+<li>若无 docker : <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -O-https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Zo3i&#x2F;OCS&#x2F;master&#x2F;docker&#x2F;docker-all2.sh | SH wget -O-</span><br></pre></td></tr></table></figure></li>
+<li>若有 docker 无 docker compose : <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li>若 docker 和 docker compose都有， 跳过此步`</li>
+</ul>
+</li>
+<li><p><strong>安装 frpMgr</strong></p>
+<ul>
+<li><code>https://raw.githubusercontent.com/Zo3i/frpMgr/master/web/src/main/docker/final/run.sh | SH  </code></li>
+<li>约 500 M，若下载太慢可以修改 host，或者用 <a href="https://g.widora.cn/">Github代下载</a> 再传到服务器</li>
+</ul>
+</li>
+<li><p><strong>开放防火墙 8999 端口</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="利用管理面板自动安装-frp-server"><a href="#利用管理面板自动安装-frp-server" class="headerlink" title="利用管理面板自动安装 frp server"></a>利用管理面板自动安装 frp server</h2><ul>
+<li><p>访问 <code>服务器域名（ip）:8999</code>   如 <code>xx.com:8999</code>，账户密码 admin / 12345678</p>
+</li>
+<li><p>准备一个域名，解析 *.xxx.com （二级通配）到 frp_server 的服务器 IP</p>
+</li>
+<li><p>配置 frp_server (图来自 frpMgr github)</p>
+<ul>
+<li>服务器名称，自定义名称，不解释</li>
+<li>服务器 IP：待安装 frp_server 的服务器IP</li>
+<li>域名：刚刚的一级域名</li>
+<li>访问端口：web 访问端口，如果配 web 访问要用到（和ssh无关），记得安全组/防火墙打开。</li>
+<li>服务器用户名：服务器用户名。</li>
+<li>依次点击 【保存】【远程安装】，输入服务器密码，即可看到安装成功提示</li>
+<li>在服务器执行 <code>netstat -lnp|grep 7000</code> 查看服务是否成功启动</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/778ec45220f7dc5fae657beb12f3f21016985174/68747470733a2f2f7a78782e6f6e652f696d67732f323031392f31312f623965373761363035663330396231362e706e67"></p>
+</li>
+</ul>
+<h2 id="利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装"><a href="#利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装" class="headerlink" title="利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装"></a>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</h2><ul>
+<li>选择 <code>SSH客户端配置</code>， 点击右上角 <code>新增</code></li>
+<li><img src="http://qiniu.tcualhp.cn/frp.png"></li>
+<li>填写 client 配置<ul>
+<li>项目名称随意</li>
+<li>远程端口为之后访问外网的端口，如你之后想通过 <code>*.xx.com:8090</code> 访问内网，就填8090， 同样防火墙和安全组要打开</li>
+<li>服务器选上一步添加的服务器</li>
+</ul>
+</li>
+<li>填写成功后点击右侧 <code>linux</code>，复制安装命令，在 client 安装即可。（client 需安装 ssh, 并开放22端口）</li>
+</ul>
+<h2 id="使用ssl访问"><a href="#使用ssl访问" class="headerlink" title="使用ssl访问"></a>使用ssl访问</h2><ul>
+<li>ip 为 frp_server域名/IP，端口为 client 配置的端口</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>DailyLove-日常记录小程序后端细节展现(springboot)</title>
+    <url>/2019/08/DailyLove-%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E7%BB%86%E8%8A%82%E5%B1%95%E7%8E%B0(springboot)/</url>
+    <content><![CDATA[<h2 id="事件（核心）"><a href="#事件（核心）" class="headerlink" title="事件（核心）"></a>事件（核心）</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h2 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h2><h2 id="组队"><a href="#组队" class="headerlink" title="组队"></a>组队</h2>]]></content>
+      <categories>
+        <category>CS</category>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>DailyLove</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker安装与使用IDEA部署到远程服务器</title>
+    <url>/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用</p>
+<span id="more"></span>
+<blockquote>
+<p>如果是想学习可以跳过这段，首先我想学docker, 查了下好像docker for windows只能win10专业版安装，所以我招了教程利用各种帖子，后来安装失败，于是我在服务器上安装，很成功。之后发现可以用IDEA一键部署到服务器，就配置了一下，因为安全组关系又浪费不少时间，后来链接成功，但打包失败，我以为本地也要装，于是又试了一下，结果一下子就好了。可是IDEA打包还是失败，还来发现了什么，重启了一下IDEA，一切就都可以了，真是吐血，本地应该不需要装Docker，直接调用远程服务器的tcp的2375接口。</p>
+</blockquote>
+<h2 id="Docker-教程"><a href="#Docker-教程" class="headerlink" title="Docker 教程"></a>Docker 教程</h2><ul>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/introduction/what.html">Docker 从入门到实践</a></li>
+</ul>
+<h2 id="Docker-两个版本区分"><a href="#Docker-两个版本区分" class="headerlink" title="Docker 两个版本区分"></a>Docker 两个版本区分</h2><ul>
+<li><a href="https://blog.csdn.net/JENREY/article/details/84493812">dockerToolbox和docker for windows的区别</a></li>
+</ul>
+<h2 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h2><h3 id="Docker-for-Windows-安装"><a href="#Docker-for-Windows-安装" class="headerlink" title="Docker for Windows 安装"></a>Docker for Windows 安装</h3><ul>
+<li>安装<ul>
+<li><a href="https://www.cnblogs.com/samwu/p/10360943.html">Windows10家庭版安装Docker for Windows</a></li>
+</ul>
+</li>
+<li>与虚拟机冲突解决办法<ul>
+<li><a href="https://blog.csdn.net/qwsamxy/article/details/50533007">【Hyper-V】与【VirtualBox】【VMware】冲突的解决方法</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker-Toolbox-安装"><a href="#Docker-Toolbox-安装" class="headerlink" title="Docker Toolbox 安装"></a>Docker Toolbox 安装</h3><ul>
+<li><a href="https://www.cnblogs.com/jeshy/p/10518857.html">Docker ToolBox安装</a> 无脑安装</li>
+</ul>
+<h3 id="Docker-Linux-安装"><a href="#Docker-Linux-安装" class="headerlink" title="Docker Linux 安装"></a>Docker Linux 安装</h3><ul>
+<li>过于简单，无脑输命令就行， 第一条教程链接里面各个发行版本安装方法都有</li>
+</ul>
+<h2 id="IDEA-连接远程-Docker-进行部署"><a href="#IDEA-连接远程-Docker-进行部署" class="headerlink" title="IDEA 连接远程 Docker 进行部署"></a>IDEA 连接远程 Docker 进行部署</h2><h3 id="远程服务器-Docker-设置-其实就是开放2375端口"><a href="#远程服务器-Docker-设置-其实就是开放2375端口" class="headerlink" title="远程服务器 Docker 设置(其实就是开放2375端口)"></a>远程服务器 Docker 设置(其实就是开放2375端口)</h3><ul>
+<li>docker 配置<ul>
+<li><a href="https://blog.51cto.com/709151/2406150">Ubuntu配置方法</a></li>
+<li><a href="https://blog.csdn.net/u012946310/article/details/82315302">CentOS配置方法</a></li>
+</ul>
+</li>
+<li>服务器配置<ul>
+<li>防火墙2375端口打开</li>
+<li>如果是阿里云要新建安全组规则加入2375</li>
+<li>如果是宝塔也要开放2375端口（注意这两个都要开放，我之前以为宝塔能直接改动阿里云的安全组就只开放了宝塔，结果一直连接超时）</li>
+</ul>
+</li>
+</ul>
+<h3 id="IDEA-设置"><a href="#IDEA-设置" class="headerlink" title="IDEA 设置"></a>IDEA 设置</h3><ul>
+<li><a href="https://blog.csdn.net/forezp/article/details/70198649">docker部署spring cloud项目</a></li>
+<li>记得IDEA在maven引入docker之后重启一下，不然可能会出现我之前的无法连接到 “localhost:2375” 错误</li>
+</ul>
+<h2 id="部分错误文档"><a href="#部分错误文档" class="headerlink" title="部分错误文档"></a>部分错误文档</h2><ul>
+<li><a href="https://blog.csdn.net/ii19910410/article/details/87882917">Dockerfile ADD路径不正确问题</a></li>
+<li><a href="https://blog.csdn.net/ChineseYoung/article/details/83107353">这个也不错</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+        <category>common</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一次由被推销而引发的对市场营销学的思考</title>
+    <url>/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<h2 id="主要情景再现"><a href="#主要情景再现" class="headerlink" title="主要情景再现"></a>主要情景再现</h2><p>中午我去拿快递的时候被一个女生拦下来，背着个大大的黑色双肩包，说耽误我一分钟时间，我当时因为点了自提外卖还有再等一会都下课了人会很多快递队伍会很长就想走，她又说只有一分钟，我还是很好停下来。她说她是市场营销实习，需要连续一星期卖60盒笔(也许是一星期每天60盒)，不然就会被辞退，中间我们僵持了很久，我也动摇过，后来想了想我也是看过《人性的弱点》的，不能一直那么因为太好心被骗就还是说我真的不需要就没买</p>
+<h2 id="细节梳理"><a href="#细节梳理" class="headerlink" title="细节梳理"></a>细节梳理</h2><ol>
+<li><ul>
+<li><strong>细节：</strong> 刚拦住我就往我手里塞两盒笔</li>
+<li><strong>思考：</strong> 先下手为强，用笔困住我，后面我一直走不掉很大程度是因为我手里有笔没法推给她，同时我以为她给我笔是要送我的，以为是什么送笔推销活动之类的。同时塞给我两盒笔意思是我想让你买笔，并且数量都给你定好了，是两盒。</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 说自己市场营销的，还有说我以后也会有实习，自己以前也是我的同学一类的人，等等</li>
+<li><strong>思考：</strong> 套近乎，降低你的防备，引起你的同情</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 说卖不出去就要辞退，旁边还有好几个和她一样的，她们在竞争，苦情戏</li>
+<li><strong>思考：</strong> 博取同情，但是我挣扎了很久终于抵制了，我也有同情她，我看她没打伞，聊天的时候我有帮她挡太阳</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 问我大几的，我说大三，她一脸惊讶，说我长得好小</li>
+<li><strong>思考：</strong> 虽然应该是真实的处于本能的夸赞，因为我从小到大都有过诸如高三被当成高一的经历，但这个的确是夸赞，给我一个人情，为的是让我买笔还她更大的人情</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 我说我计算机的不怎么用笔，给我看有个计算机的买了十多盒笔</li>
+<li><strong>思考：</strong> 当时我还真信了，后来想想这个肯定是摆拍，谁会闲着没事买那么多，我以前一下子一两盒就够多了。而且她给我看很多笔，首先提高你的购买预期，然后再降低。一下子买两盒无法接受，但是如果一下子让你买十几盒，再让你买两盒，你就比较容易接受</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 我问一盒几支，一盒多少钱，她一直只说一支 2.5 元， 后来我一直追问她才说一盒十二支，一盒28（大概，具体忘了）</li>
+<li><strong>思考：</strong> 一直说一支的价格是因为 2.5 这个数感觉很小，说一盒数字很大不容易接受。但是我一算就能算出一盒价钱，一般一盒笔 12 支， 一盒就要 30， 这个价格真心不便宜，再加上前段时间出了小米巨能写，这个笔性价比真不高。她犯了一个错误，一直在博取同情，却没说笔的优势或者质量，对于理性的人来说是没用的</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 后来说我买一盒，半盒，几支也行</li>
+<li><strong>思考：</strong> 努力卖出去，降低你预期，再加上卖惨</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 开始说只耽误你一分钟</li>
+<li><strong>思考：</strong> 只耽误我一分钟这种话对于我这种好心的人来说根本拒绝不了，我连传单都会主动去接，同时不说是卖笔，先说市场营销套近乎降低你的抗拒感，不过这个笔性价比真不高，而且一盒实在多，一两支还行</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 挑人挑中了我</li>
+<li><strong>思考：</strong> 当时人挺多的，但是偏偏挑了我，可能是我面善，经常遇到各种人找我推销还有加微信做任务，挑人也是一个技能</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>think</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>人为什么而活</title>
+    <url>/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</url>
+    <content><![CDATA[<p><strong>为了</strong></p>
+<span id="more"></span>
+
+<h3 id="做你想做的"><a href="#做你想做的" class="headerlink" title="做你想做的"></a><p align="center">做你想做的</p></h3><h3 id="做你该做的"><a href="#做你该做的" class="headerlink" title="做你该做的"></a><p align="center">做你该做的</p></h3>]]></content>
+      <categories>
+        <category>think</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo部署踩坑总结(文末有自动部署备份脚本)</title>
+    <url>/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本</p>
+<span id="more"></span>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="https://hexo.io/zh-cn/docs/">官方教程</a> 官方教程肯定是最权威的最好的教程</li>
+<li><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://blog.enjoytoshare.club/article/hexo-do-domain.html">域名绑定</a> 实现用自己的域名访问博客</li>
+<li><a href="https://blog.csdn.net/u012195214/article/details/72721065">原文件备份</a> <code>master</code> 用于静态界面，另外新建一个分支，比如 <code>hexo</code> 用来备份原文件和配置等，<a href="#deploy_backup">点我跳转到备份详细过程防踩坑</a></li>
+</ul>
+<h2 id="hexo-更新"><a href="#hexo-更新" class="headerlink" title="hexo 更新"></a><code>hexo</code> 更新</h2><ul>
+<li>如果以前下载过 <code>hexo</code>，记得升级，我原来用的2， 现在已经 3.9 了，被坑死</li>
+</ul>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
+<li> <a href="https://www.jianshu.com/p/33bc0a0a6e90">更换主题</a> 注意文章的主题地址可能过时</li>
+<li><strong>next</strong> 主题已经<strong>更换地址</strong>了， 如果看的是原来的教程，<code>clone</code> 时记得<strong>更换 next 的 Github 地址</strong></li>
+</ul>
+<h3 id="deploy_backup"> 部署与备份</h3>
+* 前期工作
+
+<ul>
+<li><p>突然发现官网写的很清楚，<a href="https://hexo.io/zh-cn/docs/deployment.html">hexo部署</a></p>
+</li>
+<li><p>记得在 <code>hexo-d</code> 前修改站点配置文件即 <code>_config.yml</code> 中的 <code>deploy</code> 配置， 示例， 注意替换具体仓库地址</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># message: [message]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>如果 <code>hexo -d</code> 报错就看 <a href="https://blog.csdn.net/weixin_36401046/article/details/52940313">这个链接</a></p>
+</li>
+<li><p>备份说明</p>
+<ul>
+<li>命令： <code>hexo d</code></li>
+<li>内部实现：其实是 <code>hexo-depolyer-git</code> 将 <code>hexo-g</code> 后生成的 <code>public</code> 文件打包。所以 <code>hexo-d</code> 的时候他会把 <code>public</code> 也就是静态文件自己上传到 <code>git</code>远程仓库的 <code>master</code> 分支（ git 地址和 master 分支在站点配置文件那边要提前配置好），我们不用管。换句话说也就是如果你不备份，只需要做到这里就好了，这个命令完成的是对静态文件的上传。</li>
+<li>备份：所以像前面说的，我们要备份的话，就在不影响 <code>master</code> 的情况下，新建一个分支，比如 <code>hexo</code> , 平时写文章就在 <code>hexo</code> 分支， 并且<strong>不用切换回master</strong>！！！，因为我前面讲到 master 分支也就是静态 <code>public</code> 文件的部署已经交给 <code>hexo-d</code> 全权负责了！我之前就是切回去所以错了</li>
+<li>附录一（<code>.gitignore</code>）</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.<span class="built_in">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">auto_deploy.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>附录二（<strong>自动部署备份脚本</strong>）</li>
+</ul>
+<blockquote>
+<p><strong>使用说明：每次写完文件保存后 bash 执行 <code>sh ./auto_deploy.sh &quot;提交的message&quot;</code> 即可， 文件名自定</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="comment"># 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="comment"># 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="comment"># 到页面发布分支</span></span><br><span class="line"><span class="comment"># 清理原静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成，部署</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+        <category>common</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo5.0+安装报错总结</title>
+    <url>/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><code>hexo</code> 官方文档：<a href="https://hexo.io/zh-cn/docs/">文档 | Hexo</a></p>
+<p><code>hexo</code> 中 <code>_posts</code> 文件夹分类：</p>
+<p><a href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客</a></p>
+<p><a href="https://www.dazhuanlan.com/2020/03/28/5e7e34ca352b3/">如何对hexo中的文章进行分类管理 | 大专栏</a></p>
+<p>添加看板娘：<a href="https://blog.csdn.net/qq_36239569/article/details/104104894">Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客</a></p>
+<p><a href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">https://tang.su/2020/09/upgrade-hexo-to-5-0/#more</a>)</p>
+<p><a href="http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/">Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林</a></p>
+<p><a href="https://blog.csdn.net/zhu_1997/article/details/87554975">hexo博客next主题添加 评论功能_Mumu’s Blogs-CSDN博客</a></p>
+<span id="more"></span>
+
+<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="报错一："><a href="#报错一：" class="headerlink" title="报错一："></a>报错一：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">FATAL &#123;</span><br><span class="line">  err: YAMLException: end of the stream or a document separator is expected (1:1)</span><br><span class="line"></span><br><span class="line">   1 | &#96;&#96;&#96;</span><br><span class="line">  -----^</span><br><span class="line">      at generateError (D:\Desktop\blog\node_modules\js-yaml\lib\loader.js:183:10)asap.js:40:19)</span><br><span class="line">      at flush </span><br><span class="line">      </span><br><span class="line">      ---------------中间省略---------------------</span><br><span class="line">      (internal&#x2F;process&#x2F;task_queues.js:75:11) &#123;</span><br><span class="line">    reason: &#39;end of the stream or a document separator is expected&#39;,</span><br><span class="line">    mark: &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;&#96;&#96;&#96;\n&#39;,</span><br><span class="line">      position: 0,</span><br><span class="line">      line: 0,</span><br><span class="line">      column: 0,</span><br><span class="line">      snippet: &#39; 1 | &#96;&#96;&#96;\n-----^&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>查阅资料得知，大部分情况为，<code>_config.yml</code> 文件下所有的 <code>:</code> 后，必须有空格，且只能有一个空格。于是我开始检查，利用编辑器搜索 <code>: </code>，高亮出符合内容的冒号，这样就能快速找出不符合要求的冒号。但是试了好几遍，没有找出不符合要求的，缓存清除一类的也不行。</p>
+<p>在这个时候，我仔细阅读错误，可以看到，错误中指示了 「buffer:’```\n」</p>
+<p>我一直认为这是乱码，没有什么指导性作用。直到后来我看别人的报错的 <code>buffer</code> 行是这样的 <code>buffer: &#39;# Hexo Configuration\n## Docs: http://hexo.io/docs/configuration.html</code>。</p>
+<p>也就是说，<code>buffer</code> 后的内容真是出现错误的信息！但我的报错怎么这么奇怪啊！等下，这个怎么那么像 <code>markdown</code> 的多行代码？我在哪里写了呢，于是我想到了 <code>scaffolds/post.md</code> 中我定义的模板，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">permalink: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>因为去年的时候我部署过 <code>hexo</code>，所以这次是直接粘贴上去的，粘贴的时候， <code>typora</code> 把 <code>---</code> 转化成了 「```」，问题解决！</p>
+<h3 id="报错二"><a href="#报错二" class="headerlink" title="报错二"></a>报错二</h3><p>hexo 的链接点击不跳转，变成下载文件</p>
+<p><a href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">升级Hexo到5.0 | TS’ Blog</a></p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>人为什么而活2</title>
+    <url>/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</url>
+    <content><![CDATA[<p>现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「<strong>做你想做的，做你该做的</strong>」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  </p>
+<p>有趣的是，在2020年7月18日，我在知乎回答了这样一个问题：「是什么让你坚持活下去（限10个字之内）？」，我的回答是，「<strong>我爱的人，爱我的人</strong>」。当时的我应该是处于心情的低谷期，每天的焦虑、自卑、抑郁、逃避充斥着我。可以看得出来，当时的我更加注重「人」的意义。或许你会觉得，当时的我，是个重情重义的人——事实确实如此，但另一方面，这短短的八个字，也体现了我的焦虑型依恋的本质，换句话说，这个时候，我已经迷失自我了：我们把这八个字做一下小学时常考的「缩句」，那么我的回答就成了「（别）人，（别）人」，<strong>给出这个答案时候的我，根本不是为自己而活着</strong>，换句话说，我看不到自己活着的意义，心中对于「我」的概念已经很微弱了。  </p>
+<span id="more"></span>
+
+<p>人活着是要有「自我稳定性」的，包括情绪稳定、拥有取悦自己的能力，拥有一个人生活的能力等等。是很奇怪，一个人越是无法一个人活着，就越难遇到与其结伴的人；一个人越是自己能活得很好，自信乐观，优秀，越是能感染到其他人。  </p>
+<p>所以，我选择了后者。</p>
+<p>我曾在「声昔」发表过一个心情，「如何毁了一个人，夺去除了生命以外对TA而言最重要的东西；如何成就一个人，夺去除了生命以外对TA而言最重要的东西」。前半句很好理解，后半句我想表达什么意思呢，又为什么会想到这句话呢？前面提到，我过去的一年，迷失了自我，不是为自己而活，沉浸在负面情绪中，最终，我活着的动力，那个「爱我的人」，选择了离开。这对焦虑型依恋的我而言，就像丢了命，当时的我真的觉得活不下去了。我同时面临着自我攻击、至爱的人对我的失望放弃，还有一个多月后即将考研的压力。  </p>
+<p>我认真反思过，细数了去年一年来我的缺点，有真正的缺点，也有自以为的缺点：我是个很闷的人，欢脱不起来；我是个很自卑的人，与两年前那个自信的少年截然相反；我是个不注重打扮的人，近几个月窝在寝室，随性穿衣服，加上长时间的熬夜，肤质一泻千里；我是个抑郁、焦虑的人，我看不到未来的希望，哪怕当时拥有的，我也会觉得我失去，美好的东西，我都觉得自己不配；我是个喜欢逃避的人，沉浸在那种负面情绪中，不愿走出来，或者根本走不出来；我是个社交很失败的人，以前还会努力与人接触，在有了女朋友后，把所有的社交都逐渐转向了她，这也是我逐渐无趣的一大原因，太久没好好和人说话了；我是个无法控制自己情绪的人；我是个很难与人共情的人，我无法，也可能是不愿，认真探索别人说话时的情绪，想表达的心思，无法与人感同身受；我是个做事没有计划的人，大学三年多一直在努力，但都一直在往不同的方向努力，奖学金拿了很多，比赛的奖也拿了不少，项目经历也有一些，老师和同学也都非常认可我，但我就是把牌打成了这个样子，在毕业的时候远远没有达到我期望、他人期望的水平，一直没有持续往一个方向使力，所以我想读研；我是个很怪的人，我给自己设限，我觉得自己不善于社交，我觉得自己不配享受那些高档的美食，我觉得自己做不到很多东西，我觉得很多事情只有某种类型的人才能做，而我不是；我做事太有目的性。</p>
+<p>生活和自己都抛弃了我。很感激那两个星期陪伴了我的人，给我的安慰和激励。在那之后，我疯狂得进行自我救赎，我去找不同的人聊天，去接触新的圈子，去找老乡群的人，去找考研群主胡子哥，去找挽回机构（就聊了一次，毕竟还是要靠自己，有人点醒就够了——其实也是因为太贵了，价格5位数，是贫穷让我拥有了自我救赎的能力），也去找心理咨询师聊过，还有自我对话。和心理咨询师的聊天很有意思，因为当时预约的人很多，我被排到了一星期后，然而我在一星期后自愈了很多，和老师聊天的时候，全程笑着讲述我的经历，与其说是去咨询的，不如说是去演讲的。一边讲着过去的经历，一边自我分析，「我觉得这是什么什么样的心态，应该怎么样去解决」，老师也夸我分析的都对。讲到后来，老师问我，「所以你想咨询什么问题呢？」，我想了想，好像当时确实没有什么太大的问题需要咨询哈哈哈。索性就请教了个关于社交的问题，然后询问了老师的下班时间，提前几分钟结束了咨询。我觉得心里咨询师是很辛苦的，一直在认真听我的讲述，不停地记录我的情况，努力与我共情，我也有义务为她着想，我们并不是只有咨询师师咨询者的关系，也有普通朋友的关系。</p>
+<p>我发现自己有个毛病是永远改不掉了，哪怕是在我经历了四个月的自我救赎，脱胎换骨后仍几乎没变——「话唠」。不同的是，如果是与人交谈，我会观察对方的反应，看是否对方愿意听；以及与人交流的时候，我现在更趋向于少说自己，而努力去识别对方的情绪，引领着对方把自己想说的说舒畅了。</p>
+<p>话题拉回到自我救赎上，前面讲的是与「人」的交谈，求助，其实占比更多的，是「自我」救赎，是通过「阅读」，与自己对话。</p>
+<p>最近几个月的阅读主要分为两大类：「与人」，「自我」。最初的时候，我改变的原动力是挽回她，所以在知乎上拼命搜索「挽回」，明白了许多浅层的原因，弄清了是什么导致了分手，以及挽回中的哪些错误不能犯。后来，我开始阅读「亲密关系」领域的经典书籍，去学习「为什么要去爱」、「能从爱中获得什么」、「如何去爱」，这段时间我重新审视了自己挽回的动机，去思考关于爱的深层次的内容，也正是在这段时间，我修复了自己的恋爱性格缺陷——「焦虑型依恋」，也是在这段时间，我学习了如何正确对待自己的情绪，进而控制自己的情绪，以及如何带动对方的正向情绪；学习了如何维护亲密关系；学习了如何与人沟通；学习了如何共情。后期，直到现在，我主要阅读的是关于「自我」的书籍，诸如《被讨厌的勇气》，《羞耻感》，《认知觉醒》一类的书，前两本治愈的是自己的性格，差不多根治了二十多年来的自卑心理；后面那本是关于自我提升的，因为只有自己变得优秀自律，才值得爱人与被爱，才能收获高质量的爱。当然我读的书远不止上面几本，还有知乎以及公众号上面的文章，以及我生命中的一位贵人——小黑老师，从亲密关系到社交关系，从自我管理到职场生存，都给了我实质性的帮助，启发了我很多很多。</p>
+<p>「杀不死我的，只会让我更强大」，很幸运，在绝境中，在「毁灭」与「成就」中，我选择了后者。前面那一大段我所列出的缺点，现在，有的已经成了我的优点，有的已经克服，有的正在努力的路上。</p>
+<p>2月，我开始使用一个叫「声昔」的app，认识了许多与我相似的、曾经自卑现在重获新生的人。同时，我也因为这段经历，能与很多人感同身受，温暖了很多人，给他们带来了希望。尤其是当有人发空间表达自己被温暖到了，又有人回复我：「哇，竟然有人懂我这段话的意思，太意外，太惊喜了。这是我的困惑，甚至为此焦虑，看了你说的这段话，挺有启发的，感谢（原文还有表情）」，看到这些反馈，我相信，我当时是最幸福的。我的这些举动，并不是完全无私的，帮助他们是我发自内心的乐意的，但感受到别人需要我而引发的价值感，也正是我所渴求的。后来一个叫「书籍共读讨论社」的社团，群里的气氛异常的好，在这个群中，聊天与其他地方不一样，我们都在这个氛围中努力深度思考，发的感悟反思都是一次几百个字，占满整个屏幕，无论是发话的人，还是阅读的人，都需要沉浸下来认真思考的能力。感谢这个社团，让我重新获得了深度思考的能力，让我重新能认真看完一整个文章。现在社团已经从最初的部长，蒲公英，我，发展到了满员，并且至少有四个人因为无法进群，一直在默默订阅着。声昔的社团和普通的群是不一样的，它所有的聊天都是公开的，所以大家加群，都是喜欢群内的气氛，想要加入进来。我很荣幸，能作为这样一个远离焦躁的社团的一分子，享受着大家给我带来的启迪，享受着我给大家带来的思考，享受着大家对我价值的肯定。</p>
+<p>啊，我突然想到了文章的标题是：「人为什么而活2」。其实最上面的两个回答都有其正确性，但前些天看到了一篇文章，写道，「人活着没有什么意义」。是啊，我觉得人活着并不需要去追求什么所谓的意义的，<strong>「活在当下」</strong>就好，现在我这样的状态就很好。可能这是已经被说烂了的四个字，但有些东西，真的只有经历了什么，才能真正感受到它蕴含的意思。比如我以前不喜欢听歌，觉得吵闹，歌词只是歌词；现在很喜欢听歌，仿佛每句歌词，都对应着我的一段经历，对应着我的一段感悟。<strong>活在当下，是克服焦虑的关键；活在当下，亦是珍惜现在认真生活的态度；活在当下，是不盲从于结果注重过程的随和态度；活在当下，更是从一点一滴中发现快乐发现美好，保持快乐的秘诀。</strong>果真书看多了，文采也提升了，能写出这么「肉麻」的话了哈哈哈，但却都是发自肺腑的真话。</p>
+]]></content>
+      <categories>
+        <category>think</category>
+      </categories>
+  </entry>
+</search>
