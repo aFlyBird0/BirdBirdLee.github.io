@@ -1,72 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用frpMgr快速搭建内网穿透</title>
-    <url>/2020/04/%E4%BD%BF%E7%94%A8frpMgr%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
-<li>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a> </li>
-<li>利用管理面板自动安装 frp server</li>
-<li>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</li>
-<li>使用 <code>ssh</code> 访问</li>
-</ol>
+    <title>hexo部署踩坑总结(文末有自动部署备份脚本)</title>
+    <url>/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本</p>
 <span id="more"></span>
 
-<h2 id="安装基于-frp-的内网穿透管理面板-frpMgr"><a href="#安装基于-frp-的内网穿透管理面板-frpMgr" class="headerlink" title="安装基于 frp 的内网穿透管理面板 frpMgr"></a>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a></h2><ul>
-<li><strong>安装</strong><ol>
-<li><p><strong>安装 docker 与 docker compose</strong></p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="https://hexo.io/zh-cn/docs/">官方教程</a> 官方教程肯定是最权威的最好的教程</li>
+<li><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://blog.enjoytoshare.club/article/hexo-do-domain.html">域名绑定</a> 实现用自己的域名访问博客</li>
+<li><a href="https://blog.csdn.net/u012195214/article/details/72721065">原文件备份</a> <code>master</code> 用于静态界面，另外新建一个分支，比如 <code>hexo</code> 用来备份原文件和配置等，<a href="#deploy_backup">点我跳转到备份详细过程防踩坑</a></li>
+</ul>
+<h2 id="hexo-更新"><a href="#hexo-更新" class="headerlink" title="hexo 更新"></a><code>hexo</code> 更新</h2><ul>
+<li>如果以前下载过 <code>hexo</code>，记得升级，我原来用的2， 现在已经 3.9 了，被坑死</li>
+</ul>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
+<li> <a href="https://www.jianshu.com/p/33bc0a0a6e90">更换主题</a> 注意文章的主题地址可能过时</li>
+<li><strong>next</strong> 主题已经<strong>更换地址</strong>了， 如果看的是原来的教程，<code>clone</code> 时记得<strong>更换 next 的 Github 地址</strong></li>
+</ul>
+<h3 id="deploy_backup"> 部署与备份</h3>
+* 前期工作
+
 <ul>
-<li>若无 docker : <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -O-https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Zo3i&#x2F;OCS&#x2F;master&#x2F;docker&#x2F;docker-all2.sh | SH wget -O-</span><br></pre></td></tr></table></figure></li>
-<li>若有 docker 无 docker compose : <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
-<li>若 docker 和 docker compose都有， 跳过此步`</li>
-</ul>
+<li><p>突然发现官网写的很清楚，<a href="https://hexo.io/zh-cn/docs/deployment.html">hexo部署</a></p>
 </li>
-<li><p><strong>安装 frpMgr</strong></p>
+<li><p>记得在 <code>hexo-d</code> 前修改站点配置文件即 <code>_config.yml</code> 中的 <code>deploy</code> 配置， 示例， 注意替换具体仓库地址</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># message: [message]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>如果 <code>hexo -d</code> 报错就看 <a href="https://blog.csdn.net/weixin_36401046/article/details/52940313">这个链接</a></p>
+</li>
+<li><p>备份说明</p>
 <ul>
-<li><code>https://raw.githubusercontent.com/Zo3i/frpMgr/master/web/src/main/docker/final/run.sh | SH  </code></li>
-<li>约 500 M，若下载太慢可以修改 host，或者用 <a href="https://g.widora.cn/">Github代下载</a> 再传到服务器</li>
+<li>命令： <code>hexo d</code></li>
+<li>内部实现：其实是 <code>hexo-depolyer-git</code> 将 <code>hexo-g</code> 后生成的 <code>public</code> 文件打包。所以 <code>hexo-d</code> 的时候他会把 <code>public</code> 也就是静态文件自己上传到 <code>git</code>远程仓库的 <code>master</code> 分支（ git 地址和 master 分支在站点配置文件那边要提前配置好），我们不用管。换句话说也就是如果你不备份，只需要做到这里就好了，这个命令完成的是对静态文件的上传。</li>
+<li>备份：所以像前面说的，我们要备份的话，就在不影响 <code>master</code> 的情况下，新建一个分支，比如 <code>hexo</code> , 平时写文章就在 <code>hexo</code> 分支， 并且<strong>不用切换回master</strong>！！！，因为我前面讲到 master 分支也就是静态 <code>public</code> 文件的部署已经交给 <code>hexo-d</code> 全权负责了！我之前就是切回去所以错了</li>
+<li>附录一（<code>.gitignore</code>）</li>
 </ul>
-</li>
-<li><p><strong>开放防火墙 8999 端口</strong></p>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="利用管理面板自动安装-frp-server"><a href="#利用管理面板自动安装-frp-server" class="headerlink" title="利用管理面板自动安装 frp server"></a>利用管理面板自动安装 frp server</h2><ul>
-<li><p>访问 <code>服务器域名（ip）:8999</code>   如 <code>xx.com:8999</code>，账户密码 admin / 12345678</p>
-</li>
-<li><p>准备一个域名，解析 *.xxx.com （二级通配）到 frp_server 的服务器 IP</p>
-</li>
-<li><p>配置 frp_server (图来自 frpMgr github)</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.<span class="built_in">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">auto_deploy.sh</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>服务器名称，自定义名称，不解释</li>
-<li>服务器 IP：待安装 frp_server 的服务器IP</li>
-<li>域名：刚刚的一级域名</li>
-<li>访问端口：web 访问端口，如果配 web 访问要用到（和ssh无关），记得安全组/防火墙打开。</li>
-<li>服务器用户名：服务器用户名。</li>
-<li>依次点击 【保存】【远程安装】，输入服务器密码，即可看到安装成功提示</li>
-<li>在服务器执行 <code>netstat -lnp|grep 7000</code> 查看服务是否成功启动</li>
+<li>附录二（<strong>自动部署备份脚本</strong>）</li>
 </ul>
-<p><img src="https://camo.githubusercontent.com/778ec45220f7dc5fae657beb12f3f21016985174/68747470733a2f2f7a78782e6f6e652f696d67732f323031392f31312f623965373761363035663330396231362e706e67"></p>
-</li>
-</ul>
-<h2 id="利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装"><a href="#利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装" class="headerlink" title="利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装"></a>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</h2><ul>
-<li>选择 <code>SSH客户端配置</code>， 点击右上角 <code>新增</code></li>
-<li><img src="http://qiniu.tcualhp.cn/frp.png"></li>
-<li>填写 client 配置<ul>
-<li>项目名称随意</li>
-<li>远程端口为之后访问外网的端口，如你之后想通过 <code>*.xx.com:8090</code> 访问内网，就填8090， 同样防火墙和安全组要打开</li>
-<li>服务器选上一步添加的服务器</li>
-</ul>
-</li>
-<li>填写成功后点击右侧 <code>linux</code>，复制安装命令，在 client 安装即可。（client 需安装 ssh, 并开放22端口）</li>
-</ul>
-<h2 id="使用ssl访问"><a href="#使用ssl访问" class="headerlink" title="使用ssl访问"></a>使用ssl访问</h2><ul>
-<li>ip 为 frp_server域名/IP，端口为 client 配置的端口</li>
+<blockquote>
+<p><strong>使用说明：每次写完文件保存后 bash 执行 <code>sh ./auto_deploy.sh &quot;提交的message&quot;</code> 即可， 文件名自定</strong></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="comment"># 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="comment"># 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="comment"># 到页面发布分支</span></span><br><span class="line"><span class="comment"># 清理原静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成，部署</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
         <category>CS</category>
+        <category>common</category>
       </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>DailyLove-日常记录小程序后端细节展现(springboot)</title>
@@ -141,6 +128,17 @@
       </tags>
   </entry>
   <entry>
+    <title>人为什么而活</title>
+    <url>/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</url>
+    <content><![CDATA[<p><strong>为了</strong></p>
+<span id="more"></span>
+
+<h3 id="做你想做的"><a href="#做你想做的" class="headerlink" title="做你想做的"></a><p align="center">做你想做的</p></h3><h3 id="做你该做的"><a href="#做你该做的" class="headerlink" title="做你该做的"></a><p align="center">做你该做的</p></h3>]]></content>
+      <categories>
+        <category>think</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一次由被推销而引发的对市场营销学的思考</title>
     <url>/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/</url>
     <content><![CDATA[<h2 id="主要情景再现"><a href="#主要情景再现" class="headerlink" title="主要情景再现"></a>主要情景再现</h2><p>中午我去拿快递的时候被一个女生拦下来，背着个大大的黑色双肩包，说耽误我一分钟时间，我当时因为点了自提外卖还有再等一会都下课了人会很多快递队伍会很长就想走，她又说只有一分钟，我还是很好停下来。她说她是市场营销实习，需要连续一星期卖60盒笔(也许是一星期每天60盒)，不然就会被辞退，中间我们僵持了很久，我也动摇过，后来想了想我也是看过《人性的弱点》的，不能一直那么因为太好心被骗就还是说我真的不需要就没买</p>
@@ -197,70 +195,72 @@
       </categories>
   </entry>
   <entry>
-    <title>人为什么而活</title>
-    <url>/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</url>
-    <content><![CDATA[<p><strong>为了</strong></p>
+    <title>使用frpMgr快速搭建内网穿透</title>
+    <url>/2020/04/%E4%BD%BF%E7%94%A8frpMgr%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a> </li>
+<li>利用管理面板自动安装 frp server</li>
+<li>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</li>
+<li>使用 <code>ssh</code> 访问</li>
+</ol>
 <span id="more"></span>
 
-<h3 id="做你想做的"><a href="#做你想做的" class="headerlink" title="做你想做的"></a><p align="center">做你想做的</p></h3><h3 id="做你该做的"><a href="#做你该做的" class="headerlink" title="做你该做的"></a><p align="center">做你该做的</p></h3>]]></content>
-      <categories>
-        <category>think</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo部署踩坑总结(文末有自动部署备份脚本)</title>
-    <url>/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本</p>
-<span id="more"></span>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
-<li><a href="https://hexo.io/zh-cn/docs/">官方教程</a> 官方教程肯定是最权威的最好的教程</li>
-<li><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">使用hexo+github搭建免费个人博客详细教程</a></li>
-<li><a href="https://blog.enjoytoshare.club/article/hexo-do-domain.html">域名绑定</a> 实现用自己的域名访问博客</li>
-<li><a href="https://blog.csdn.net/u012195214/article/details/72721065">原文件备份</a> <code>master</code> 用于静态界面，另外新建一个分支，比如 <code>hexo</code> 用来备份原文件和配置等，<a href="#deploy_backup">点我跳转到备份详细过程防踩坑</a></li>
-</ul>
-<h2 id="hexo-更新"><a href="#hexo-更新" class="headerlink" title="hexo 更新"></a><code>hexo</code> 更新</h2><ul>
-<li>如果以前下载过 <code>hexo</code>，记得升级，我原来用的2， 现在已经 3.9 了，被坑死</li>
-</ul>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
-<li> <a href="https://www.jianshu.com/p/33bc0a0a6e90">更换主题</a> 注意文章的主题地址可能过时</li>
-<li><strong>next</strong> 主题已经<strong>更换地址</strong>了， 如果看的是原来的教程，<code>clone</code> 时记得<strong>更换 next 的 Github 地址</strong></li>
-</ul>
-<h3 id="deploy_backup"> 部署与备份</h3>
-* 前期工作
-
+<h2 id="安装基于-frp-的内网穿透管理面板-frpMgr"><a href="#安装基于-frp-的内网穿透管理面板-frpMgr" class="headerlink" title="安装基于 frp 的内网穿透管理面板 frpMgr"></a>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a></h2><ul>
+<li><strong>安装</strong><ol>
+<li><p><strong>安装 docker 与 docker compose</strong></p>
 <ul>
-<li><p>突然发现官网写的很清楚，<a href="https://hexo.io/zh-cn/docs/deployment.html">hexo部署</a></p>
+<li>若无 docker : <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -O-https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Zo3i&#x2F;OCS&#x2F;master&#x2F;docker&#x2F;docker-all2.sh | SH wget -O-</span><br></pre></td></tr></table></figure></li>
+<li>若有 docker 无 docker compose : <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li>若 docker 和 docker compose都有， 跳过此步`</li>
+</ul>
 </li>
-<li><p>记得在 <code>hexo-d</code> 前修改站点配置文件即 <code>_config.yml</code> 中的 <code>deploy</code> 配置， 示例， 注意替换具体仓库地址</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># message: [message]</span></span><br></pre></td></tr></table></figure></li>
-<li><p>如果 <code>hexo -d</code> 报错就看 <a href="https://blog.csdn.net/weixin_36401046/article/details/52940313">这个链接</a></p>
+<li><p><strong>安装 frpMgr</strong></p>
+<ul>
+<li><code>https://raw.githubusercontent.com/Zo3i/frpMgr/master/web/src/main/docker/final/run.sh | SH  </code></li>
+<li>约 500 M，若下载太慢可以修改 host，或者用 <a href="https://g.widora.cn/">Github代下载</a> 再传到服务器</li>
+</ul>
 </li>
-<li><p>备份说明</p>
-<ul>
-<li>命令： <code>hexo d</code></li>
-<li>内部实现：其实是 <code>hexo-depolyer-git</code> 将 <code>hexo-g</code> 后生成的 <code>public</code> 文件打包。所以 <code>hexo-d</code> 的时候他会把 <code>public</code> 也就是静态文件自己上传到 <code>git</code>远程仓库的 <code>master</code> 分支（ git 地址和 master 分支在站点配置文件那边要提前配置好），我们不用管。换句话说也就是如果你不备份，只需要做到这里就好了，这个命令完成的是对静态文件的上传。</li>
-<li>备份：所以像前面说的，我们要备份的话，就在不影响 <code>master</code> 的情况下，新建一个分支，比如 <code>hexo</code> , 平时写文章就在 <code>hexo</code> 分支， 并且<strong>不用切换回master</strong>！！！，因为我前面讲到 master 分支也就是静态 <code>public</code> 文件的部署已经交给 <code>hexo-d</code> 全权负责了！我之前就是切回去所以错了</li>
-<li>附录一（<code>.gitignore</code>）</li>
+<li><p><strong>开放防火墙 8999 端口</strong></p>
+</li>
+</ol>
+</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.<span class="built_in">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">auto_deploy.sh</span><br></pre></td></tr></table></figure>
-
+<h2 id="利用管理面板自动安装-frp-server"><a href="#利用管理面板自动安装-frp-server" class="headerlink" title="利用管理面板自动安装 frp server"></a>利用管理面板自动安装 frp server</h2><ul>
+<li><p>访问 <code>服务器域名（ip）:8999</code>   如 <code>xx.com:8999</code>，账户密码 admin / 12345678</p>
+</li>
+<li><p>准备一个域名，解析 *.xxx.com （二级通配）到 frp_server 的服务器 IP</p>
+</li>
+<li><p>配置 frp_server (图来自 frpMgr github)</p>
 <ul>
-<li>附录二（<strong>自动部署备份脚本</strong>）</li>
+<li>服务器名称，自定义名称，不解释</li>
+<li>服务器 IP：待安装 frp_server 的服务器IP</li>
+<li>域名：刚刚的一级域名</li>
+<li>访问端口：web 访问端口，如果配 web 访问要用到（和ssh无关），记得安全组/防火墙打开。</li>
+<li>服务器用户名：服务器用户名。</li>
+<li>依次点击 【保存】【远程安装】，输入服务器密码，即可看到安装成功提示</li>
+<li>在服务器执行 <code>netstat -lnp|grep 7000</code> 查看服务是否成功启动</li>
 </ul>
-<blockquote>
-<p><strong>使用说明：每次写完文件保存后 bash 执行 <code>sh ./auto_deploy.sh &quot;提交的message&quot;</code> 即可， 文件名自定</strong></p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="comment"># 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="comment"># 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="comment"># 到页面发布分支</span></span><br><span class="line"><span class="comment"># 清理原静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成，部署</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<p><img src="https://camo.githubusercontent.com/778ec45220f7dc5fae657beb12f3f21016985174/68747470733a2f2f7a78782e6f6e652f696d67732f323031392f31312f623965373761363035663330396231362e706e67"></p>
+</li>
+</ul>
+<h2 id="利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装"><a href="#利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装" class="headerlink" title="利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装"></a>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</h2><ul>
+<li>选择 <code>SSH客户端配置</code>， 点击右上角 <code>新增</code></li>
+<li><img src="http://qiniu.tcualhp.cn/frp.png"></li>
+<li>填写 client 配置<ul>
+<li>项目名称随意</li>
+<li>远程端口为之后访问外网的端口，如你之后想通过 <code>*.xx.com:8090</code> 访问内网，就填8090， 同样防火墙和安全组要打开</li>
+<li>服务器选上一步添加的服务器</li>
+</ul>
+</li>
+<li>填写成功后点击右侧 <code>linux</code>，复制安装命令，在 client 安装即可。（client 需安装 ssh, 并开放22端口）</li>
+</ul>
+<h2 id="使用ssl访问"><a href="#使用ssl访问" class="headerlink" title="使用ssl访问"></a>使用ssl访问</h2><ul>
+<li>ip 为 frp_server域名/IP，端口为 client 配置的端口</li>
 </ul>
 ]]></content>
       <categories>
         <category>CS</category>
-        <category>common</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>hexo5.0+安装报错总结</title>
