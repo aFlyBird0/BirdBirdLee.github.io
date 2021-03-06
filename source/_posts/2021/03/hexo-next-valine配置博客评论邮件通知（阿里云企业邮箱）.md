@@ -73,5 +73,5 @@ SMTP_PORT : 阿里云为：25 （邮件服务提供商 SMTP 端口, 此项需要
 
 应该这样修改，`enable` 和 `notify` 改为 `true`，以及 `appid` 与 `appkey` 填完整
 
-![image-20210306153258422](C:\Users\LHP\AppData\Roaming\Typora\typora-user-images\image-20210306153258422.png)
+![image-20210306153258422](https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153258422.png)
 
