@@ -80,6 +80,10 @@ https://tang.su/2020/09/upgrade-hexo-to-5-0/#more)
 
 [阿里企业邮箱POP\SMTP\IMAP地址和端口信息_凌飞安-CSDN博客_阿里邮箱pop服务器](https://blog.csdn.net/lingfeian/article/details/100030808?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=1328603.27235.16150118713713009&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
 
+[Hexo NexT 7谷歌收录 必应收录 百度收录 | 蓝蓝博客](https://lanlan2017.github.io/blog/242f5d55/)
+
+[Hexo博客：十一、文章置顶 - 简书](https://www.jianshu.com/p/a94422c0dc48/)
+
 ## 报错
 
 ### 报错一：
