@@ -5,7 +5,7 @@
 # Site
 title: Bird's Blog
 subtitle: ''
-description: "欢迎来到爱飞的鸟记录「技术与温度」的博客世界"
+description: "记录「技术与温度」"
 keywords:
 author: Bird
 language: zh-CN
@@ -139,5 +139,25 @@ live2d:
     height: 300
   mobile:
     show: true
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+  hexo-generator-feed
+# 设置RSS feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
 
  

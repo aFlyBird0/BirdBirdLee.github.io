@@ -84,6 +84,8 @@ https://tang.su/2020/09/upgrade-hexo-to-5-0/#more)
 
 [Hexo博客：十一、文章置顶 - 简书](https://www.jianshu.com/p/a94422c0dc48/)
 
+[Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧](https://www.gagahappy.com/use-next-theme/)
+
 ## 报错
 
 ### 报错一：
