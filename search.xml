@@ -24,6 +24,33 @@
       </categories>
   </entry>
   <entry>
+    <title>为hexo-next安装侧边rss</title>
+    <url>/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</url>
+    <content><![CDATA[<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-在博客根目录下安装-hexo-generator-feed"><a href="#1-在博客根目录下安装-hexo-generator-feed" class="headerlink" title="1. 在博客根目录下安装 hexo-generator-feed"></a>1. 在博客根目录下安装<a href="https://github.com/hexojs/hexo-generator-feed"> hexo-generator-feed</a></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="2-在博客根目录下的-config-yml-文件中添加以下代码"><a href="#2-在博客根目录下的-config-yml-文件中添加以下代码" class="headerlink" title="2. 在博客根目录下的 _config.yml 文件中添加以下代码"></a>2. 在博客根目录下的 <code>_config.yml</code> 文件中添加以下代码</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">feed:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">atom</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">atom.xml</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">hub:</span></span><br><span class="line">  <span class="attr">content:</span></span><br><span class="line">  <span class="attr">content_limit:</span> <span class="number">140</span></span><br><span class="line">  <span class="attr">content_limit_delim:</span> <span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="attr">order_by:</span> <span class="string">-date</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">icon.png</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置博客根目录下的-config-yml-文件"><a href="#3-配置博客根目录下的-config-yml-文件" class="headerlink" title="3. 配置博客根目录下的 _config.yml 文件"></a>3. 配置博客根目录下的 <code>_config.yml</code> 文件</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">自己域名</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-修改-Next-主题的配置文件-config-yml"><a href="#4-修改-Next-主题的配置文件-config-yml" class="headerlink" title="4. 修改 Next 主题的配置文件 _config.yml"></a>4. 修改 <code>Next</code> 主题的配置文件 <code>_config.yml</code></h3><p>首先，这里的主题配置文件最好是根目录下的 <code>_config_next.yml</code>，如果没有的话，建议把 <code>/thems/next/_config.yml</code> 文件复制到根目录下，并改名成 <code>_config_next.yml</code>。</p>
+<p>不直接修改<code>/themes/next/_config.yml</code> 的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
+<p><code>rss</code> 有两种形式，一种是侧边栏，一种是每个文章底部都有个大大的<code>rss</code>区域，推荐侧边烂。(缩进都是两格，我这里代码可能缩进格数不对)</p>
+<p>侧边栏形式：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
+
+<p>文章底部形式：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></p>
+<p>[给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog](</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱）</title>
     <url>/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/</url>
     <content><![CDATA[<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><blockquote>
@@ -98,6 +125,7 @@
 <p><a href="https://lanlan2017.github.io/blog/242f5d55/">Hexo NexT 7谷歌收录 必应收录 百度收录 | 蓝蓝博客</a></p>
 <p><a href="https://www.jianshu.com/p/a94422c0dc48/">Hexo博客：十一、文章置顶 - 简书</a></p>
 <p><a href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></p>
+<p><a href="https://suyin-blog.club/2020/2M3YWE7/">给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog</a></p>
 <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="报错一："><a href="#报错一：" class="headerlink" title="报错一："></a>报错一：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">FATAL &#123;</span><br><span class="line">  err: YAMLException: end of the stream or a document separator is expected (1:1)</span><br><span class="line"></span><br><span class="line">   1 | &#96;&#96;&#96;</span><br><span class="line">  -----^</span><br><span class="line">      at generateError (D:\Desktop\blog\node_modules\js-yaml\lib\loader.js:183:10)asap.js:40:19)</span><br><span class="line">      at flush </span><br><span class="line">      </span><br><span class="line">      ---------------中间省略---------------------</span><br><span class="line">      (internal&#x2F;process&#x2F;task_queues.js:75:11) &#123;</span><br><span class="line">    reason: &#39;end of the stream or a document separator is expected&#39;,</span><br><span class="line">    mark: &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;&#96;&#96;&#96;\n&#39;,</span><br><span class="line">      position: 0,</span><br><span class="line">      line: 0,</span><br><span class="line">      column: 0,</span><br><span class="line">      snippet: &#39; 1 | &#96;&#96;&#96;\n-----^&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>查阅资料得知，大部分情况为，<code>_config.yml</code> 文件下所有的 <code>:</code> 后，必须有空格，且只能有一个空格。于是我开始检查，利用编辑器搜索 <code>: </code>，高亮出符合内容的冒号，这样就能快速找出不符合要求的冒号。但是试了好几遍，没有找出不符合要求的，缓存清除一类的也不行。</p>
