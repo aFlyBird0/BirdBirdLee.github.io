@@ -74,6 +74,12 @@ https://tang.su/2020/09/upgrade-hexo-to-5-0/#more)
 
 [hexo博客next主题添加 评论功能_Mumu's Blogs-CSDN博客](https://blog.csdn.net/zhu_1997/article/details/87554975)
 
+[zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。](https://github.com/zhaojun1998/Valine-Admin)
+
+[[转]Hexo主题使用Valine-Admin管理评论和评论提醒_MelodyJerry-CSDN博客](https://blog.csdn.net/weixin_43438052/article/details/106617739?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242)
+
+[阿里企业邮箱POP\SMTP\IMAP地址和端口信息_凌飞安-CSDN博客_阿里邮箱pop服务器](https://blog.csdn.net/lingfeian/article/details/100030808?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=1328603.27235.16150118713713009&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+
 ## 报错
 
 ### 报错一：

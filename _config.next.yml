@@ -618,9 +618,9 @@ valine:
   enable: true
   appid: 6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va
   appkey: irTJuJuhBG8Pn6zKBvxEmCMN
-  notify: false # Mail notifier
+  notify: true # Mail notifier
   verify: false # Verification code
-  placeholder: 欢迎留言~ # Comment box placeholder
+  placeholder: 欢迎留言~ (填写email可接受回复通知） # Comment box placeholder
   avatar: mm # Gravatar style
   guest_info: nick,mail,link # Custom comment header
   pageSize: 10 # Pagination size
