@@ -28,7 +28,7 @@ custom_file_path:
   #postMeta: source/_data/post-meta.swig
   #postBodyEnd: source/_data/post-body-end.swig
   #footer: source/_data/footer.swig
-  #bodyEnd: source/_data/body-end.swig
+  bodyEnd: source/_data/body-end.swig
   #variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
   #style: source/_data/styles.styl
@@ -1001,3 +1001,11 @@ vendors:
 css: css
 js: js
 images: images
+
+# 鼠标特效，fireworks，explosion，love，text 烟花，爆炸。爱，text，详见 https://tding.top/archives/58cff12b.html
+cursor_effect: fireworks
+
+# 打字特效
+typing_effect:
+  colorful: true  # 礼花特效
+  shake: false  # 震动特效

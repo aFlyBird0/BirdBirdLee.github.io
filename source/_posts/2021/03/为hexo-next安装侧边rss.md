@@ -64,4 +64,4 @@ follow_me:
 
 [Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧](https://www.gagahappy.com/use-next-theme/)
 
-[给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog](
+[给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog](https://suyin-blog.club/2020/2M3YWE7/)
