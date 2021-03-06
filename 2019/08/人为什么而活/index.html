@@ -598,10 +598,10 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     new Valine({
       el         : '#valine-comments',
       verify     : false,
-      notify     : false,
+      notify     : true,
       appId      : '6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va',
       appKey     : 'irTJuJuhBG8Pn6zKBvxEmCMN',
-      placeholder: "欢迎留言~",
+      placeholder: "欢迎留言~ (填写email可接受回复通知）",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
