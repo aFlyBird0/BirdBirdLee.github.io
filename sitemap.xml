@@ -116,6 +116,13 @@
 
   
   <url>
+    <loc>http://bird.blog.tcualhp.cn/tags/DailyLove/</loc>
+    <lastmod>2021-03-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
@@ -124,13 +131,6 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/hexo/</loc>
-    <lastmod>2021-03-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/DailyLove/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -146,14 +146,14 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/think/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/CS/common/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/CS/common/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/think/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
