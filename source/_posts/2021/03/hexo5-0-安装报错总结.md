@@ -63,37 +63,24 @@ hexo g -d
 
 * `hexo` 中 `_posts` 文件夹分类：
 * [如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客](https://blog.csdn.net/maosidiaoxian/article/details/85220394)
-
 * [如何对hexo中的文章进行分类管理 | 大专栏](https://www.dazhuanlan.com/2020/03/28/5e7e34ca352b3/)
-
 * 添加看板娘：[Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客](https://blog.csdn.net/qq_36239569/article/details/104104894)
-
 * https://tang.su/2020/09/upgrade-hexo-to-5-0/#more)
-
 * [Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林](http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/)
-
 * [hexo博客next主题添加 评论功能_Mumu's Blogs-CSDN博客](https://blog.csdn.net/zhu_1997/article/details/87554975)
-
 * [zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。](https://github.com/zhaojun1998/Valine-Admin)
-
 * [[转]Hexo主题使用Valine-Admin管理评论和评论提醒_MelodyJerry-CSDN博客](https://blog.csdn.net/weixin_43438052/article/details/106617739?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242)
-
 * [阿里企业邮箱POP\SMTP\IMAP地址和端口信息_凌飞安-CSDN博客_阿里邮箱pop服务器](https://blog.csdn.net/lingfeian/article/details/100030808?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=1328603.27235.16150118713713009&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
-
 * [Hexo NexT 7谷歌收录 必应收录 百度收录 | 蓝蓝博客](https://lanlan2017.github.io/blog/242f5d55/)
-
 * [Hexo博客：十一、文章置顶 - 简书](https://www.jianshu.com/p/a94422c0dc48/)
-
 * [Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧](https://www.gagahappy.com/use-next-theme/)
-
 * [给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog](https://suyin-blog.club/2020/2M3YWE7/)
-
 * [给 Hexo Next 网站评论框配置炫酷的打字效果 | 苏寅 Blog](https://suyin-blog.club/2020/EBJEZ6/)
-
 * 打字特效（一定要先看第一个链接，涉及到 next 主题配置分离思想）
   * [Hexo-NexT 版本更新记录 | 小丁的个人博客](https://tding.top/archives/2bd6d82.html)
   * [Hexo-NexT 添加打字特效、鼠标点击特效 | 小丁的个人博客](https://tding.top/archives/58cff12b.html) 
 * [hexo-submit-urls-to-search-engine 中文文档 | 峡州仙士之页](https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html)
+* 近期文章（ NexT 已经更换 Nunjucks 作为模板引擎，必须按照这里的来，旧的都显示不出）：[Hexo-NexT 版本更新记录 | 小丁的个人博客](https://tding.top/archives/2bd6d82.html)
 
 
 

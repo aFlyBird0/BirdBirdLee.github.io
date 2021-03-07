@@ -165,7 +165,7 @@ avatar:
   # Replace the default image and set the url here.
   url: https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG #/images/avatar.gif
   # If true, the avatar will be dispalyed in circle.
-  rounded: false
+  rounded: true
   # If true, the avatar will be rotated with the cursor.
   rotated: false
 
