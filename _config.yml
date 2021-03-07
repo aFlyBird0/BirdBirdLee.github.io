@@ -5,7 +5,7 @@
 # Site
 title: Bird's Blog
 subtitle: '记录「技术与温度」'
-description: "记录「技术与温度」"
+description: "热爱可抵岁月漫长"
 keywords:
 author: Bird
 language: zh-CN
@@ -135,8 +135,8 @@ live2d:
     use: live2d-widget-model-hibiki
   display:
     position: right
-    width: 160
-    height: 300
+    width: 120
+    height: 210
   mobile:
     show: true
 
