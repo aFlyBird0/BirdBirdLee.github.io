@@ -3,6 +3,7 @@ title: hexo5.0+安装报错总结
 mylink: hexo5.0+安装报错总结
 date: 2021-03-05 16:33:10
 tags:
+	-
 categories:
 	- CS
 ---
@@ -16,9 +17,7 @@ categories:
 首先明确两点，`github` 展示的页面，不由自己掌管，也不用自己 `git push` 全部交由 `hexo g -d` 这个命令来完成，它会在 `/public` 文件夹中生成要部署的静态页面，然后复制到 `/.deploy_git` 文件夹中，再全部覆盖推到我们在 `/_config.yml`中设置的 分支，若设置的是 `master`，则文件内容是这样的：
 ```yml
 deploy: 
-
-​	branch: master
-
+  branch: master
 ```
 
 我们要做的，是设置一个备份分支，如 `hexo` 分支，并在 `github` 中将其设置成默认分支，然后手动推到远程，`master` 和 `hexo`这两个分支没有关联，我们也只要维护 `hexo`分支来备份自己的文件。而 `master`分支下的静态文件的提交，由 `hexo g -d`来完成（是的这部分我说了两遍）
@@ -94,6 +93,7 @@ hexo g -d
 * 打字特效（一定要先看第一个链接，涉及到 next 主题配置分离思想）
   * [Hexo-NexT 版本更新记录 | 小丁的个人博客](https://tding.top/archives/2bd6d82.html)
   * [Hexo-NexT 添加打字特效、鼠标点击特效 | 小丁的个人博客](https://tding.top/archives/58cff12b.html) 
+* [hexo-submit-urls-to-search-engine 中文文档 | 峡州仙士之页](https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html)
 
 
 

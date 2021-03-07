@@ -24,7 +24,7 @@ minify: false
 custom_file_path:
   #head: source/_data/head.swig
   #header: source/_data/header.swig
-  #sidebar: source/_data/sidebar.swig
+  # sidebar: source/_data/sidebar.swig
   #postMeta: source/_data/post-meta.swig
   #postBodyEnd: source/_data/post-body-end.swig
   #footer: source/_data/footer.swig
@@ -356,18 +356,33 @@ android_chrome_color: "#222"
 # Custom Logo (Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
 
+# codeblock:
+#   # Code Highlight theme
+#   # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
+#   # See: https://github.com/chriskempson/tomorrow-theme
+#   highlight_theme: galactic
+#   # Add copy button on codeblock
+#   copy_button:
+#     enable: false
+#     # Show text copy result.
+#     show_result: false
+#     # Available values: default | flat | mac
+#     style:
+
 codeblock:
   # Code Highlight theme
-  # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
-  # See: https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: galactic
+  # All available themes: https://theme-next.js.org/highlight/
+  theme:
+    light: monokai-sublime
+    dark: monokai
+  prism:
+    light: prism-dracula
+    dark: prism-okaidia
   # Add copy button on codeblock
   copy_button:
-    enable: false
-    # Show text copy result.
-    show_result: false
+    enable: true
     # Available values: default | flat | mac
-    style:
+    style: mac
 
 back2top:
   enable: true
@@ -1009,3 +1024,8 @@ cursor_effect: fireworks
 typing_effect:
   colorful: true  # 礼花特效
   shake: false  # 震动特效
+
+# 最近文章
+recent_posts_title: 近期文章
+recent_posts_layout: block
+recent_posts: true
