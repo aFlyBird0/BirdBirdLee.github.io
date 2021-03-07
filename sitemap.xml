@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/</loc>
+    <loc>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/</loc>
     
     <lastmod>2021-03-07</lastmod>
     
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/</loc>
+    <loc>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/</loc>
     
     <lastmod>2021-03-07</lastmod>
     
@@ -150,20 +150,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/CS/</loc>
-    <lastmod>2021-03-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-03-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
@@ -189,6 +175,13 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/CS/common/</loc>
+    <lastmod>2021-03-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-03-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -49,10 +49,10 @@
 
 <p>未完待续，要结合题目把这题写出来。</p>
 ]]></content>
-      <tags>
-        <tag>CS</tag>
-        <tag>算法</tag>
-      </tags>
+      <categories>
+        <category>CS</category>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>hdoj刷题一(java)：2000-2009</title>
@@ -129,10 +129,10 @@
 <p>（顺便利用这篇文章测试一下 <code>hexo</code> 的博客， <code>markdown</code> 渲染是不是严格的，以前都是故意弄一个空行来区分段落，这次行末没加双空格也没加空格，看看格式会不会乱）</p>
 <p>事实证明会自己换行，还挺智能。</p>
 ]]></content>
-      <tags>
-        <tag>CS</tag>
-        <tag>算法</tag>
-      </tags>
+      <categories>
+        <category>CS</category>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>起床小插曲</title>
