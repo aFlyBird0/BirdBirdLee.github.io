@@ -26,6 +26,17 @@
       </categories>
   </entry>
   <entry>
+    <title>起床小插曲</title>
+    <url>/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</url>
+    <content><![CDATA[<p>今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。</p>
+<p>一边找衣服，一边吟着整首，突然吟到「雁过也，正伤心，却是旧时相识」，停住，反复琢磨了几遍。李清照想表达的意思早已忘记，我却有了自己的理解。大雁飞过，正在惆怅伤心，却发现这是旧识认识的那个大雁，一时间，竟不知是该怀着再次分别的伤心，还是再次相遇的欣喜了。</p>
+<p>后记：查阅资料，百度汉语的翻译的「向南避寒的大雁已飞过去了，伤心的是却是原来的旧日相识」，这个相识指的是词人自己。但我还是更喜欢自己的理解，毕竟，翻译的人也不知道李清照怎么想的，子非鱼，安知鱼之乐？或许她和我想的还一样呢！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
     <title>为hexo-next安装侧边rss</title>
     <url>/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</url>
     <content><![CDATA[<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-在博客根目录下安装-hexo-generator-feed"><a href="#1-在博客根目录下安装-hexo-generator-feed" class="headerlink" title="1. 在博客根目录下安装 hexo-generator-feed"></a>1. 在博客根目录下安装<a href="https://github.com/hexojs/hexo-generator-feed"> hexo-generator-feed</a></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
@@ -95,7 +106,7 @@
 <span id="more"></span>
 
 <p>首先明确两点，<code>github</code> 展示的页面，不由自己掌管，也不用自己 <code>git push</code> 全部交由 <code>hexo g -d</code> 这个命令来完成，它会在 <code>/public</code> 文件夹中生成要部署的静态页面，然后复制到 <code>/.deploy_git</code> 文件夹中，再全部覆盖推到我们在 <code>/_config.yml</code>中设置的 分支，若设置的是 <code>master</code>，则文件内容是这样的：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"></span><br><span class="line"><span class="string">​</span>	<span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
 <p>我们要做的，是设置一个备份分支，如 <code>hexo</code> 分支，并在 <code>github</code> 中将其设置成默认分支，然后手动推到远程，<code>master</code> 和 <code>hexo</code>这两个分支没有关联，我们也只要维护 <code>hexo</code>分支来备份自己的文件。而 <code>master</code>分支下的静态文件的提交，由 <code>hexo g -d</code>来完成（是的这部分我说了两遍）</p>
 <p>有一点需要注意，在仓库界面，如果你建立的第一个分支不是静态文件所在的那个分支，要手动改回 <code>master</code>，即 <code>hexo</code> 分支。（一般情况最先建立的都是主分支，即静态文件分支，不用进行这个操作）</p>
@@ -151,6 +162,8 @@
 <li><a href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></li>
 <li><a href="https://tding.top/archives/58cff12b.html">Hexo-NexT 添加打字特效、鼠标点击特效 | 小丁的个人博客</a> </li>
 </ul>
+</li>
+<li><p><a href="https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html">hexo-submit-urls-to-search-engine 中文文档 | 峡州仙士之页</a></p>
 </li>
 </ul>
 <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="报错一："><a href="#报错一：" class="headerlink" title="报错一："></a>报错一：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">FATAL &#123;</span><br><span class="line">  err: YAMLException: end of the stream or a document separator is expected (1:1)</span><br><span class="line"></span><br><span class="line">   1 | &#96;&#96;&#96;</span><br><span class="line">  -----^</span><br><span class="line">      at generateError (D:\Desktop\blog\node_modules\js-yaml\lib\loader.js:183:10)asap.js:40:19)</span><br><span class="line">      at flush </span><br><span class="line">      </span><br><span class="line">      ---------------中间省略---------------------</span><br><span class="line">      (internal&#x2F;process&#x2F;task_queues.js:75:11) &#123;</span><br><span class="line">    reason: &#39;end of the stream or a document separator is expected&#39;,</span><br><span class="line">    mark: &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;&#96;&#96;&#96;\n&#39;,</span><br><span class="line">      position: 0,</span><br><span class="line">      line: 0,</span><br><span class="line">      column: 0,</span><br><span class="line">      snippet: &#39; 1 | &#96;&#96;&#96;\n-----^&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
