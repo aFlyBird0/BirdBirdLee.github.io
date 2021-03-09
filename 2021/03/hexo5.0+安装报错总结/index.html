@@ -6,9 +6,11 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="SzFlcDH-1N6SvMJ27lapzWdttiOcoDs7SHVqroj6Jso">
+  <meta name="baidu-site-verification" content="code-aONLTKUdkd">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,20 +19,22 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="参考链接hexo 官方文档：文档 | Hexo hexo 中 _posts 文件夹分类： 如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客 如何对hexo中的文章进行分类管理 | 大专栏 添加看板娘：Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客 https:&#x2F;&#x2F;tang.su&#x2F;2020&#x2F;09&#x2F;upgrade-hexo-to-5-0&#x2F;#more) H">
+  <meta name="description" content="部署与备份小总结经过我三次的 hexo 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署备份。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo5.0+安装报错总结">
 <meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="参考链接hexo 官方文档：文档 | Hexo hexo 中 _posts 文件夹分类： 如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客 如何对hexo中的文章进行分类管理 | 大专栏 添加看板娘：Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客 https:&#x2F;&#x2F;tang.su&#x2F;2020&#x2F;09&#x2F;upgrade-hexo-to-5-0&#x2F;#more) H">
+<meta property="og:description" content="部署与备份小总结经过我三次的 hexo 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署备份。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png">
 <meta property="article:published_time" content="2021-03-05T08:33:10.000Z">
-<meta property="article:modified_time" content="2021-03-09T06:25:16.120Z">
+<meta property="article:modified_time" content="2021-03-09T06:37:37.665Z">
 <meta property="article:author" content="Bird">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png">
 
 <link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/">
 
@@ -76,6 +80,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Bird's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -99,6 +104,7 @@
       <h1 class="site-title">Bird's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
+      <p class="site-subtitle" itemprop="description">记录「技术与温度」</p>
   </div>
 
   <div class="site-nav-right">
@@ -136,6 +142,11 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-readnotes">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="section"><i class="fa fa-book fa-fw"></i>读书笔记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -196,9 +207,9 @@
     <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
       <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="CS笔记与随笔">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -225,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-09 14:25:16" itemprop="dateModified" datetime="2021-03-09T14:25:16+08:00">2021-03-09</time>
+                <time title="修改时间：2021-03-09 14:37:37" itemprop="dateModified" datetime="2021-03-09T14:37:37+08:00">2021-03-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,13 +255,6 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="far fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -271,14 +275,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -290,16 +294,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><code>hexo</code> 官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">文档 | Hexo</a></p>
-<p><code>hexo</code> 中 <code>_posts</code> 文件夹分类：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/28/5e7e34ca352b3/">如何对hexo中的文章进行分类管理 | 大专栏</a></p>
-<p>添加看板娘：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36239569/article/details/104104894">Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">https://tang.su/2020/09/upgrade-hexo-to-5-0/#more</a>)</p>
-<p><a target="_blank" rel="noopener" href="http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/">Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_1997/article/details/87554975">hexo博客next主题添加 评论功能_Mumu’s Blogs-CSDN博客</a></p>
+        <h2 id="部署与备份小总结"><a href="#部署与备份小总结" class="headerlink" title="部署与备份小总结"></a>部署与备份小总结</h2><p>经过我三次的 <code>hexo</code> 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署备份。</p>
 <span id="more"></span>
 
+<p>首先明确两点，<code>github</code> 展示的页面，不由自己掌管，也不用自己 <code>git push</code> 全部交由 <code>hexo g -d</code> 这个命令来完成，它会在 <code>/public</code> 文件夹中生成要部署的静态页面，然后复制到 <code>/.deploy_git</code> 文件夹中，再全部覆盖推到我们在 <code>/_config.yml</code>中设置的 分支，若设置的是 <code>master</code>，则文件内容是这样的：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>我们要做的，是设置一个备份分支，如 <code>hexo</code> 分支，并在 <code>github</code> 中将其设置成默认分支，然后手动推到远程，<code>master</code> 和 <code>hexo</code>这两个分支没有关联，我们也只要维护 <code>hexo</code>分支来备份自己的文件。而 <code>master</code>分支下的静态文件的提交，由 <code>hexo g -d</code>来完成（是的这部分我说了两遍）</p>
+<p>有一点需要注意，在仓库界面，如果你建立的第一个分支不是静态文件所在的那个分支，要手动改回 <code>master</code>，即 <code>hexo</code> 分支。（一般情况最先建立的都是主分支，即静态文件分支，不用进行这个操作）</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210305214426331.png" alt="image-20210305214426331"></p>
+<p>我的操作流程是这样的：</p>
+<ol>
+<li>先在本地把整个博客都搭好了，文件夹名字随意</li>
+<li>在远程仓库建立 <code>用户名.github.io</code> 仓库，注意 <code>readme</code> 和 <code>.gitignore</code> 文件都不要</li>
+<li>在本地博客目录下， <code>git init</code>，然后 <code>git remote add origin git@github.com:用户名/用户名.github.io.git</code> 与远程仓库建立联系</li>
+<li>然后再把本地文件提交，推上去，再检出 <code>hexo</code> 分支，推上去，将 <code>hexo</code> 分支设置为默认分支</li>
+<li>后面需要写文章的时候，用 <code>hexo new &quot;文件名&quot;</code></li>
+<li>部署和备份直接运行我去年写的脚本，将脚本复制到博客根目录下，<code>git bash</code> 键入：<code>sh auto_deploy.sh &quot;github提交的commit&quot;</code> 即可完成部署+备份</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;$1&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="meta">#</span><span class="bash"> 到页面发布分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git checkout master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清理原html</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"> 生成，部署</span></span><br><span class="line">hexo g -d</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回原文件分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git checkout hexo</span>		</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>写到这里，下面的链接早已不局限于安装部署了，各种杂七杂八的关于自建 <code>hexo</code> 的链接都有收录</p>
+<p><code>hexo</code> 官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">文档 | Hexo</a></p>
+<ul>
+<li><code>hexo</code> 中 <code>_posts</code> 文件夹分类：</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/maosidiaoxian/article/details/85220394">如何在Hexo中对文章md文件分类_一个码农的博客-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/28/5e7e34ca352b3/">如何对hexo中的文章进行分类管理 | 大专栏</a></li>
+<li>添加看板娘：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36239569/article/details/104104894">Hexo添加Live2D看板娘最新教程_enchanted的博客-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">https://tang.su/2020/09/upgrade-hexo-to-5-0/#more</a>)</li>
+<li><a target="_blank" rel="noopener" href="http://www.yangyong.xyz/2018/01/03/add-hexo-next-post-views/">Hexo NexT 主题优化：显示文章阅读次数 | 九月枫林</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_1997/article/details/87554975">hexo博客next主题添加 评论功能_Mumu’s Blogs-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zhaojun1998/Valine-Admin">zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43438052/article/details/106617739?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&spm=1001.2101.3001.4242">[转]Hexo主题使用Valine-Admin管理评论和评论提醒_MelodyJerry-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lingfeian/article/details/100030808?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&dist_request_id=1328603.27235.16150118713713009&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control">阿里企业邮箱POP\SMTP\IMAP地址和端口信息_凌飞安-CSDN博客_阿里邮箱pop服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://lanlan2017.github.io/blog/242f5d55/">Hexo NexT 7谷歌收录 必应收录 百度收录 | 蓝蓝博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a94422c0dc48/">Hexo博客：十一、文章置顶 - 简书</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></li>
+<li><a target="_blank" rel="noopener" href="https://suyin-blog.club/2020/2M3YWE7/">给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://suyin-blog.club/2020/EBJEZ6/">给 Hexo Next 网站评论框配置炫酷的打字效果 | 苏寅 Blog</a></li>
+<li>打字特效（一定要先看第一个链接，涉及到 next 主题配置分离思想）<ul>
+<li><a target="_blank" rel="noopener" href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://tding.top/archives/58cff12b.html">Hexo-NexT 添加打字特效、鼠标点击特效 | 小丁的个人博客</a> </li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html">hexo-submit-urls-to-search-engine 中文文档 | 峡州仙士之页</a></li>
+<li>近期文章（ NexT 已经更换 Nunjucks 作为模板引擎，必须按照这里的来，旧的都显示不出）：<a target="_blank" rel="noopener" href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></li>
+</ul>
 <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="报错一："><a href="#报错一：" class="headerlink" title="报错一："></a>报错一：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">FATAL &#123;</span><br><span class="line">  err: YAMLException: end of the stream or a document separator is expected (1:1)</span><br><span class="line"></span><br><span class="line">   1 | &#96;&#96;&#96;</span><br><span class="line">  -----^</span><br><span class="line">      at generateError (D:\Desktop\blog\node_modules\js-yaml\lib\loader.js:183:10)asap.js:40:19)</span><br><span class="line">      at flush </span><br><span class="line">      </span><br><span class="line">      ---------------中间省略---------------------</span><br><span class="line">      (internal&#x2F;process&#x2F;task_queues.js:75:11) &#123;</span><br><span class="line">    reason: &#39;end of the stream or a document separator is expected&#39;,</span><br><span class="line">    mark: &#123;</span><br><span class="line">      name: null,</span><br><span class="line">      buffer: &#39;&#96;&#96;&#96;\n&#39;,</span><br><span class="line">      position: 0,</span><br><span class="line">      line: 0,</span><br><span class="line">      column: 0,</span><br><span class="line">      snippet: &#39; 1 | &#96;&#96;&#96;\n-----^&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>查阅资料得知，大部分情况为，<code>_config.yml</code> 文件下所有的 <code>:</code> 后，必须有空格，且只能有一个空格。于是我开始检查，利用编辑器搜索 <code>: </code>，高亮出符合内容的冒号，这样就能快速找出不符合要求的冒号。但是试了好几遍，没有找出不符合要求的，缓存清除一类的也不行。</p>
@@ -311,6 +353,11 @@
 <p>因为去年的时候我部署过 <code>hexo</code>，所以这次是直接粘贴上去的，粘贴的时候， <code>typora</code> 把 <code>---</code> 转化成了 「```」，问题解决！</p>
 <h3 id="报错二"><a href="#报错二" class="headerlink" title="报错二"></a>报错二</h3><p>hexo 的链接点击不跳转，变成下载文件</p>
 <p><a target="_blank" rel="noopener" href="https://tang.su/2020/09/upgrade-hexo-to-5-0/#more">升级Hexo到5.0 | TS’ Blog</a></p>
+<h3 id="错误三"><a href="#错误三" class="headerlink" title="错误三"></a>错误三</h3><p>我发现用 <code>npm</code> 安装 <code>next</code> 很不靠谱，<code>/themes</code> 文件夹中什么都没，所以涉及到编辑js的那些操作都做不了。于是检出了个 <code>bug_fix</code> 分支，删除了 <code>.gitkeep</code> 文件，<code>git clone</code> 了 <code>next</code> 的代码。后来又发现，主题内部自带了一份 <code>_config.yml</code> 文件，而且结构和之前的那份完全不一样！！！得知，根目录下的 <code>_config.yml</code> 的优先级比主题文件夹里面的优先级高，所以把配置复制到根目录下的配置文件，并且新的配置文件中是含有 <code>valine</code> 的默认配置的，很轻松就配置好了。</p>
+<h3 id="错误四"><a href="#错误四" class="headerlink" title="错误四"></a>错误四</h3><p>无法评论，需要在 <code>leancloud</code> 中【设置】-【安全中心】中设置安全域名，即自己的域名，形式为<code>https://你在cname中填写的域名</code></p>
+<h3 id="错误五"><a href="#错误五" class="headerlink" title="错误五"></a>错误五</h3><p>访客显示错误，原因是域名映射的时候，<code>github</code> 给我们映射成了 <code>https</code>，但其实我是<code>http</code>，做如下设置即可</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_visitors:</span></span><br><span class="line">	<span class="attr">security:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -329,7 +376,10 @@
     <a href="/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/" rel="prev" title="人为什么而活2">
       <i class="fa fa-chevron-left"></i> 人为什么而活2
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/" rel="next" title="hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱）">
+      hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -389,28 +439,30 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">2.</span> <span class="nav-text">报错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%80%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">报错一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">报错二</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%A4%87%E4%BB%BD%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">部署与备份小总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">3.</span> <span class="nav-text">报错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%80%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">报错一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%BA%8C"><span class="nav-number">3.2.</span> <span class="nav-text">报错二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%B8%89"><span class="nav-number">3.3.</span> <span class="nav-text">错误三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%9B%9B"><span class="nav-number">3.4.</span> <span class="nav-text">错误四</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BA%94"><span class="nav-number">3.5.</span> <span class="nav-text">错误五</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bird"
+      src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
   <p class="site-author-name" itemprop="name">Bird</p>
-  <div class="site-description" itemprop="description">CS笔记与随笔</div>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -425,9 +477,47 @@
       <span class="links-of-author-item">
         <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
   </div>
 
 
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2021/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="读书笔记测试文章" target="_blank">读书笔记测试文章</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/" title="hdoj刷题六(java)：2050-2059" target="_blank">hdoj刷题六(java)：2050-2059</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/" title="hdoj刷题二(java)：2010-2019" target="_blank">hdoj刷题二(java)：2010-2019</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/" title="hdoj刷题一(java)：2000-2009" target="_blank">hdoj刷题一(java)：2000-2009</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/" title="起床小插曲" target="_blank">起床小插曲</a>
+          </li>
+        
+      </ul>
+    </div>
 
       </div>
 
@@ -447,7 +537,7 @@
 
 <div class="copyright">
   
-  &copy; 2019 – 
+  &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -457,37 +547,17 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">21 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
 
 
 
@@ -517,9 +587,14 @@
                 console.error('Failed to save visitor count', error);
               });
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -546,7 +621,7 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va","app_key":"irTJuJuhBG8Pn6zKBvxEmCMN","server_url":null,"security":true};
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va","app_key":"irTJuJuhBG8Pn6zKBvxEmCMN","server_url":null,"security":false};
     function fetchData(api_server) {
       var Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
@@ -605,6 +680,31 @@
 
 
   
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
 
 
 
@@ -640,10 +740,10 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     new Valine({
       el         : '#valine-comments',
       verify     : false,
-      notify     : false,
+      notify     : true,
       appId      : '6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va',
       appKey     : 'irTJuJuhBG8Pn6zKBvxEmCMN',
-      placeholder: "(。・∀・)ノ🍻)",
+      placeholder: "欢迎留言~ (填写email可接受回复通知）",
       avatar     : 'mm',
       meta       : guest,
       pageSize   : '10' || 10,
@@ -657,5 +757,18 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 });
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":160,"height":300},"mobile":{"show":true}});</script></body>
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":120,"height":210},"mobile":{"show":true}});</script></body>
 </html>
