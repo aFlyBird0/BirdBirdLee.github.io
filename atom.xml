@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-03-09T06:37:37.673Z</updated>
+  <updated>2021-03-09T06:53:56.899Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo新建菜单并添加文章</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</id>
+    <published>2021-03-08T15:42:41.000Z</published>
+    <updated>2021-03-09T06:53:56.899Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;两种不同效果对比&quot;&gt;&lt;a href=&quot;#两种不同效果对比&quot; class=&quot;headerlink&quot; title=&quot;两种不同效果对比&quot;&gt;&lt;/a&gt;两种不同效果对比&lt;/h2&gt;&lt;h2 id=&quot;最终效果&quot;&gt;&lt;a href=&quot;#最终效果&quot; class=&quot;headerlink&quot; title=&quot;最终效果&quot;&gt;&lt;/a&gt;最终效果&lt;/h2&gt;&lt;p&gt;本文章使用的是 &lt;code&gt;next&lt;/code&gt; 主题，其他主题类似。&lt;/p&gt;
+&lt;p&gt;以添加「读书笔记」菜单为例，以下是最终效果&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>读书笔记测试文章</title>
@@ -108,17 +126,10 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</id>
     <published>2021-03-07T04:39:24.000Z</published>
-    <updated>2021-03-09T06:37:37.675Z</updated>
+    <updated>2021-03-09T06:41:23.656Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。&lt;/p&gt;
-&lt;p&gt;一边找衣服，一边吟着整首，突然吟到「雁过也，正伤心，却是旧时相识」，停住，反复琢磨了几遍。李清照想表达的意思早已忘记</summary>
-        
-      
+    <summary type="html">&lt;p&gt;今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。&lt;/p&gt;</summary>
     
     
     

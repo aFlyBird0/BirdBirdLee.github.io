@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</loc>
+    
+    <lastmod>2021-03-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</loc>
+    
+    <lastmod>2021-03-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://bird.blog.tcualhp.cn/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.html</loc>
     
     <lastmod>2021-03-09</lastmod>
@@ -10,13 +24,6 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/about/index.html</loc>
-    
-    <lastmod>2021-03-09</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</loc>
     
     <lastmod>2021-03-09</lastmod>
     
@@ -158,14 +165,14 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/DailyLove/</loc>
+    <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
+    <loc>http://bird.blog.tcualhp.cn/tags/DailyLove/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -181,7 +188,7 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/CS/SpringBoot/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/think/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -195,13 +202,6 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/think/</loc>
-    <lastmod>2021-03-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://bird.blog.tcualhp.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/CS/SpringBoot/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -217,6 +217,13 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-03-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
