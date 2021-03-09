@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-03-08T12:17:14.280Z</updated>
+  <updated>2021-03-08T16:27:29.688Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -17,20 +17,61 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>读书笔记测试文章</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</id>
+    <published>2021-03-08T15:36:14.000Z</published>
+    <updated>2021-03-08T16:27:29.688Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;修改&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="读书笔记" scheme="http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hdoj刷题六(java)：2050-2059</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/</id>
+    <published>2021-03-08T12:40:03.000Z</published>
+    <updated>2021-03-08T14:41:04.778Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
+    
+    <category term="算法" scheme="http://bird.blog.tcualhp.cn/categories/CS/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>hdoj刷题二(java)：2010-2019</title>
     <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/</id>
     <published>2021-03-07T14:34:47.000Z</published>
-    <updated>2021-03-08T12:17:14.280Z</updated>
+    <updated>2021-03-08T12:38:41.940Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;题目、分析与代码&quot;&gt;&lt;a href=&quot;#题目、分析与代码&quot; class=&quot;headerlink&quot; title=&quot;题目、分析与代码&quot;&gt;&lt;/a&gt;题目、分析与代码&lt;/h2&gt;&lt;h3 id=&quot;Problem-2010-水仙花数&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;题目、分析与代码&quot;&gt;&lt;a href=&quot;#题目、分析与代码&quot; class=&quot;headerlink&quot; title=&quot;题目、分析与代码&quot;&gt;&lt;/a&gt;题目、分析与代码&lt;/h2&gt;&lt;h3 id=&quot;Problem-2010-水仙花数&quot;&gt;&lt;a href=&quot;#Problem-2010-水仙花数&quot; class=&quot;headerlink&quot; title=&quot;Problem - 2010 水仙花数&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=2010&quot;&gt;Problem - 2010 水仙花数&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;再跳说不过去了，这里写一下， 个人觉得这里最难的是数位的拆分。有两种方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读取成数字，然后先取余，再除10，循环&lt;/li&gt;
+&lt;li&gt;读取成字符串，获取子串，再用 &lt;code&gt;parseInt()&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
@@ -46,10 +87,10 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/</id>
     <published>2021-03-07T08:34:15.000Z</published>
-    <updated>2021-03-07T15:45:08.023Z</updated>
+    <updated>2021-03-08T12:41:35.992Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;本次刷题主要是针对复试，以前用的是 &lt;code&gt;C++&lt;/code&gt;，最近一年用 &lt;code&gt;Java&lt;/code&gt; 做项目多，也是想着以后靠 &lt;code&gt;Java&lt;/code&gt; 吃饭，所以换用 &lt;code&gt;Java&lt;/code&gt;。寒假在 &lt;code&gt;LeetCode&lt;/code&gt; 刷了一些题，所以最近的刷题主要是习惯用 &lt;code&gt;Java&lt;/code&gt; 做输入输出以及用 &lt;code&gt;Java&lt;/code&gt; 写算法题（多留意常用 &lt;code&gt;api&lt;/code&gt;，背下来，考试手写）&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;本次刷题主要是针对复试，刷 hdoj 第11页的题，以前用的是 &lt;code&gt;C++&lt;/code&gt;，最近一年用 &lt;code&gt;Java&lt;/code&gt; 做项目多，也是想着以后靠 &lt;code&gt;Java&lt;/code&gt; 吃饭，所以换用 &lt;code&gt;Java&lt;/code&gt;。寒假在 &lt;code&gt;LeetCode&lt;/code&gt; 刷了一些题，所以最近的刷题主要是习惯用 &lt;code&gt;Java&lt;/code&gt; 做输入输出以及用 &lt;code&gt;Java&lt;/code&gt; 写算法题（多留意常用 &lt;code&gt;api&lt;/code&gt;，背下来，考试手写）&lt;/p&gt;
 &lt;p&gt;下面是找到的一篇输入输出教程，足够应付了：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/shijiebei2009/article/details/17305223&quot;&gt;ACM之Java输入输出_以家为家，以乡为乡，以国为国，以天下为天下-CSDN博客_acm java输入输出&lt;/a&gt;&lt;/p&gt;</summary>
     
