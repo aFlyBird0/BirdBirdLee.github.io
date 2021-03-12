@@ -30,7 +30,7 @@
 <meta property="og:description" content="向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-08T12:40:03.000Z">
-<meta property="article:modified_time" content="2021-03-09T06:37:37.659Z">
+<meta property="article:modified_time" content="2021-03-12T16:23:04.746Z">
 <meta property="article:author" content="Bird">
 <meta name="twitter:card" content="summary">
 
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-09 14:37:37" itemprop="dateModified" datetime="2021-03-09T14:37:37+08:00">2021-03-09</time>
+                <time title="修改时间：2021-03-13 00:23:04" itemprop="dateModified" datetime="2021-03-13T00:23:04+08:00">2021-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,7 +277,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>122</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -299,7 +299,30 @@
         <p>向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。</p>
 <span id="more"></span>
 
-<h3 id="Problem-2050-折线分割平面"><a href="#Problem-2050-折线分割平面" class="headerlink" title="Problem - 2050 折线分割平面"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2050">Problem - 2050 折线分割平面</a></h3><h3 id="Problem-2051-Bitset"><a href="#Problem-2051-Bitset" class="headerlink" title="Problem - 2051 Bitset"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2051">Problem - 2051 Bitset</a></h3><h3 id="Problem-2052-Picture"><a href="#Problem-2052-Picture" class="headerlink" title="Problem - 2052 Picture"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2052">Problem - 2052 Picture</a></h3>
+<h3 id="Problem-2050-折线分割平面"><a href="#Problem-2050-折线分割平面" class="headerlink" title="Problem - 2050 折线分割平面"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2050">Problem - 2050 折线分割平面</a></h3><h3 id="Problem-2051-Bitset"><a href="#Problem-2051-Bitset" class="headerlink" title="Problem - 2051 Bitset"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2051">Problem - 2051 Bitset</a></h3><p>这题为典型的10进制转二进制，不断取余2再除2就行。但是这样的数位是反的，所以我有两种思路将其弄正：</p>
+<ul>
+<li>一种是弄个数组反向输出，数组大小为log2(N+1)向上取整，向上取整有点东西的，一开始我表达式就写错了。并且学到了 java 的 log2n方式：</li>
+</ul>
+<blockquote>
+<p>在java中求log2N，首先要弄明白一个初中学到的公式log2N=logeN/loge2,logeN代表以e为底的N的对数,loge2代表以e为底的2的对数.<br>在java.lang.math类中的log(double a)代表以e为底的a的对数,因此log2N在Java中的表示为:<br>log((double)N)/log((double)2)</p>
+</blockquote>
+<p>所以实际计算数组长度的时候代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>下面是完整代码：一遍过！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lhp</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/3/12 23:57</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">P2051</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (sc.hasNext())&#123;</span><br><span class="line">            <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">            ten2Two(num);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ten2Two</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br><span class="line"><span class="comment">//        System.out.println(&quot;len:&quot; + len);</span></span><br><span class="line">        <span class="keyword">int</span>[] numTwo = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (num &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            numTwo[i] = num % <span class="number">2</span>;</span><br><span class="line">            num /= <span class="number">2</span>;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=len-<span class="number">1</span>; j&gt;=<span class="number">0</span>; j--)&#123;</span><br><span class="line">            System.out.print(numTwo[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还有一种我想试试递归输出，先计算再输出，递归可能不占优，但是一直对递归的思想理解不透彻，想试试</li>
+</ul>
+<p>没想到一下子就写出来了！果然凌晨是敲代码的最佳时机！奖励自己一片面包，长胖！</p>
+<p>思路是这样的，既然最先算出来的最后输出，那么其实和树的后序遍历很像：先递归下去，返回到根节点的时候再输出，即，先把 num/2 传下去算着，等算完了再把 num%2 输出，递归退出判断是什么呢？当然是和上面那个方法的 while 退出判断一样啦，为0就退出。</p>
+<p>以下是递归实现的函数部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">ten2Two2</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ten2Two2(num/<span class="number">2</span>);</span><br><span class="line">            System.out.print(num%<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Problem-2052-Picture"><a href="#Problem-2052-Picture" class="headerlink" title="Problem - 2052 Picture"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2052">Problem - 2052 Picture</a></h3>
     </div>
 
     
@@ -488,12 +511,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">28k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">24 分钟</span>
+    <span title="站点阅读时长">25 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
