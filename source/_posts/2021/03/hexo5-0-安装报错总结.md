@@ -6,6 +6,7 @@ tags:
 	-
 categories:
 	- CS
+    - hexo
 ---
 
 ## 部署与备份小总结

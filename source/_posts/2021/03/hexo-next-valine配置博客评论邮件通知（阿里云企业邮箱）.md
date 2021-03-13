@@ -5,6 +5,8 @@ date: 2021-03-06 15:13:10
 tags:
 	- hexo
 categories:
+	- CS
+    - hexo
 ---
 
 ## 参考博客

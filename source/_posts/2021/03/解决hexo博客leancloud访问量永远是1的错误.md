@@ -5,6 +5,8 @@ date: 2021-03-13 16:22:27
 tags:
 	- hexo
 categories:
+	- CS
+    - hexo
 ---
 
 ## 错误定位
@@ -17,13 +19,17 @@ categories:
 
 应该是`Couter`类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。
 
+<!--more-->
+
+## 错误解决
+
 进入`leancloud`控制台，【存储】-【结构化数据】-【Counter】，删除 Class
 
 ![image-20210313162937093](https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png)
 
 再创建一个 `Counter` Class，注意下面选【无限制】
 
-![image-20210313163038465](C:\Users\LHP\AppData\Roaming\Typora\typora-user-images\image-20210313163038465.png)
+![image-20210313163038465](https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png)
 
 ## 参考
 

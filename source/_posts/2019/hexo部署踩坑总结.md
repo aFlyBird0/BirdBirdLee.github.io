@@ -6,7 +6,7 @@ tags:
     - hexo
 categories:
     - CS
-    - common
+    - hexo
 ---
 
 hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本
