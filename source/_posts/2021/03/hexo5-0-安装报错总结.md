@@ -81,6 +81,7 @@ hexo g -d
   * [Hexo-NexT 添加打字特效、鼠标点击特效 | 小丁的个人博客](https://tding.top/archives/58cff12b.html) 
 * [hexo-submit-urls-to-search-engine 中文文档 | 峡州仙士之页](https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html)
 * 近期文章（ NexT 已经更换 Nunjucks 作为模板引擎，必须按照这里的来，旧的都显示不出）：[Hexo-NexT 版本更新记录 | 小丁的个人博客](https://tding.top/archives/2bd6d82.html)
+* [Hexo Next阅读次数不正常、显示多个阅读次数 | 咖里De](https://blog.garryde.com/archives/63320.html)
 
 
 
