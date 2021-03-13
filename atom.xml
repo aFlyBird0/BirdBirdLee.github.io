@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-03-12T15:51:42.909Z</updated>
+  <updated>2021-03-13T08:33:04.120Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决hexo博客leancloud访问量永远是1的错误</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</id>
+    <published>2021-03-13T08:22:27.000Z</published>
+    <updated>2021-03-13T08:33:04.120Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;错误定位&quot;&gt;&lt;a href=&quot;#错误定位&quot; class=&quot;headerlink&quot; title=&quot;错误定位&quot;&gt;&lt;/a&gt;错误定位&lt;/h2&gt;&lt;p&gt;定位到错误：这条请求标红，并且含有 &lt;code&gt;Counter&lt;/code&gt;，我猜是</summary>
+        
+      
+    
+    
+    
+    
+    <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>随笔20200915</title>

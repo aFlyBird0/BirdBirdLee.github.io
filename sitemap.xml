@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</loc>
+    
+    <lastmod>2021-03-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2021-03-13</lastmod>
@@ -165,14 +172,14 @@
 
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
+    <loc>http://bird.blog.tcualhp.cn/tags/hexo/</loc>
     <lastmod>2021-03-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/tags/hexo/</loc>
+    <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
     <lastmod>2021-03-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -223,14 +230,14 @@
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2021-03-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://bird.blog.tcualhp.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2021-03-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

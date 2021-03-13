@@ -26,6 +26,23 @@
       </categories>
   </entry>
   <entry>
+    <title>解决hexo博客leancloud访问量永远是1的错误</title>
+    <url>/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h2 id="错误定位"><a href="#错误定位" class="headerlink" title="错误定位"></a>错误定位</h2><p>定位到错误：这条请求标红，并且含有 <code>Counter</code>，我猜是 <code>leancloud</code> 修改访问量的接口</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png" alt="image-20210313162321026"></p>
+<p>返回是这样的：<img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png" alt="image-20210313162351656"></p>
+<p>应该是<code>Couter</code>类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。</p>
+<p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png" alt="image-20210313162937093"></p>
+<p>再创建一个 <code>Counter</code> Class，注意下面选【无限制】</p>
+<p><img src="C:\Users\LHP\AppData\Roaming\Typora\typora-user-images\image-20210313163038465.png" alt="image-20210313163038465"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ouyanting.com/archives/2018/12/ebe3ded2.html">Forbidden writing by object’s ACL. - Yanting Ou</a></p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>随笔20200915</title>
     <url>/2021/03/%E9%9A%8F%E7%AC%9420200915/</url>
     <content><![CDATA[<p>刷题做笔记时，无意间看到去年9月份写的随笔，隐去了别人的姓名，顺手传上来吧</p>
