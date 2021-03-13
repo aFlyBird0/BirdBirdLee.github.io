@@ -32,12 +32,17 @@
 <p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png" alt="image-20210313162321026"></p>
 <p>返回是这样的：<img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png" alt="image-20210313162351656"></p>
 <p>应该是<code>Couter</code>类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。</p>
-<p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
+<span id="more"></span>
+
+<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h2><p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
 <p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png" alt="image-20210313162937093"></p>
 <p>再创建一个 <code>Counter</code> Class，注意下面选【无限制】</p>
-<p><img src="C:\Users\LHP\AppData\Roaming\Typora\typora-user-images\image-20210313163038465.png" alt="image-20210313163038465"></p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png" alt="image-20210313163038465"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ouyanting.com/archives/2018/12/ebe3ded2.html">Forbidden writing by object’s ACL. - Yanting Ou</a></p>
 ]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
@@ -119,6 +124,9 @@
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
@@ -336,6 +344,9 @@
 <h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></p>
 <p><a href="https://suyin-blog.club/2020/2M3YWE7/">给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog</a></p>
 ]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
@@ -372,6 +383,9 @@
 <p>应该这样修改，<code>enable</code> 和 <code>notify</code> 改为 <code>true</code>，以及 <code>appid</code> 与 <code>appkey</code> 填完整</p>
 <p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153258422.png" alt="image-20210306153258422"></p>
 ]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
@@ -446,7 +460,7 @@
 
 ]]></content>
       <categories>
-        <category>CS</category>
+        <category>CS - hexo</category>
       </categories>
   </entry>
   <entry>
@@ -694,7 +708,7 @@
 ]]></content>
       <categories>
         <category>CS</category>
-        <category>common</category>
+        <category>hexo</category>
       </categories>
       <tags>
         <tag>hexo</tag>

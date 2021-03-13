@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-03-13T08:33:04.120Z</updated>
+  <updated>2021-03-13T10:32:19.243Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -21,18 +21,17 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</id>
     <published>2021-03-13T08:22:27.000Z</published>
-    <updated>2021-03-13T08:33:04.120Z</updated>
+    <updated>2021-03-13T10:32:19.243Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;错误定位&quot;&gt;&lt;a href=&quot;#错误定位&quot; class=&quot;headerlink&quot; title=&quot;错误定位&quot;&gt;&lt;/a&gt;错误定位&lt;/h2&gt;&lt;p&gt;定位到错误：这条请求标红，并且含有 &lt;code&gt;Counter&lt;/code&gt;，我猜是</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;错误定位&quot;&gt;&lt;a href=&quot;#错误定位&quot; class=&quot;headerlink&quot; title=&quot;错误定位&quot;&gt;&lt;/a&gt;错误定位&lt;/h2&gt;&lt;p&gt;定位到错误：这条请求标红，并且含有 &lt;code&gt;Counter&lt;/code&gt;，我猜是 &lt;code&gt;leancloud&lt;/code&gt; 修改访问量的接口&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png&quot; alt=&quot;image-20210313162321026&quot;&gt;&lt;/p&gt;
+&lt;p&gt;返回是这样的：&lt;img src=&quot;https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png&quot; alt=&quot;image-20210313162351656&quot;&gt;&lt;/p&gt;
+&lt;p&gt;应该是&lt;code&gt;Couter&lt;/code&gt;类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。&lt;/p&gt;</summary>
     
     
+    
+    <category term="CS - hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS-hexo/"/>
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
@@ -61,13 +60,15 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</id>
     <published>2021-03-08T15:42:41.000Z</published>
-    <updated>2021-03-09T06:53:56.899Z</updated>
+    <updated>2021-03-13T10:32:43.935Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;两种不同效果对比&quot;&gt;&lt;a href=&quot;#两种不同效果对比&quot; class=&quot;headerlink&quot; title=&quot;两种不同效果对比&quot;&gt;&lt;/a&gt;两种不同效果对比&lt;/h2&gt;&lt;h2 id=&quot;最终效果&quot;&gt;&lt;a href=&quot;#最终效果&quot; class=&quot;headerlink&quot; title=&quot;最终效果&quot;&gt;&lt;/a&gt;最终效果&lt;/h2&gt;&lt;p&gt;本文章使用的是 &lt;code&gt;next&lt;/code&gt; 主题，其他主题类似。&lt;/p&gt;
 &lt;p&gt;以添加「读书笔记」菜单为例，以下是最终效果&lt;/p&gt;</summary>
     
     
+    
+    <category term="CS - hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS-hexo/"/>
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
@@ -183,12 +184,14 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</id>
     <published>2021-03-06T13:25:23.000Z</published>
-    <updated>2021-03-09T06:37:37.667Z</updated>
+    <updated>2021-03-13T10:32:25.750Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h2&gt;&lt;h3 id=&quot;1-在博客根目录下安装-hexo-generator-feed&quot;&gt;&lt;a href=&quot;#1-在博客根目录下安装-hexo-generator-feed&quot; class=&quot;headerlink&quot; title=&quot;1. 在博客根目录下安装 hexo-generator-feed&quot;&gt;&lt;/a&gt;1. 在博客根目录下安装&lt;a href=&quot;https://github.com/hexojs/hexo-generator-feed&quot;&gt; hexo-generator-feed&lt;/a&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install hexo-generator-feed --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
+    
+    <category term="CS - hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS-hexo/"/>
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
@@ -200,7 +203,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/</id>
     <published>2021-03-06T07:13:10.000Z</published>
-    <updated>2021-03-09T06:37:37.660Z</updated>
+    <updated>2021-03-13T10:32:33.535Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;参考博客&quot;&gt;&lt;a href=&quot;#参考博客&quot; class=&quot;headerlink&quot; title=&quot;参考博客&quot;&gt;&lt;/a&gt;参考博客&lt;/h2&gt;&lt;blockquote&gt;
@@ -210,6 +213,8 @@
 &lt;p&gt;Valine-Admin 官方教程：&lt;a href=&quot;https://github.com/zhaojun1998/Valine-Admin&quot;&gt;zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。&lt;/a&gt;&lt;/p&gt;</summary>
     
     
+    
+    <category term="CS - hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS-hexo/"/>
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
@@ -221,14 +226,14 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/</id>
     <published>2021-03-05T08:33:10.000Z</published>
-    <updated>2021-03-13T07:49:38.788Z</updated>
+    <updated>2021-03-13T10:32:38.540Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;部署与备份小总结&quot;&gt;&lt;a href=&quot;#部署与备份小总结&quot; class=&quot;headerlink&quot; title=&quot;部署与备份小总结&quot;&gt;&lt;/a&gt;部署与备份小总结&lt;/h2&gt;&lt;p&gt;经过我三次的 &lt;code&gt;hexo&lt;/code&gt; 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署备份。&lt;/p&gt;</summary>
     
     
     
-    <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
+    <category term="CS - hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS-hexo/"/>
     
     
   </entry>
@@ -349,7 +354,7 @@
     <link href="http://bird.blog.tcualhp.cn/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/"/>
     <id>http://bird.blog.tcualhp.cn/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</id>
     <published>2019-08-04T07:50:32.000Z</published>
-    <updated>2021-03-05T10:31:36.178Z</updated>
+    <updated>2021-03-13T10:32:03.234Z</updated>
     
     
     <summary type="html">&lt;p&gt;hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本&lt;/p&gt;</summary>
@@ -358,7 +363,7 @@
     
     <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
     
-    <category term="common" scheme="http://bird.blog.tcualhp.cn/categories/CS/common/"/>
+    <category term="hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS/hexo/"/>
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
