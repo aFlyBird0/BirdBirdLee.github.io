@@ -106,7 +106,6 @@ deploy:
     repo: git@github.com:BirdBirdLee/BirdBirdLee.github.io.git
     branch: master
     # message: [message]
-  - type: leancloud_counter_security_sync
 
 # 搜索插件
 search:
