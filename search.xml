@@ -1,279 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>人为什么而活2</title>
-    <url>/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</url>
-    <content><![CDATA[<p>现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「<strong>做你想做的，做你该做的</strong>」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  </p>
-<p>有趣的是，在2020年7月18日，我在知乎回答了这样一个问题：「是什么让你坚持活下去（限10个字之内）？」，我的回答是，「<strong>我爱的人，爱我的人</strong>」。当时的我应该是处于心情的低谷期，每天的焦虑、自卑、抑郁、逃避充斥着我。可以看得出来，当时的我更加注重「人」的意义。或许你会觉得，当时的我，是个重情重义的人——事实确实如此，但另一方面，这短短的八个字，也体现了我的焦虑型依恋的本质，换句话说，这个时候，我已经迷失自我了：我们把这八个字做一下小学时常考的「缩句」，那么我的回答就成了「（别）人，（别）人」，<strong>给出这个答案时候的我，根本不是为自己而活着</strong>，换句话说，我看不到自己活着的意义，心中对于「我」的概念已经很微弱了。  </p>
+    <title>DailyLove-日常记录小程序后端细节展现(springboot)</title>
+    <url>/2019/08/DailyLove-%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E7%BB%86%E8%8A%82%E5%B1%95%E7%8E%B0(springboot)/</url>
+    <content><![CDATA[<h2 id="事件（核心）"><a href="#事件（核心）" class="headerlink" title="事件（核心）"></a>事件（核心）</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h2 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h2><h2 id="组队"><a href="#组队" class="headerlink" title="组队"></a>组队</h2>]]></content>
+      <categories>
+        <category>CS</category>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>DailyLove</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker安装与使用IDEA部署到远程服务器</title>
+    <url>/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用</p>
 <span id="more"></span>
-
-<p>人活着是要有「自我稳定性」的，包括情绪稳定、拥有取悦自己的能力，拥有一个人生活的能力等等。是很奇怪，一个人越是无法一个人活着，就越难遇到与其结伴的人；一个人越是自己能活得很好，自信乐观，优秀，越是能感染到其他人。  </p>
-<p>所以，我选择了后者。</p>
-<p>我曾在「声昔」发表过一个心情，「如何毁了一个人，夺去除了生命以外对TA而言最重要的东西；如何成就一个人，夺去除了生命以外对TA而言最重要的东西」。前半句很好理解，后半句我想表达什么意思呢，又为什么会想到这句话呢？前面提到，我过去的一年，迷失了自我，不是为自己而活，沉浸在负面情绪中，最终，我活着的动力，那个「爱我的人」，选择了离开。这对焦虑型依恋的我而言，就像丢了命，当时的我真的觉得活不下去了。我同时面临着自我攻击、至爱的人对我的失望放弃，还有一个多月后即将考研的压力。  </p>
-<p>我认真反思过，细数了去年一年来我的缺点，有真正的缺点，也有自以为的缺点：我是个很闷的人，欢脱不起来；我是个很自卑的人，与两年前那个自信的少年截然相反；我是个不注重打扮的人，近几个月窝在寝室，随性穿衣服，加上长时间的熬夜，肤质一泻千里；我是个抑郁、焦虑的人，我看不到未来的希望，哪怕当时拥有的，我也会觉得我失去，美好的东西，我都觉得自己不配；我是个喜欢逃避的人，沉浸在那种负面情绪中，不愿走出来，或者根本走不出来；我是个社交很失败的人，以前还会努力与人接触，在有了女朋友后，把所有的社交都逐渐转向了她，这也是我逐渐无趣的一大原因，太久没好好和人说话了；我是个无法控制自己情绪的人；我是个很难与人共情的人，我无法，也可能是不愿，认真探索别人说话时的情绪，想表达的心思，无法与人感同身受；我是个做事没有计划的人，大学三年多一直在努力，但都一直在往不同的方向努力，奖学金拿了很多，比赛的奖也拿了不少，项目经历也有一些，老师和同学也都非常认可我，但我就是把牌打成了这个样子，在毕业的时候远远没有达到我期望、他人期望的水平，一直没有持续往一个方向使力，所以我想读研；我是个很怪的人，我给自己设限，我觉得自己不善于社交，我觉得自己不配享受那些高档的美食，我觉得自己做不到很多东西，我觉得很多事情只有某种类型的人才能做，而我不是；我做事太有目的性。</p>
-<p>生活和自己都抛弃了我。很感激那两个星期陪伴了我的人，给我的安慰和激励。在那之后，我疯狂得进行自我救赎，我去找不同的人聊天，去接触新的圈子，去找老乡群的人，去找考研群主胡子哥，去找挽回机构（就聊了一次，毕竟还是要靠自己，有人点醒就够了——其实也是因为太贵了，价格5位数，是贫穷让我拥有了自我救赎的能力），也去找心理咨询师聊过，还有自我对话。和心理咨询师的聊天很有意思，因为当时预约的人很多，我被排到了一星期后，然而我在一星期后自愈了很多，和老师聊天的时候，全程笑着讲述我的经历，与其说是去咨询的，不如说是去演讲的。一边讲着过去的经历，一边自我分析，「我觉得这是什么什么样的心态，应该怎么样去解决」，老师也夸我分析的都对。讲到后来，老师问我，「所以你想咨询什么问题呢？」，我想了想，好像当时确实没有什么太大的问题需要咨询哈哈哈。索性就请教了个关于社交的问题，然后询问了老师的下班时间，提前几分钟结束了咨询。我觉得心里咨询师是很辛苦的，一直在认真听我的讲述，不停地记录我的情况，努力与我共情，我也有义务为她着想，我们并不是只有咨询师师咨询者的关系，也有普通朋友的关系。</p>
-<p>我发现自己有个毛病是永远改不掉了，哪怕是在我经历了四个月的自我救赎，脱胎换骨后仍几乎没变——「话唠」。不同的是，如果是与人交谈，我会观察对方的反应，看是否对方愿意听；以及与人交流的时候，我现在更趋向于少说自己，而努力去识别对方的情绪，引领着对方把自己想说的说舒畅了。</p>
-<p>话题拉回到自我救赎上，前面讲的是与「人」的交谈，求助，其实占比更多的，是「自我」救赎，是通过「阅读」，与自己对话。</p>
-<p>最近几个月的阅读主要分为两大类：「与人」，「自我」。最初的时候，我改变的原动力是挽回她，所以在知乎上拼命搜索「挽回」，明白了许多浅层的原因，弄清了是什么导致了分手，以及挽回中的哪些错误不能犯。后来，我开始阅读「亲密关系」领域的经典书籍，去学习「为什么要去爱」、「能从爱中获得什么」、「如何去爱」，这段时间我重新审视了自己挽回的动机，去思考关于爱的深层次的内容，也正是在这段时间，我修复了自己的恋爱性格缺陷——「焦虑型依恋」，也是在这段时间，我学习了如何正确对待自己的情绪，进而控制自己的情绪，以及如何带动对方的正向情绪；学习了如何维护亲密关系；学习了如何与人沟通；学习了如何共情。后期，直到现在，我主要阅读的是关于「自我」的书籍，诸如《被讨厌的勇气》，《羞耻感》，《认知觉醒》一类的书，前两本治愈的是自己的性格，差不多根治了二十多年来的自卑心理；后面那本是关于自我提升的，因为只有自己变得优秀自律，才值得爱人与被爱，才能收获高质量的爱。当然我读的书远不止上面几本，还有知乎以及公众号上面的文章，以及我生命中的一位贵人——小黑老师，从亲密关系到社交关系，从自我管理到职场生存，都给了我实质性的帮助，启发了我很多很多。</p>
-<p>人能找到自己真正喜欢的事物，真是一件很不容易却又幸福的事儿——而我找到了「读书」。读书的时候，时间是完全属于自己的，心境是完全平和的。</p>
-<p>「杀不死我的，只会让我更强大」，很幸运，在绝境中，在「毁灭」与「成就」中，我选择了后者。前面那一大段我所列出的缺点，现在，有的已经成了我的优点，有的已经克服，有的正在努力的路上。</p>
-<p>改变确实在一点点发生。我首先是突破了「自我设限」，如我给自己设定的「 我不擅长社交」，从而重拾了与人交流的勇气，又如我开始吃西红柿（煮的），吃洋葱，还有一次吃了室友给我捏的两个海苔饭团，这在以前，光是「海苔」和「拌饭」任何一个，都能让我的胃翻江倒海。我改变了情绪认知的方式，以前的我沉浸在被情绪控制的「爽感」中，就像毒品一般，被摧残着却又离不开。后来，我告诉自己，情绪只是身体对自己发出的信号，告诉自己身体的想法，告诉自己该怎么做了。比如焦虑的时候，身体是要告诉你该干事情了，而不是让你继续沉浸在里面。在与人交谈的时候，我能放下自己的好胜心、自卑心、嫉妒心，或许以前别人向我夸耀自己的成果的时候，我会下意识远离，一个是因为嫉妒，一个是怕引起心中的焦虑和自卑；现在我大部分时候能短暂的放下自我意识，把角色转换到对方身上，由衷地为对方高兴，并认真地赞美TA，因此我有几个朋友也比以前更「铁」了，聊天的频率、广度、深度都有增加。还有好多好多，一时间无法分享我成长的喜悦。啊对，还有最重要的一点，这两个多月，我的一个十多年的梦想实现啦——体重从90斤蹭蹭蹭窜到了100+！或许是我妈妈手艺太好的缘故，抑或是我驱散了长久以来的负面情绪的缘故。</p>
-<p>2月，我开始使用一个叫「声昔」的app，认识了许多与我相似的、曾经自卑现在重获新生的人。同时，我也因为这段经历，能与很多人感同身受，温暖了很多人，给他们带来了希望。尤其是当有人发空间表达自己被温暖到了，又有人回复我：「哇，竟然有人懂我这段话的意思，太意外，太惊喜了。这是我的困惑，甚至为此焦虑，看了你说的这段话，挺有启发的，感谢（原文还有表情）」，看到这些反馈，我相信，我当时是最幸福的。我的这些举动，并不是完全无私的，帮助他们是我发自内心的乐意的，但感受到别人需要我而引发的价值感，也正是我所渴求的。后来一个叫「书籍共读讨论社」的社团，群里的气氛异常的好，在这个群中，聊天与其他地方不一样，我们都在这个氛围中努力深度思考，发的感悟反思都是一次几百个字，占满整个屏幕，无论是发话的人，还是阅读的人，都需要沉浸下来认真思考的能力。感谢这个社团，让我重新获得了深度思考的能力，让我重新能认真看完一整个文章。现在社团已经从最初的部长，蒲公英，我，发展到了满员，并且至少有四个人因为无法进群，一直在默默订阅着。声昔的社团和普通的群是不一样的，它所有的聊天都是公开的，所以大家加群，都是喜欢群内的气氛，想要加入进来。我很荣幸，能作为这样一个远离焦躁的社团的一分子，享受着大家给我带来的启迪，享受着我给大家带来的思考，享受着大家对我价值的肯定。</p>
-<p>啊，我突然想到了文章的标题是：「人为什么而活2」。其实最上面的两个回答都有其正确性，但前些天看到了一篇文章，写道，「人活着没有什么意义」。是啊，我觉得人活着并不需要去追求什么所谓的意义的，<strong>「活在当下」</strong>就好，现在我这样的状态就很好。可能这是已经被说烂了的四个字，但有些东西，真的只有经历了什么，才能真正感受到它蕴含的意思。比如我以前不喜欢听歌，觉得吵闹，歌词只是歌词；现在很喜欢听歌，仿佛每句歌词，都对应着我的一段经历，对应着我的一段感悟。<strong>活在当下，是克服焦虑的关键；活在当下，亦是珍惜现在认真生活的态度；活在当下，是不盲从于结果注重过程的随和态度；活在当下，更是从一点一滴中发现快乐发现美好，保持快乐的秘诀。</strong>果真书看多了，文采也提升了，能写出这么「肉麻」的话了哈哈哈，但却都是发自肺腑的真话。</p>
+<blockquote>
+<p>如果是想学习可以跳过这段，首先我想学docker, 查了下好像docker for windows只能win10专业版安装，所以我招了教程利用各种帖子，后来安装失败，于是我在服务器上安装，很成功。之后发现可以用IDEA一键部署到服务器，就配置了一下，因为安全组关系又浪费不少时间，后来链接成功，但打包失败，我以为本地也要装，于是又试了一下，结果一下子就好了。可是IDEA打包还是失败，还来发现了什么，重启了一下IDEA，一切就都可以了，真是吐血，本地应该不需要装Docker，直接调用远程服务器的tcp的2375接口。</p>
+</blockquote>
+<h2 id="Docker-教程"><a href="#Docker-教程" class="headerlink" title="Docker 教程"></a>Docker 教程</h2><ul>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/introduction/what.html">Docker 从入门到实践</a></li>
+</ul>
+<h2 id="Docker-两个版本区分"><a href="#Docker-两个版本区分" class="headerlink" title="Docker 两个版本区分"></a>Docker 两个版本区分</h2><ul>
+<li><a href="https://blog.csdn.net/JENREY/article/details/84493812">dockerToolbox和docker for windows的区别</a></li>
+</ul>
+<h2 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h2><h3 id="Docker-for-Windows-安装"><a href="#Docker-for-Windows-安装" class="headerlink" title="Docker for Windows 安装"></a>Docker for Windows 安装</h3><ul>
+<li>安装<ul>
+<li><a href="https://www.cnblogs.com/samwu/p/10360943.html">Windows10家庭版安装Docker for Windows</a></li>
+</ul>
+</li>
+<li>与虚拟机冲突解决办法<ul>
+<li><a href="https://blog.csdn.net/qwsamxy/article/details/50533007">【Hyper-V】与【VirtualBox】【VMware】冲突的解决方法</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker-Toolbox-安装"><a href="#Docker-Toolbox-安装" class="headerlink" title="Docker Toolbox 安装"></a>Docker Toolbox 安装</h3><ul>
+<li><a href="https://www.cnblogs.com/jeshy/p/10518857.html">Docker ToolBox安装</a> 无脑安装</li>
+</ul>
+<h3 id="Docker-Linux-安装"><a href="#Docker-Linux-安装" class="headerlink" title="Docker Linux 安装"></a>Docker Linux 安装</h3><ul>
+<li>过于简单，无脑输命令就行， 第一条教程链接里面各个发行版本安装方法都有</li>
+</ul>
+<h2 id="IDEA-连接远程-Docker-进行部署"><a href="#IDEA-连接远程-Docker-进行部署" class="headerlink" title="IDEA 连接远程 Docker 进行部署"></a>IDEA 连接远程 Docker 进行部署</h2><h3 id="远程服务器-Docker-设置-其实就是开放2375端口"><a href="#远程服务器-Docker-设置-其实就是开放2375端口" class="headerlink" title="远程服务器 Docker 设置(其实就是开放2375端口)"></a>远程服务器 Docker 设置(其实就是开放2375端口)</h3><ul>
+<li>docker 配置<ul>
+<li><a href="https://blog.51cto.com/709151/2406150">Ubuntu配置方法</a></li>
+<li><a href="https://blog.csdn.net/u012946310/article/details/82315302">CentOS配置方法</a></li>
+</ul>
+</li>
+<li>服务器配置<ul>
+<li>防火墙2375端口打开</li>
+<li>如果是阿里云要新建安全组规则加入2375</li>
+<li>如果是宝塔也要开放2375端口（注意这两个都要开放，我之前以为宝塔能直接改动阿里云的安全组就只开放了宝塔，结果一直连接超时）</li>
+</ul>
+</li>
+</ul>
+<h3 id="IDEA-设置"><a href="#IDEA-设置" class="headerlink" title="IDEA 设置"></a>IDEA 设置</h3><ul>
+<li><a href="https://blog.csdn.net/forezp/article/details/70198649">docker部署spring cloud项目</a></li>
+<li>记得IDEA在maven引入docker之后重启一下，不然可能会出现我之前的无法连接到 “localhost:2375” 错误</li>
+</ul>
+<h2 id="部分错误文档"><a href="#部分错误文档" class="headerlink" title="部分错误文档"></a>部分错误文档</h2><ul>
+<li><a href="https://blog.csdn.net/ii19910410/article/details/87882917">Dockerfile ADD路径不正确问题</a></li>
+<li><a href="https://blog.csdn.net/ChineseYoung/article/details/83107353">这个也不错</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+        <category>common</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一次由被推销而引发的对市场营销学的思考</title>
+    <url>/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<h2 id="主要情景再现"><a href="#主要情景再现" class="headerlink" title="主要情景再现"></a>主要情景再现</h2><p>中午我去拿快递的时候被一个女生拦下来，背着个大大的黑色双肩包，说耽误我一分钟时间，我当时因为点了自提外卖还有再等一会都下课了人会很多快递队伍会很长就想走，她又说只有一分钟，我还是很好停下来。她说她是市场营销实习，需要连续一星期卖60盒笔(也许是一星期每天60盒)，不然就会被辞退，中间我们僵持了很久，我也动摇过，后来想了想我也是看过《人性的弱点》的，不能一直那么因为太好心被骗就还是说我真的不需要就没买</p>
+<h2 id="细节梳理"><a href="#细节梳理" class="headerlink" title="细节梳理"></a>细节梳理</h2><ol>
+<li><ul>
+<li><strong>细节：</strong> 刚拦住我就往我手里塞两盒笔</li>
+<li><strong>思考：</strong> 先下手为强，用笔困住我，后面我一直走不掉很大程度是因为我手里有笔没法推给她，同时我以为她给我笔是要送我的，以为是什么送笔推销活动之类的。同时塞给我两盒笔意思是我想让你买笔，并且数量都给你定好了，是两盒。</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 说自己市场营销的，还有说我以后也会有实习，自己以前也是我的同学一类的人，等等</li>
+<li><strong>思考：</strong> 套近乎，降低你的防备，引起你的同情</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 说卖不出去就要辞退，旁边还有好几个和她一样的，她们在竞争，苦情戏</li>
+<li><strong>思考：</strong> 博取同情，但是我挣扎了很久终于抵制了，我也有同情她，我看她没打伞，聊天的时候我有帮她挡太阳</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 问我大几的，我说大三，她一脸惊讶，说我长得好小</li>
+<li><strong>思考：</strong> 虽然应该是真实的处于本能的夸赞，因为我从小到大都有过诸如高三被当成高一的经历，但这个的确是夸赞，给我一个人情，为的是让我买笔还她更大的人情</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 我说我计算机的不怎么用笔，给我看有个计算机的买了十多盒笔</li>
+<li><strong>思考：</strong> 当时我还真信了，后来想想这个肯定是摆拍，谁会闲着没事买那么多，我以前一下子一两盒就够多了。而且她给我看很多笔，首先提高你的购买预期，然后再降低。一下子买两盒无法接受，但是如果一下子让你买十几盒，再让你买两盒，你就比较容易接受</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 我问一盒几支，一盒多少钱，她一直只说一支 2.5 元， 后来我一直追问她才说一盒十二支，一盒28（大概，具体忘了）</li>
+<li><strong>思考：</strong> 一直说一支的价格是因为 2.5 这个数感觉很小，说一盒数字很大不容易接受。但是我一算就能算出一盒价钱，一般一盒笔 12 支， 一盒就要 30， 这个价格真心不便宜，再加上前段时间出了小米巨能写，这个笔性价比真不高。她犯了一个错误，一直在博取同情，却没说笔的优势或者质量，对于理性的人来说是没用的</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 后来说我买一盒，半盒，几支也行</li>
+<li><strong>思考：</strong> 努力卖出去，降低你预期，再加上卖惨</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 开始说只耽误你一分钟</li>
+<li><strong>思考：</strong> 只耽误我一分钟这种话对于我这种好心的人来说根本拒绝不了，我连传单都会主动去接，同时不说是卖笔，先说市场营销套近乎降低你的抗拒感，不过这个笔性价比真不高，而且一盒实在多，一两支还行</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>细节：</strong> 挑人挑中了我</li>
+<li><strong>思考：</strong> 当时人挺多的，但是偏偏挑了我，可能是我面善，经常遇到各种人找我推销还有加微信做任务，挑人也是一个技能</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>think</category>
       </categories>
   </entry>
   <entry>
-    <title>关于读闲书以及做笔记的思考</title>
-    <url>/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<h2 id="阅读方式"><a href="#阅读方式" class="headerlink" title="阅读方式"></a>阅读方式</h2><p>目前我读书有以下几种方式：「精读」、「笔记阅读」、「略读」、「选读」</p>
-<p>「精读」即完整地看完整本书，有时候会做笔记，如果不做笔记会对重点句子划线</p>
-<p>「笔记阅读」是我自己取的名字，就是看别人的读书笔记起到阅读的效果，我最喜欢的是看幕布精选的读书笔记，因为幕布的读书笔记多是大纲式的，阅读笔记可以快速掌握书的脉络与大部分内容；其次是知乎、简书。笔记阅读的优点是能节省很多时间，缺点就是不容易理解或理解有偏差，并且因为不是读的原文，无法对某些精彩的点建立深刻的印象，容易读完就忘。所以现在，笔记阅读对我来说，主要有以下三种用法：略读书籍、挑选书籍、读后复习。</p>
-<p>「略读」、「选读」我觉得差不多，「略」得多了、快了，可不就成「选读」了，索性放一块了。灵感来源于很久以前看的某篇文章，当时作者称之为「猜书」，大概是看了目录后，猜测文章的内容是什么，然后快速翻阅，如果确实和自己想的一样，那么就可以直接跳过。比如《执迷》这本书，我在知乎上看了不少文章，以及亲身经历，对「焦虑型依恋」的成因和表现十分清楚，所以只读了这本书的方法论部分。</p>
-<h2 id="记笔记"><a href="#记笔记" class="headerlink" title="记笔记"></a>记笔记</h2><p>讲一下这些天看书的经验，对我来说，是否应该记笔记。</p>
-<p>原来我是很讨厌记笔记的，一个是麻烦且浪费时间，另一个是会破坏读书的体验。我喜欢用 Kindle 读书，再用个电脑记笔记，太怪了，还伤眼。所以一直都是用 Kindle 直接划线。但是弊端来了，划线或者说摘抄，我后面根本不会去看，而且划线比较随性，没有自己的思考，所以决定还是边看边记，或者第二遍再做笔记。</p>
-<p>我不做「大纲式笔记」，只是按章节，把每个章节触动到我的，觉得重要的句子，用自己的话写下来，而不是简单摘抄。这样一来，我必须边读书边思考，边想着作者这章在表达什么，哪些对我有用，哪怕后面记的笔记我也不看，但是这个过程会让我养成思考的习惯。这些章节性的总结摘要，组成了我的读书笔记的「读书笔记」部分。看完整本书，我会结合前面记录的句子，总结出整本书对我的启发，这个启发特指以后我在生活中真正能想起来并为我所用的，即「转化」部分。</p>
-<p>来个小总结，「读书笔记」部分是为了以写促思，「转化」部分是为了把「阅读量」转化为「吸收量」、「改变量」。</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>怦然心动的人生整理魔法-读书笔记</title>
-    <url>/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="书籍基本信息"><a href="#书籍基本信息" class="headerlink" title="书籍基本信息"></a>书籍基本信息</h2><p>作者：近藤麻离惠<br>标签：个人管理、生活管理</p>
-<h2 id="阅读方式与进度"><a href="#阅读方式与进度" class="headerlink" title="阅读方式与进度"></a>阅读方式与进度</h2><ul>
-<li>理论篇<ul>
-<li>精读（理论篇前两章）：阅毕</li>
-<li>略读+笔记阅读（理论篇剩余）：阅毕</li>
+    <title>hexo部署踩坑总结(文末有自动部署备份脚本)</title>
+    <url>/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本</p>
+<span id="more"></span>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="https://hexo.io/zh-cn/docs/">官方教程</a> 官方教程肯定是最权威的最好的教程</li>
+<li><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">使用hexo+github搭建免费个人博客详细教程</a></li>
+<li><a href="https://blog.enjoytoshare.club/article/hexo-do-domain.html">域名绑定</a> 实现用自己的域名访问博客</li>
+<li><a href="https://blog.csdn.net/u012195214/article/details/72721065">原文件备份</a> <code>master</code> 用于静态界面，另外新建一个分支，比如 <code>hexo</code> 用来备份原文件和配置等，<a href="#deploy_backup">点我跳转到备份详细过程防踩坑</a></li>
 </ul>
-</li>
-<li>实践篇<ul>
-<li>待读</li>
+<h2 id="hexo-更新"><a href="#hexo-更新" class="headerlink" title="hexo 更新"></a><code>hexo</code> 更新</h2><ul>
+<li>如果以前下载过 <code>hexo</code>，记得升级，我原来用的2， 现在已经 3.9 了，被坑死</li>
 </ul>
-</li>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
+<li> <a href="https://www.jianshu.com/p/33bc0a0a6e90">更换主题</a> 注意文章的主题地址可能过时</li>
+<li><strong>next</strong> 主题已经<strong>更换地址</strong>了， 如果看的是原来的教程，<code>clone</code> 时记得<strong>更换 next 的 Github 地址</strong></li>
 </ul>
-<h2 id="读书笔记"><a href="#读书笔记" class="headerlink" title="读书笔记"></a>读书笔记</h2><h3 id="怦然心动的人生整理魔法"><a href="#怦然心动的人生整理魔法" class="headerlink" title="怦然心动的人生整理魔法"></a>怦然心动的人生整理魔法</h3><h4 id="第1章：为什么再怎么整理都整理不好"><a href="#第1章：为什么再怎么整理都整理不好" class="headerlink" title="第1章：为什么再怎么整理都整理不好"></a>第1章：为什么再怎么整理都整理不好</h4><ul>
-<li><p>几乎所有人都是按自己的方式整理，平时人们并不重视整理的学习</p>
-</li>
-<li><p>如果<strong>一口气整理完</strong>，房间就会一口气变得整齐，但很多时候你以为的一口气整理完其实真正只整理了一半，所以会反弹</p>
-</li>
-<li><p>作者信奉的不是「培养每天整理一点的习惯」，而是「通过一次性整理，使意识发生戏剧性的变化」</p>
-</li>
-<li><blockquote>
-<p>如果能进行一次性正确的整理，就能立刻看到效果，而且能长久保持整理后的整洁状态，只要亲身体验这个过程，我想任何人都会在心底里深切感到不能再让房间回复杂乱了</p>
-</blockquote>
-</li>
-<li><p>整理时该做的，大致只有两件事，<strong>一是确定物品的弃留</strong>，<strong>二是设定物品放置的位置</strong></p>
-</li>
-<li><p>要迅速整理完毕，然后面对自己真正应该面对的问题。比如考试前很多人喜欢整理，但这只是因为想通过整理来缓解焦虑，反而浪费了大量时间</p>
-</li>
-<li><p>收纳不能真正解决整理的问题，治标不治本。所以整理要从丢弃无用物品开始</p>
-</li>
-<li><p>不能按场所整理，要<strong>按物品类别整理</strong></p>
-</li>
-<li><p>整理与个性无关（原文是：按个性改变整理方法，毫无意义）其实不会整理者一共有三种类型</p>
+<h3 id="deploy_backup"> 部署与备份</h3>
+* 前期工作
+
 <ul>
-<li>不愿丢弃型</li>
-<li>不能把物品放回原位型</li>
-<li>既不愿丢又不能放回原位型 </li>
-</ul>
+<li><p>突然发现官网写的很清楚，<a href="https://hexo.io/zh-cn/docs/deployment.html">hexo部署</a></p>
 </li>
-<li><p>整理是节庆，不需要每天做，就是一次把它做完</p>
+<li><p>记得在 <code>hexo-d</code> 前修改站点配置文件即 <code>_config.yml</code> 中的 <code>deploy</code> 配置， 示例， 注意替换具体仓库地址</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># message: [message]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>如果 <code>hexo -d</code> 报错就看 <a href="https://blog.csdn.net/weixin_36401046/article/details/52940313">这个链接</a></p>
 </li>
-</ul>
-<h4 id="第2章：只留下让你怦然心动的，其他统统「丢掉」"><a href="#第2章：只留下让你怦然心动的，其他统统「丢掉」" class="headerlink" title="第2章：只留下让你怦然心动的，其他统统「丢掉」"></a>第2章：只留下让你怦然心动的，其他统统「丢掉」</h4><ul>
-<li>短时间整理完成，给意识冲击</li>
-<li><strong>==整理的顺序==一定要严格执行，丢完前绝对不行进行收纳</strong><ol>
-<li>丢弃物品</li>
-<li>设置收纳场所（设定物品放置的位置）</li>
-</ol>
-</li>
-<li>丢东西前，先思考「理想的生活」，即整理的目的，要达到什么效果，一定要清晰</li>
-<li><strong>选择物品的标准：「触碰时有心动感吗」</strong>，选择的是留下什么，而不是把注意力放在要扔掉什么</li>
-<li>把同类的物品集中起来，进行要一次性判断。我们必须正确掌握自己现在到底拥有多少物品</li>
-<li>刚开始丢弃的时候从难度低的物品开始，把难度大的如纪念品留到最后</li>
-<li>尽量不要让父母看到自己丢弃的东西，他们有可能会因为觉得可惜自己拿去，但大多数时候他们并不会用，反而成了负担</li>
-<li>如何让家人学会整理：自己做好丢弃，做好榜样</li>
-</ul>
-<h4 id="第3章：按「物品类别」整理，竟如此顺利！"><a href="#第3章：按「物品类别」整理，竟如此顺利！" class="headerlink" title="第3章：按「物品类别」整理，竟如此顺利！"></a>第3章：按「物品类别」整理，竟如此顺利！</h4><p>看完前两章，我发现其实作者已经把她的思想强调过很多次了，这时去知乎看了几篇阅读笔记，大家写的东西都是相似的，并且和我自己归纳的也一致（前文加粗的部分即作者的主要思想），那么这本书的整体脉络思路我其实已经把握了，所以剩下的部分直接改为略读。</p>
+<li><p>备份说明</p>
 <ul>
-<li>这章触动我的点，或者说学到的新知识是：叠衣服的时候，叠成小长方形，比我平时折的更小些，然后竖着放，好处是衣服之间不会互相压着，取衣服的时候不会乱，同时不容易有褶皱（作者认为衣服折叠的褶皱是衣服互相挤压，这点等我实践后再看）观点是很打动我的，尤其是我其实挺会叠衣服，也是分类放置，但是整理完之后，过段时间就又会乱了，因为衣服叠放移动几件衣服就容易乱，可以尝试竖着放。但是学校的衣柜是比较高的，如果竖着放空间利用率会很低，而作者讲述的是用抽屉收纳竖着放的衣服，所以到底适不适合还要看具体操作。（第四章作者有了补充，用空鞋盒，不错）</li>
+<li>命令： <code>hexo d</code></li>
+<li>内部实现：其实是 <code>hexo-depolyer-git</code> 将 <code>hexo-g</code> 后生成的 <code>public</code> 文件打包。所以 <code>hexo-d</code> 的时候他会把 <code>public</code> 也就是静态文件自己上传到 <code>git</code>远程仓库的 <code>master</code> 分支（ git 地址和 master 分支在站点配置文件那边要提前配置好），我们不用管。换句话说也就是如果你不备份，只需要做到这里就好了，这个命令完成的是对静态文件的上传。</li>
+<li>备份：所以像前面说的，我们要备份的话，就在不影响 <code>master</code> 的情况下，新建一个分支，比如 <code>hexo</code> , 平时写文章就在 <code>hexo</code> 分支， 并且<strong>不用切换回master</strong>！！！，因为我前面讲到 master 分支也就是静态 <code>public</code> 文件的部署已经交给 <code>hexo-d</code> 全权负责了！我之前就是切回去所以错了</li>
+<li>附录一（<code>.gitignore</code>）</li>
 </ul>
-<h4 id="第4章：让人闪闪发亮的「心动收纳课」"><a href="#第4章：让人闪闪发亮的「心动收纳课」" class="headerlink" title="第4章：让人闪闪发亮的「心动收纳课」"></a>第4章：让人闪闪发亮的「心动收纳课」</h4><ul>
-<li>每个物品都要设定固定的位置，用完放回原处（我以前也会大致设定物品的位置，连左右口袋装什么我都会设定好，所以我几乎没有找完左口袋又摸右口袋的情况。但对于桌面与柜子的整理，物品类别太多，许多东西我是没有归类的，正是这些临时性的没有严格归类的小物品，让我的空间越来越乱）</li>
-</ul>
-<h4 id="第5章：让人生发生喜剧性变化的整理魔法"><a href="#第5章：让人生发生喜剧性变化的整理魔法" class="headerlink" title="第5章：让人生发生喜剧性变化的整理魔法"></a>第5章：让人生发生喜剧性变化的整理魔法</h4><p>引用知乎「<a href="https://zhuanlan.zhihu.com/p/57909732">余小满</a>」的话：</p>
-<blockquote>
-<p>我们整理的不仅仅是物品与环境，而是自己的内心。过好当下，不念过去，不畏将来。</p>
-</blockquote>
-<h4 id="结束语：整理魔法，让你的每一天闪耀光芒"><a href="#结束语：整理魔法，让你的每一天闪耀光芒" class="headerlink" title="结束语：整理魔法，让你的每一天闪耀光芒"></a>结束语：整理魔法，让你的每一天闪耀光芒</h4><h3 id="怦然心动的人生整理魔法：实践解惑篇"><a href="#怦然心动的人生整理魔法：实践解惑篇" class="headerlink" title="怦然心动的人生整理魔法：实践解惑篇"></a>怦然心动的人生整理魔法：实践解惑篇</h3><h2 id="转化"><a href="#转化" class="headerlink" title="转化"></a>转化</h2><ul>
-<li>（突然萌生了一个很有意思的想法，我在读这本书的时候，其实也是在做「整理」，丢弃大部分内容，只留下让我心动的）</li>
-<li>必须一次性整理完</li>
-<li>整理前好好想象一下整理之后期待的样子</li>
-<li><strong>==整理的顺序==一定要严格执行，丢完前绝对不行进行收纳</strong><ol>
-<li>丢弃物品<ol>
-<li>选择的是留下来的物品，不是把重点放在要丢什么</li>
-<li>判断是否要丢的标准是，触摸，是否心动</li>
-</ol>
-</li>
-<li>设置收纳场所（设定物品放置的位置）<ol>
-<li>按类别整理，把同类的聚在一起，有利于看清自己拥有的东西的现状，不要按地点</li>
-<li>用完了及时放回</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>衣服建议竖着摆</li>
-<li>在整理的时候，我们能知道自己真正喜欢什么在意什么，还能在整理中悟得不要迷恋过去、更重要的是未来。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>解决hexo博客leancloud访问量永远是1的错误</title>
-    <url>/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<h2 id="错误定位"><a href="#错误定位" class="headerlink" title="错误定位"></a>错误定位</h2><p>定位到错误：这条请求标红，并且含有 <code>Counter</code>，我猜是 <code>leancloud</code> 修改访问量的接口</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png" alt="image-20210313162321026"></p>
-<p>返回是这样的：<img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png" alt="image-20210313162351656"></p>
-<p>应该是<code>Couter</code>类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。</p>
-<span id="more"></span>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.<span class="built_in">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">auto_deploy.sh</span><br></pre></td></tr></table></figure>
 
-<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h2><p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png" alt="image-20210313162937093"></p>
-<p>再创建一个 <code>Counter</code> Class，注意下面选【无限制】</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png" alt="image-20210313163038465"></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ouyanting.com/archives/2018/12/ebe3ded2.html">Forbidden writing by object’s ACL. - Yanting Ou</a></p>
-]]></content>
-      <categories>
-        <category>CS - hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>随笔20200915</title>
-    <url>/2021/03/%E9%9A%8F%E7%AC%9420200915/</url>
-    <content><![CDATA[<p>刷题做笔记时，无意间看到去年9月份写的随笔，隐去了别人的姓名，顺手传上来吧</p>
-<span id="more"></span>
-
-<p>这段时间似乎在想很多东西，也不知想明白没有，决定记一些下来。  </p>
-<p>大概分为以下几个方面，得与失，时间，自身缺点。  </p>
-<p>这一年又可以算上我的低谷，似乎我总觉得自己处在低谷，容易一蹶不振。从去年9月到现在，做的最大的两个决定便是，一，打小挑比赛，二，考研。当初的想法是利用比赛来贴金，也是因为之前被别人加绩点羡慕到了，当了队长，一年的时间断断续续精力都花在上面，但是没获得省级奖励。现在看来也觉得后悔，觉得十分不值，貌似又是一个“错误”的决定，我发现一直以来我是个很自卑的人，觉得很多东西都做不了，但后来发现其实当时的自己完全可以做到，或许自卑是另一种为自己开脱的借口。  </p>
-<p>考研方面，也是因为自己很大的一个缺点，不喜欢定计划，统筹能力不行，没有目标，哪里来的执行，日常的具体表现，就是有时候学的很猛，有时候又完全不学，效率和状态不在线上，导致现在自己陷入了一个很尴尬的境地。</p>
-<p>但人不能总流于表面的，不能一直活在过去的阴影中的，不能活在无限的错误中的。比赛方面，既然有失，而且我也不是废人，那么必有得，所以得是什么呢？主要分为两个方面：  </p>
-<ol>
-<li>自我硬实力提升、人际关系<ol>
-<li>我一直在人际交往，或者说非计算机专业方面有很大的欠缺，最近甚至觉得自己有些孤僻了。</li>
-<li>打比赛的过程中，涉及到任务分配、积极性调动、以及人与人之间的潜规则，学到了不少。</li>
-<li>人际关系方面，看到了某某的“八面玲珑”，一个看起来很水，不喜欢弄专业功课的人，做项目打比赛似乎也吊儿郎当，但是就是认识很多人，无论用什么方式，从最开始的每天和我说晚安，到后面有空就聊一点，用很简单的方式就稳固了人际关系，是我需要学习的。*(2021年3月12日晚，后记：以我现在的待人角度来说，他身上其实也我很多欣赏的地方，作为一个管理专业的人，本身就是要投身到各种社团参与，活动举办上来，我认为他在自己的领域已经很强了。并且如果他是看似轻松，那么一定也有背后的辛苦；如果他确实很轻松，他们他会更厉害，天生就是管理的料)*</li>
-</ol>
-</li>
-<li>反思<ol>
-<li>想把这一年的经历，当作自己新的一轮蜕变，如果说上次是爱情观、生活观上的改变，这次是对自我管理（时间、性格认识）的彻底深入以及社会化的努力尝试。</li>
-<li>痛则思变，如果不改变，以后只会更痛。现在形式很严峻，但算不上最坏，在总结了之前的错误之后，不应继续沉迷在对过去的错误的悔恨中，而是想着怎么在当前的自我条件、外部环境下，让未来更漂亮。</li>
-</ol>
-</li>
-</ol>
-<p>或许，现在问我如何成功，我的答案是“目标+方法+时间”，没有目标，就不会有努力的动力，没有时间管理能力，没有实践，怎么出成果，而方法又是决定效率的关键，在大家都拼时间的情况下，效率也很重要。根据某某分享的一些中国经济的事实，似乎钱的规则也是有许多普通人所想不到的点的，另辟蹊径也是办法，不过那需要更广阔的知识和眼界做支撑。今年的我，在这三个方面，似乎都没做到，所以是失败的，明年的我，一定是成功的。今年没明确的目标，没有阶段任务，导致无动力，时间上无论是客观的比赛原因，还是自己懒，贪玩，都是没花时间学习。最后因为想逃避，所以屏蔽了很多考研信息，这又是方法的失败。光分析是没用的，认识的最终目的，还是获得正确的方法论，是应用到实践上面，后面的三个多月，相信自己，不负自己，不负相亲相爱之人。</p>
-<p><em>2021年3月12日晚，后记：</em></p>
-<p><em>看完这篇文章，我发现自己当时确实在慢慢想着改变，但当时或许更多的是停留在思想层面，落实的不多。扪心自问，现在虽然我也没有落实太多自己的想法，但我这几个月是真真切切感受到痛苦了的，改变的痛苦。由内而外的改变是痛苦的，只有感受到了痛苦，才是真的改变了。</em></p>
-<p><em>昨天躺在床上，想着，以前喜欢蜕变这个词，现在并不喜欢，我认为，蜕变并不能正确得描述改变的过程与体验，人的改变哪里是一瞬间。改变是这样的，它就像，你拿着个锤子，知道这块骨头有问题，解决的办法只能是把它敲碎，把它重塑成你希望的样子好的样子，看你有没有勇气去触碰它，仅仅意识到是没有用的。直到现在，我承认，我也只是敲碎了一部分骨头，有不少骨头迟迟不忍动，还有些正在愈合的阵痛期，甚至还有些愈合后，再次敲碎。不过，我也很享受新长出的骨骼所给我带来的一切。</em></p>
-<p><em>最后，回答一下半年前的话，「后面的三个多月，相信自己，不负自己，不负相亲相爱之人」，我敢肯定，我做到了（此处没有应该两字，以前的我总喜欢用「逃避」来逃避什么）。</em></p>
-<p><em>又写多了，害，是弄完了开题报告和开题答辩PPT的兴奋。现在三座大山，暂时只剩复试和新苗啦！</em></p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo新建菜单并添加文章</title>
-    <url>/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h2 id="两种不同效果对比"><a href="#两种不同效果对比" class="headerlink" title="两种不同效果对比"></a>两种不同效果对比</h2><h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p>本文章使用的是 <code>next</code> 主题，其他主题类似。</p>
-<p>以添加「读书笔记」菜单为例，以下是最终效果</p>
-<span id="more"></span>
-
-<h3 id="效果一"><a href="#效果一" class="headerlink" title="效果一"></a>效果一</h3><p>菜单点开，里面有相关分类的文章，可一直往该页面增加文章，但不能在该界面加其余陈述。<strong>相当于给某个特定分类在菜单栏建立了个快捷方式</strong>。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210308234647999.png" alt="image-20210308234647999"></p>
-<h3 id="效果二"><a href="#效果二" class="headerlink" title="效果二"></a>效果二</h3><p>菜单点开后，只有一篇文章，不能链接其他文章。<strong>可以类比「关于」界面</strong></p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210309001205793.png" alt="image-20210309001205793"></p>
-<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h3 id="1-（效果一、二都要做）新建一个名为-readNotes-的页面，命令如下"><a href="#1-（效果一、二都要做）新建一个名为-readNotes-的页面，命令如下" class="headerlink" title="1. （效果一、二都要做）新建一个名为 readNotes 的页面，命令如下"></a>1. （效果一、二都要做）新建一个名为 <code>readNotes</code> 的页面，命令如下</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new page readNotes</span><br></pre></td></tr></table></figure>
-
-<p>取名可随意，哪怕写中文的 <code>读书笔记</code> 也是可以的，看个人习惯。</p>
-<p>后续：我后面还是直接取了中文的 <code>读书笔记</code> 的名字，一个是省事，一个是翻译文件只会翻译菜单的 <code>readNotes</code>，可以看到两个效果图中的右侧的分类和标题都还是 <code>readNotes</code> 没被翻译。</p>
-<p>这时候你会发现 <code>/source/</code> 文件夹下多了个 <code>readNotes</code> 文件夹，里面有个 <code>index.md</code>。</p>
-<p>效果二中，<code>index.md</code> 类似 <code>next</code> 内置的「关于」等界面，里面可以写内容，效果一编辑此文件无效。</p>
-<h3 id="2-（一、二）在主题配置中开启菜单"><a href="#2-（一、二）在主题配置中开启菜单" class="headerlink" title="2. （一、二）在主题配置中开启菜单"></a>2. （一、二）在主题配置中开启菜单</h3><h4 id="效果一-1"><a href="#效果一-1" class="headerlink" title="效果一"></a>效果一</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">	<span class="attr">readNotes:</span> <span class="string">/categories/readNotes/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-bookyml</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="效果二-1"><a href="#效果二-1" class="headerlink" title="效果二"></a>效果二</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">	<span class="attr">readNotes:</span> <span class="string">/readNotes/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-book</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="图标问题（一、二）"><a href="#图标问题（一、二）" class="headerlink" title="图标问题（一、二）"></a>图标问题（一、二）</h4><p><code>fa-book</code> 是图标的简称，<code>next</code> 用的是 Font Awesome 的图标</p>
-<p>在官网 <a href="https://fontawesome.dashgame.com/">Font Awesome，一套绝佳的图标字体库和CSS框架</a> 中搜索喜欢的图标，点击复制即可</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210309001915721.png" alt="image-20210309001915721"></p>
-<h3 id="3-修改语言文件，将-readNotes-翻译为「读书笔记」"><a href="#3-修改语言文件，将-readNotes-翻译为「读书笔记」" class="headerlink" title="3. 修改语言文件，将 readNotes 翻译为「读书笔记」"></a>3. 修改语言文件，将 readNotes 翻译为「读书笔记」</h3><p>原本取的就是中文名的可以跳过这步。</p>
-<p>自从 NexT-7.3.0 开始，官方推荐采用数据文件将配置与主题分离，这样我们可以在不修改主题源码的同时完成选项配置、自定义布局、自定义样式，便于后续 NexT 版本更新。</p>
-<p>我们原来是通过配置主题下的 <code>languages</code> 目录中的 <code>zh-CN.yml</code> 文件来对菜单等进行中文翻译的，现在我们可以通过在 <code>hexo/source/_data/</code> 下新建数据文件 <code>languages.yml</code>，并全文配置如下：（注意注释部分）</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">zh-CN:</span>	<span class="comment">#看这里，把下面的内容（即next主题的原zh-CN文件，向右缩进</span></span><br><span class="line">		<span class="comment"># 然后加个标头zh-CN，使用zh-Hans的同理</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">简体中文</span></span><br><span class="line">  <span class="attr">title:</span></span><br><span class="line">    <span class="attr">archive:</span> <span class="string">归档</span></span><br><span class="line">    <span class="attr">category:</span> <span class="string">分类</span></span><br><span class="line">    <span class="attr">tag:</span> <span class="string">标签</span></span><br><span class="line">    <span class="attr">schedule:</span> <span class="string">日程表</span></span><br><span class="line">  <span class="attr">menu:</span></span><br><span class="line">    <span class="attr">home:</span> <span class="string">首页</span></span><br><span class="line">    <span class="attr">archives:</span> <span class="string">归档</span></span><br><span class="line">    <span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">标签</span></span><br><span class="line">    <span class="attr">about:</span> <span class="string">关于</span></span><br><span class="line">    <span class="attr">search:</span> <span class="string">搜索</span></span><br><span class="line">    <span class="attr">schedule:</span> <span class="string">日程表</span></span><br><span class="line">    <span class="attr">sitemap:</span> <span class="string">站点地图</span></span><br><span class="line">    <span class="attr">commonweal:</span> <span class="string">公益</span> <span class="number">404</span></span><br><span class="line">    <span class="attr">readNotes:</span> <span class="string">读书笔记</span>	<span class="comment">#在这里添加</span></span><br><span class="line">  <span class="attr">sidebar:</span></span><br><span class="line">    <span class="attr">overview:</span> <span class="string">站点概览</span></span><br><span class="line">    <span class="attr">toc:</span> <span class="string">文章目录</span></span><br><span class="line">  <span class="attr">post:</span></span><br><span class="line">  <span class="comment">#（以下省略，不要直接复制本代码，先缩进，再加zh-Hans或zh-CN标头，再加readNotes: 读书笔记）</span></span><br></pre></td></tr></table></figure>
-
-<p>关于配置文件与主题分离，强烈建议阅读这篇文章：</p>
-<p><a href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></p>
-<h3 id="4-（仅一）如果在新建文章时进行归类"><a href="#4-（仅一）如果在新建文章时进行归类" class="headerlink" title="4. （仅一）如果在新建文章时进行归类"></a>4. （仅一）如果在新建文章时进行归类</h3><p>写文章时，头部加个 <code>readNotes</code> 分类就行，以下是 next 主题的方式</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">(title,</span> <span class="string">date等其余头部信息已省略)</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">readNotes</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-
-<p>先在这个分类下写一篇文章，再 <code>hexo s</code>，否则会报错。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><p>参考了小丁的关于 <code>next</code> 主题的数据文件部分，主要是 <code>languages.yml</code> <a href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></p>
-</li>
-<li><p>参考了本篇博客的大部分内容 <a href="https://blog.csdn.net/weixin_30312557/article/details/98233523?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.control">hexo添加新菜单并实现新菜单的文章归类_weixin_30312557的博客-CSDN博客</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>CS - hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hdoj刷题六(java)：2050-2059</title>
-    <url>/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/</url>
-    <content><![CDATA[<p>向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。</p>
-<span id="more"></span>
-
-<h3 id="Problem-2050-折线分割平面"><a href="#Problem-2050-折线分割平面" class="headerlink" title="Problem - 2050 折线分割平面"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2050">Problem - 2050 折线分割平面</a></h3><h3 id="Problem-2051-Bitset"><a href="#Problem-2051-Bitset" class="headerlink" title="Problem - 2051 Bitset"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2051">Problem - 2051 Bitset</a></h3><p>这题为典型的10进制转二进制，不断取余2再除2就行。但是这样的数位是反的，所以我有两种思路将其弄正：</p>
 <ul>
-<li>一种是弄个数组反向输出，数组大小为log2(N+1)向上取整，向上取整有点东西的，一开始我表达式就写错了。并且学到了 java 的 log2n方式：</li>
+<li>附录二（<strong>自动部署备份脚本</strong>）</li>
 </ul>
 <blockquote>
-<p>在java中求log2N，首先要弄明白一个初中学到的公式log2N=logeN/loge2,logeN代表以e为底的N的对数,loge2代表以e为底的2的对数.<br>在java.lang.math类中的log(double a)代表以e为底的a的对数,因此log2N在Java中的表示为:<br>log((double)N)/log((double)2)</p>
+<p><strong>使用说明：每次写完文件保存后 bash 执行 <code>sh ./auto_deploy.sh &quot;提交的message&quot;</code> 即可， 文件名自定</strong></p>
 </blockquote>
-<p>所以实际计算数组长度的时候代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
-
-<p>下面是完整代码：一遍过！</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lhp</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/3/12 23:57</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">P2051</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (sc.hasNext())&#123;</span><br><span class="line">            <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">            ten2Two(num);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ten2Two</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br><span class="line"><span class="comment">//        System.out.println(&quot;len:&quot; + len);</span></span><br><span class="line">        <span class="keyword">int</span>[] numTwo = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (num &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            numTwo[i] = num % <span class="number">2</span>;</span><br><span class="line">            num /= <span class="number">2</span>;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=len-<span class="number">1</span>; j&gt;=<span class="number">0</span>; j--)&#123;</span><br><span class="line">            System.out.print(numTwo[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>还有一种我想试试递归输出，先计算再输出，递归可能不占优，但是一直对递归的思想理解不透彻，想试试</li>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="comment"># 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="comment"># 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="comment"># 到页面发布分支</span></span><br><span class="line"><span class="comment"># 清理原静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成，部署</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>没想到一下子就写出来了！果然凌晨是敲代码的最佳时机！奖励自己一片面包，长胖！</p>
-<p>思路是这样的，既然最先算出来的最后输出，那么其实和树的后序遍历很像：先递归下去，返回到根节点的时候再输出，即，先把 num/2 传下去算着，等算完了再把 num%2 输出，递归退出判断是什么呢？当然是和上面那个方法的 while 退出判断一样啦，为0就退出。</p>
-<p>以下是递归实现的函数部分：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">ten2Two2</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ten2Two2(num/<span class="number">2</span>);</span><br><span class="line">            System.out.print(num%<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Problem-2052-Picture"><a href="#Problem-2052-Picture" class="headerlink" title="Problem - 2052 Picture"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2052">Problem - 2052 Picture</a></h3>]]></content>
+]]></content>
       <categories>
         <category>CS</category>
-        <category>算法</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人为什么而活</title>
+    <url>/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</url>
+    <content><![CDATA[<p><strong>为了</strong></p>
+<span id="more"></span>
+
+<h3 id="做你想做的"><a href="#做你想做的" class="headerlink" title="做你想做的"></a><p align="center">做你想做的</p></h3><h3 id="做你该做的"><a href="#做你该做的" class="headerlink" title="做你该做的"></a><p align="center">做你该做的</p></h3>]]></content>
+      <categories>
+        <category>think</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用frpMgr快速搭建内网穿透</title>
+    <url>/2020/04/%E4%BD%BF%E7%94%A8frpMgr%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a> </li>
+<li>利用管理面板自动安装 frp server</li>
+<li>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</li>
+<li>使用 <code>ssh</code> 访问</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="安装基于-frp-的内网穿透管理面板-frpMgr"><a href="#安装基于-frp-的内网穿透管理面板-frpMgr" class="headerlink" title="安装基于 frp 的内网穿透管理面板 frpMgr"></a>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a></h2><ul>
+<li><strong>安装</strong><ol>
+<li><p><strong>安装 docker 与 docker compose</strong></p>
+<ul>
+<li>若无 docker : <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -O-https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Zo3i&#x2F;OCS&#x2F;master&#x2F;docker&#x2F;docker-all2.sh | SH wget -O-</span><br></pre></td></tr></table></figure></li>
+<li>若有 docker 无 docker compose : <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
+<li>若 docker 和 docker compose都有， 跳过此步`</li>
+</ul>
+</li>
+<li><p><strong>安装 frpMgr</strong></p>
+<ul>
+<li><code>https://raw.githubusercontent.com/Zo3i/frpMgr/master/web/src/main/docker/final/run.sh | SH  </code></li>
+<li>约 500 M，若下载太慢可以修改 host，或者用 <a href="https://g.widora.cn/">Github代下载</a> 再传到服务器</li>
+</ul>
+</li>
+<li><p><strong>开放防火墙 8999 端口</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="利用管理面板自动安装-frp-server"><a href="#利用管理面板自动安装-frp-server" class="headerlink" title="利用管理面板自动安装 frp server"></a>利用管理面板自动安装 frp server</h2><ul>
+<li><p>访问 <code>服务器域名（ip）:8999</code>   如 <code>xx.com:8999</code>，账户密码 admin / 12345678</p>
+</li>
+<li><p>准备一个域名，解析 *.xxx.com （二级通配）到 frp_server 的服务器 IP</p>
+</li>
+<li><p>配置 frp_server (图来自 frpMgr github)</p>
+<ul>
+<li>服务器名称，自定义名称，不解释</li>
+<li>服务器 IP：待安装 frp_server 的服务器IP</li>
+<li>域名：刚刚的一级域名</li>
+<li>访问端口：web 访问端口，如果配 web 访问要用到（和ssh无关），记得安全组/防火墙打开。</li>
+<li>服务器用户名：服务器用户名。</li>
+<li>依次点击 【保存】【远程安装】，输入服务器密码，即可看到安装成功提示</li>
+<li>在服务器执行 <code>netstat -lnp|grep 7000</code> 查看服务是否成功启动</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/778ec45220f7dc5fae657beb12f3f21016985174/68747470733a2f2f7a78782e6f6e652f696d67732f323031392f31312f623965373761363035663330396231362e706e67"></p>
+</li>
+</ul>
+<h2 id="利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装"><a href="#利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装" class="headerlink" title="利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装"></a>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</h2><ul>
+<li>选择 <code>SSH客户端配置</code>， 点击右上角 <code>新增</code></li>
+<li><img src="http://qiniu.tcualhp.cn/frp.png"></li>
+<li>填写 client 配置<ul>
+<li>项目名称随意</li>
+<li>远程端口为之后访问外网的端口，如你之后想通过 <code>*.xx.com:8090</code> 访问内网，就填8090， 同样防火墙和安全组要打开</li>
+<li>服务器选上一步添加的服务器</li>
+</ul>
+</li>
+<li>填写成功后点击右侧 <code>linux</code>，复制安装命令，在 client 安装即可。（client 需安装 ssh, 并开放22端口）</li>
+</ul>
+<h2 id="使用ssl访问"><a href="#使用ssl访问" class="headerlink" title="使用ssl访问"></a>使用ssl访问</h2><ul>
+<li>ip 为 frp_server域名/IP，端口为 client 配置的端口</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
       </categories>
   </entry>
   <entry>
@@ -410,86 +396,39 @@
       </categories>
   </entry>
   <entry>
-    <title>起床小插曲</title>
-    <url>/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</url>
-    <content><![CDATA[<p>今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。</p>
+    <title>hdoj刷题六(java)：2050-2059</title>
+    <url>/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/</url>
+    <content><![CDATA[<p>向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。</p>
 <span id="more"></span>
 
-<p>一边找衣服，一边吟着整首，突然吟到「雁过也，正伤心，却是旧时相识」，停住，反复琢磨了几遍。李清照想表达的意思早已忘记，我却有了自己的理解。大雁飞过，正在惆怅伤心，却发现这是旧识认识的那个大雁，一时间，竟不知是该怀着再次分别的伤心，还是再次相遇的欣喜了。</p>
-<p>后记：查阅资料，百度汉语的翻译的「向南避寒的大雁已飞过去了，伤心的是却是原来的旧日相识」，这个相识指的是词人自己。但我还是更喜欢自己的理解，毕竟，翻译的人也不知道李清照怎么想的，子非鱼，安知鱼之乐？或许她和我想的还一样呢！</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>为hexo-next安装侧边rss</title>
-    <url>/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</url>
-    <content><![CDATA[<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-在博客根目录下安装-hexo-generator-feed"><a href="#1-在博客根目录下安装-hexo-generator-feed" class="headerlink" title="1. 在博客根目录下安装 hexo-generator-feed"></a>1. 在博客根目录下安装<a href="https://github.com/hexojs/hexo-generator-feed"> hexo-generator-feed</a></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h3 id="2-在博客根目录下的-config-yml-文件中添加以下代码"><a href="#2-在博客根目录下的-config-yml-文件中添加以下代码" class="headerlink" title="2. 在博客根目录下的 _config.yml 文件中添加以下代码"></a>2. 在博客根目录下的 <code>_config.yml</code> 文件中添加以下代码</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">feed:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">atom</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">atom.xml</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">hub:</span></span><br><span class="line">  <span class="attr">content:</span></span><br><span class="line">  <span class="attr">content_limit:</span> <span class="number">140</span></span><br><span class="line">  <span class="attr">content_limit_delim:</span> <span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="attr">order_by:</span> <span class="string">-date</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">icon.png</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-配置博客根目录下的-config-yml-文件"><a href="#3-配置博客根目录下的-config-yml-文件" class="headerlink" title="3. 配置博客根目录下的 _config.yml 文件"></a>3. 配置博客根目录下的 <code>_config.yml</code> 文件</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">自己域名</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-修改-Next-主题的配置文件-config-yml"><a href="#4-修改-Next-主题的配置文件-config-yml" class="headerlink" title="4. 修改 Next 主题的配置文件 _config.yml"></a>4. 修改 <code>Next</code> 主题的配置文件 <code>_config.yml</code></h3><p>首先，这里的主题配置文件最好是根目录下的 <code>_config_next.yml</code>，如果没有的话，建议把 <code>/thems/next/_config.yml</code> 文件复制到根目录下，并改名成 <code>_config_next.yml</code>。</p>
-<p>不直接修改<code>/themes/next/_config.yml</code> 的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
-<p><code>rss</code> 有两种形式，一种是侧边栏，一种是每个文章底部都有个大大的<code>rss</code>区域，推荐侧边烂。(缩进都是两格，我这里代码可能缩进格数不对)</p>
-<p>侧边栏形式：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
-
-<p>文章底部形式：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></p>
-<p><a href="https://suyin-blog.club/2020/2M3YWE7/">给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog</a></p>
-]]></content>
-      <categories>
-        <category>CS - hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱）</title>
-    <url>/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><blockquote>
-<p>不喜欢重复造轮子和复制粘贴别人的内容，这里在Valine-Admin官方教程和某博客的基础上，增加<strong>阿里云企业邮箱</strong>的配置部分，以及指出原博客中的一些错误</p>
+<h3 id="Problem-2050-折线分割平面"><a href="#Problem-2050-折线分割平面" class="headerlink" title="Problem - 2050 折线分割平面"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2050">Problem - 2050 折线分割平面</a></h3><h3 id="Problem-2051-Bitset"><a href="#Problem-2051-Bitset" class="headerlink" title="Problem - 2051 Bitset"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2051">Problem - 2051 Bitset</a></h3><p>这题为典型的10进制转二进制，不断取余2再除2就行。但是这样的数位是反的，所以我有两种思路将其弄正：</p>
+<ul>
+<li>一种是弄个数组反向输出，数组大小为log2(N+1)向上取整，向上取整有点东西的，一开始我表达式就写错了。并且学到了 java 的 log2n方式：</li>
+</ul>
+<blockquote>
+<p>在java中求log2N，首先要弄明白一个初中学到的公式log2N=logeN/loge2,logeN代表以e为底的N的对数,loge2代表以e为底的2的对数.<br>在java.lang.math类中的log(double a)代表以e为底的a的对数,因此log2N在Java中的表示为:<br>log((double)N)/log((double)2)</p>
 </blockquote>
-<p>某博客：<a href="https://segmentfault.com/a/1190000021474516?utm_source=tag-newest">Hexo主题使用Valine-Admin管理评论和评论提醒 - SegmentFault 思否</a></p>
-<p>Valine-Admin 官方教程：<a href="https://github.com/zhaojun1998/Valine-Admin">zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。</a></p>
-<span id="more"></span>
+<p>所以实际计算数组长度的时候代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br></pre></td></tr></table></figure>
 
-<h2 id="邮件通知部署流程"><a href="#邮件通知部署流程" class="headerlink" title="邮件通知部署流程"></a>邮件通知部署流程</h2><p>完全按上面的「某博客」来即可，下面指出博客中的一些不清晰的地方以及错误</p>
-<h3 id="阿里云企业邮箱"><a href="#阿里云企业邮箱" class="headerlink" title="阿里云企业邮箱"></a>阿里云企业邮箱</h3><p>用管理员账号，一般为 <code>postmaster@域名</code>，依次点击【组织与用户】-【员工账号管理】-【新建账号】</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306152129677.png" alt="image-20210306152129677"></p>
-<p>基本信息填写略，注意下图红框部分勾选</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306152223749.png" alt="image-20210306152223749"></p>
-<p>值得注意的是，我搜了半天，甚至登录了员工邮箱，都没找到 <code>SMTP</code> 授权码。经尝试，<strong>授权码就是上图中给员工邮箱分配的密码</strong>。</p>
-<p>也就是说，<code>leancloud</code> 中要填写的环境变量有这些（如果用阿里云企业邮箱）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SITE_NAME : 网站名称。</span><br><span class="line">SITE_URL : 网站地址, 最后不要加 &#x2F; 。</span><br><span class="line">SMTP_USER : 填写创建的员工邮箱地址（SMTP 服务用户名，一般为邮箱地址。）</span><br><span class="line">SMTP_PASS : 阿里云为创建员工邮箱时分配的密码（SMTP 密码，一般为授权码，而不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式）</span><br><span class="line">SENDER_NAME : 寄件人名称。</span><br><span class="line">TO_EMAIL：填写自己的收件邮箱，所以的评论都会发给这个邮箱</span><br><span class="line">TEMPLATE_NAME：设置提醒邮件的主题，目前内置了两款主题，分别为 default 与 rainbow。默认为 default</span><br><span class="line">SMTP_HOST : 阿里云为：smtp.mxhichina.com（邮件服务提供商 SMTP 地址，如 qq : smtp.qq.com，此项需要自行查询或询问其服务商。）</span><br><span class="line">SMTP_PORT : 阿里云为：25 （邮件服务提供商 SMTP 端口, 此项需要自行查询或询问其服务商。）</span><br></pre></td></tr></table></figure>
+<p>下面是完整代码：一遍过！</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> lhp</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> TODO</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/3/12 23:57</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">P2051</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span> (sc.hasNext())&#123;</span><br><span class="line">            <span class="keyword">int</span> num = sc.nextInt();</span><br><span class="line">            ten2Two(num);</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ten2Two</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = (<span class="keyword">int</span>) Math.ceil((Math.log((<span class="keyword">double</span>)(num+<span class="number">1</span>))/Math.log((<span class="keyword">double</span>)<span class="number">2</span>)));</span><br><span class="line"><span class="comment">//        System.out.println(&quot;len:&quot; + len);</span></span><br><span class="line">        <span class="keyword">int</span>[] numTwo = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (num &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            numTwo[i] = num % <span class="number">2</span>;</span><br><span class="line">            num /= <span class="number">2</span>;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=len-<span class="number">1</span>; j&gt;=<span class="number">0</span>; j--)&#123;</span><br><span class="line">            System.out.print(numTwo[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="定时任务自动唤醒"><a href="#定时任务自动唤醒" class="headerlink" title="定时任务自动唤醒"></a>定时任务自动唤醒</h3><p>还有个环境变量是 <code>ADMIN_URL</code>，是原博客中设置定时任务自动唤醒要用到的，设置方法如下：</p>
-<p>进入应用，依次点击：【云引擎】-【web】-【设置】，下拉（其实和环境变量在同一页），找到【云引擎域名】，绑定一下，下图红框内的文字即为 <code>ADMIN_URL</code> 项应填入的值</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153102967.png" alt="image-20210306153102967"></p>
-<h3 id="原博客捡漏定时任务错误"><a href="#原博客捡漏定时任务错误" class="headerlink" title="原博客捡漏定时任务错误"></a>原博客捡漏定时任务错误</h3><p>博客中关于捡漏定时任务的描述中，截图和给出的代码不一致，（截图是正确的），这里我给出正确代码以供复制</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 0 8 * * ?</span><br></pre></td></tr></table></figure>
+<ul>
+<li>还有一种我想试试递归输出，先计算再输出，递归可能不占优，但是一直对递归的思想理解不透彻，想试试</li>
+</ul>
+<p>没想到一下子就写出来了！果然凌晨是敲代码的最佳时机！奖励自己一片面包，长胖！</p>
+<p>思路是这样的，既然最先算出来的最后输出，那么其实和树的后序遍历很像：先递归下去，返回到根节点的时候再输出，即，先把 num/2 传下去算着，等算完了再把 num%2 输出，递归退出判断是什么呢？当然是和上面那个方法的 while 退出判断一样啦，为0就退出。</p>
+<p>以下是递归实现的函数部分：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">ten2Two2</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ten2Two2(num/<span class="number">2</span>);</span><br><span class="line">            System.out.print(num%<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153610390.png" alt="image-20210306153610390"></p>
-<h3 id="next主题配置文件修改"><a href="#next主题配置文件修改" class="headerlink" title="next主题配置文件修改"></a>next主题配置文件修改</h3><p>还有一点博客没提到，原作者应该是默认大家已经会开启评论但是没设置邮件通知。</p>
-<p>应该这样修改，<code>enable</code> 和 <code>notify</code> 改为 <code>true</code>，以及 <code>appid</code> 与 <code>appkey</code> 填完整</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153258422.png" alt="image-20210306153258422"></p>
-]]></content>
+<h3 id="Problem-2052-Picture"><a href="#Problem-2052-Picture" class="headerlink" title="Problem - 2052 Picture"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2052">Problem - 2052 Picture</a></h3>]]></content>
       <categories>
-        <category>CS - hexo</category>
+        <category>CS</category>
+        <category>算法</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>hexo5.0+安装报错总结</title>
@@ -565,265 +504,331 @@
       </categories>
   </entry>
   <entry>
-    <title>使用frpMgr快速搭建内网穿透</title>
-    <url>/2020/04/%E4%BD%BF%E7%94%A8frpMgr%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
-<li>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a> </li>
-<li>利用管理面板自动安装 frp server</li>
-<li>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</li>
-<li>使用 <code>ssh</code> 访问</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="安装基于-frp-的内网穿透管理面板-frpMgr"><a href="#安装基于-frp-的内网穿透管理面板-frpMgr" class="headerlink" title="安装基于 frp 的内网穿透管理面板 frpMgr"></a>安装基于 <a href="https://github.com/fatedier/frp">frp</a> 的内网穿透管理面板 <a href="https://github.com/Zo3i/frpMgr">frpMgr</a></h2><ul>
-<li><strong>安装</strong><ol>
-<li><p><strong>安装 docker 与 docker compose</strong></p>
-<ul>
-<li>若无 docker : <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -O-https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Zo3i&#x2F;OCS&#x2F;master&#x2F;docker&#x2F;docker-all2.sh | SH wget -O-</span><br></pre></td></tr></table></figure></li>
-<li>若有 docker 无 docker compose : <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure></li>
-<li>若 docker 和 docker compose都有， 跳过此步`</li>
-</ul>
-</li>
-<li><p><strong>安装 frpMgr</strong></p>
-<ul>
-<li><code>https://raw.githubusercontent.com/Zo3i/frpMgr/master/web/src/main/docker/final/run.sh | SH  </code></li>
-<li>约 500 M，若下载太慢可以修改 host，或者用 <a href="https://g.widora.cn/">Github代下载</a> 再传到服务器</li>
-</ul>
-</li>
-<li><p><strong>开放防火墙 8999 端口</strong></p>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="利用管理面板自动安装-frp-server"><a href="#利用管理面板自动安装-frp-server" class="headerlink" title="利用管理面板自动安装 frp server"></a>利用管理面板自动安装 frp server</h2><ul>
-<li><p>访问 <code>服务器域名（ip）:8999</code>   如 <code>xx.com:8999</code>，账户密码 admin / 12345678</p>
-</li>
-<li><p>准备一个域名，解析 *.xxx.com （二级通配）到 frp_server 的服务器 IP</p>
-</li>
-<li><p>配置 frp_server (图来自 frpMgr github)</p>
-<ul>
-<li>服务器名称，自定义名称，不解释</li>
-<li>服务器 IP：待安装 frp_server 的服务器IP</li>
-<li>域名：刚刚的一级域名</li>
-<li>访问端口：web 访问端口，如果配 web 访问要用到（和ssh无关），记得安全组/防火墙打开。</li>
-<li>服务器用户名：服务器用户名。</li>
-<li>依次点击 【保存】【远程安装】，输入服务器密码，即可看到安装成功提示</li>
-<li>在服务器执行 <code>netstat -lnp|grep 7000</code> 查看服务是否成功启动</li>
-</ul>
-<p><img src="https://camo.githubusercontent.com/778ec45220f7dc5fae657beb12f3f21016985174/68747470733a2f2f7a78782e6f6e652f696d67732f323031392f31312f623965373761363035663330396231362e706e67"></p>
-</li>
-</ul>
-<h2 id="利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装"><a href="#利用管理面板生成-frp-client-安装语句，在待被穿透内网设备上安装" class="headerlink" title="利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装"></a>利用管理面板生成 frp client 安装语句，在待被穿透内网设备上安装</h2><ul>
-<li>选择 <code>SSH客户端配置</code>， 点击右上角 <code>新增</code></li>
-<li><img src="http://qiniu.tcualhp.cn/frp.png"></li>
-<li>填写 client 配置<ul>
-<li>项目名称随意</li>
-<li>远程端口为之后访问外网的端口，如你之后想通过 <code>*.xx.com:8090</code> 访问内网，就填8090， 同样防火墙和安全组要打开</li>
-<li>服务器选上一步添加的服务器</li>
-</ul>
-</li>
-<li>填写成功后点击右侧 <code>linux</code>，复制安装命令，在 client 安装即可。（client 需安装 ssh, 并开放22端口）</li>
-</ul>
-<h2 id="使用ssl访问"><a href="#使用ssl访问" class="headerlink" title="使用ssl访问"></a>使用ssl访问</h2><ul>
-<li>ip 为 frp_server域名/IP，端口为 client 配置的端口</li>
-</ul>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一次由被推销而引发的对市场营销学的思考</title>
-    <url>/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<h2 id="主要情景再现"><a href="#主要情景再现" class="headerlink" title="主要情景再现"></a>主要情景再现</h2><p>中午我去拿快递的时候被一个女生拦下来，背着个大大的黑色双肩包，说耽误我一分钟时间，我当时因为点了自提外卖还有再等一会都下课了人会很多快递队伍会很长就想走，她又说只有一分钟，我还是很好停下来。她说她是市场营销实习，需要连续一星期卖60盒笔(也许是一星期每天60盒)，不然就会被辞退，中间我们僵持了很久，我也动摇过，后来想了想我也是看过《人性的弱点》的，不能一直那么因为太好心被骗就还是说我真的不需要就没买</p>
-<h2 id="细节梳理"><a href="#细节梳理" class="headerlink" title="细节梳理"></a>细节梳理</h2><ol>
-<li><ul>
-<li><strong>细节：</strong> 刚拦住我就往我手里塞两盒笔</li>
-<li><strong>思考：</strong> 先下手为强，用笔困住我，后面我一直走不掉很大程度是因为我手里有笔没法推给她，同时我以为她给我笔是要送我的，以为是什么送笔推销活动之类的。同时塞给我两盒笔意思是我想让你买笔，并且数量都给你定好了，是两盒。</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 说自己市场营销的，还有说我以后也会有实习，自己以前也是我的同学一类的人，等等</li>
-<li><strong>思考：</strong> 套近乎，降低你的防备，引起你的同情</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 说卖不出去就要辞退，旁边还有好几个和她一样的，她们在竞争，苦情戏</li>
-<li><strong>思考：</strong> 博取同情，但是我挣扎了很久终于抵制了，我也有同情她，我看她没打伞，聊天的时候我有帮她挡太阳</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 问我大几的，我说大三，她一脸惊讶，说我长得好小</li>
-<li><strong>思考：</strong> 虽然应该是真实的处于本能的夸赞，因为我从小到大都有过诸如高三被当成高一的经历，但这个的确是夸赞，给我一个人情，为的是让我买笔还她更大的人情</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 我说我计算机的不怎么用笔，给我看有个计算机的买了十多盒笔</li>
-<li><strong>思考：</strong> 当时我还真信了，后来想想这个肯定是摆拍，谁会闲着没事买那么多，我以前一下子一两盒就够多了。而且她给我看很多笔，首先提高你的购买预期，然后再降低。一下子买两盒无法接受，但是如果一下子让你买十几盒，再让你买两盒，你就比较容易接受</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 我问一盒几支，一盒多少钱，她一直只说一支 2.5 元， 后来我一直追问她才说一盒十二支，一盒28（大概，具体忘了）</li>
-<li><strong>思考：</strong> 一直说一支的价格是因为 2.5 这个数感觉很小，说一盒数字很大不容易接受。但是我一算就能算出一盒价钱，一般一盒笔 12 支， 一盒就要 30， 这个价格真心不便宜，再加上前段时间出了小米巨能写，这个笔性价比真不高。她犯了一个错误，一直在博取同情，却没说笔的优势或者质量，对于理性的人来说是没用的</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 后来说我买一盒，半盒，几支也行</li>
-<li><strong>思考：</strong> 努力卖出去，降低你预期，再加上卖惨</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 开始说只耽误你一分钟</li>
-<li><strong>思考：</strong> 只耽误我一分钟这种话对于我这种好心的人来说根本拒绝不了，我连传单都会主动去接，同时不说是卖笔，先说市场营销套近乎降低你的抗拒感，不过这个笔性价比真不高，而且一盒实在多，一两支还行</li>
-</ul>
-</li>
-<li><ul>
-<li><strong>细节：</strong> 挑人挑中了我</li>
-<li><strong>思考：</strong> 当时人挺多的，但是偏偏挑了我，可能是我面善，经常遇到各种人找我推销还有加微信做任务，挑人也是一个技能</li>
-</ul>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>think</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>DailyLove-日常记录小程序后端细节展现(springboot)</title>
-    <url>/2019/08/DailyLove-%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E7%BB%86%E8%8A%82%E5%B1%95%E7%8E%B0(springboot)/</url>
-    <content><![CDATA[<h2 id="事件（核心）"><a href="#事件（核心）" class="headerlink" title="事件（核心）"></a>事件（核心）</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h2 id="邮件"><a href="#邮件" class="headerlink" title="邮件"></a>邮件</h2><h2 id="组队"><a href="#组队" class="headerlink" title="组队"></a>组队</h2>]]></content>
-      <categories>
-        <category>CS</category>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>DailyLove</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装与使用IDEA部署到远程服务器</title>
-    <url>/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用</p>
-<span id="more"></span>
-<blockquote>
-<p>如果是想学习可以跳过这段，首先我想学docker, 查了下好像docker for windows只能win10专业版安装，所以我招了教程利用各种帖子，后来安装失败，于是我在服务器上安装，很成功。之后发现可以用IDEA一键部署到服务器，就配置了一下，因为安全组关系又浪费不少时间，后来链接成功，但打包失败，我以为本地也要装，于是又试了一下，结果一下子就好了。可是IDEA打包还是失败，还来发现了什么，重启了一下IDEA，一切就都可以了，真是吐血，本地应该不需要装Docker，直接调用远程服务器的tcp的2375接口。</p>
+    <title>hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱）</title>
+    <url>/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><blockquote>
+<p>不喜欢重复造轮子和复制粘贴别人的内容，这里在Valine-Admin官方教程和某博客的基础上，增加<strong>阿里云企业邮箱</strong>的配置部分，以及指出原博客中的一些错误</p>
 </blockquote>
-<h2 id="Docker-教程"><a href="#Docker-教程" class="headerlink" title="Docker 教程"></a>Docker 教程</h2><ul>
-<li><a href="https://yeasy.gitbooks.io/docker_practice/introduction/what.html">Docker 从入门到实践</a></li>
-</ul>
-<h2 id="Docker-两个版本区分"><a href="#Docker-两个版本区分" class="headerlink" title="Docker 两个版本区分"></a>Docker 两个版本区分</h2><ul>
-<li><a href="https://blog.csdn.net/JENREY/article/details/84493812">dockerToolbox和docker for windows的区别</a></li>
-</ul>
-<h2 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h2><h3 id="Docker-for-Windows-安装"><a href="#Docker-for-Windows-安装" class="headerlink" title="Docker for Windows 安装"></a>Docker for Windows 安装</h3><ul>
-<li>安装<ul>
-<li><a href="https://www.cnblogs.com/samwu/p/10360943.html">Windows10家庭版安装Docker for Windows</a></li>
-</ul>
-</li>
-<li>与虚拟机冲突解决办法<ul>
-<li><a href="https://blog.csdn.net/qwsamxy/article/details/50533007">【Hyper-V】与【VirtualBox】【VMware】冲突的解决方法</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="Docker-Toolbox-安装"><a href="#Docker-Toolbox-安装" class="headerlink" title="Docker Toolbox 安装"></a>Docker Toolbox 安装</h3><ul>
-<li><a href="https://www.cnblogs.com/jeshy/p/10518857.html">Docker ToolBox安装</a> 无脑安装</li>
-</ul>
-<h3 id="Docker-Linux-安装"><a href="#Docker-Linux-安装" class="headerlink" title="Docker Linux 安装"></a>Docker Linux 安装</h3><ul>
-<li>过于简单，无脑输命令就行， 第一条教程链接里面各个发行版本安装方法都有</li>
-</ul>
-<h2 id="IDEA-连接远程-Docker-进行部署"><a href="#IDEA-连接远程-Docker-进行部署" class="headerlink" title="IDEA 连接远程 Docker 进行部署"></a>IDEA 连接远程 Docker 进行部署</h2><h3 id="远程服务器-Docker-设置-其实就是开放2375端口"><a href="#远程服务器-Docker-设置-其实就是开放2375端口" class="headerlink" title="远程服务器 Docker 设置(其实就是开放2375端口)"></a>远程服务器 Docker 设置(其实就是开放2375端口)</h3><ul>
-<li>docker 配置<ul>
-<li><a href="https://blog.51cto.com/709151/2406150">Ubuntu配置方法</a></li>
-<li><a href="https://blog.csdn.net/u012946310/article/details/82315302">CentOS配置方法</a></li>
-</ul>
-</li>
-<li>服务器配置<ul>
-<li>防火墙2375端口打开</li>
-<li>如果是阿里云要新建安全组规则加入2375</li>
-<li>如果是宝塔也要开放2375端口（注意这两个都要开放，我之前以为宝塔能直接改动阿里云的安全组就只开放了宝塔，结果一直连接超时）</li>
-</ul>
-</li>
-</ul>
-<h3 id="IDEA-设置"><a href="#IDEA-设置" class="headerlink" title="IDEA 设置"></a>IDEA 设置</h3><ul>
-<li><a href="https://blog.csdn.net/forezp/article/details/70198649">docker部署spring cloud项目</a></li>
-<li>记得IDEA在maven引入docker之后重启一下，不然可能会出现我之前的无法连接到 “localhost:2375” 错误</li>
-</ul>
-<h2 id="部分错误文档"><a href="#部分错误文档" class="headerlink" title="部分错误文档"></a>部分错误文档</h2><ul>
-<li><a href="https://blog.csdn.net/ii19910410/article/details/87882917">Dockerfile ADD路径不正确问题</a></li>
-<li><a href="https://blog.csdn.net/ChineseYoung/article/details/83107353">这个也不错</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>CS</category>
-        <category>common</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo部署踩坑总结(文末有自动部署备份脚本)</title>
-    <url>/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>hexo安装，部署，主题，备份教程，备份为自己尝试很多次的总结，附自动部署备份脚本</p>
+<p>某博客：<a href="https://segmentfault.com/a/1190000021474516?utm_source=tag-newest">Hexo主题使用Valine-Admin管理评论和评论提醒 - SegmentFault 思否</a></p>
+<p>Valine-Admin 官方教程：<a href="https://github.com/zhaojun1998/Valine-Admin">zhaojun1998/Valine-Admin: 一个 Valine 的拓展应用，用来增强 Valine 的邮件通知。</a></p>
 <span id="more"></span>
 
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
-<li><a href="https://hexo.io/zh-cn/docs/">官方教程</a> 官方教程肯定是最权威的最好的教程</li>
-<li><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">使用hexo+github搭建免费个人博客详细教程</a></li>
-<li><a href="https://blog.enjoytoshare.club/article/hexo-do-domain.html">域名绑定</a> 实现用自己的域名访问博客</li>
-<li><a href="https://blog.csdn.net/u012195214/article/details/72721065">原文件备份</a> <code>master</code> 用于静态界面，另外新建一个分支，比如 <code>hexo</code> 用来备份原文件和配置等，<a href="#deploy_backup">点我跳转到备份详细过程防踩坑</a></li>
-</ul>
-<h2 id="hexo-更新"><a href="#hexo-更新" class="headerlink" title="hexo 更新"></a><code>hexo</code> 更新</h2><ul>
-<li>如果以前下载过 <code>hexo</code>，记得升级，我原来用的2， 现在已经 3.9 了，被坑死</li>
-</ul>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
-<li> <a href="https://www.jianshu.com/p/33bc0a0a6e90">更换主题</a> 注意文章的主题地址可能过时</li>
-<li><strong>next</strong> 主题已经<strong>更换地址</strong>了， 如果看的是原来的教程，<code>clone</code> 时记得<strong>更换 next 的 Github 地址</strong></li>
-</ul>
-<h3 id="deploy_backup"> 部署与备份</h3>
-* 前期工作
+<h2 id="邮件通知部署流程"><a href="#邮件通知部署流程" class="headerlink" title="邮件通知部署流程"></a>邮件通知部署流程</h2><p>完全按上面的「某博客」来即可，下面指出博客中的一些不清晰的地方以及错误</p>
+<h3 id="阿里云企业邮箱"><a href="#阿里云企业邮箱" class="headerlink" title="阿里云企业邮箱"></a>阿里云企业邮箱</h3><p>用管理员账号，一般为 <code>postmaster@域名</code>，依次点击【组织与用户】-【员工账号管理】-【新建账号】</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306152129677.png" alt="image-20210306152129677"></p>
+<p>基本信息填写略，注意下图红框部分勾选</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306152223749.png" alt="image-20210306152223749"></p>
+<p>值得注意的是，我搜了半天，甚至登录了员工邮箱，都没找到 <code>SMTP</code> 授权码。经尝试，<strong>授权码就是上图中给员工邮箱分配的密码</strong>。</p>
+<p>也就是说，<code>leancloud</code> 中要填写的环境变量有这些（如果用阿里云企业邮箱）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SITE_NAME : 网站名称。</span><br><span class="line">SITE_URL : 网站地址, 最后不要加 &#x2F; 。</span><br><span class="line">SMTP_USER : 填写创建的员工邮箱地址（SMTP 服务用户名，一般为邮箱地址。）</span><br><span class="line">SMTP_PASS : 阿里云为创建员工邮箱时分配的密码（SMTP 密码，一般为授权码，而不是邮箱的登陆密码，请自行查询对应邮件服务商的获取方式）</span><br><span class="line">SENDER_NAME : 寄件人名称。</span><br><span class="line">TO_EMAIL：填写自己的收件邮箱，所以的评论都会发给这个邮箱</span><br><span class="line">TEMPLATE_NAME：设置提醒邮件的主题，目前内置了两款主题，分别为 default 与 rainbow。默认为 default</span><br><span class="line">SMTP_HOST : 阿里云为：smtp.mxhichina.com（邮件服务提供商 SMTP 地址，如 qq : smtp.qq.com，此项需要自行查询或询问其服务商。）</span><br><span class="line">SMTP_PORT : 阿里云为：25 （邮件服务提供商 SMTP 端口, 此项需要自行查询或询问其服务商。）</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>突然发现官网写的很清楚，<a href="https://hexo.io/zh-cn/docs/deployment.html">hexo部署</a></p>
-</li>
-<li><p>记得在 <code>hexo-d</code> 前修改站点配置文件即 <code>_config.yml</code> 中的 <code>deploy</code> 配置， 示例， 注意替换具体仓库地址</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="comment"># message: [message]</span></span><br></pre></td></tr></table></figure></li>
-<li><p>如果 <code>hexo -d</code> 报错就看 <a href="https://blog.csdn.net/weixin_36401046/article/details/52940313">这个链接</a></p>
-</li>
-<li><p>备份说明</p>
-<ul>
-<li>命令： <code>hexo d</code></li>
-<li>内部实现：其实是 <code>hexo-depolyer-git</code> 将 <code>hexo-g</code> 后生成的 <code>public</code> 文件打包。所以 <code>hexo-d</code> 的时候他会把 <code>public</code> 也就是静态文件自己上传到 <code>git</code>远程仓库的 <code>master</code> 分支（ git 地址和 master 分支在站点配置文件那边要提前配置好），我们不用管。换句话说也就是如果你不备份，只需要做到这里就好了，这个命令完成的是对静态文件的上传。</li>
-<li>备份：所以像前面说的，我们要备份的话，就在不影响 <code>master</code> 的情况下，新建一个分支，比如 <code>hexo</code> , 平时写文章就在 <code>hexo</code> 分支， 并且<strong>不用切换回master</strong>！！！，因为我前面讲到 master 分支也就是静态 <code>public</code> 文件的部署已经交给 <code>hexo-d</code> 全权负责了！我之前就是切回去所以错了</li>
-<li>附录一（<code>.gitignore</code>）</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.<span class="built_in">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">auto_deploy.sh</span><br></pre></td></tr></table></figure>
+<h3 id="定时任务自动唤醒"><a href="#定时任务自动唤醒" class="headerlink" title="定时任务自动唤醒"></a>定时任务自动唤醒</h3><p>还有个环境变量是 <code>ADMIN_URL</code>，是原博客中设置定时任务自动唤醒要用到的，设置方法如下：</p>
+<p>进入应用，依次点击：【云引擎】-【web】-【设置】，下拉（其实和环境变量在同一页），找到【云引擎域名】，绑定一下，下图红框内的文字即为 <code>ADMIN_URL</code> 项应填入的值</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153102967.png" alt="image-20210306153102967"></p>
+<h3 id="原博客捡漏定时任务错误"><a href="#原博客捡漏定时任务错误" class="headerlink" title="原博客捡漏定时任务错误"></a>原博客捡漏定时任务错误</h3><p>博客中关于捡漏定时任务的描述中，截图和给出的代码不一致，（截图是正确的），这里我给出正确代码以供复制</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 0 8 * * ?</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>附录二（<strong>自动部署备份脚本</strong>）</li>
-</ul>
-<blockquote>
-<p><strong>使用说明：每次写完文件保存后 bash 执行 <code>sh ./auto_deploy.sh &quot;提交的message&quot;</code> 即可， 文件名自定</strong></p>
-</blockquote>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切回hexo, 以防万一</span></span><br><span class="line">git checkout hexo</span><br><span class="line"><span class="comment"># 提交本地的</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"><span class="comment"># 提交到远程</span></span><br><span class="line">git push origin hexo</span><br><span class="line"><span class="comment"># 到页面发布分支</span></span><br><span class="line"><span class="comment"># 清理原静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成，部署</span></span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-</ul>
+
+
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153610390.png" alt="image-20210306153610390"></p>
+<h3 id="next主题配置文件修改"><a href="#next主题配置文件修改" class="headerlink" title="next主题配置文件修改"></a>next主题配置文件修改</h3><p>还有一点博客没提到，原作者应该是默认大家已经会开启评论但是没设置邮件通知。</p>
+<p>应该这样修改，<code>enable</code> 和 <code>notify</code> 改为 <code>true</code>，以及 <code>appid</code> 与 <code>appkey</code> 填完整</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210306153258422.png" alt="image-20210306153258422"></p>
 ]]></content>
       <categories>
-        <category>CS</category>
-        <category>hexo</category>
+        <category>CS - hexo</category>
       </categories>
       <tags>
         <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
-    <title>人为什么而活</title>
-    <url>/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</url>
-    <content><![CDATA[<p><strong>为了</strong></p>
+    <title>hexo新建菜单并添加文章</title>
+    <url>/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h2 id="两种不同效果对比"><a href="#两种不同效果对比" class="headerlink" title="两种不同效果对比"></a>两种不同效果对比</h2><h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p>本文章使用的是 <code>next</code> 主题，其他主题类似。</p>
+<p>以添加「读书笔记」菜单为例，以下是最终效果</p>
 <span id="more"></span>
 
-<h3 id="做你想做的"><a href="#做你想做的" class="headerlink" title="做你想做的"></a><p align="center">做你想做的</p></h3><h3 id="做你该做的"><a href="#做你该做的" class="headerlink" title="做你该做的"></a><p align="center">做你该做的</p></h3>]]></content>
+<h3 id="效果一"><a href="#效果一" class="headerlink" title="效果一"></a>效果一</h3><p>菜单点开，里面有相关分类的文章，可一直往该页面增加文章，但不能在该界面加其余陈述。<strong>相当于给某个特定分类在菜单栏建立了个快捷方式</strong>。</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210308234647999.png" alt="image-20210308234647999"></p>
+<h3 id="效果二"><a href="#效果二" class="headerlink" title="效果二"></a>效果二</h3><p>菜单点开后，只有一篇文章，不能链接其他文章。<strong>可以类比「关于」界面</strong></p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210309001205793.png" alt="image-20210309001205793"></p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h3 id="1-（效果一、二都要做）新建一个名为-readNotes-的页面，命令如下"><a href="#1-（效果一、二都要做）新建一个名为-readNotes-的页面，命令如下" class="headerlink" title="1. （效果一、二都要做）新建一个名为 readNotes 的页面，命令如下"></a>1. （效果一、二都要做）新建一个名为 <code>readNotes</code> 的页面，命令如下</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new page readNotes</span><br></pre></td></tr></table></figure>
+
+<p>取名可随意，哪怕写中文的 <code>读书笔记</code> 也是可以的，看个人习惯。</p>
+<p>后续：我后面还是直接取了中文的 <code>读书笔记</code> 的名字，一个是省事，一个是翻译文件只会翻译菜单的 <code>readNotes</code>，可以看到两个效果图中的右侧的分类和标题都还是 <code>readNotes</code> 没被翻译。</p>
+<p>这时候你会发现 <code>/source/</code> 文件夹下多了个 <code>readNotes</code> 文件夹，里面有个 <code>index.md</code>。</p>
+<p>效果二中，<code>index.md</code> 类似 <code>next</code> 内置的「关于」等界面，里面可以写内容，效果一编辑此文件无效。</p>
+<h3 id="2-（一、二）在主题配置中开启菜单"><a href="#2-（一、二）在主题配置中开启菜单" class="headerlink" title="2. （一、二）在主题配置中开启菜单"></a>2. （一、二）在主题配置中开启菜单</h3><h4 id="效果一-1"><a href="#效果一-1" class="headerlink" title="效果一"></a>效果一</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">	<span class="attr">readNotes:</span> <span class="string">/categories/readNotes/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-bookyml</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="效果二-1"><a href="#效果二-1" class="headerlink" title="效果二"></a>效果二</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">	<span class="attr">readNotes:</span> <span class="string">/readNotes/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-book</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="图标问题（一、二）"><a href="#图标问题（一、二）" class="headerlink" title="图标问题（一、二）"></a>图标问题（一、二）</h4><p><code>fa-book</code> 是图标的简称，<code>next</code> 用的是 Font Awesome 的图标</p>
+<p>在官网 <a href="https://fontawesome.dashgame.com/">Font Awesome，一套绝佳的图标字体库和CSS框架</a> 中搜索喜欢的图标，点击复制即可</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210309001915721.png" alt="image-20210309001915721"></p>
+<h3 id="3-修改语言文件，将-readNotes-翻译为「读书笔记」"><a href="#3-修改语言文件，将-readNotes-翻译为「读书笔记」" class="headerlink" title="3. 修改语言文件，将 readNotes 翻译为「读书笔记」"></a>3. 修改语言文件，将 readNotes 翻译为「读书笔记」</h3><p>原本取的就是中文名的可以跳过这步。</p>
+<p>自从 NexT-7.3.0 开始，官方推荐采用数据文件将配置与主题分离，这样我们可以在不修改主题源码的同时完成选项配置、自定义布局、自定义样式，便于后续 NexT 版本更新。</p>
+<p>我们原来是通过配置主题下的 <code>languages</code> 目录中的 <code>zh-CN.yml</code> 文件来对菜单等进行中文翻译的，现在我们可以通过在 <code>hexo/source/_data/</code> 下新建数据文件 <code>languages.yml</code>，并全文配置如下：（注意注释部分）</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">zh-CN:</span>	<span class="comment">#看这里，把下面的内容（即next主题的原zh-CN文件，向右缩进</span></span><br><span class="line">		<span class="comment"># 然后加个标头zh-CN，使用zh-Hans的同理</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">简体中文</span></span><br><span class="line">  <span class="attr">title:</span></span><br><span class="line">    <span class="attr">archive:</span> <span class="string">归档</span></span><br><span class="line">    <span class="attr">category:</span> <span class="string">分类</span></span><br><span class="line">    <span class="attr">tag:</span> <span class="string">标签</span></span><br><span class="line">    <span class="attr">schedule:</span> <span class="string">日程表</span></span><br><span class="line">  <span class="attr">menu:</span></span><br><span class="line">    <span class="attr">home:</span> <span class="string">首页</span></span><br><span class="line">    <span class="attr">archives:</span> <span class="string">归档</span></span><br><span class="line">    <span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">标签</span></span><br><span class="line">    <span class="attr">about:</span> <span class="string">关于</span></span><br><span class="line">    <span class="attr">search:</span> <span class="string">搜索</span></span><br><span class="line">    <span class="attr">schedule:</span> <span class="string">日程表</span></span><br><span class="line">    <span class="attr">sitemap:</span> <span class="string">站点地图</span></span><br><span class="line">    <span class="attr">commonweal:</span> <span class="string">公益</span> <span class="number">404</span></span><br><span class="line">    <span class="attr">readNotes:</span> <span class="string">读书笔记</span>	<span class="comment">#在这里添加</span></span><br><span class="line">  <span class="attr">sidebar:</span></span><br><span class="line">    <span class="attr">overview:</span> <span class="string">站点概览</span></span><br><span class="line">    <span class="attr">toc:</span> <span class="string">文章目录</span></span><br><span class="line">  <span class="attr">post:</span></span><br><span class="line">  <span class="comment">#（以下省略，不要直接复制本代码，先缩进，再加zh-Hans或zh-CN标头，再加readNotes: 读书笔记）</span></span><br></pre></td></tr></table></figure>
+
+<p>关于配置文件与主题分离，强烈建议阅读这篇文章：</p>
+<p><a href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></p>
+<h3 id="4-（仅一）如果在新建文章时进行归类"><a href="#4-（仅一）如果在新建文章时进行归类" class="headerlink" title="4. （仅一）如果在新建文章时进行归类"></a>4. （仅一）如果在新建文章时进行归类</h3><p>写文章时，头部加个 <code>readNotes</code> 分类就行，以下是 next 主题的方式</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">(title,</span> <span class="string">date等其余头部信息已省略)</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">readNotes</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>先在这个分类下写一篇文章，再 <code>hexo s</code>，否则会报错。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p>参考了小丁的关于 <code>next</code> 主题的数据文件部分，主要是 <code>languages.yml</code> <a href="https://tding.top/archives/2bd6d82.html">Hexo-NexT 版本更新记录 | 小丁的个人博客</a></p>
+</li>
+<li><p>参考了本篇博客的大部分内容 <a href="https://blog.csdn.net/weixin_30312557/article/details/98233523?utm_medium=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-OPENSEARCH-6.control">hexo添加新菜单并实现新菜单的文章归类_weixin_30312557的博客-CSDN博客</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为hexo-next安装侧边rss</title>
+    <url>/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</url>
+    <content><![CDATA[<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-在博客根目录下安装-hexo-generator-feed"><a href="#1-在博客根目录下安装-hexo-generator-feed" class="headerlink" title="1. 在博客根目录下安装 hexo-generator-feed"></a>1. 在博客根目录下安装<a href="https://github.com/hexojs/hexo-generator-feed"> hexo-generator-feed</a></h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="2-在博客根目录下的-config-yml-文件中添加以下代码"><a href="#2-在博客根目录下的-config-yml-文件中添加以下代码" class="headerlink" title="2. 在博客根目录下的 _config.yml 文件中添加以下代码"></a>2. 在博客根目录下的 <code>_config.yml</code> 文件中添加以下代码</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">feed:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">atom</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">atom.xml</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">hub:</span></span><br><span class="line">  <span class="attr">content:</span></span><br><span class="line">  <span class="attr">content_limit:</span> <span class="number">140</span></span><br><span class="line">  <span class="attr">content_limit_delim:</span> <span class="string">&quot; &quot;</span></span><br><span class="line">  <span class="attr">order_by:</span> <span class="string">-date</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">icon.png</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置博客根目录下的-config-yml-文件"><a href="#3-配置博客根目录下的-config-yml-文件" class="headerlink" title="3. 配置博客根目录下的 _config.yml 文件"></a>3. 配置博客根目录下的 <code>_config.yml</code> 文件</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">自己域名</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-修改-Next-主题的配置文件-config-yml"><a href="#4-修改-Next-主题的配置文件-config-yml" class="headerlink" title="4. 修改 Next 主题的配置文件 _config.yml"></a>4. 修改 <code>Next</code> 主题的配置文件 <code>_config.yml</code></h3><p>首先，这里的主题配置文件最好是根目录下的 <code>_config_next.yml</code>，如果没有的话，建议把 <code>/thems/next/_config.yml</code> 文件复制到根目录下，并改名成 <code>_config_next.yml</code>。</p>
+<p>不直接修改<code>/themes/next/_config.yml</code> 的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
+<p><code>rss</code> 有两种形式，一种是侧边栏，一种是每个文章底部都有个大大的<code>rss</code>区域，推荐侧边烂。(缩进都是两格，我这里代码可能缩进格数不对)</p>
+<p>侧边栏形式：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">social:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
+
+<p>文章底部形式：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">	<span class="attr">RSS:</span> <span class="string">/atom.xml</span> <span class="string">||</span> <span class="string">rss</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><p><a href="https://www.gagahappy.com/use-next-theme/">Hexo安装Next主题 Rss 侧边栏 | 漂自己的移，让别人都撞墙去吧</a></p>
+<p><a href="https://suyin-blog.club/2020/2M3YWE7/">给 Hexo 中的 Next 主题添加 RSS 功能 | 苏寅 Blog</a></p>
+]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人为什么而活2</title>
+    <url>/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</url>
+    <content><![CDATA[<p>现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「<strong>做你想做的，做你该做的</strong>」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  </p>
+<p>有趣的是，在2020年7月18日，我在知乎回答了这样一个问题：「是什么让你坚持活下去（限10个字之内）？」，我的回答是，「<strong>我爱的人，爱我的人</strong>」。当时的我应该是处于心情的低谷期，每天的焦虑、自卑、抑郁、逃避充斥着我。可以看得出来，当时的我更加注重「人」的意义。或许你会觉得，当时的我，是个重情重义的人——事实确实如此，但另一方面，这短短的八个字，也体现了我的焦虑型依恋的本质，换句话说，这个时候，我已经迷失自我了：我们把这八个字做一下小学时常考的「缩句」，那么我的回答就成了「（别）人，（别）人」，<strong>给出这个答案时候的我，根本不是为自己而活着</strong>，换句话说，我看不到自己活着的意义，心中对于「我」的概念已经很微弱了。  </p>
+<span id="more"></span>
+
+<p>人活着是要有「自我稳定性」的，包括情绪稳定、拥有取悦自己的能力，拥有一个人生活的能力等等。是很奇怪，一个人越是无法一个人活着，就越难遇到与其结伴的人；一个人越是自己能活得很好，自信乐观，优秀，越是能感染到其他人。  </p>
+<p>所以，我选择了后者。</p>
+<p>我曾在「声昔」发表过一个心情，「如何毁了一个人，夺去除了生命以外对TA而言最重要的东西；如何成就一个人，夺去除了生命以外对TA而言最重要的东西」。前半句很好理解，后半句我想表达什么意思呢，又为什么会想到这句话呢？前面提到，我过去的一年，迷失了自我，不是为自己而活，沉浸在负面情绪中，最终，我活着的动力，那个「爱我的人」，选择了离开。这对焦虑型依恋的我而言，就像丢了命，当时的我真的觉得活不下去了。我同时面临着自我攻击、至爱的人对我的失望放弃，还有一个多月后即将考研的压力。  </p>
+<p>我认真反思过，细数了去年一年来我的缺点，有真正的缺点，也有自以为的缺点：我是个很闷的人，欢脱不起来；我是个很自卑的人，与两年前那个自信的少年截然相反；我是个不注重打扮的人，近几个月窝在寝室，随性穿衣服，加上长时间的熬夜，肤质一泻千里；我是个抑郁、焦虑的人，我看不到未来的希望，哪怕当时拥有的，我也会觉得我失去，美好的东西，我都觉得自己不配；我是个喜欢逃避的人，沉浸在那种负面情绪中，不愿走出来，或者根本走不出来；我是个社交很失败的人，以前还会努力与人接触，在有了女朋友后，把所有的社交都逐渐转向了她，这也是我逐渐无趣的一大原因，太久没好好和人说话了；我是个无法控制自己情绪的人；我是个很难与人共情的人，我无法，也可能是不愿，认真探索别人说话时的情绪，想表达的心思，无法与人感同身受；我是个做事没有计划的人，大学三年多一直在努力，但都一直在往不同的方向努力，奖学金拿了很多，比赛的奖也拿了不少，项目经历也有一些，老师和同学也都非常认可我，但我就是把牌打成了这个样子，在毕业的时候远远没有达到我期望、他人期望的水平，一直没有持续往一个方向使力，所以我想读研；我是个很怪的人，我给自己设限，我觉得自己不善于社交，我觉得自己不配享受那些高档的美食，我觉得自己做不到很多东西，我觉得很多事情只有某种类型的人才能做，而我不是；我做事太有目的性。</p>
+<p>生活和自己都抛弃了我。很感激那两个星期陪伴了我的人，给我的安慰和激励。在那之后，我疯狂得进行自我救赎，我去找不同的人聊天，去接触新的圈子，去找老乡群的人，去找考研群主胡子哥，去找挽回机构（就聊了一次，毕竟还是要靠自己，有人点醒就够了——其实也是因为太贵了，价格5位数，是贫穷让我拥有了自我救赎的能力），也去找心理咨询师聊过，还有自我对话。和心理咨询师的聊天很有意思，因为当时预约的人很多，我被排到了一星期后，然而我在一星期后自愈了很多，和老师聊天的时候，全程笑着讲述我的经历，与其说是去咨询的，不如说是去演讲的。一边讲着过去的经历，一边自我分析，「我觉得这是什么什么样的心态，应该怎么样去解决」，老师也夸我分析的都对。讲到后来，老师问我，「所以你想咨询什么问题呢？」，我想了想，好像当时确实没有什么太大的问题需要咨询哈哈哈。索性就请教了个关于社交的问题，然后询问了老师的下班时间，提前几分钟结束了咨询。我觉得心里咨询师是很辛苦的，一直在认真听我的讲述，不停地记录我的情况，努力与我共情，我也有义务为她着想，我们并不是只有咨询师师咨询者的关系，也有普通朋友的关系。</p>
+<p>我发现自己有个毛病是永远改不掉了，哪怕是在我经历了四个月的自我救赎，脱胎换骨后仍几乎没变——「话唠」。不同的是，如果是与人交谈，我会观察对方的反应，看是否对方愿意听；以及与人交流的时候，我现在更趋向于少说自己，而努力去识别对方的情绪，引领着对方把自己想说的说舒畅了。</p>
+<p>话题拉回到自我救赎上，前面讲的是与「人」的交谈，求助，其实占比更多的，是「自我」救赎，是通过「阅读」，与自己对话。</p>
+<p>最近几个月的阅读主要分为两大类：「与人」，「自我」。最初的时候，我改变的原动力是挽回她，所以在知乎上拼命搜索「挽回」，明白了许多浅层的原因，弄清了是什么导致了分手，以及挽回中的哪些错误不能犯。后来，我开始阅读「亲密关系」领域的经典书籍，去学习「为什么要去爱」、「能从爱中获得什么」、「如何去爱」，这段时间我重新审视了自己挽回的动机，去思考关于爱的深层次的内容，也正是在这段时间，我修复了自己的恋爱性格缺陷——「焦虑型依恋」，也是在这段时间，我学习了如何正确对待自己的情绪，进而控制自己的情绪，以及如何带动对方的正向情绪；学习了如何维护亲密关系；学习了如何与人沟通；学习了如何共情。后期，直到现在，我主要阅读的是关于「自我」的书籍，诸如《被讨厌的勇气》，《羞耻感》，《认知觉醒》一类的书，前两本治愈的是自己的性格，差不多根治了二十多年来的自卑心理；后面那本是关于自我提升的，因为只有自己变得优秀自律，才值得爱人与被爱，才能收获高质量的爱。当然我读的书远不止上面几本，还有知乎以及公众号上面的文章，以及我生命中的一位贵人——小黑老师，从亲密关系到社交关系，从自我管理到职场生存，都给了我实质性的帮助，启发了我很多很多。</p>
+<p>人能找到自己真正喜欢的事物，真是一件很不容易却又幸福的事儿——而我找到了「读书」。读书的时候，时间是完全属于自己的，心境是完全平和的。</p>
+<p>「杀不死我的，只会让我更强大」，很幸运，在绝境中，在「毁灭」与「成就」中，我选择了后者。前面那一大段我所列出的缺点，现在，有的已经成了我的优点，有的已经克服，有的正在努力的路上。</p>
+<p>改变确实在一点点发生。我首先是突破了「自我设限」，如我给自己设定的「 我不擅长社交」，从而重拾了与人交流的勇气，又如我开始吃西红柿（煮的），吃洋葱，还有一次吃了室友给我捏的两个海苔饭团，这在以前，光是「海苔」和「拌饭」任何一个，都能让我的胃翻江倒海。我改变了情绪认知的方式，以前的我沉浸在被情绪控制的「爽感」中，就像毒品一般，被摧残着却又离不开。后来，我告诉自己，情绪只是身体对自己发出的信号，告诉自己身体的想法，告诉自己该怎么做了。比如焦虑的时候，身体是要告诉你该干事情了，而不是让你继续沉浸在里面。在与人交谈的时候，我能放下自己的好胜心、自卑心、嫉妒心，或许以前别人向我夸耀自己的成果的时候，我会下意识远离，一个是因为嫉妒，一个是怕引起心中的焦虑和自卑；现在我大部分时候能短暂的放下自我意识，把角色转换到对方身上，由衷地为对方高兴，并认真地赞美TA，因此我有几个朋友也比以前更「铁」了，聊天的频率、广度、深度都有增加。还有好多好多，一时间无法分享我成长的喜悦。啊对，还有最重要的一点，这两个多月，我的一个十多年的梦想实现啦——体重从90斤蹭蹭蹭窜到了100+！或许是我妈妈手艺太好的缘故，抑或是我驱散了长久以来的负面情绪的缘故。</p>
+<p>2月，我开始使用一个叫「声昔」的app，认识了许多与我相似的、曾经自卑现在重获新生的人。同时，我也因为这段经历，能与很多人感同身受，温暖了很多人，给他们带来了希望。尤其是当有人发空间表达自己被温暖到了，又有人回复我：「哇，竟然有人懂我这段话的意思，太意外，太惊喜了。这是我的困惑，甚至为此焦虑，看了你说的这段话，挺有启发的，感谢（原文还有表情）」，看到这些反馈，我相信，我当时是最幸福的。我的这些举动，并不是完全无私的，帮助他们是我发自内心的乐意的，但感受到别人需要我而引发的价值感，也正是我所渴求的。后来一个叫「书籍共读讨论社」的社团，群里的气氛异常的好，在这个群中，聊天与其他地方不一样，我们都在这个氛围中努力深度思考，发的感悟反思都是一次几百个字，占满整个屏幕，无论是发话的人，还是阅读的人，都需要沉浸下来认真思考的能力。感谢这个社团，让我重新获得了深度思考的能力，让我重新能认真看完一整个文章。现在社团已经从最初的部长，蒲公英，我，发展到了满员，并且至少有四个人因为无法进群，一直在默默订阅着。声昔的社团和普通的群是不一样的，它所有的聊天都是公开的，所以大家加群，都是喜欢群内的气氛，想要加入进来。我很荣幸，能作为这样一个远离焦躁的社团的一分子，享受着大家给我带来的启迪，享受着我给大家带来的思考，享受着大家对我价值的肯定。</p>
+<p>啊，我突然想到了文章的标题是：「人为什么而活2」。其实最上面的两个回答都有其正确性，但前些天看到了一篇文章，写道，「人活着没有什么意义」。是啊，我觉得人活着并不需要去追求什么所谓的意义的，<strong>「活在当下」</strong>就好，现在我这样的状态就很好。可能这是已经被说烂了的四个字，但有些东西，真的只有经历了什么，才能真正感受到它蕴含的意思。比如我以前不喜欢听歌，觉得吵闹，歌词只是歌词；现在很喜欢听歌，仿佛每句歌词，都对应着我的一段经历，对应着我的一段感悟。<strong>活在当下，是克服焦虑的关键；活在当下，亦是珍惜现在认真生活的态度；活在当下，是不盲从于结果注重过程的随和态度；活在当下，更是从一点一滴中发现快乐发现美好，保持快乐的秘诀。</strong>果真书看多了，文采也提升了，能写出这么「肉麻」的话了哈哈哈，但却都是发自肺腑的真话。</p>
+]]></content>
       <categories>
         <category>think</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于读闲书以及做笔记的思考</title>
+    <url>/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<h2 id="阅读方式"><a href="#阅读方式" class="headerlink" title="阅读方式"></a>阅读方式</h2><p>目前我读书有以下几种方式：「精读」、「笔记阅读」、「略读」、「选读」</p>
+<span id="more"></span>
+
+<p>「精读」即完整地看完整本书，有时候会做笔记，如果不做笔记会对重点句子划线</p>
+<p>「笔记阅读」是我自己取的名字，就是看别人的读书笔记起到阅读的效果，我最喜欢的是看幕布精选的读书笔记，因为幕布的读书笔记多是大纲式的，阅读笔记可以快速掌握书的脉络与大部分内容；其次是知乎、简书。笔记阅读的优点是能节省很多时间，缺点就是不容易理解或理解有偏差，并且因为不是读的原文，无法对某些精彩的点建立深刻的印象，容易读完就忘。所以现在，笔记阅读对我来说，主要有以下三种用法：略读书籍、挑选书籍、读后复习。</p>
+<p>「略读」、「选读」我觉得差不多，「略」得多了、快了，可不就成「选读」了，索性放一块了。灵感来源于很久以前看的某篇文章，当时作者称之为「猜书」，大概是看了目录后，猜测文章的内容是什么，然后快速翻阅，如果确实和自己想的一样，那么就可以直接跳过。比如《执迷》这本书，我在知乎上看了不少文章，以及亲身经历，对「焦虑型依恋」的成因和表现十分清楚，所以只读了这本书的方法论部分。</p>
+<h2 id="记笔记"><a href="#记笔记" class="headerlink" title="记笔记"></a>记笔记</h2><p>讲一下这些天看书的经验，对我来说，是否应该记笔记。</p>
+<p>原来我是很讨厌记笔记的，一个是麻烦且浪费时间，另一个是会破坏读书的体验。我喜欢用 Kindle 读书，再用个电脑记笔记，太怪了，还伤眼。所以一直都是用 Kindle 直接划线。但是弊端来了，划线或者说摘抄，我后面根本不会去看，而且划线比较随性，没有自己的思考，所以决定还是边看边记，或者第二遍再做笔记。</p>
+<p>我不做「大纲式笔记」，只是按章节，把每个章节触动到我的，觉得重要的句子，用自己的话写下来，而不是简单摘抄。这样一来，我必须边读书边思考，边想着作者这章在表达什么，哪些又是真正能为我所用的，哪些我并不赞同或者与我无关的能直接跳过，哪怕后面记的笔记我也不看，但是这个过程会让我养成思考的习惯。</p>
+<p>这些章节性的总结摘要，组成了我的读书笔记的「读书笔记」部分。看完整本书，我会结合前面记录的句子，总结出整本书对我的启发，这个启发特指以后我在生活中真正能想起来并为我所用的，即「转化」部分。</p>
+<p>来个小总结，「读书笔记」部分是为了以写促思，「转化」部分是为了把「阅读量」转化为「吸收量」、「改变量」。 </p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>解决hexo博客leancloud访问量永远是1的错误</title>
+    <url>/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h2 id="错误定位"><a href="#错误定位" class="headerlink" title="错误定位"></a>错误定位</h2><p>定位到错误：这条请求标红，并且含有 <code>Counter</code>，我猜是 <code>leancloud</code> 修改访问量的接口</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png" alt="image-20210313162321026"></p>
+<p>返回是这样的：<img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png" alt="image-20210313162351656"></p>
+<p>应该是<code>Couter</code>类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。</p>
+<span id="more"></span>
+
+<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h2><p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png" alt="image-20210313162937093"></p>
+<p>再创建一个 <code>Counter</code> Class，注意下面选【无限制】</p>
+<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png" alt="image-20210313163038465"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.ouyanting.com/archives/2018/12/ebe3ded2.html">Forbidden writing by object’s ACL. - Yanting Ou</a></p>
+]]></content>
+      <categories>
+        <category>CS - hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔20200915</title>
+    <url>/2021/03/%E9%9A%8F%E7%AC%9420200915/</url>
+    <content><![CDATA[<p>刷题做笔记时，无意间看到去年9月份写的随笔，隐去了别人的姓名，顺手传上来吧</p>
+<span id="more"></span>
+
+<p>这段时间似乎在想很多东西，也不知想明白没有，决定记一些下来。  </p>
+<p>大概分为以下几个方面，得与失，时间，自身缺点。  </p>
+<p>这一年又可以算上我的低谷，似乎我总觉得自己处在低谷，容易一蹶不振。从去年9月到现在，做的最大的两个决定便是，一，打小挑比赛，二，考研。当初的想法是利用比赛来贴金，也是因为之前被别人加绩点羡慕到了，当了队长，一年的时间断断续续精力都花在上面，但是没获得省级奖励。现在看来也觉得后悔，觉得十分不值，貌似又是一个“错误”的决定，我发现一直以来我是个很自卑的人，觉得很多东西都做不了，但后来发现其实当时的自己完全可以做到，或许自卑是另一种为自己开脱的借口。  </p>
+<p>考研方面，也是因为自己很大的一个缺点，不喜欢定计划，统筹能力不行，没有目标，哪里来的执行，日常的具体表现，就是有时候学的很猛，有时候又完全不学，效率和状态不在线上，导致现在自己陷入了一个很尴尬的境地。</p>
+<p>但人不能总流于表面的，不能一直活在过去的阴影中的，不能活在无限的错误中的。比赛方面，既然有失，而且我也不是废人，那么必有得，所以得是什么呢？主要分为两个方面：  </p>
+<ol>
+<li>自我硬实力提升、人际关系<ol>
+<li>我一直在人际交往，或者说非计算机专业方面有很大的欠缺，最近甚至觉得自己有些孤僻了。</li>
+<li>打比赛的过程中，涉及到任务分配、积极性调动、以及人与人之间的潜规则，学到了不少。</li>
+<li>人际关系方面，看到了某某的“八面玲珑”，一个看起来很水，不喜欢弄专业功课的人，做项目打比赛似乎也吊儿郎当，但是就是认识很多人，无论用什么方式，从最开始的每天和我说晚安，到后面有空就聊一点，用很简单的方式就稳固了人际关系，是我需要学习的。*(2021年3月12日晚，后记：以我现在的待人角度来说，他身上其实也我很多欣赏的地方，作为一个管理专业的人，本身就是要投身到各种社团参与，活动举办上来，我认为他在自己的领域已经很强了。并且如果他是看似轻松，那么一定也有背后的辛苦；如果他确实很轻松，他们他会更厉害，天生就是管理的料)*</li>
+</ol>
+</li>
+<li>反思<ol>
+<li>想把这一年的经历，当作自己新的一轮蜕变，如果说上次是爱情观、生活观上的改变，这次是对自我管理（时间、性格认识）的彻底深入以及社会化的努力尝试。</li>
+<li>痛则思变，如果不改变，以后只会更痛。现在形式很严峻，但算不上最坏，在总结了之前的错误之后，不应继续沉迷在对过去的错误的悔恨中，而是想着怎么在当前的自我条件、外部环境下，让未来更漂亮。</li>
+</ol>
+</li>
+</ol>
+<p>或许，现在问我如何成功，我的答案是“目标+方法+时间”，没有目标，就不会有努力的动力，没有时间管理能力，没有实践，怎么出成果，而方法又是决定效率的关键，在大家都拼时间的情况下，效率也很重要。根据某某分享的一些中国经济的事实，似乎钱的规则也是有许多普通人所想不到的点的，另辟蹊径也是办法，不过那需要更广阔的知识和眼界做支撑。今年的我，在这三个方面，似乎都没做到，所以是失败的，明年的我，一定是成功的。今年没明确的目标，没有阶段任务，导致无动力，时间上无论是客观的比赛原因，还是自己懒，贪玩，都是没花时间学习。最后因为想逃避，所以屏蔽了很多考研信息，这又是方法的失败。光分析是没用的，认识的最终目的，还是获得正确的方法论，是应用到实践上面，后面的三个多月，相信自己，不负自己，不负相亲相爱之人。</p>
+<p><em>2021年3月12日晚，后记：</em></p>
+<p><em>看完这篇文章，我发现自己当时确实在慢慢想着改变，但当时或许更多的是停留在思想层面，落实的不多。扪心自问，现在虽然我也没有落实太多自己的想法，但我这几个月是真真切切感受到痛苦了的，改变的痛苦。由内而外的改变是痛苦的，只有感受到了痛苦，才是真的改变了。</em></p>
+<p><em>昨天躺在床上，想着，以前喜欢蜕变这个词，现在并不喜欢，我认为，蜕变并不能正确得描述改变的过程与体验，人的改变哪里是一瞬间。改变是这样的，它就像，你拿着个锤子，知道这块骨头有问题，解决的办法只能是把它敲碎，把它重塑成你希望的样子好的样子，看你有没有勇气去触碰它，仅仅意识到是没有用的。直到现在，我承认，我也只是敲碎了一部分骨头，有不少骨头迟迟不忍动，还有些正在愈合的阵痛期，甚至还有些愈合后，再次敲碎。不过，我也很享受新长出的骨骼所给我带来的一切。</em></p>
+<p><em>最后，回答一下半年前的话，「后面的三个多月，相信自己，不负自己，不负相亲相爱之人」，我敢肯定，我做到了（此处没有应该两字，以前的我总喜欢用「逃避」来逃避什么）。</em></p>
+<p><em>又写多了，害，是弄完了开题报告和开题答辩PPT的兴奋。现在三座大山，暂时只剩复试和新苗啦！</em></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>怦然心动的人生整理魔法-读书笔记</title>
+    <url>/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="书籍基本信息"><a href="#书籍基本信息" class="headerlink" title="书籍基本信息"></a>书籍基本信息</h2><p>作者：近藤麻离惠<br>标签：个人管理、生活管理</p>
+<span id="more"></span>
+
+<h2 id="阅读方式与进度"><a href="#阅读方式与进度" class="headerlink" title="阅读方式与进度"></a>阅读方式与进度</h2><ul>
+<li>理论篇<ul>
+<li>精读（理论篇前两章）：阅毕 2021年3月14日</li>
+<li>略读+笔记阅读（理论篇剩余）：阅毕 2021年3月14日</li>
+</ul>
+</li>
+<li>实践篇<ul>
+<li>待读</li>
+</ul>
+</li>
+</ul>
+<h2 id="读书笔记"><a href="#读书笔记" class="headerlink" title="读书笔记"></a>读书笔记</h2><h3 id="怦然心动的人生整理魔法"><a href="#怦然心动的人生整理魔法" class="headerlink" title="怦然心动的人生整理魔法"></a>怦然心动的人生整理魔法</h3><h4 id="第1章：为什么再怎么整理都整理不好"><a href="#第1章：为什么再怎么整理都整理不好" class="headerlink" title="第1章：为什么再怎么整理都整理不好"></a>第1章：为什么再怎么整理都整理不好</h4><ul>
+<li><p>几乎所有人都是按自己的方式整理，平时人们并不重视整理的学习</p>
+</li>
+<li><p>如果<strong>一口气整理完</strong>，房间就会一口气变得整齐，但很多时候你以为的一口气整理完其实真正只整理了一半，所以会反弹</p>
+</li>
+<li><p>作者信奉的不是「培养每天整理一点的习惯」，而是「通过一次性整理，使意识发生戏剧性的变化」</p>
+</li>
+<li><blockquote>
+<p>如果能进行一次性正确的整理，就能立刻看到效果，而且能长久保持整理后的整洁状态，只要亲身体验这个过程，我想任何人都会在心底里深切感到不能再让房间回复杂乱了</p>
+</blockquote>
+</li>
+<li><p>整理时该做的，大致只有两件事，<strong>一是确定物品的弃留</strong>，<strong>二是设定物品放置的位置</strong></p>
+</li>
+<li><p>要迅速整理完毕，然后面对自己真正应该面对的问题。比如考试前很多人喜欢整理，但这只是因为想通过整理来缓解焦虑，反而浪费了大量时间</p>
+</li>
+<li><p>收纳不能真正解决整理的问题，治标不治本。所以整理要从丢弃无用物品开始</p>
+</li>
+<li><p>不能按场所整理，要<strong>按物品类别整理</strong></p>
+</li>
+<li><p>整理与个性无关（原文是：按个性改变整理方法，毫无意义）其实不会整理者一共有三种类型</p>
+<ul>
+<li>不愿丢弃型</li>
+<li>不能把物品放回原位型</li>
+<li>既不愿丢又不能放回原位型 </li>
+</ul>
+</li>
+<li><p>整理是节庆，不需要每天做，就是一次把它做完</p>
+</li>
+</ul>
+<h4 id="第2章：只留下让你怦然心动的，其他统统「丢掉」"><a href="#第2章：只留下让你怦然心动的，其他统统「丢掉」" class="headerlink" title="第2章：只留下让你怦然心动的，其他统统「丢掉」"></a>第2章：只留下让你怦然心动的，其他统统「丢掉」</h4><ul>
+<li>短时间整理完成，给意识冲击</li>
+<li><strong>==整理的顺序==一定要严格执行，丢完前绝对不行进行收纳</strong><ol>
+<li>丢弃物品</li>
+<li>设置收纳场所（设定物品放置的位置）</li>
+</ol>
+</li>
+<li>丢东西前，先思考「理想的生活」，即整理的目的，要达到什么效果，一定要清晰</li>
+<li><strong>选择物品的标准：「触碰时有心动感吗」</strong>，选择的是留下什么，而不是把注意力放在要扔掉什么</li>
+<li>把同类的物品集中起来，进行要一次性判断。我们必须正确掌握自己现在到底拥有多少物品</li>
+<li>刚开始丢弃的时候从难度低的物品开始，把难度大的如纪念品留到最后</li>
+<li>尽量不要让父母看到自己丢弃的东西，他们有可能会因为觉得可惜自己拿去，但大多数时候他们并不会用，反而成了负担</li>
+<li>如何让家人学会整理：自己做好丢弃，做好榜样</li>
+</ul>
+<h4 id="第3章：按「物品类别」整理，竟如此顺利！"><a href="#第3章：按「物品类别」整理，竟如此顺利！" class="headerlink" title="第3章：按「物品类别」整理，竟如此顺利！"></a>第3章：按「物品类别」整理，竟如此顺利！</h4><p>看完前两章，我发现其实作者已经把她的思想强调过很多次了，这时去知乎看了几篇阅读笔记，大家写的东西都是相似的，并且和我自己归纳的也一致（前文加粗的部分即作者的主要思想），那么这本书的整体脉络思路我其实已经把握了，所以剩下的部分直接改为略读。</p>
+<ul>
+<li>这章触动我的点，或者说学到的新知识是：叠衣服的时候，叠成小长方形，比我平时折的更小些，然后竖着放，好处是衣服之间不会互相压着，取衣服的时候不会乱，同时不容易有褶皱（作者认为衣服折叠的褶皱是衣服互相挤压，这点等我实践后再看）观点是很打动我的，尤其是我其实挺会叠衣服，也是分类放置，但是整理完之后，过段时间就又会乱了，因为衣服叠放移动几件衣服就容易乱，可以尝试竖着放。但是学校的衣柜是比较高的，如果竖着放空间利用率会很低，而作者讲述的是用抽屉收纳竖着放的衣服，所以到底适不适合还要看具体操作。（第四章作者有了补充，用空鞋盒，不错）</li>
+</ul>
+<h4 id="第4章：让人闪闪发亮的「心动收纳课」"><a href="#第4章：让人闪闪发亮的「心动收纳课」" class="headerlink" title="第4章：让人闪闪发亮的「心动收纳课」"></a>第4章：让人闪闪发亮的「心动收纳课」</h4><ul>
+<li>每个物品都要设定固定的位置，用完放回原处（我以前也会大致设定物品的位置，连左右口袋装什么我都会设定好，所以我几乎没有找完左口袋又摸右口袋的情况。但对于桌面与柜子的整理，物品类别太多，许多东西我是没有归类的，正是这些临时性的没有严格归类的小物品，让我的空间越来越乱）</li>
+</ul>
+<h4 id="第5章：让人生发生喜剧性变化的整理魔法"><a href="#第5章：让人生发生喜剧性变化的整理魔法" class="headerlink" title="第5章：让人生发生喜剧性变化的整理魔法"></a>第5章：让人生发生喜剧性变化的整理魔法</h4><p>引用知乎「<a href="https://zhuanlan.zhihu.com/p/57909732">余小满</a>」的话：</p>
+<blockquote>
+<p>我们整理的不仅仅是物品与环境，而是自己的内心。过好当下，不念过去，不畏将来。</p>
+</blockquote>
+<h4 id="结束语：整理魔法，让你的每一天闪耀光芒"><a href="#结束语：整理魔法，让你的每一天闪耀光芒" class="headerlink" title="结束语：整理魔法，让你的每一天闪耀光芒"></a>结束语：整理魔法，让你的每一天闪耀光芒</h4><h3 id="怦然心动的人生整理魔法：实践解惑篇"><a href="#怦然心动的人生整理魔法：实践解惑篇" class="headerlink" title="怦然心动的人生整理魔法：实践解惑篇"></a>怦然心动的人生整理魔法：实践解惑篇</h3><h2 id="转化"><a href="#转化" class="headerlink" title="转化"></a>转化</h2><ul>
+<li>（突然萌生了一个很有意思的想法，我在读这本书的时候，其实也是在做「整理」，丢弃大部分内容，只留下让我心动的）</li>
+<li>必须一次性整理完</li>
+<li>整理前好好想象一下整理之后期待的样子</li>
+<li><strong>==整理的顺序==一定要严格执行，丢完前绝对不行进行收纳</strong><ol>
+<li>丢弃物品<ol>
+<li>选择的是留下来的物品，不是把重点放在要丢什么</li>
+<li>判断是否要丢的标准是，触摸，是否心动</li>
+</ol>
+</li>
+<li>设置收纳场所（设定物品放置的位置）<ol>
+<li>按类别整理，把同类的聚在一起，有利于看清自己拥有的东西的现状，不要按地点</li>
+<li>用完了及时放回</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>衣服建议竖着摆</li>
+<li>在整理的时候，我们能知道自己真正喜欢什么在意什么，还能在整理中悟得不要迷恋过去、更重要的是未来。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>起床小插曲</title>
+    <url>/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</url>
+    <content><![CDATA[<p>今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。</p>
+<span id="more"></span>
+
+<p>一边找衣服，一边吟着整首，突然吟到「雁过也，正伤心，却是旧时相识」，停住，反复琢磨了几遍。李清照想表达的意思早已忘记，我却有了自己的理解。大雁飞过，正在惆怅伤心，却发现这是旧识认识的那个大雁，一时间，竟不知是该怀着再次分别的伤心，还是再次相遇的欣喜了。</p>
+<p>后记：查阅资料，百度汉语的翻译的「向南避寒的大雁已飞过去了，伤心的是却是原来的旧日相识」，这个相识指的是词人自己。但我还是更喜欢自己的理解，毕竟，翻译的人也不知道李清照怎么想的，子非鱼，安知鱼之乐？或许她和我想的还一样呢！</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
       </categories>
   </entry>
 </search>
