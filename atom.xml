@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-03-13T10:32:19.243Z</updated>
+  <updated>2021-03-14T09:37:44.544Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于读闲书以及做笔记的思考</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/</id>
+    <published>2021-03-14T09:37:11.000Z</published>
+    <updated>2021-03-14T09:37:44.544Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;阅读方式&quot;&gt;&lt;a href=&quot;#阅读方式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="读书笔记" scheme="http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>怦然心动的人生整理魔法-读书笔记</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-03-13T12:28:27.000Z</published>
+    <updated>2021-03-14T10:19:43.698Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;书籍基本信息&quot;&gt;&lt;a href=&quot;#书籍基本信息&quot; class=&quot;headerlink&quot; title=&quot;书籍基本信息&quot;&gt;&lt;/a&gt;书籍基本信息&lt;/h2&gt;&lt;p&gt;作者：近藤麻离惠&lt;br&gt;标签：个人管理、生活管理&lt;/p&gt;
+&lt;h2 id=&quot;阅读方式与进度&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="读书笔记" scheme="http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>解决hexo博客leancloud访问量永远是1的错误</title>
@@ -72,30 +119,6 @@
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记测试文章</title>
-    <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
-    <id>http://bird.blog.tcualhp.cn/2021/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</id>
-    <published>2021-03-08T15:36:14.000Z</published>
-    <updated>2021-03-09T06:37:37.673Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;修改&lt;/p&gt;
-</summary>
-        
-      
-    
-    
-    
-    <category term="读书笔记" scheme="http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
     
   </entry>
   
