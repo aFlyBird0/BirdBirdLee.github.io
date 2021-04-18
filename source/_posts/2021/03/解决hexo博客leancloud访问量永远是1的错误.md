@@ -6,7 +6,7 @@ tags:
 	- hexo
 categories:
 	- CS
-    - hexo
+	- hexo
 ---
 
 ## 错误定位
