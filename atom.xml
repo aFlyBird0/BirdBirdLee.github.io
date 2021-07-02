@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-05-03T10:51:34.174Z</updated>
+  <updated>2021-07-02T02:31:42.802Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Scrapy知网爬虫（一）整体理论篇</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/</id>
+    <published>2021-07-02T02:19:31.000Z</published>
+    <updated>2021-07-02T02:31:42.802Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论</summary>
+        
+      
+    
+    
+    
+    
+    <category term="爬虫" scheme="http://bird.blog.tcualhp.cn/tags/%E7%88%AC%E8%99%AB/"/>
+    
+    <category term="Scrapy" scheme="http://bird.blog.tcualhp.cn/tags/Scrapy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>声昔-读书会-亲密关系</title>
     <link href="http://bird.blog.tcualhp.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/"/>
     <id>http://bird.blog.tcualhp.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/</id>
     <published>2021-05-03T10:25:16.000Z</published>
-    <updated>2021-05-03T10:51:34.174Z</updated>
+    <updated>2021-07-02T02:21:02.104Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;h3 id=&quot;何为亲密关系&quot;&gt;&lt;a href=&quot;#何为亲密关系&quot; class=&quot;headerlink&quot; title=&quot;何为亲密关系&quot;&gt;&lt;/a&gt;何为亲密关系&lt;/h3&gt;&lt;p&gt;本意是指不限年龄和性别的两人之间和谐、融洽的关系。但目前来说，大多数情况下指的是情侣、夫妻间的爱情。值得注意的是，心理学家认为，两个人之间存在影响与互赖，才称之为关系。所以其实并非所有情侣、婚姻间都存在亲密关系。&lt;/p&gt;
@@ -287,7 +312,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</id>
     <published>2021-03-04T16:22:50.000Z</published>
-    <updated>2021-04-18T05:51:39.171Z</updated>
+    <updated>2021-07-02T02:20:42.391Z</updated>
     
     
     <summary type="html">&lt;p&gt;现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「&lt;strong&gt;做你想做的，做你该做的&lt;/strong&gt;」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  &lt;/p&gt;
@@ -411,23 +436,6 @@
     
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人为什么而活</title>
-    <link href="http://bird.blog.tcualhp.cn/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/"/>
-    <id>http://bird.blog.tcualhp.cn/2019/08/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB/</id>
-    <published>2019-08-03T16:12:34.000Z</published>
-    <updated>2021-03-05T10:31:42.400Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;为了&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="think" scheme="http://bird.blog.tcualhp.cn/categories/think/"/>
-    
     
   </entry>
   
