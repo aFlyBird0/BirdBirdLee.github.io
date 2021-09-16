@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="SzFlcDH-1N6SvMJ27lapzWdttiOcoDs7SHVqroj6Jso">
+  <meta name="baidu-site-verification" content="code-aONLTKUdkd">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="专利审查指南解析本项目代码地址：BirdBirdLee&#x2F;parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库 〇、本项目的由来、意义由来导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。师兄说建议用 Java 的 Apache POI，但我刚学了 Golang 一星期，就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Golang 解析专利审查指南">
+<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Bird&#39;s Blog">
+<meta property="og:description" content="专利审查指南解析本项目代码地址：BirdBirdLee&#x2F;parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库 〇、本项目的由来、意义由来导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。师兄说建议用 Java 的 Apache POI，但我刚学了 Golang 一星期，就">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210915223953307.png">
+<meta property="article:published_time" content="2021-09-16T16:28:40.000Z">
+<meta property="article:modified_time" content="2021-09-16T16:29:49.675Z">
+<meta property="article:author" content="Bird">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210915223953307.png">
+
+<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用 Golang 解析专利审查指南 | Bird's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bird's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bird's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录「技术与温度」</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-readnotes">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="section"><i class="fa fa-book fa-fw"></i>读书笔记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+      <meta itemprop="name" content="Bird">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bird's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Golang 解析专利审查指南
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-17 00:28:40 / 修改时间：00:29:49" itemprop="dateCreated datePublished" datetime="2021-09-17T00:28:40+08:00">2021-09-17</time>
+            </span>
+
+          
+            <span id="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Golang 解析专利审查指南" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="专利审查指南解析"><a href="#专利审查指南解析" class="headerlink" title="专利审查指南解析"></a>专利审查指南解析</h1><p>本项目代码地址：<a target="_blank" rel="noopener" href="https://github.com/BirdBirdLee/parsePatentWord">BirdBirdLee/parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库</a></p>
+<h2 id="〇、本项目的由来、意义"><a href="#〇、本项目的由来、意义" class="headerlink" title="〇、本项目的由来、意义"></a>〇、本项目的由来、意义</h2><h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p>导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。<br>师兄说建议用 Java 的 <code>Apache POI</code>，但我刚学了 Golang 一星期，就想用 Golang 做！！！死磕~~~（其实中间反复过两次，真的很想用 Java 或 Python 的 API！还好坚持下来了，收获了很多）</p>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><ol>
+<li>第一个真正意义上的自己的 Go 项目，检验、巩固了前几天的学习</li>
+<li>第一次这么认真看源码，因为没有文档？？！极大锻炼了自己看源码的能力，还挺有趣？</li>
+<li>和室友拥有了一次愉快的半夜一起写代码的奇妙而又愉快的体验。他看我在弄，来了兴趣，现学 C# 和我并行尝试。中间不少思路我们都想到一块了，比如发现文档没有标题格式全是正文，思考大纲转标题，然后又都决定找框架的「大纲」接口</li>
+<li>提前一星期完成了老师的任务，后面一星期可以专心学 Go 了。</li>
+<li>利用这次项目，对 vim 比以前更习惯了一点，总算「存活」下来了。</li>
+</ol>
+<h2 id="一、本项目内容"><a href="#一、本项目内容" class="headerlink" title="一、本项目内容"></a>一、本项目内容</h2><p>项目大背景：把《专利审查指南…》做成网页版的电子书，加入高级搜索等功能。<br>本项目工作：提取《专利审查…》内容，抽取标题层级和段落内容，存入数据库中。<br>项目进度：</p>
+<ul>
+<li>2021年9月11日 3点52分 目前已完成标题层级与文档内容抽取为 <code>Golang Slice</code> 功能。</li>
+<li>2021年9月13日：标题与段落内容加上层级关系；数据入库</li>
+<li>2021年9月15日：完成了从数据库中查询目录，生成树结构传给前端，以及查询文章内容。（在另一个项目中）</li>
+</ul>
+<h2 id="二、抽取过程概述"><a href="#二、抽取过程概述" class="headerlink" title="二、抽取过程概述"></a>二、抽取过程概述</h2><h3 id="2-1-按段落与大纲初步抽取"><a href="#2-1-按段落与大纲初步抽取" class="headerlink" title="2.1 按段落与大纲初步抽取"></a>2.1 按段落与大纲初步抽取</h3><p>阅读 <code>gooxml</code> 源码，按段落抽取 Word 文档，每段带有大纲级别。该步骤得到的内容格式如下：</p>
+<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210915223953307.png" alt="image-20210915223953307"></p>
+<p>其中，<code>4</code> 代表4级目录，<code>0</code> 代表文本内容</p>
+<h3 id="2-2-合并近邻的同大纲内容"><a href="#2-2-合并近邻的同大纲内容" class="headerlink" title="2.2 合并近邻的同大纲内容"></a>2.2 合并近邻的同大纲内容</h3><p>同一目录下可能有多个段落，但向前端返回的文本，应该是一整段，所以合并紧邻的同大纲内容。</p>
+<h3 id="2-3-将层级目录与文本内容存至数据库中"><a href="#2-3-将层级目录与文本内容存至数据库中" class="headerlink" title="2.3 将层级目录与文本内容存至数据库中"></a>2.3 将层级目录与文本内容存至数据库中</h3><p>** 这步为本项目的难点 **<br>源码见 <code>/build/build.go</code><br>上一步获得的内容是这样的：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>   <span class="string">这是一级标题</span> <span class="string">a</span></span><br><span class="line"><span class="number">1</span>   <span class="string">这是一级标题</span> <span class="string">b</span></span><br><span class="line"><span class="number">2</span> <span class="string">这是一级标题</span> <span class="string">b</span> <span class="string">下的二级标题</span> <span class="string">c</span></span><br><span class="line"><span class="number">3</span> <span class="string">这是二级标题</span> <span class="string">c</span> <span class="string">下的三级标题</span> <span class="string">d</span></span><br><span class="line"><span class="number">0</span> <span class="string">这是三级标题下的文本</span> <span class="string">e</span></span><br><span class="line"><span class="number">2</span> <span class="string">这是一级标题</span> <span class="string">a</span> <span class="string">下的二级标题</span> <span class="string">f</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+<p>难点在于：<strong>既要在数据库中指明段落文本属于哪个标题（目录），又要指明每个标题的父标题是什么</strong><br>这里用到了 <strong>栈</strong>，来保存最近的一个标题在数据库中的 <code>id</code> 以及 当前的最深的大纲级别 <code>maxLvl</code>（代码中是 <code>lastLvl</code>）<br>逐个遍历第二步得到的带有大纲级别的段落：</p>
+<ul>
+<li>如果当前内容是文本（大纲级别是0），之前链接此文本内容到栈顶的标题。因为是文本内容一定附属在最近的标题下。</li>
+<li>如果是当前内容是标题（大纲级别大于0）<ul>
+<li>如果当前内容的大纲级别大于 <code>maxLvl</code> ，就说明目录变深了，压栈，<code>maxLvl</code> + 1，并将当前标题的父标题指向原来栈顶的 <code>id</code></li>
+<li>如果相同，出栈，保证栈内不存在同级大纲。这样出栈后，当前栈顶元素一定是当前内容的父标题。 <code>maxLvl</code>不变，标题父目录指向出栈后的 <code>id</code>。</li>
+<li>如果小于。出栈多次。因为变深只能一次深一级，如从二级目录变成三级目录，而变浅可以直接从三级目录变成一级目录。计算变浅的差值，决定 <code>pop</code> 的次数，以及 <code>maxLvl</code> 减少的层级即可。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、开发问题与解决方案记录"><a href="#三、开发问题与解决方案记录" class="headerlink" title="三、开发问题与解决方案记录"></a>三、开发问题与解决方案记录</h2><h3 id="1-文件相对绝对路径"><a href="#1-文件相对绝对路径" class="headerlink" title="1.文件相对绝对路径"></a>1.文件相对绝对路径</h3><p>Go 的环境路径和项目路径不一致，所以要获取代码文件所在的路径，自己写了个工具类，即 <code>/util/fileUtil.go</code> 的 <code>GetRunPath()</code></p>
+<h3 id="2-gooxml-document-不支持-doc"><a href="#2-gooxml-document-不支持-doc" class="headerlink" title="2. gooxml document 不支持 doc"></a>2. gooxml document 不支持 doc</h3><p>doc 转存成 docx</p>
+<h3 id="3-gooxml-和-unidoc-unioffice-弃用"><a href="#3-gooxml-和-unidoc-unioffice-弃用" class="headerlink" title="3. gooxml 和 unidoc/unioffice 弃用"></a>3. gooxml 和 unidoc/unioffice 弃用</h3><p>gooxml 太旧了，文档也 404<br>unioffice 应该是基于 gooxml 写的，但是要授权，只能免费用 14 天<br>所以都弃用，但是真就没办法了吗？</p>
+<h3 id="4-切换解析-word-方法"><a href="#4-切换解析-word-方法" class="headerlink" title="4. 切换解析 word 方法"></a>4. 切换解析 word 方法</h3><p>受某大佬启发，先将 word 转成 html 的形式，再读取 html，原因如下：<br>我要实现的目标是读取 word，所以可以转换成等效格式，再提取。如果是编辑 word，那可能要直接操作 word 了<br>之所以选择 html ，是因为我之前对爬虫比较熟，用 xpath 有信心。分析 html 源码后，确定能获取各元素属性</p>
+<h3 id="4-如何解析标题"><a href="#4-如何解析标题" class="headerlink" title="4. 如何解析标题"></a>4. 如何解析标题</h3><p><code>mso-outline-level</code> 属性，揭示了大纲级别，<code>1</code> 为「第一部分 初步审查」，以此类推</p>
+<h3 id="5-如何解析文本（段落）"><a href="#5-如何解析文本（段落）" class="headerlink" title="5. 如何解析文本（段落）"></a>5. 如何解析文本（段落）</h3><p>转化成的 html ，一段为一个 <code>div</code>， 同一标题下的多段没有共同的 <code>div</code>，所以只能一段一段提取。<br>目前拟采用 <code>mso-char-indent-count:2.0</code>，因为每段前都有缩进。</p>
+<h3 id="6-编码与文件转换问题"><a href="#6-编码与文件转换问题" class="headerlink" title="6. 编码与文件转换问题"></a>6. 编码与文件转换问题</h3><p>先把 doc 转 docx，再另存为 html，再用 vscode 打开（编码 GBK），然后保存成 UTF-8</p>
+<h3 id="7-htmlQuery-获取-html-node-的字符串"><a href="#7-htmlQuery-获取-html-node-的字符串" class="headerlink" title="7. htmlQuery 获取 html node 的字符串"></a>7. htmlQuery 获取 html node 的字符串</h3><p>查看源代码，引用 <code>Data</code> 属性就行<br>注：因为 Word 转 html 后有很多格式错乱(例如左侧的「细则」会整段混入到右侧的文本中），导致虽然能识别大部分文档，但是会有很多乱七八糟的东西，所以还是决定再试试 gooxml</p>
+<h3 id="8-利用-gooxml-document-设置-word-样式"><a href="#8-利用-gooxml-document-设置-word-样式" class="headerlink" title="8. 利用 gooxml/document 设置 word 样式"></a>8. 利用 gooxml/document 设置 word 样式</h3><p><a target="_blank" rel="noopener" href="https://github.com/carmel/gooxml/blob/master/_examples/document/simple/main.go">gooxml/main.go at master · carmel/gooxml</a><br>利用 para.SetStyle() 属性</p>
+<h3 id="9-如何利用-gooxml-document-获取段落属性"><a href="#9-如何利用-gooxml-document-获取段落属性" class="headerlink" title="9. 如何利用 gooxml/document 获取段落属性"></a>9. 如何利用 gooxml/document 获取段落属性</h3><p>这里没有文档，是个难点，只能肝源码<br>先看看 <code>(p Paragraph) SetStyle(s string)</code> 的函数定义：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">SetStyle</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    p.ensurePPr()</span><br><span class="line">    <span class="keyword">if</span> s == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">        p.x.PPr.PStyle = <span class="literal">nil</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        p.x.PPr.PStyle = wml.NewCT_String()</span><br><span class="line">        p.x.PPr.PStyle.ValAttr = s</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以得知，关键样式属性在于 <code>Paragraph.p.x.PPr.PStyle.ValAttr</code>, 但这是私有属性。<br>继续看 <code>Paragraph</code> 所在的 <code>paragraph.go</code> 文件，找到了 <code>(p Paragraph) Style() string</code> 函数</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">Style</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> p.x.PPr != <span class="literal">nil</span> &amp;&amp; p.x.PPr.PStyle != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p.x.PPr.PStyle.ValAttr</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Bingo！</p>
+<h3 id="10-《审查指南…》中，没有「标题」样式，全是正文"><a href="#10-《审查指南…》中，没有「标题」样式，全是正文" class="headerlink" title="10. 《审查指南…》中，没有「标题」样式，全是正文"></a>10. 《审查指南…》中，没有「标题」样式，全是正文</h3><p>正常的格式应该是 <code>Heading1</code> 这种（经由 <code>/try/parseTry.go</code> 中的 <code>TestNewDocGooxml</code> 测试，确保正确）<br>但是，获取了同一个 <code>style</code>（即 <code>x.PPr.PStyle.ValAttr</code>）属性，发现：<br>** 《审查指南..》中的样式，要么是空，要么是类似 <code>1</code>、<code>2</code>、<code>40</code>、<code>50</code> 这样的数字<br>并且，这些数字和大纲级别没有严格对应之处</p>
+<h3 id="11-尝试用属性获取"><a href="#11-尝试用属性获取" class="headerlink" title="11. 尝试用属性获取"></a>11. 尝试用属性获取</h3><p><code>paragraph.go</code> 源码文件，有个 <code>Properties</code> 函数，或许有用</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">Properties</span><span class="params">()</span> <span class="title">ParagraphProperties</span></span> &#123;</span><br><span class="line">	p.ensurePPr()</span><br><span class="line">	<span class="keyword">return</span> ParagraphProperties&#123;p.d, p.x.PPr&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入 <code>PragraphProperties.go</code>，得到：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParagraphProperties are the properties for a paragraph.</span></span><br><span class="line"><span class="keyword">type</span> ParagraphProperties <span class="keyword">struct</span> &#123;</span><br><span class="line">	d *Document</span><br><span class="line">	x *wml.CT_PPr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// Style returns the style for a paragraph, or an empty string if it is unset.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p ParagraphProperties)</span> <span class="title">Style</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> p.x.PStyle != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p.x.PStyle.ValAttr</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过测试，发现这里的 <code>style</code> 和前面那个 <code>style</code> 指向的是同一个东西，线索中断。</p>
+<h3 id="12-能否通过将大纲转成标题来实现提取？"><a href="#12-能否通过将大纲转成标题来实现提取？" class="headerlink" title="12. 能否通过将大纲转成标题来实现提取？"></a>12. 能否通过将大纲转成标题来实现提取？</h3><p>《审查指南…》虽然没有标题级别，但是有严格的大纲级别，能否通过外部手段，不通过 <code>Golang</code>，先把大纲转成 <code>style</code> 的 <code>Heading</code>？</p>
+<h3 id="13-找到了-gooxml-中的-「大纲属性」"><a href="#13-找到了-gooxml-中的-「大纲属性」" class="headerlink" title="13. 找到了 gooxml 中的 「大纲属性」"></a>13. 找到了 gooxml 中的 「大纲属性」</h3><p>先去看 <code>ParagraphProperties.go</code> 文件，找到类定义：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParagraphProperties are the properties for a paragraph.</span></span><br><span class="line"><span class="keyword">type</span> ParagraphProperties <span class="keyword">struct</span> &#123;</span><br><span class="line">	d *Document</span><br><span class="line">	x *wml.CT_PPr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后看看 <code>wml.CT_PPr</code> 到底是怎么定义的？<br><code>CT_PPr.go</code> 中定义了该结构体，其中有一个属性是这个：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Associated Outline Level</span></span><br><span class="line"><span class="keyword">type</span> CT_PPr <span class="keyword">struct</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	OutlineLvl *CT_DecimalNumber</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再看看 <code>CT_DecimalNumber</code> 是什么：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> CT_DecimalNumber <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// Decimal Number Value</span></span><br><span class="line">	ValAttr <span class="keyword">int64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实就是个结构体指针，里面有个 <code>int64</code><br>那么怎么获取这个属性(<code>x *wml.CT_PPr</code>)呢？回到 <code>ParagraphProperties.go</code> 中：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// X returns the inner wrapped XML type.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p ParagraphProperties)</span> <span class="title">X</span><span class="params">()</span> *<span class="title">wml</span>.<span class="title">CT_PPr</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> p.x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结一下，获取 Word 大纲级别的方式如下，这里要防止空指针：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, para := <span class="keyword">range</span> doc.Paragraphs() &#123;</span><br><span class="line">    <span class="keyword">var</span> outlineLvl <span class="keyword">int64</span></span><br><span class="line">    <span class="keyword">if</span> outlineLvlStruct := para.Properties().X().OutlineLvl; outlineLvlStruct!=<span class="literal">nil</span>&#123;</span><br><span class="line">        outlineLvl = outlineLvlStruct.ValAttr</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        outlineLvl = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/unidoc/unioffice">unidoc/unioffice 另外一个可以处理 office 的文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://pkg.go.dev/github.com/baliance/gooxml#section-readme">gooxml 官方文档</a> 这个文档应该是 <code>unioffice</code> 的前身</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/" rel="prev" title="Scrapy知网爬虫（一）整体理论篇">
+      <i class="fa fa-chevron-left"></i> Scrapy知网爬虫（一）整体理论篇
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97%E8%A7%A3%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">专利审查指南解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%87%E3%80%81%E6%9C%AC%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%94%B1%E6%9D%A5%E3%80%81%E6%84%8F%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">〇、本项目的由来、意义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E6%9D%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text">由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%84%8F%E4%B9%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">意义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E9%A1%B9%E7%9B%AE%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">一、本项目内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8A%BD%E5%8F%96%E8%BF%87%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">二、抽取过程概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%8C%89%E6%AE%B5%E8%90%BD%E4%B8%8E%E5%A4%A7%E7%BA%B2%E5%88%9D%E6%AD%A5%E6%8A%BD%E5%8F%96"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 按段落与大纲初步抽取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%90%88%E5%B9%B6%E8%BF%91%E9%82%BB%E7%9A%84%E5%90%8C%E5%A4%A7%E7%BA%B2%E5%86%85%E5%AE%B9"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 合并近邻的同大纲内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%B0%86%E5%B1%82%E7%BA%A7%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AD%98%E8%87%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 将层级目录与文本内容存至数据库中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E8%AE%B0%E5%BD%95"><span class="nav-number">1.4.</span> <span class="nav-text">三、开发问题与解决方案记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E7%9B%B8%E5%AF%B9%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.文件相对绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gooxml-document-%E4%B8%8D%E6%94%AF%E6%8C%81-doc"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. gooxml document 不支持 doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gooxml-%E5%92%8C-unidoc-unioffice-%E5%BC%83%E7%94%A8"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. gooxml 和 unidoc&#x2F;unioffice 弃用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%88%87%E6%8D%A2%E8%A7%A3%E6%9E%90-word-%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 切换解析 word 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A6%82%E4%BD%95%E8%A7%A3%E6%9E%90%E6%A0%87%E9%A2%98"><span class="nav-number">1.4.5.</span> <span class="nav-text">4. 如何解析标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%A6%82%E4%BD%95%E8%A7%A3%E6%9E%90%E6%96%87%E6%9C%AC%EF%BC%88%E6%AE%B5%E8%90%BD%EF%BC%89"><span class="nav-number">1.4.6.</span> <span class="nav-text">5. 如何解析文本（段落）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BC%96%E7%A0%81%E4%B8%8E%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.7.</span> <span class="nav-text">6. 编码与文件转换问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-htmlQuery-%E8%8E%B7%E5%8F%96-html-node-%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.8.</span> <span class="nav-text">7. htmlQuery 获取 html node 的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%88%A9%E7%94%A8-gooxml-document-%E8%AE%BE%E7%BD%AE-word-%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.4.9.</span> <span class="nav-text">8. 利用 gooxml&#x2F;document 设置 word 样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-gooxml-document-%E8%8E%B7%E5%8F%96%E6%AE%B5%E8%90%BD%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.10.</span> <span class="nav-text">9. 如何利用 gooxml&#x2F;document 获取段落属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E3%80%8A%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97%E2%80%A6%E3%80%8B%E4%B8%AD%EF%BC%8C%E6%B2%A1%E6%9C%89%E3%80%8C%E6%A0%87%E9%A2%98%E3%80%8D%E6%A0%B7%E5%BC%8F%EF%BC%8C%E5%85%A8%E6%98%AF%E6%AD%A3%E6%96%87"><span class="nav-number">1.4.11.</span> <span class="nav-text">10. 《审查指南…》中，没有「标题」样式，全是正文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E5%B0%9D%E8%AF%95%E7%94%A8%E5%B1%9E%E6%80%A7%E8%8E%B7%E5%8F%96"><span class="nav-number">1.4.12.</span> <span class="nav-text">11. 尝试用属性获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E8%83%BD%E5%90%A6%E9%80%9A%E8%BF%87%E5%B0%86%E5%A4%A7%E7%BA%B2%E8%BD%AC%E6%88%90%E6%A0%87%E9%A2%98%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%8F%90%E5%8F%96%EF%BC%9F"><span class="nav-number">1.4.13.</span> <span class="nav-text">12. 能否通过将大纲转成标题来实现提取？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E6%89%BE%E5%88%B0%E4%BA%86-gooxml-%E4%B8%AD%E7%9A%84-%E3%80%8C%E5%A4%A7%E7%BA%B2%E5%B1%9E%E6%80%A7%E3%80%8D"><span class="nav-number">1.4.14.</span> <span class="nav-text">13. 找到了 gooxml 中的 「大纲属性」</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3"><span class="nav-number">1.5.</span> <span class="nav-text">文档</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bird"
+      src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+  <p class="site-author-name" itemprop="name">Bird</p>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" title="使用 Golang 解析专利审查指南" target="_blank">使用 Golang 解析专利审查指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/" title="Scrapy知网爬虫（一）整体理论篇" target="_blank">Scrapy知网爬虫（一）整体理论篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" title="声昔-读书会-亲密关系" target="_blank">声昔-读书会-亲密关系</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="关于读闲书以及做笔记的思考" target="_blank">关于读闲书以及做笔记的思考</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="怦然心动的人生整理魔法-读书笔记" target="_blank">怦然心动的人生整理魔法-读书笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bird</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">51k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">46 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va","app_key":"irTJuJuhBG8Pn6zKBvxEmCMN","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va',
+      appKey     : 'irTJuJuhBG8Pn6zKBvxEmCMN',
+      placeholder: "欢迎留言~ (填写email可接受回复通知）",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":120,"height":210},"mobile":{"show":true}});</script></body>
+</html>
