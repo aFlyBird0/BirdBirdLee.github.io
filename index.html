@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-17 00:32:49" itemprop="dateModified" datetime="2021-09-17T00:32:49+08:00">2021-09-17</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
 
           
@@ -285,226 +285,118 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有md原汁原味。</p>
-<h1 id="1-相关概念、理论和工具介绍"><a href="#1-相关概念、理论和工具介绍" class="headerlink" title="1 相关概念、理论和工具介绍"></a>1 相关概念、理论和工具介绍</h1><h2 id="1-1-Scrapy"><a href="#1-1-Scrapy" class="headerlink" title="1.1 Scrapy"></a>1.1 Scrapy</h2><p>Scrapy是一套基于Twisted的异步处理框架，由纯Python实现，用于从web网站中抓取结构化数据，是目前应用最广泛的工业级爬虫框架。Scrapy最大的优势在于，它设计了一个爬虫的通用架构，预设了多种爬虫基类，也提供了许多组件和中间件，任何人都能按照自己的需求快速写出高性能爬虫代码，并根据自己的需要编写中间件灵活应对各种业务场景。</p>
-<p>Scrapy框架主要由七大组件组成，它们分别是Scrapy引擎(Scrapy Engine)、调度器(Scheduler)、下载器(Downloader)、爬虫（Spider）、实体管道(Item Pipeline)、下载器中间件(Downloader middlewares)和爬虫中间件(Spider middlewares)。展示了Scrapy的整体架构。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/d98d59fc3e58e6364ae032e43ab0851d.png" alt="图1-1 Scrapy 整体架构"></p>
-<center>图1-1 Scrapy 整体架构</center>
+          <p>简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。采用模块化的设计，拥有流程控制模块、错误重爬模块、任务分发模块，任务监督模块等。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有md原汁原味。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<h3 id="1-1-1-Scrapy引擎-Scrapy-Engine"><a href="#1-1-1-Scrapy引擎-Scrapy-Engine" class="headerlink" title="1.1.1 Scrapy引擎(Scrapy Engine)"></a>1.1.1 Scrapy引擎(Scrapy Engine)</h3><p>引擎是Scrapy框架的核心，用来控制调度器、下载器、爬虫。引擎相当于爬虫的“大脑”，操控数据在系统中所有组件的传送，并在合适的时机触发相应的动作。</p>
-<h3 id="1-1-2-调度器-Scheduler"><a href="#1-1-2-调度器-Scheduler" class="headerlink" title="1.1.2 调度器(Scheduler)"></a>1.1.2 调度器(Scheduler)</h3><p>在Scrapy中，所有的request（网络请求）都交由调度器统一管理。无论是start_url（起始请求）还是后续在页面中获取的新的url，都经由引擎传送至调度器，然后入队，统一调度，待轮到请求发起时，调度器将队列中的request出队，提供给引擎，传送至其他模块。</p>
-<p>调度器的设置，能更加高效利用CPU从而提高运行效率。没有队列作缓冲，网络延迟、文件读取等情况都会阻塞进程的运行，而将request放在调度器中，可以由引擎决定程序执行、网络请求、文件读取的时机，三大任务并行执行不会相互阻塞。</p>
-<p>同时调度器带有自动request去重功能，对于每一种请求，都可选择是否去重。值得一提的是，调度队列保存在内存中，若程序异常终止，缓存的request会丢失。</p>
-<h3 id="1-1-3-下载器-Downloader"><a href="#1-1-3-下载器-Downloader" class="headerlink" title="1.1.3 下载器(Downloader)"></a>1.1.3 下载器(Downloader)</h3><p>下载器用于执行网络请求，高速下载网络上的资源。Scrapy建立在异步模型<a target="_blank" rel="noopener" href="https://www.oschina.net/p/twisted+matrix">Twisted</a>之上，Twisted采用回调机制，在处理IO或执行网络请求等费时操作时，程序不会一直等待响应，而是会注册一个回调至事件循环中并为该事件分配一个回调后处理的函数，而后将处理器资源分配到其他任务中，在多个任务快速切换且不用担心阻塞和线程安全问题。所以用户在编写代码时，只需要用少量的代码，即可编写出高效率的线程安全爬虫。</p>
-<h3 id="1-1-4-爬虫（Spider）"><a href="#1-1-4-爬虫（Spider）" class="headerlink" title="1.1.4 爬虫（Spider）"></a>1.1.4 爬虫（Spider）</h3><p>爬虫，是用户需要自定义最多的部分，涉及初始请求的构造、网页结构的解析、实体结构的提取、新请求的生成等。</p>
-<ul>
-<li><p>初始请求构造：用户传入start_urls列表作为初始请求url，Scrapy提取初始Url，调用默认的start_requests函数将url封装成request，传至网络请求调度器。业务场景复杂时，当简单的url列表难以满足爬虫需要（如需要一次传入不同的参数作为起始url），也可直接覆写<br>start_requests函数，自行封装requests传入调度器</p>
-</li>
-<li><p>网页结构解析：Request得到的是html源代码，需要再使用网页解析工具，如Xpath（XML<br>Path Language）、Beautiful<br>Soup。前者提供了非常简洁明了的路径选择表达式用于从XML文档中提取信息，后者封装了简单的Python式函数用来处理XML、HTML文档的标签提取、搜索。前者的优势在于速度快，灵活高效，后者的优势在于使用简单，本设计选用了Xpath解析网页。</p>
-</li>
-<li><p>实体结构的提取：解析网页结构完毕后，爬虫真正的目的是数据的持久化，所以用户需要将获取的一个个字段封装成不同类型的实体（Item），传至实体管道(Item<br>Pipeline)。</p>
-</li>
-<li><p>新请求的生成：一般情况下，初始url不会包含所有待爬url，程序编写者需自行实现链接提取、翻页等逻辑，以构建新的网络请求。在本设计中，设定每一轮次获取特定日期特定学科分类的所有文献信息。实际运行时，start_requests只执行一次搜索请求，之后通过翻页与链接提取获得所有文献链接，再将链接加入请求调度序列执行新一轮请求解析。</p>
-</li>
-</ul>
-<h3 id="1-1-5-实体管道-Item-Pipeline"><a href="#1-1-5-实体管道-Item-Pipeline" class="headerlink" title="1.1.5 实体管道(Item Pipeline)"></a>1.1.5 实体管道(Item Pipeline)</h3><p>用户在Sider中提取出实体结构（Item），将被发送至实体管道，经过用户定义的process_item函数后，持久化至数据库或本地文件，也可丢弃。</p>
-<h3 id="1-1-6-下载器中间件-Downloader-middlewares"><a href="#1-1-6-下载器中间件-Downloader-middlewares" class="headerlink" title="1.1.6 下载器中间件(Downloader middlewares)"></a>1.1.6 下载器中间件(Downloader middlewares)</h3><p>下载器中间件是在引擎及下载器之间的hook（钩子），下载器返回的response先经过中间件处理后再交由引擎。通过下载器中间件的创建，重写其中的方法，可扩展Scrapy功能，实现更换请求头、设置代理、自动重试、网络异常处理等功能。</p>
-<h3 id="1-1-7-爬虫中间件-Spider-middlewares"><a href="#1-1-7-爬虫中间件-Spider-middlewares" class="headerlink" title="1.1.7 爬虫中间件(Spider middlewares)"></a>1.1.7 爬虫中间件(Spider middlewares)</h3><p>Spider中间件是在引擎及爬虫之间的钩子，可以过滤引擎传递的响应（response）和数据（items）。</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="2-科技大数据采集处理系统"><a href="#2-科技大数据采集处理系统" class="headerlink" title="2 科技大数据采集处理系统"></a>2 科技大数据采集处理系统</h1><h2 id="2-1-爬虫概述"><a href="#2-1-爬虫概述" class="headerlink" title="2.1 爬虫概述"></a>2.1 爬虫概述</h2><p>科技大数据采集处理系统采用Scrapy-Redis框架，实现了全自动化抓取知网专利、论文并持久化至文件系统中。</p>
-<p>本系统在数据完整性、爬虫速度、错误处理、程序健壮性与可维护性上都进行了深入的研究，代码量超过3000行。主要由流程控制模块、链接获取模块、Scrapy-Redis核心引擎、页面解析模块、错误记录与错误重爬模块组成。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/bfe072103482e3bba5e91d0c8fc3892d.png"></p>
-<center>图2-1 知网爬虫整体流程图</center>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<h2 id="2-2-文献遍历策略分析"><a href="#2-2-文献遍历策略分析" class="headerlink" title="2.2 文献遍历策略分析"></a>2.2 文献遍历策略分析</h2><p>评价爬虫成功与否的一大标准就是数据量的完整度，因此，必须采取一种合理的能够便利整个专利库、论文库检索方案。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/aee90b91eca87e40fa4162bcb2ac3340.png"></p>
-<center>图2-2 知网专利高级检索-界面示意</center>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
 
-<p>上图是知网专利的高级检索页面，经分析，程序可通过学科分类（左侧红框所示）与公开日（右侧红框所示）限定检索范围，实现整个数据库的遍历。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/07f30c260a9c53e147482e3178868028.png"></p>
-<center>图2-3 知网专利高级检索-结果示意</center>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+      <meta itemprop="name" content="Bird">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
 
-<p>如上图所示，知网搜索结果为每页50条，只返回前120。所以必须保证每一次检索的专利条数都在6000条以内，因此本设计采用了每轮只爬特定日期的特定学科分类下的文献，确保搜索结果不溢出。下图为文献遍历策略流程图。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/1317903ff48bb4b9cc36d8f5934e29ba.png"></p>
-<center>图2-4 爬虫遍历策略</center>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bird's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" class="post-title-link" itemprop="url">浅析Golang之T与*T方法集及receiver</a>
+        </h2>
 
-<h2 id="2-3-流程控制模块"><a href="#2-3-流程控制模块" class="headerlink" title="2.3 流程控制模块"></a>2.3 流程控制模块</h2><h3 id="2-3-1-模块设计理念与优点"><a href="#2-3-1-模块设计理念与优点" class="headerlink" title="2.3.1 模块设计理念与优点"></a>2.3.1 模块设计理念与优点</h3><p>流程控制模块是上文文献遍历策略的具体实现。一个优秀的爬虫系统是无状态的，即爬虫本身不记录任何运行状态，一切交由外部数据库掌控。优点有三：</p>
-<p>（1）爬虫任务的制定和代码无关，每次只需启动爬虫无需改动代码，通过修改数据库可在远程直接控制爬虫任务的开始、暂停。</p>
-<p>（2）若状态管理在爬虫内部实现，由内存控制，那么当程序异常终止（如严重异常、进程被Kill）时，极易丢失当前任务进度</p>
-<p>（3）本流程控制模块兼具简单的远程监控功能，可实时查看爬虫进度</p>
-<p>通过流程控制模块，爬虫核心部分只需实现爬取特定日期特定学科分类下的所有文献功能即可，至于启动时该从哪里开始爬、爬完当前学科分类与日期下一个爬什么、异常终止再启动后从哪里续爬、爬虫任务设定与读取等功能，全部交由流程控制模块即可。（注意，本流程控制模块实现的是任务级的粗粒度状态管理，请求级别的细粒度状态管理将在后文展开介绍）。</p>
-<h3 id="2-3-2-模块具体实现"><a href="#2-3-2-模块具体实现" class="headerlink" title="2.3.2 模块具体实现"></a>2.3.2 模块具体实现</h3><p>前文讲到，文献遍历的核心在于任务制定以及每次传给爬虫程序一个日期加一个学科分类信息，本模块将围绕其展开。分持久层与代码流程两部分讲解</p>
-<h3 id="2-3-2-1-持久层"><a href="#2-3-2-1-持久层" class="headerlink" title="2.3.2.1 持久层"></a>2.3.2.1 持久层</h3><p>持久层，即采用什么数据库持久化爬虫任务状态，又如何定义数据库结构</p>
-<p><strong>数据库选用：</strong></p>
-<p>程序原先采用的是文件系统置访问标记的方式，但这样的弊端太多：访问标记需要全局统一、每次获取下一个日期和分类需要重新遍历整个文件、线程不安全，因为同时涉及日期和分类两个状态的更新导致文件修改逻辑非常复杂，不但要置访问标记还要在遍历完一个轮次后擦除访问标记。</p>
-<p>后期系统采用Mysql数据库，优点如下：</p>
-<p>（1）对状态的修改直接调用数据库的增删改查即可，方便且不易出错</p>
-<p>（2）可远程控制任务开始、停止</p>
-<p>（3）线程安全</p>
-<p><strong>数据库结构定义：</strong></p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/1f2cafb84ef623134db9340aef956984.png"></p>
-<center>图 2-5 Status 爬虫任务状态表结构定义</center>
+        <div class="post-meta">
 
-<p>本系统包含了专利、论文、成果等多种文献爬虫，所以设置了type字段用于区分。curCode字段包含两个含义，起始日期与当前日期，程序启动时爬虫将读取该字段作为起始日期，启动后将不断更新该字段来表示当前运行日期。endDate字段为终止日期，由用户设定，也可不设定，默认为当天。Status<br>字段简单指示了爬虫的状态，流程控制模块每次被调用的时候会将当前时间更新至status，用户可根据该字段判断程序是否正在运行。</p>
-<h3 id="2-3-2-2-代码流程"><a href="#2-3-2-2-代码流程" class="headerlink" title="2.3.2.2 代码流程"></a>2.3.2.2 代码流程</h3><p>本采集系统将所有学科分类代码放在了一个文件中，在启动时读取一次加载至内存中，得到学科分类列表。因为列表固定不变，所以无需存放至数据库中。程序运行时，通过比对内存中的学科分类列表和从数据库中获取的上一次爬的学科分类即可获得上一次学科分类的下标，进而通过下标加一的操作获得下一个学科分类。下图是完整的学科分类与日期获取控制流程。本流程图隐去了数据库重连，任务有效性判断（如未定义起始日期）等细节。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/80e468db53d9d06a95f382465f78c6cf.png"></p>
-<center>图2-6 爬虫任务流程控制模块-流程图</center>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<h3 id="2-3-3-模块使用"><a href="#2-3-3-模块使用" class="headerlink" title="2.3.3 模块使用"></a>2.3.3 模块使用</h3><p>任务设定：程序运行前设定开始日期(curDate)、结束日期(endDate,结束日期可不设，默认当天），运行程序即可。可在运行中任意时刻更新结束日期字段</p>
-<p>任务状态查看：通过curDate和curCode字段可查看当前运行进度，通过status字段查看上一次调用流程控制模块时间判断程序是否仍在运行中。</p>
-<p>任务终止：更新结束日期字段，使其早于（小于）开始日期(curDate)字段即可。程序会在处理完当前队列中缓存的请求、保存完所有管道中的文件后停止。</p>
-<h2 id="2-4-链接获取模块"><a href="#2-4-链接获取模块" class="headerlink" title="2.4 链接获取模块"></a>2.4 链接获取模块</h2><p>链接获取模块负责获取一个分类下所有的文献链接，对于每个链接发起新的页面请求，以获得文献标题、摘要等信息。新的请求将由引擎通过请求队列统一调度。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/6c84b51a3c61ea097e3ee5eab1e42b3b.png"></p>
-<center>图2-7 链接获取模块流程图</center>
+              <time title="创建时间：2021-10-06 00:36:38 / 修改时间：01:50:04" itemprop="dateCreated datePublished" datetime="2021-10-06T00:36:38+08:00">2021-10-06</time>
+            </span>
 
-<p>流程图见上，展示了程序如何获取特定日期特定学科分类下的所有链接，涉及链接提取解析、自动翻页、Cookie更换等。Cookie更换是因为知网限定每次搜索，只能翻15页左右，所以在翻页到达一定次数的时候，需要重新执行搜索请求更换Cookie。程序的结束由流程控制模块决定，故本流程图未标明。</p>
-<h2 id="2-5-页面解析模块"><a href="#2-5-页面解析模块" class="headerlink" title="2.5 页面解析模块"></a>2.5 页面解析模块</h2><p>页面解析模块负责解析下载器返回的网页内容，提取结构化信息，生成文献对象，传至数据管道。</p>
-<p>系统采用xpath作为网页结构解析工具，因代码细节过多，本文只介绍专利内容解析中较为复杂的一个例子。专利详情页（部分）如下图：</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ccb50cfa763a8226fc6dfa223580fab6.png"></p>
-<center>图2-8 专利详情页</center>
+          
+            <span id="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" class="post-meta-item leancloud_visitors" data-flag-title="浅析Golang之T与*T方法集及receiver" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
 
-<p>初次尝试链接提取时，程序按顺序提取了右侧的非加粗文字。后期随着程序的运行，出现了下标越界等异常，问题在于：专利页面字段不是固定的，如部分专利拥有“代理人”字段，没有“申请公布号”、“公开公告日”，而是“授权公告日”、“公开公告日”等。</p>
-<p>故本系统采用了如下方式，确保能成功提取到所有字段：将形如“专利类型：发明公开”的字段作为一个整体一起提取，将其看作键值的形式，通过分析大量的专利页面找到所有的键，之后将当前页面的键与键列表一一比对，解决了字段不一的问题。实际运行过程中，还发现，“申请公布号”和“公开公告日”两字段前有个空格。</p>
-<p>下面是网页代码分析。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/a487da26cf52afe46d36579748e1acc0.png"></p>
-<center>图 2-9 专利详情-网页源代码</center>
+        </div>
+      </header>
 
-<p>网页源代码部分也较为混乱，表面上获取row、rowtit、funds等标签即可，仔细分析网页结构将会发现，网页同时含有row,row-1, row-2, rowtit,<br>rowtit2等标签，并且不同字段间的网页标签选择并没有明显规则。加上含有超链接文字与纯文本的提取又不同，给网页解析带来了非常大的困难。</p>
-<p>所以系统选用了灵活性极高的xpath，用少量的代码优雅解决了这一问题，下图代码同时展示了对复杂标签的提取策略与前文提高的键值方式解析字段的详细实现方法。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/b778a209fdc8582efdc7d98051fbb08c.png"></p>
-<center>图2-10 专利网页内容解析代码</center>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-<h2 id="2-6-下载中间件设置"><a href="#2-6-下载中间件设置" class="headerlink" title="2.6 下载中间件设置"></a>2.6 下载中间件设置</h2><p>本系统改写了下载中间件，主要做了两项工作：</p>
-<p>（1）在引擎从调度序列取出request后，设置了请求头信息，如修改user-agent，动态设置代理</p>
-<p>（1）网页请求结果预分析，遇到异常网络状态码时，自动重试，达到一定次数后发送信息至错误记录模块。</p>
-<h3 id="2-6-1-请求头设置"><a href="#2-6-1-请求头设置" class="headerlink" title="2.6.1 请求头设置"></a>2.6.1 请求头设置</h3><p>（1）在项目设置文件中设置默认请求头，如下：</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/b8a121a0ad0c294f96a3827a0ceb9cc0.png"></p>
-<center>图2-11 默认请求头</center>
-
-<p>(2)预定义多个user-agent，重写下载中间件的process_request方法，每次随机选取一个user-agent</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/3355c7a31c7557903a1ba4f756264739.png"></p>
-<center>图 2-12 user-agent设置</center>
-
-<p>（3）Referer是反爬虫手段之一，告知服务器在此请求发送前用户访问的是哪个链接，为了防止被网站识别，这里需要针对专利和论文设置不同的Refer，值为高级搜索页面链接，同样写在process_request中。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/c4fc7a36fff4fa2cada745a3a6d978c1.png"></p>
-<center>图 2-13 referer设置</center>
-
-<h3 id="2-6-2-代理设置"><a href="#2-6-2-代理设置" class="headerlink" title="2.6.2 代理设置"></a>2.6.2 代理设置</h3><p>为了防止因反爬机制高频率抓取网页内容而被封禁ip，可以采用代理，起到伪装自己而不被服务器发现真正请求源的作用。Scrapy的代理设置方式与请求头设置方式类似，新建下载中间件类，重写process_request方法，修改请求头添加相应字段即可。由于不同代理商的具体获取方式不同，本文略过代理获取、使用部分，主要介绍本设计研发的适用于Scrapy框架的两种代理设置通用工具。</p>
-<p><strong>全局代理开关设置</strong></p>
-<p>爬虫初期需要快速抓取数据需要代理，后期增量更新时抓取量少可不用代理，所以非常有必要设计一套简单可行的全局代理开关设置方法。</p>
-<p>本设计采用的方式是在scrapy设置文件settings.py中增设PROXY_OPEN设置项，所有使用代理的地方通过判断该设置值选择是否启用代理。</p>
-<p>但代理中间件的开启与否相对复杂，使用了python的类三目运算，动态设置代理中间件的优先级变量，若PROXY_OPEN为True则设定数字优先级，此时代理中间件开启，否则设定优先级为None，即不开启。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/819037d8136e088a1ed18cc61cdad30c.png"></p>
-<center>图 2-14 代理中间件开关设置</center>
-
-<p><strong>代理复用组件</strong></p>
-<p>网络代理费用较为昂贵，以本次研究使用的代理为例，包月500元左右，ip不限量，但只能每5秒获取5个代理IP，所以本设计设计了一套代理复用组件。可在配置文件中设置平均代理复用的次数，组件将每次随机返回一个代理，并记录总使用次数，若发生代理失效异常，组件也会自动将失效代理剔除，所有代理复用完毕后将自动获取下一批代理，流程图如下（省略了异常处理等细节）：</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/cf009475b78a7364cf27fe50dced079b.png"></p>
-<center>图2-15 代理复用组件流程图</center>
-
-<h3 id="2-6-3-网络异常处理"><a href="#2-6-3-网络异常处理" class="headerlink" title="2.6.3 网络异常处理"></a>2.6.3 网络异常处理</h3><p>数据采集时，经常会遇到各种网络异常，造成的原因是多样的，如：当前电脑网络拥堵、服务器错误、请求过快被服务器识别、302跳转、验证码弹窗、Cookie失效。其中的大部分异常只是由于暂时性的网络不畅或部分tcp连接丢失造成的，这部分网络错误重新请求是可以正常获取网页内容的。</p>
-<p>所以本设计网络异常处理分为两步：</p>
-<ol>
-<li><p>通过改写下载中间件获取异常网络状态码，若该状态码在定义的重试状态码列表内，立即重试，否则抛弃该请求，交由错误记录模块处理。</p>
-</li>
-<li><p>定义最大重试次数，超过后有可能是Cookie失效等原因导致目前多次请求无法正常获取内容，交由错误记录模块处理。</p>
-<p>具体代码如下：</p>
-</li>
-</ol>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/fc38caa5aa289ce4236f99d30cc28a53.png"></p>
-<center>图2-16 网络异常处理代码</center>
-
-<p>代码除了执行自动重试操作，还进行了有关代理异常的判断，如果异常是由于代理引起的，则会向代理模块发送代理错误信息，移除失效代理。其中的save_url函数逻辑较简单未贴出：判断当前重试次数是否超过最大重试次数，若超过，调用错误记录函数记录出错日期、学科分类、链接。</p>
-<h2 id="2-7-异常处理、错误记录与错误重爬模块"><a href="#2-7-异常处理、错误记录与错误重爬模块" class="headerlink" title="2.7 异常处理、错误记录与错误重爬模块"></a>2.7 异常处理、错误记录与错误重爬模块</h2><h3 id="2-7-1-异常处理"><a href="#2-7-1-异常处理" class="headerlink" title="2.7.1 异常处理"></a>2.7.1 异常处理</h3><p>为了保证程序的健壮性，必须在程序异常时由下至上、由细及粗地接住所有可能的异常、错误。底层先接住可知的、已预测到的、主动抛出的异常，如有时请求网页传回的是js而非html，抛出网页解析异常，这部分异常不记录具体异常信息，只记录出错的日期、学科分类、链接；对于未预测到的异常，顶层定义一个全局异常处理类，记录详细异常调用栈，并记录出错日期、学科分类、链接。</p>
-<h3 id="2-7-2-错误记录"><a href="#2-7-2-错误记录" class="headerlink" title="2.7.2 错误记录"></a>2.7.2 错误记录</h3><p>为了保证数据的完整性，对出错任务的记录与重爬尤为重要。</p>
-<p>记录的错误类型：本数据采集系统主要分两步，第一步是获取文献链接，第二步是请求文献链接解析内容。因此，错误记录也被分为两种，一种是在获取文献链接阶段时，记录失败任务对应的日期、学科分类；另一种则是在请求文献链接得到文献详细信息时，记录出错失败的链接。</p>
-<p>错误捕捉策略：随着程序的不断迭代优化，因对网页结构分析不到位与程序代码缺陷引发的异常已被全部规避。目前部分链接获取与解析失败的原因绝大多数还是源于网络问题，如非正常网络状态码（302跳转、服务器拒绝连接、请求超时），这部分会由网络异常处理模块捕捉，传送至错误记录模块；另一部分则是程序在实际运行中，存在少量状态码正确但网页内容不是预期搜索结果的情况，这部分也会被错误记录模块记录下来。</p>
-<p>错误记录数据表结构：程序共定义了两个数据表用来记录错误，errorCode表用于记录链接获取阶段时的失败任务；errorLink用于记录请求文献链接解析详情时的失败链接。</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/80a585d0c15f4c231391a2bcff3982dc.png"></p>
-<center>图2-17 errorCode表</center>
-
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/900ed8305b80ebcced5006aadc67445a.png"></p>
-<center>图2-18 errorLink表</center>
-
-<h3 id="2-7-3-错误重爬模块"><a href="#2-7-3-错误重爬模块" class="headerlink" title="2.7.3 错误重爬模块"></a>2.7.3 错误重爬模块</h3><p>系统会在运行时自动记录两种错误至mysql数据库中，当所有预设任务结束时，程序将进入错误重爬模块。</p>
-<p>第一步，读取errorCode表，获取失败的日期与学科分类，重新获取文献链接，并解析链接对应的文献详情，直到表空。因为爬虫核心实现了每轮次对特定日期特定日期分类的文献抓取工作，正常任务流程的日期与学科分类输入源来自流程控制模块，在错误重爬时，只需要更换输入源为errorCode表即可。</p>
-<p>第二步：读取errorLink表，获取请求文献详情阶段失败的文献链接，重新执行请求与解析，直到表空。</p>
-<h2 id="2-8-请求级细粒度爬虫状态管理"><a href="#2-8-请求级细粒度爬虫状态管理" class="headerlink" title="2.8 请求级细粒度爬虫状态管理"></a>2.8 请求级细粒度爬虫状态管理</h2><p>本数据采集系统的网络请求主要分为两个阶段，第一阶段获取所有的文献链接，第二阶段请求文献链接获取文献详情。为了最大程度实现系统运行的自动化，这两个阶段其实是互相交织、无中间文件生成、无明显顺序的。系统并不是先获取完所有的文献链接，存至文件中，结束后再启动第二阶段工作，而是每请求得到一个链接，立即传送至第二阶段。</p>
-<p>前文的流程控制系统中对状态管理只是停留在任务级，或者说只能实现记录当前爬到哪个“日期-学科分类”轮次。但要想完美解决细粒度状态记录、防止数据丢失、文献去重还有非常多的问题要解决，主要有以下几点：</p>
-<ol>
-<li><p> Scrapy调度器管理的请求队列保留在内存中，程序异常终止时，所有未调度请求会丢失。待调度的请求包括第一阶段链接获取与第二阶段内容解析。</p>
-</li>
-<li><p> 因Scrapy的统一调度策略，致使当前轮次并不与调度队列中的请求同步，调度队列中可能还存放着前几轮获取的文献链接，待传送至第二阶段的获取文献详情模块。这使得程序中断重启动后很难决定从哪个轮次继续：如果只是重复上一未完成轮次可能会漏掉前几轮次的未传入第二阶段的链接，如果重复轮次过深又会多做大量不必要的重复性链接获取工作。</p>
-</li>
-<li><p> Scrapy自带去重器也在内存中，所以只能保证单次运行抓取不重复，若程序意外中断而重启，重新抓取时该去重器无法达到去重效果。</p>
-</li>
-</ol>
-<p>系统采用了Scrapy-Redis框架解决上述问题，具体如下：</p>
-<ol>
-<li><p> 使用Redis持久化请求队列，将原本内存中处理的调度换成Redis队列。</p>
-</li>
-<li><p> 使用Redis进行去重，为每个需要去重的请求生成一个独特的指纹，持久化至Redis中（Set数据结构），新请求加入请求队列前，先判断数据库中是否含有相同指纹，无则入队。</p>
-</li>
-</ol>
-<p>使用Redis持久化调度器中的请求队列，使得每个新生成的请求都会被立刻缓存至Redis中，程序终止时几乎不会丢失；程序重新启动后，将从Redis读取请求，完美解决问题（1）（2）。</p>
-<p>使用Redis将去重数据持久化，程序运行而去重序列不丢失，解决了问题（3）。</p>
-<h2 id="2-9-任务分发"><a href="#2-9-任务分发" class="headerlink" title="2.9 任务分发"></a>2.9 任务分发</h2><p>为了进一步加快抓取速度，本设计构建了任务分发模式，是分布式爬虫的一种实现方式。</p>
-<p>传统的分布式爬虫是多个服务器上运行一个任务，这样的形式优点在于可以快速执行完一个任务。但程序的运行环境安装非常繁琐，可行的方案是使用docker统一安装，但linux服务器数量不多，window安装docker也很麻烦。</p>
-<p>故本设计将程序使用了pyinstaller打包工具，将代码和运行环境一同打包成可执行文件，可在任意一台联网的windows系统电脑上运行，大幅度增强了程序的移植性，提高了分发效率。</p>
-<p>得益于系统采用的任务状态管理模块，使得任务的切分非常方便。原系统任务的设定通过操作数据库完成，新系统只要加一个自动建库建表、从配置文件中读取任务、自动更新数据库任务的逻辑即可。</p>
-<p>本分发模式的优点在于：</p>
-<ol>
-<li> 运行环境依赖低，可以直接使用家用电脑运行程序</li>
-<li> 程序与配置分离，一次打包后，通过修改配置文件就能实现任务的分发</li>
-</ol>
-<h1 id="3-Redis在Scrapy中的使用"><a href="#3-Redis在Scrapy中的使用" class="headerlink" title="3 Redis在Scrapy中的使用"></a>3 Redis在Scrapy中的使用</h1><h2 id="3-1-Scrapy介绍（只介绍redis相关部分）"><a href="#3-1-Scrapy介绍（只介绍redis相关部分）" class="headerlink" title="3.1 Scrapy介绍（只介绍redis相关部分）"></a>3.1 Scrapy介绍（只介绍redis相关部分）</h2><ul>
-<li>请求调度方面<ul>
-<li>平时我们写爬虫，使用requests，请求后处理结果都是顺序执行的</li>
-<li>scrapy是基于twisted的，所有的请求都对应了一个回调函数</li>
-<li>并且，scrapy的所有请求不是马上执行的，它有个调度器，所有的网络请求都会被统一存在一个队列里面，由scrapy引擎调度</li>
-<li>问题在于，这个 <strong>调度序列在内存里面</strong> ，程序终止的时候，调度队列会丢失</li>
-</ul>
-</li>
-<li>去重方面<ul>
-<li>Scrapy有自带的去重器，同时它也在内存里面，所以它只能保证程序单次运行，链接不重复。但当你要爬的数据量大的时候，或者说想实现断点续爬功能，就gg了。</li>
-</ul>
-</li>
-<li>scrapy提供的解决方式<ul>
-<li>它自带一个jobdir功能，可以在程序终止的时候把内存中的状态信息写到磁盘里。但我不太敢用，听有人说有时候不好用。加上业务逻辑复杂，我觉得还是自己写的靠谱。</li>
-</ul>
-</li>
-<li>单机、集群（或者说分布式方面）<ul>
-<li>无论是前面的<ul>
-<li>①请求调度</li>
-<li>②请求去重</li>
-<li>③以及没提到的，我们获取了请求了网页，并且提取了其中的字段，将字段封装成了对象，将python对象执行数据处理与保存操作的时候</li>
-</ul>
-</li>
-<li>这三个操作原始的scrapy都是单机的，用redis可以达到分布式的作用</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-2-Scrapy-Redis框架"><a href="#3-2-Scrapy-Redis框架" class="headerlink" title="3.2 Scrapy-Redis框架"></a>3.2 Scrapy-Redis框架</h2><ul>
-<li>持久化请求队列，保证数据几乎不丢失<ul>
-<li>之前的scrapy策略是，有了新的请求，将请求入队至内存中的调度队列</li>
-<li>现在的策略是，有了新请求，将请求放到redis中，出队了再删除</li>
-<li>所以之前程序一关闭，就会丢失队列中所有的请求，数量级在几十到上千乃至上万；现在因为每个新请求直接是入了redis的队的，所以关闭了几乎不会丢失请求（要丢失的话可能只是某个函数执行到一半导致的请求丢失），丢失的数量基本是0，最多1、2这样</li>
-<li>换一种表达方式就是，入队这个操作其实是很快的，但是原来只有出队了，保存了数据，这个请求对应的数据才算真正抓取到了，所以程序一关闭，没执行出队的请求、请求了没来得及处理、保存数据的，都会丢失；现在因为是把请求队列放在redis了，数据丢失只可能发生在将入队却未入队的那一刹那，几乎不会丢</li>
-</ul>
-</li>
-<li>持久化items<ul>
-<li>解释一下items：请求得到网页源代码，提供了你想要的字段，生成的数据对象（比如提取摘要、作者，封装成论文对象，论文就是items），得到数据对象之后，执行数据写入也有个间隙，持久化items可以起到防止这阶段的数据丢失的作用</li>
-</ul>
-</li>
-<li>持久化去重队列<ul>
-<li>之前讲到scrapy的去重在内存里，只能保证本机本次运行的链接不重复，那么如果持久化了，就能保证集群、多次运行链接不重复</li>
-</ul>
-</li>
-<li>集群、分布式<ul>
-<li>这个很好理解了，请求队列由redis掌管，那么可以由多个slave都从redis读请求，分布执行；去重也可；也可以把数据处理弄成分布式的，因为封装完成的items会先经过redis暂存一下。（不过我没用itmes的持久化，因为毕竟论文专利对象太占内存了。。）</li>
-</ul>
-</li>
-</ul>
-
+      
+          <p>到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博客讲得单一了容易有理解偏差。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -548,10 +440,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-17 00:28:40 / 修改时间：00:29:49" itemprop="dateCreated datePublished" datetime="2021-09-17T00:28:40+08:00">2021-09-17</time>
+              <time title="创建时间：2021-09-17 00:28:40" itemprop="dateCreated datePublished" datetime="2021-09-17T00:28:40+08:00">2021-09-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
+              </span>
 
           
             <span id="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Golang 解析专利审查指南" title="阅读次数">
@@ -601,83 +499,14 @@
       
           <h1 id="专利审查指南解析"><a href="#专利审查指南解析" class="headerlink" title="专利审查指南解析"></a>专利审查指南解析</h1><p>本项目代码地址：<a target="_blank" rel="noopener" href="https://github.com/BirdBirdLee/parsePatentWord">BirdBirdLee/parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库</a></p>
 <h2 id="〇、本项目的由来、意义"><a href="#〇、本项目的由来、意义" class="headerlink" title="〇、本项目的由来、意义"></a>〇、本项目的由来、意义</h2><h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p>导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。<br>师兄说建议用 Java 的 <code>Apache POI</code>，但我刚学了 Golang 一星期，就想用 Golang 做！！！死磕~~~（其实中间反复过两次，真的很想用 Java 或 Python 的 API！还好坚持下来了，收获了很多）</p>
-<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><ol>
-<li>第一个真正意义上的自己的 Go 项目，检验、巩固了前几天的学习</li>
-<li>第一次这么认真看源码，因为没有文档？？！极大锻炼了自己看源码的能力，还挺有趣？</li>
-<li>和室友拥有了一次愉快的半夜一起写代码的奇妙而又愉快的体验。他看我在弄，来了兴趣，现学 C# 和我并行尝试。中间不少思路我们都想到一块了，比如发现文档没有标题格式全是正文，思考大纲转标题，然后又都决定找框架的「大纲」接口</li>
-<li>提前一星期完成了老师的任务，后面一星期可以专心学 Go 了。</li>
-<li>利用这次项目，对 vim 比以前更习惯了一点，总算「存活」下来了。</li>
-</ol>
-<h2 id="一、本项目内容"><a href="#一、本项目内容" class="headerlink" title="一、本项目内容"></a>一、本项目内容</h2><p>项目大背景：把《专利审查指南…》做成网页版的电子书，加入高级搜索等功能。<br>本项目工作：提取《专利审查…》内容，抽取标题层级和段落内容，存入数据库中。<br>项目进度：</p>
-<ul>
-<li>2021年9月11日 3点52分 目前已完成标题层级与文档内容抽取为 <code>Golang Slice</code> 功能。</li>
-<li>2021年9月13日：标题与段落内容加上层级关系；数据入库</li>
-<li>2021年9月15日：完成了从数据库中查询目录，生成树结构传给前端，以及查询文章内容。（在另一个项目中）</li>
-</ul>
-<h2 id="二、抽取过程概述"><a href="#二、抽取过程概述" class="headerlink" title="二、抽取过程概述"></a>二、抽取过程概述</h2><h3 id="2-1-按段落与大纲初步抽取"><a href="#2-1-按段落与大纲初步抽取" class="headerlink" title="2.1 按段落与大纲初步抽取"></a>2.1 按段落与大纲初步抽取</h3><p>阅读 <code>gooxml</code> 源码，按段落抽取 Word 文档，每段带有大纲级别。该步骤得到的内容格式如下：</p>
-<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210915223953307.png" alt="image-20210915223953307"></p>
-<p>其中，<code>4</code> 代表4级目录，<code>0</code> 代表文本内容</p>
-<h3 id="2-2-合并近邻的同大纲内容"><a href="#2-2-合并近邻的同大纲内容" class="headerlink" title="2.2 合并近邻的同大纲内容"></a>2.2 合并近邻的同大纲内容</h3><p>同一目录下可能有多个段落，但向前端返回的文本，应该是一整段，所以合并紧邻的同大纲内容。</p>
-<h3 id="2-3-将层级目录与文本内容存至数据库中"><a href="#2-3-将层级目录与文本内容存至数据库中" class="headerlink" title="2.3 将层级目录与文本内容存至数据库中"></a>2.3 将层级目录与文本内容存至数据库中</h3><p>** 这步为本项目的难点 **<br>源码见 <code>/build/build.go</code><br>上一步获得的内容是这样的：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>   <span class="string">这是一级标题</span> <span class="string">a</span></span><br><span class="line"><span class="number">1</span>   <span class="string">这是一级标题</span> <span class="string">b</span></span><br><span class="line"><span class="number">2</span> <span class="string">这是一级标题</span> <span class="string">b</span> <span class="string">下的二级标题</span> <span class="string">c</span></span><br><span class="line"><span class="number">3</span> <span class="string">这是二级标题</span> <span class="string">c</span> <span class="string">下的三级标题</span> <span class="string">d</span></span><br><span class="line"><span class="number">0</span> <span class="string">这是三级标题下的文本</span> <span class="string">e</span></span><br><span class="line"><span class="number">2</span> <span class="string">这是一级标题</span> <span class="string">a</span> <span class="string">下的二级标题</span> <span class="string">f</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
-
-<p>难点在于：<strong>既要在数据库中指明段落文本属于哪个标题（目录），又要指明每个标题的父标题是什么</strong><br>这里用到了 <strong>栈</strong>，来保存最近的一个标题在数据库中的 <code>id</code> 以及 当前的最深的大纲级别 <code>maxLvl</code>（代码中是 <code>lastLvl</code>）<br>逐个遍历第二步得到的带有大纲级别的段落：</p>
-<ul>
-<li>如果当前内容是文本（大纲级别是0），之前链接此文本内容到栈顶的标题。因为是文本内容一定附属在最近的标题下。</li>
-<li>如果是当前内容是标题（大纲级别大于0）<ul>
-<li>如果当前内容的大纲级别大于 <code>maxLvl</code> ，就说明目录变深了，压栈，<code>maxLvl</code> + 1，并将当前标题的父标题指向原来栈顶的 <code>id</code></li>
-<li>如果相同，出栈，保证栈内不存在同级大纲。这样出栈后，当前栈顶元素一定是当前内容的父标题。 <code>maxLvl</code>不变，标题父目录指向出栈后的 <code>id</code>。</li>
-<li>如果小于。出栈多次。因为变深只能一次深一级，如从二级目录变成三级目录，而变浅可以直接从三级目录变成一级目录。计算变浅的差值，决定 <code>pop</code> 的次数，以及 <code>maxLvl</code> 减少的层级即可。</li>
-</ul>
-</li>
-</ul>
-<h2 id="三、开发问题与解决方案记录"><a href="#三、开发问题与解决方案记录" class="headerlink" title="三、开发问题与解决方案记录"></a>三、开发问题与解决方案记录</h2><h3 id="1-文件相对绝对路径"><a href="#1-文件相对绝对路径" class="headerlink" title="1.文件相对绝对路径"></a>1.文件相对绝对路径</h3><p>Go 的环境路径和项目路径不一致，所以要获取代码文件所在的路径，自己写了个工具类，即 <code>/util/fileUtil.go</code> 的 <code>GetRunPath()</code></p>
-<h3 id="2-gooxml-document-不支持-doc"><a href="#2-gooxml-document-不支持-doc" class="headerlink" title="2. gooxml document 不支持 doc"></a>2. gooxml document 不支持 doc</h3><p>doc 转存成 docx</p>
-<h3 id="3-gooxml-和-unidoc-unioffice-弃用"><a href="#3-gooxml-和-unidoc-unioffice-弃用" class="headerlink" title="3. gooxml 和 unidoc/unioffice 弃用"></a>3. gooxml 和 unidoc/unioffice 弃用</h3><p>gooxml 太旧了，文档也 404<br>unioffice 应该是基于 gooxml 写的，但是要授权，只能免费用 14 天<br>所以都弃用，但是真就没办法了吗？</p>
-<h3 id="4-切换解析-word-方法"><a href="#4-切换解析-word-方法" class="headerlink" title="4. 切换解析 word 方法"></a>4. 切换解析 word 方法</h3><p>受某大佬启发，先将 word 转成 html 的形式，再读取 html，原因如下：<br>我要实现的目标是读取 word，所以可以转换成等效格式，再提取。如果是编辑 word，那可能要直接操作 word 了<br>之所以选择 html ，是因为我之前对爬虫比较熟，用 xpath 有信心。分析 html 源码后，确定能获取各元素属性</p>
-<h3 id="4-如何解析标题"><a href="#4-如何解析标题" class="headerlink" title="4. 如何解析标题"></a>4. 如何解析标题</h3><p><code>mso-outline-level</code> 属性，揭示了大纲级别，<code>1</code> 为「第一部分 初步审查」，以此类推</p>
-<h3 id="5-如何解析文本（段落）"><a href="#5-如何解析文本（段落）" class="headerlink" title="5. 如何解析文本（段落）"></a>5. 如何解析文本（段落）</h3><p>转化成的 html ，一段为一个 <code>div</code>， 同一标题下的多段没有共同的 <code>div</code>，所以只能一段一段提取。<br>目前拟采用 <code>mso-char-indent-count:2.0</code>，因为每段前都有缩进。</p>
-<h3 id="6-编码与文件转换问题"><a href="#6-编码与文件转换问题" class="headerlink" title="6. 编码与文件转换问题"></a>6. 编码与文件转换问题</h3><p>先把 doc 转 docx，再另存为 html，再用 vscode 打开（编码 GBK），然后保存成 UTF-8</p>
-<h3 id="7-htmlQuery-获取-html-node-的字符串"><a href="#7-htmlQuery-获取-html-node-的字符串" class="headerlink" title="7. htmlQuery 获取 html node 的字符串"></a>7. htmlQuery 获取 html node 的字符串</h3><p>查看源代码，引用 <code>Data</code> 属性就行<br>注：因为 Word 转 html 后有很多格式错乱(例如左侧的「细则」会整段混入到右侧的文本中），导致虽然能识别大部分文档，但是会有很多乱七八糟的东西，所以还是决定再试试 gooxml</p>
-<h3 id="8-利用-gooxml-document-设置-word-样式"><a href="#8-利用-gooxml-document-设置-word-样式" class="headerlink" title="8. 利用 gooxml/document 设置 word 样式"></a>8. 利用 gooxml/document 设置 word 样式</h3><p><a target="_blank" rel="noopener" href="https://github.com/carmel/gooxml/blob/master/_examples/document/simple/main.go">gooxml/main.go at master · carmel/gooxml</a><br>利用 para.SetStyle() 属性</p>
-<h3 id="9-如何利用-gooxml-document-获取段落属性"><a href="#9-如何利用-gooxml-document-获取段落属性" class="headerlink" title="9. 如何利用 gooxml/document 获取段落属性"></a>9. 如何利用 gooxml/document 获取段落属性</h3><p>这里没有文档，是个难点，只能肝源码<br>先看看 <code>(p Paragraph) SetStyle(s string)</code> 的函数定义：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">SetStyle</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    p.ensurePPr()</span><br><span class="line">    <span class="keyword">if</span> s == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">        p.x.PPr.PStyle = <span class="literal">nil</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        p.x.PPr.PStyle = wml.NewCT_String()</span><br><span class="line">        p.x.PPr.PStyle.ValAttr = s</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以得知，关键样式属性在于 <code>Paragraph.p.x.PPr.PStyle.ValAttr</code>, 但这是私有属性。<br>继续看 <code>Paragraph</code> 所在的 <code>paragraph.go</code> 文件，找到了 <code>(p Paragraph) Style() string</code> 函数</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">Style</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> p.x.PPr != <span class="literal">nil</span> &amp;&amp; p.x.PPr.PStyle != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p.x.PPr.PStyle.ValAttr</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Bingo！</p>
-<h3 id="10-《审查指南…》中，没有「标题」样式，全是正文"><a href="#10-《审查指南…》中，没有「标题」样式，全是正文" class="headerlink" title="10. 《审查指南…》中，没有「标题」样式，全是正文"></a>10. 《审查指南…》中，没有「标题」样式，全是正文</h3><p>正常的格式应该是 <code>Heading1</code> 这种（经由 <code>/try/parseTry.go</code> 中的 <code>TestNewDocGooxml</code> 测试，确保正确）<br>但是，获取了同一个 <code>style</code>（即 <code>x.PPr.PStyle.ValAttr</code>）属性，发现：<br>** 《审查指南..》中的样式，要么是空，要么是类似 <code>1</code>、<code>2</code>、<code>40</code>、<code>50</code> 这样的数字<br>并且，这些数字和大纲级别没有严格对应之处</p>
-<h3 id="11-尝试用属性获取"><a href="#11-尝试用属性获取" class="headerlink" title="11. 尝试用属性获取"></a>11. 尝试用属性获取</h3><p><code>paragraph.go</code> 源码文件，有个 <code>Properties</code> 函数，或许有用</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Paragraph)</span> <span class="title">Properties</span><span class="params">()</span> <span class="title">ParagraphProperties</span></span> &#123;</span><br><span class="line">	p.ensurePPr()</span><br><span class="line">	<span class="keyword">return</span> ParagraphProperties&#123;p.d, p.x.PPr&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>进入 <code>PragraphProperties.go</code>，得到：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParagraphProperties are the properties for a paragraph.</span></span><br><span class="line"><span class="keyword">type</span> ParagraphProperties <span class="keyword">struct</span> &#123;</span><br><span class="line">	d *Document</span><br><span class="line">	x *wml.CT_PPr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// Style returns the style for a paragraph, or an empty string if it is unset.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p ParagraphProperties)</span> <span class="title">Style</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> p.x.PStyle != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> p.x.PStyle.ValAttr</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经过测试，发现这里的 <code>style</code> 和前面那个 <code>style</code> 指向的是同一个东西，线索中断。</p>
-<h3 id="12-能否通过将大纲转成标题来实现提取？"><a href="#12-能否通过将大纲转成标题来实现提取？" class="headerlink" title="12. 能否通过将大纲转成标题来实现提取？"></a>12. 能否通过将大纲转成标题来实现提取？</h3><p>《审查指南…》虽然没有标题级别，但是有严格的大纲级别，能否通过外部手段，不通过 <code>Golang</code>，先把大纲转成 <code>style</code> 的 <code>Heading</code>？</p>
-<h3 id="13-找到了-gooxml-中的-「大纲属性」"><a href="#13-找到了-gooxml-中的-「大纲属性」" class="headerlink" title="13. 找到了 gooxml 中的 「大纲属性」"></a>13. 找到了 gooxml 中的 「大纲属性」</h3><p>先去看 <code>ParagraphProperties.go</code> 文件，找到类定义：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ParagraphProperties are the properties for a paragraph.</span></span><br><span class="line"><span class="keyword">type</span> ParagraphProperties <span class="keyword">struct</span> &#123;</span><br><span class="line">	d *Document</span><br><span class="line">	x *wml.CT_PPr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后看看 <code>wml.CT_PPr</code> 到底是怎么定义的？<br><code>CT_PPr.go</code> 中定义了该结构体，其中有一个属性是这个：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Associated Outline Level</span></span><br><span class="line"><span class="keyword">type</span> CT_PPr <span class="keyword">struct</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	OutlineLvl *CT_DecimalNumber</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再看看 <code>CT_DecimalNumber</code> 是什么：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> CT_DecimalNumber <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// Decimal Number Value</span></span><br><span class="line">	ValAttr <span class="keyword">int64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其实就是个结构体指针，里面有个 <code>int64</code><br>那么怎么获取这个属性(<code>x *wml.CT_PPr</code>)呢？回到 <code>ParagraphProperties.go</code> 中：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// X returns the inner wrapped XML type.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p ParagraphProperties)</span> <span class="title">X</span><span class="params">()</span> *<span class="title">wml</span>.<span class="title">CT_PPr</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> p.x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总结一下，获取 Word 大纲级别的方式如下，这里要防止空指针：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, para := <span class="keyword">range</span> doc.Paragraphs() &#123;</span><br><span class="line">    <span class="keyword">var</span> outlineLvl <span class="keyword">int64</span></span><br><span class="line">    <span class="keyword">if</span> outlineLvlStruct := para.Properties().X().OutlineLvl; outlineLvlStruct!=<span class="literal">nil</span>&#123;</span><br><span class="line">        outlineLvl = outlineLvlStruct.ValAttr</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        outlineLvl = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/unidoc/unioffice">unidoc/unioffice 另外一个可以处理 office 的文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://pkg.go.dev/github.com/baliance/gooxml#section-readme">gooxml 官方文档</a> 这个文档应该是 <code>unioffice</code> 的前身</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -729,7 +558,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-17 00:32:41" itemprop="dateModified" datetime="2021-09-17T00:32:41+08:00">2021-09-17</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -844,10 +673,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-14 17:37:11 / 修改时间：18:27:20" itemprop="dateCreated datePublished" datetime="2021-03-14T17:37:11+08:00">2021-03-14</time>
+              <time title="创建时间：2021-03-14 17:37:11" itemprop="dateCreated datePublished" datetime="2021-03-14T17:37:11+08:00">2021-03-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -964,7 +799,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 18:28:11" itemprop="dateModified" datetime="2021-03-14T18:28:11+08:00">2021-03-14</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1082,7 +917,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 23:13:33" itemprop="dateModified" datetime="2021-03-14T23:13:33+08:00">2021-03-14</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1199,10 +1034,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-12 23:51:24 / 修改时间：23:51:42" itemprop="dateCreated datePublished" datetime="2021-03-12T23:51:24+08:00">2021-03-12</time>
+              <time title="创建时间：2021-03-12 23:51:24" itemprop="dateCreated datePublished" datetime="2021-03-12T23:51:24+08:00">2021-03-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1319,7 +1160,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 23:13:44" itemprop="dateModified" datetime="2021-03-14T23:13:44+08:00">2021-03-14</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1442,7 +1283,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 22:34:12" itemprop="dateModified" datetime="2021-03-14T22:34:12+08:00">2021-03-14</time>
+                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1508,132 +1349,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/" class="post-title-link" itemprop="url">hdoj刷题二(java)：2010-2019</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-07 22:34:47" itemprop="dateCreated datePublished" datetime="2021-03-07T22:34:47+08:00">2021-03-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-09 14:37:37" itemprop="dateModified" datetime="2021-03-09T14:37:37+08:00">2021-03-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/" class="post-meta-item leancloud_visitors" data-flag-title="hdoj刷题二(java)：2010-2019" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="题目、分析与代码"><a href="#题目、分析与代码" class="headerlink" title="题目、分析与代码"></a>题目、分析与代码</h2><h3 id="Problem-2010-水仙花数"><a href="#Problem-2010-水仙花数" class="headerlink" title="Problem - 2010 水仙花数"></a><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=2010">Problem - 2010 水仙花数</a></h3><p>再跳说不过去了，这里写一下， 个人觉得这里最难的是数位的拆分。有两种方法：</p>
-<ol>
-<li>读取成数字，然后先取余，再除10，循环</li>
-<li>读取成字符串，获取子串，再用 <code>parseInt()</code></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1724,7 +1439,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1766,6 +1481,10 @@
         
         
           <li>
+            <a href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" title="浅析Golang之T与*T方法集及receiver" target="_blank">浅析Golang之T与*T方法集及receiver</a>
+          </li>
+        
+          <li>
             <a href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" title="使用 Golang 解析专利审查指南" target="_blank">使用 Golang 解析专利审查指南</a>
           </li>
         
@@ -1779,10 +1498,6 @@
         
           <li>
             <a href="/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/" title="关于读闲书以及做笔记的思考" target="_blank">关于读闲书以及做笔记的思考</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="怦然心动的人生整理魔法-读书笔记" target="_blank">怦然心动的人生整理魔法-读书笔记</a>
           </li>
         
       </ul>
@@ -1816,12 +1531,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">51k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">46 分钟</span>
+    <span title="站点阅读时长">48 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-09-16T16:29:49.675Z</updated>
+  <updated>2021-10-05T17:50:04.227Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -17,20 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>浅析Golang之T与*T方法集及receiver</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/</id>
+    <published>2021-10-05T16:36:38.000Z</published>
+    <updated>2021-10-05T17:50:04.227Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博客讲得单一了容易有理解偏差。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Golang" scheme="http://bird.blog.tcualhp.cn/tags/Golang/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用 Golang 解析专利审查指南</title>
     <link href="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/"/>
     <id>http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/</id>
     <published>2021-09-16T16:28:40.000Z</published>
-    <updated>2021-09-16T16:29:49.675Z</updated>
+    <updated>2021-10-05T17:46:34.596Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;专利审查指南解析&quot;&gt;&lt;a href=&quot;#专利审查指南解析&quot; class=&quot;headerlink&quot; title=&quot;专利审查指南解析&quot;&gt;&lt;/a&gt;专利审查指南解析&lt;/h1&gt;&lt;p&gt;本项目代码地址：&lt;a</summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;专利审查指南解析&quot;&gt;&lt;a href=&quot;#专利审查指南解析&quot; class=&quot;headerlink&quot; title=&quot;专利审查指南解析&quot;&gt;&lt;/a&gt;专利审查指南解析&lt;/h1&gt;&lt;p&gt;本项目代码地址：&lt;a href=&quot;https://github.com/BirdBirdLee/parsePatentWord&quot;&gt;BirdBirdLee/parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;〇、本项目的由来、意义&quot;&gt;&lt;a href=&quot;#〇、本项目的由来、意义&quot; class=&quot;headerlink&quot; title=&quot;〇、本项目的由来、意义&quot;&gt;&lt;/a&gt;〇、本项目的由来、意义&lt;/h2&gt;&lt;h3 id=&quot;由来&quot;&gt;&lt;a href=&quot;#由来&quot; class=&quot;headerlink&quot; title=&quot;由来&quot;&gt;&lt;/a&gt;由来&lt;/h3&gt;&lt;p&gt;导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。&lt;br&gt;师兄说建议用 Java 的 &lt;code&gt;Apache POI&lt;/code&gt;，但我刚学了 Golang 一星期，就想用 Golang 做！！！死磕~~~（其实中间反复过两次，真的很想用 Java 或 Python 的 API！还好坚持下来了，收获了很多）&lt;/p&gt;</summary>
     
     
     
@@ -44,16 +56,10 @@
     <link href="http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/"/>
     <id>http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/</id>
     <published>2021-07-02T02:19:31.000Z</published>
-    <updated>2021-09-16T16:32:49.874Z</updated>
+    <updated>2021-10-05T17:46:34.595Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论</summary>
-        
-      
+    <summary type="html">&lt;p&gt;简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。采用模块化的设计，拥有流程控制模块、错误重爬模块、任务分发模块，任务监督模块等。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有md原汁原味。&lt;/p&gt;</summary>
     
     
     
@@ -69,7 +75,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/"/>
     <id>http://bird.blog.tcualhp.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/</id>
     <published>2021-05-03T10:25:16.000Z</published>
-    <updated>2021-09-16T16:32:41.400Z</updated>
+    <updated>2021-10-05T17:46:34.593Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;导语&quot;&gt;&lt;a href=&quot;#导语&quot; class=&quot;headerlink&quot; title=&quot;导语&quot;&gt;&lt;/a&gt;导语&lt;/h2&gt;&lt;h3 id=&quot;何为亲密关系&quot;&gt;&lt;a href=&quot;#何为亲密关系&quot; class=&quot;headerlink&quot; title=&quot;何为亲密关系&quot;&gt;&lt;/a&gt;何为亲密关系&lt;/h3&gt;&lt;p&gt;本意是指不限年龄和性别的两人之间和谐、融洽的关系。但目前来说，大多数情况下指的是情侣、夫妻间的爱情。值得注意的是，心理学家认为，两个人之间存在影响与互赖，才称之为关系。所以其实并非所有情侣、婚姻间都存在亲密关系。&lt;/p&gt;
@@ -93,7 +99,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E5%85%B3%E4%BA%8E%E8%AF%BB%E9%97%B2%E4%B9%A6%E4%BB%A5%E5%8F%8A%E5%81%9A%E7%AC%94%E8%AE%B0%E7%9A%84%E6%80%9D%E8%80%83/</id>
     <published>2021-03-14T09:37:11.000Z</published>
-    <updated>2021-03-14T10:27:20.929Z</updated>
+    <updated>2021-10-05T17:46:34.584Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;阅读方式&quot;&gt;&lt;a href=&quot;#阅读方式&quot; class=&quot;headerlink&quot; title=&quot;阅读方式&quot;&gt;&lt;/a&gt;阅读方式&lt;/h2&gt;&lt;p&gt;目前我读书有以下几种方式：「精读」、「笔记阅读」、「略读」、「选读」&lt;/p&gt;</summary>
@@ -110,7 +116,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
     <published>2021-03-13T12:28:27.000Z</published>
-    <updated>2021-03-14T10:28:11.880Z</updated>
+    <updated>2021-10-05T17:46:34.586Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;书籍基本信息&quot;&gt;&lt;a href=&quot;#书籍基本信息&quot; class=&quot;headerlink&quot; title=&quot;书籍基本信息&quot;&gt;&lt;/a&gt;书籍基本信息&lt;/h2&gt;&lt;p&gt;作者：近藤麻离惠&lt;br&gt;标签：个人管理、生活管理&lt;/p&gt;</summary>
@@ -127,7 +133,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/</id>
     <published>2021-03-13T08:22:27.000Z</published>
-    <updated>2021-03-14T15:13:33.765Z</updated>
+    <updated>2021-10-05T17:46:34.588Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;错误定位&quot;&gt;&lt;a href=&quot;#错误定位&quot; class=&quot;headerlink&quot; title=&quot;错误定位&quot;&gt;&lt;/a&gt;错误定位&lt;/h2&gt;&lt;p&gt;定位到错误：这条请求标红，并且含有 &lt;code&gt;Counter&lt;/code&gt;，我猜是 &lt;code&gt;leancloud&lt;/code&gt; 修改访问量的接口&lt;/p&gt;
@@ -151,7 +157,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E9%9A%8F%E7%AC%9420200915/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E9%9A%8F%E7%AC%9420200915/</id>
     <published>2021-03-12T15:51:24.000Z</published>
-    <updated>2021-03-12T15:51:42.909Z</updated>
+    <updated>2021-10-05T17:46:34.591Z</updated>
     
     
     <summary type="html">&lt;p&gt;刷题做笔记时，无意间看到去年9月份写的随笔，隐去了别人的姓名，顺手传上来吧&lt;/p&gt;</summary>
@@ -168,7 +174,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</id>
     <published>2021-03-08T15:42:41.000Z</published>
-    <updated>2021-03-14T15:13:44.448Z</updated>
+    <updated>2021-10-05T17:46:34.580Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;两种不同效果对比&quot;&gt;&lt;a href=&quot;#两种不同效果对比&quot; class=&quot;headerlink&quot; title=&quot;两种不同效果对比&quot;&gt;&lt;/a&gt;两种不同效果对比&lt;/h2&gt;&lt;h2 id=&quot;最终效果&quot;&gt;&lt;a href=&quot;#最终效果&quot; class=&quot;headerlink&quot; title=&quot;最终效果&quot;&gt;&lt;/a&gt;最终效果&lt;/h2&gt;&lt;p&gt;本文章使用的是 &lt;code&gt;next&lt;/code&gt; 主题，其他主题类似。&lt;/p&gt;
@@ -190,7 +196,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/</id>
     <published>2021-03-08T12:40:03.000Z</published>
-    <updated>2021-03-14T14:34:12.996Z</updated>
+    <updated>2021-10-05T17:46:34.575Z</updated>
     
     
     <summary type="html">&lt;p&gt;向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。&lt;/p&gt;</summary>
@@ -209,7 +215,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/</id>
     <published>2021-03-07T14:34:47.000Z</published>
-    <updated>2021-03-09T06:37:37.657Z</updated>
+    <updated>2021-10-05T17:46:34.573Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;题目、分析与代码&quot;&gt;&lt;a href=&quot;#题目、分析与代码&quot; class=&quot;headerlink&quot; title=&quot;题目、分析与代码&quot;&gt;&lt;/a&gt;题目、分析与代码&lt;/h2&gt;&lt;h3 id=&quot;Problem-2010-水仙花数&quot;&gt;&lt;a href=&quot;#Problem-2010-水仙花数&quot; class=&quot;headerlink&quot; title=&quot;Problem - 2010 水仙花数&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=2010&quot;&gt;Problem - 2010 水仙花数&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;再跳说不过去了，这里写一下， 个人觉得这里最难的是数位的拆分。有两种方法：&lt;/p&gt;
@@ -232,7 +238,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%B8%80(java)%EF%BC%9A2000-2009/</id>
     <published>2021-03-07T08:34:15.000Z</published>
-    <updated>2021-03-09T06:37:37.656Z</updated>
+    <updated>2021-10-05T17:46:34.571Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;本次刷题主要是针对复试，刷 hdoj 第11页的题，以前用的是 &lt;code&gt;C++&lt;/code&gt;，最近一年用 &lt;code&gt;Java&lt;/code&gt; 做项目多，也是想着以后靠 &lt;code&gt;Java&lt;/code&gt; 吃饭，所以换用 &lt;code&gt;Java&lt;/code&gt;。寒假在 &lt;code&gt;LeetCode&lt;/code&gt; 刷了一些题，所以最近的刷题主要是习惯用 &lt;code&gt;Java&lt;/code&gt; 做输入输出以及用 &lt;code&gt;Java&lt;/code&gt; 写算法题（多留意常用 &lt;code&gt;api&lt;/code&gt;，背下来，考试手写）&lt;/p&gt;
@@ -253,7 +259,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E8%B5%B7%E5%BA%8A%E5%B0%8F%E6%8F%92%E6%9B%B2/</id>
     <published>2021-03-07T04:39:24.000Z</published>
-    <updated>2021-03-09T06:41:23.656Z</updated>
+    <updated>2021-10-05T17:46:34.590Z</updated>
     
     
     <summary type="html">&lt;p&gt;今天早上有点冷，又遇到了我的减衣计划，于是乎，我与被子难舍难分了。这时候想到了一句诗：「乍暖还寒时候，最难将歇」，应景！改成最难起床就更妙了。&lt;/p&gt;</summary>
@@ -270,7 +276,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E4%B8%BAhexo-next%E5%AE%89%E8%A3%85%E4%BE%A7%E8%BE%B9rss/</id>
     <published>2021-03-06T13:25:23.000Z</published>
-    <updated>2021-03-14T15:13:15.634Z</updated>
+    <updated>2021-10-05T17:46:34.582Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot; title=&quot;步骤&quot;&gt;&lt;/a&gt;步骤&lt;/h2&gt;&lt;h3 id=&quot;1-在博客根目录下安装-hexo-generator-feed&quot;&gt;&lt;a href=&quot;#1-在博客根目录下安装-hexo-generator-feed&quot; class=&quot;headerlink&quot; title=&quot;1. 在博客根目录下安装 hexo-generator-feed&quot;&gt;&lt;/a&gt;1. 在博客根目录下安装&lt;a href=&quot;https://github.com/hexojs/hexo-generator-feed&quot;&gt; hexo-generator-feed&lt;/a&gt;&lt;/h3&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install hexo-generator-feed --save&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
@@ -291,7 +297,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/</id>
     <published>2021-03-06T07:13:10.000Z</published>
-    <updated>2021-03-14T15:13:53.894Z</updated>
+    <updated>2021-10-05T17:46:34.577Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;参考博客&quot;&gt;&lt;a href=&quot;#参考博客&quot; class=&quot;headerlink&quot; title=&quot;参考博客&quot;&gt;&lt;/a&gt;参考博客&lt;/h2&gt;&lt;blockquote&gt;
@@ -316,7 +322,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/</id>
     <published>2021-03-05T08:33:10.000Z</published>
-    <updated>2021-03-14T15:14:02.098Z</updated>
+    <updated>2021-10-05T17:46:34.579Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;部署与备份小总结&quot;&gt;&lt;a href=&quot;#部署与备份小总结&quot; class=&quot;headerlink&quot; title=&quot;部署与备份小总结&quot;&gt;&lt;/a&gt;部署与备份小总结&lt;/h2&gt;&lt;p&gt;经过我三次的 &lt;code&gt;hexo&lt;/code&gt; 部署经验，现在也算是摸清了它的逻辑，这次没照搬网上的教程，自己摸索出了如何通过设置分支来部署备份。&lt;/p&gt;</summary>
@@ -335,7 +341,7 @@
     <link href="http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/"/>
     <id>http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</id>
     <published>2021-03-04T16:22:50.000Z</published>
-    <updated>2021-07-02T02:20:42.391Z</updated>
+    <updated>2021-10-05T17:46:34.583Z</updated>
     
     
     <summary type="html">&lt;p&gt;现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「&lt;strong&gt;做你想做的，做你该做的&lt;/strong&gt;」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  &lt;/p&gt;
@@ -417,27 +423,6 @@
     
     
     <category term="DailyLove" scheme="http://bird.blog.tcualhp.cn/tags/DailyLove/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker安装与使用IDEA部署到远程服务器</title>
-    <link href="http://bird.blog.tcualhp.cn/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://bird.blog.tcualhp.cn/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
-    <published>2019-08-04T07:50:33.000Z</published>
-    <updated>2021-03-05T10:37:05.238Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
-    
-    <category term="common" scheme="http://bird.blog.tcualhp.cn/categories/CS/common/"/>
-    
-    
-    <category term="docker" scheme="http://bird.blog.tcualhp.cn/tags/docker/"/>
     
   </entry>
   
