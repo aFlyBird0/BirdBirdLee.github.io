@@ -1,6 +1,6 @@
 ---
 title: 浅析Golang之T与*T方法集及receiver
-mylink: 浅析Golang之T与*T方法集及receiver
+mylink: 浅析Golang之T与T方法集及receiver
 date: 2021-10-06 00:36:38
 tags:
 	- Golang
