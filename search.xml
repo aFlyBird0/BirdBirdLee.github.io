@@ -231,6 +231,31 @@
       </tags>
   </entry>
   <entry>
+    <title>一个简单的提交统计工具</title>
+    <url>/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h2 id="项目由来"><a href="#项目由来" class="headerlink" title="项目由来"></a>项目由来</h2><p>最近在做一些群内的人员管理工作，经常要下发表格，筛选出没提交的人。<br>众所周知，懒是第一生产力，于是开发了一个可以根据人员信息表与实际提交信息，直接计算出未提交名单的工具。</p>
+<p>目前只做了桌面命令行极简版。仓库地址：<a href="https://github.com/aFlyBird0/submit_tools">aFlyBird0/submit_tools: 看看谁还没提交！！！</a></p>
+<h3 id="思路介绍"><a href="#思路介绍" class="headerlink" title="思路介绍"></a>思路介绍</h3><p>先考虑最简单的情况：如果所有人的信息，仅提供姓名。</p>
+<p>那么只要先维护一个姓名列表，然后使用某种途径获取已经提交了人的列表。遍历姓名列表，一个个看该姓名是否出现在了提交列表中即可。</p>
+<p>稍微复杂一些：提交列表不一定是规整的数组，可能来源于网页表格；也可能来源于QQ的投票统计，是OCR的结果。即，拥有许多杂乱的内容。这时候可以退而求其次，把提交信息统一转化成一个多行字符串，将列表的对应查询变成了 <code>strings.Contains()</code> 操作。</p>
+<h3 id="目前版本"><a href="#目前版本" class="headerlink" title="目前版本"></a>目前版本</h3><p>再丰富些：添加别名功能。比如，可能我们需要判断谁不在 Github 组织里，或者说收集表上只有大家的手机号而没有姓名字段，所有数据结构可以这样设计：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name   <span class="keyword">string</span>   <span class="comment">//标准名</span></span><br><span class="line">	Alias  []<span class="keyword">string</span> <span class="comment">//别名，可以是邮箱、QQ号等</span></span><br><span class="line">	Submit <span class="keyword">bool</span>     <span class="comment">// 是否已提交</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>维护一张信息表，使用 csv 结构，一行是一个人员信息。其中第一列是姓名，即标准名。后面的列数量任意，都是能唯一标识该人的 ID ，如 QQ、电话、邮箱。</p>
+<p>只要标准名或别名中的任何一个字段命中了提交信息（字符串），就认为该人已提交。</p>
+<h3 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h3><p>这样有个 bug，如果一个人叫「张三」、另一个叫「张三丰」，那么只要后者提交了，前者会被误判为已提交。<br>适当规避这个 bug 的方式是，使用较长的唯一 id。</p>
+<h3 id="未来可能的改进思路"><a href="#未来可能的改进思路" class="headerlink" title="未来可能的改进思路"></a>未来可能的改进思路</h3><p>和 Kevin 大佬聊了之后，有了以下几个改进思路：</p>
+<ol>
+<li>原来的提交信息只是纯文本字符串。可以把这个改成一个接口，对于不同的类型，如 csv、在线表格，实现不同的命中方法。其他的，从给出的提交信息中，抽取可以被当作 ID 的字段也可以封装为接口。</li>
+<li>把提交信息由原来的一大串文本改为，只接受一行一行的提交。每行提交只能被命中一次，若被命中多次，提示用户可能存在歧义。</li>
+<li>利用 qq_bot 等工具收集人员信息。之前收集群所有人的备注，OCR 可能会出问题，如果能直接调 QQ 接口更好。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅析Golang之T与*T方法集及receiver</title>
     <url>/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/</url>
     <content><![CDATA[<p>到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博客讲得单一了容易有理解偏差。</p>
