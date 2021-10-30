@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2021-10-30</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://bird.blog.tcualhp.cn/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/</loc>
     
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     
   </url>
   
@@ -207,7 +214,7 @@
 
   <url>
     <loc>http://bird.blog.tcualhp.cn/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -215,49 +222,49 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/hexo/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/DailyLove/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/docker/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/Golang/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/tags/Scrapy/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -266,56 +273,56 @@
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/CS/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/think/</loc>
-    <lastmod>2021-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/CS/hexo/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/CS/SpringBoot/</loc>
-    <lastmod>2021-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-10-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://bird.blog.tcualhp.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/CS/common/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/categories/CS/hexo/</loc>
+    <lastmod>2021-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://bird.blog.tcualhp.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://bird.blog.tcualhp.cn/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2021-10-16</lastmod>
+    <lastmod>2021-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

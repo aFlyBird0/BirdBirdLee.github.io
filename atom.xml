@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-10-16T17:11:41.063Z</updated>
+  <updated>2021-10-30T09:56:27.950Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -17,20 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>面向对象思想入门</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/</id>
+    <published>2021-10-30T09:53:42.000Z</published>
+    <updated>2021-10-30T09:56:27.950Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;一、形象解释什么是面向对象&quot;&gt;&lt;a href=&quot;#一、形象解释什么是面向对象&quot; class=&quot;headerlink&quot; title=&quot;一、形象解释什么是面向对象&quot;&gt;&lt;/a&gt;一、形象解释什么是面向对象&lt;/h2&gt;&lt;h3 id=&quot;1-1-小例子&quot;&gt;&lt;a href=&quot;#1-1-小例子&quot; class=&quot;headerlink&quot; title=&quot;1.1 小例子&quot;&gt;&lt;/a&gt;1.1 小例子&lt;/h3&gt;&lt;p&gt;先来个例子，简单了解一下面向过程和面向对象的区别。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;有一天你想吃鱼香肉丝了，怎么办呢？你有两个选择：&lt;br&gt;1、自己买材料，肉，鱼香肉丝调料，蒜苔，胡萝卜等等然后切菜切肉，开炒，盛到盘子里。&lt;br&gt;2、去饭店，张开嘴：老板！来一份鱼香肉丝！&lt;br&gt;看出来区别了吗？1是面向过程，2是面向对象。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>一个简单的提交统计工具</title>
     <link href="http://bird.blog.tcualhp.cn/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/"/>
     <id>http://bird.blog.tcualhp.cn/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/</id>
     <published>2021-10-16T16:15:43.000Z</published>
-    <updated>2021-10-16T17:11:41.063Z</updated>
+    <updated>2021-10-30T09:56:25.070Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;项目由来&quot;&gt;&lt;a href=&quot;#项目由来&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">&lt;h2 id=&quot;项目由来&quot;&gt;&lt;a href=&quot;#项目由来&quot; class=&quot;headerlink&quot; title=&quot;项目由来&quot;&gt;&lt;/a&gt;项目由来&lt;/h2&gt;&lt;p&gt;最近在做一些群内的人员管理工作，经常要下发表格，筛选出没提交的人。&lt;br&gt;众所周知，懒是第一生产力，于是开发了一个可以根据人员信息表与实际提交信息，直接计算出未提交名单的工具。&lt;/p&gt;
+&lt;p&gt;目前只做了桌面命令行极简版。仓库地址：&lt;a href=&quot;https://github.com/aFlyBird0/submit_tools&quot;&gt;aFlyBird0/submit_tools: 看看谁还没提交！！！&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;思路介绍&quot;&gt;&lt;a href=&quot;#思路介绍&quot; class=&quot;headerlink&quot; title=&quot;思路介绍&quot;&gt;&lt;/a&gt;思路介绍&lt;/h3&gt;&lt;p&gt;先考虑最简单的情况：如果所有人的信息，仅提供姓名。&lt;/p&gt;
+&lt;p&gt;那么只要先维护一个姓名列表，然后使用某种途径获取已经提交了人的列表。遍历姓名列表，一个个看该姓名是否出现在了提交列表中即可。&lt;/p&gt;
+&lt;p&gt;稍微复杂一些：提交列表不一定是规整的数组，可能来源于网页表格；也可能来源于QQ的投票统计，是OCR的结果。即，拥有许多杂乱的内容。这时候可以退而求其次，把提交信息统一转化成一个多行字符串，将列表的对应查询变成了 &lt;code&gt;strings.Contains()&lt;/code&gt; 操作。&lt;/p&gt;</summary>
     
     
     
@@ -395,29 +411,6 @@
     
     
     <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>一次由被推销而引发的对市场营销学的思考</title>
-    <link href="http://bird.blog.tcualhp.cn/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/"/>
-    <id>http://bird.blog.tcualhp.cn/2019/09/%E4%B8%80%E6%AC%A1%E7%94%B1%E8%A2%AB%E6%8E%A8%E9%94%80%E8%80%8C%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%AD%A6%E7%9A%84%E6%80%9D%E8%80%83/</id>
-    <published>2019-09-09T04:52:44.000Z</published>
-    <updated>2021-03-05T10:31:48.807Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;主要情景再现&quot;&gt;&lt;a href=&quot;#主要情景再现&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="think" scheme="http://bird.blog.tcualhp.cn/categories/think/"/>
     
     
   </entry>

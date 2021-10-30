@@ -22,17 +22,19 @@
     var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="热爱可抵岁月漫长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bird&#39;s Blog">
-<meta property="og:url" content="http://bird.blog.tcualhp.cn/archives/2021/03/page/2/index.html">
+  <meta name="description" content="一、形象解释什么是面向对象1.1 小例子先来个例子，简单了解一下面向过程和面向对象的区别。  有一天你想吃鱼香肉丝了，怎么办呢？你有两个选择：1、自己买材料，肉，鱼香肉丝调料，蒜苔，胡萝卜等等然后切菜切肉，开炒，盛到盘子里。2、去饭店，张开嘴：老板！来一份鱼香肉丝！看出来区别了吗？1是面向过程，2是面向对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象思想入门">
+<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="热爱可抵岁月漫长">
+<meta property="og:description" content="一、形象解释什么是面向对象1.1 小例子先来个例子，简单了解一下面向过程和面向对象的区别。  有一天你想吃鱼香肉丝了，怎么办呢？你有两个选择：1、自己买材料，肉，鱼香肉丝调料，蒜苔，胡萝卜等等然后切菜切肉，开炒，盛到盘子里。2、去饭店，张开嘴：老板！来一份鱼香肉丝！看出来区别了吗？1是面向过程，2是面向对象。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-30T09:53:42.000Z">
+<meta property="article:modified_time" content="2021-10-30T09:56:27.950Z">
 <meta property="article:author" content="Bird">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://bird.blog.tcualhp.cn/archives/2021/03/page/2/">
+<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/">
 
 
 <script id="page-configurations">
@@ -40,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Bird's Blog</title>
+  <title>面向对象思想入门 | Bird's Blog</title>
   
 
 
@@ -193,99 +195,171 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+      <meta itemprop="name" content="Bird">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bird's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面向对象思想入门
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-30 17:53:42 / 修改时间：17:56:27" itemprop="dateCreated datePublished" datetime="2021-10-30T17:53:42+08:00">2021-10-30</time>
+            </span>
+
+          
+            <span id="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" class="post-meta-item leancloud_visitors" data-flag-title="面向对象思想入门" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 25 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h2 id="一、形象解释什么是面向对象"><a href="#一、形象解释什么是面向对象" class="headerlink" title="一、形象解释什么是面向对象"></a>一、形象解释什么是面向对象</h2><h3 id="1-1-小例子"><a href="#1-1-小例子" class="headerlink" title="1.1 小例子"></a>1.1 小例子</h3><p>先来个例子，简单了解一下面向过程和面向对象的区别。</p>
+<blockquote>
+<p>有一天你想吃鱼香肉丝了，怎么办呢？你有两个选择：<br>1、自己买材料，肉，鱼香肉丝调料，蒜苔，胡萝卜等等然后切菜切肉，开炒，盛到盘子里。<br>2、去饭店，张开嘴：老板！来一份鱼香肉丝！<br>看出来区别了吗？1是面向过程，2是面向对象。</p>
+</blockquote>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-06T15:13:10+08:00"
-              content="2021-03-06">
-          03-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/hexo+next+valine%E9%85%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5%EF%BC%88%E9%98%BF%E9%87%8C%E4%BA%91%E4%BC%81%E4%B8%9A%E9%82%AE%E7%AE%B1%EF%BC%89/" itemprop="url">
-            <span itemprop="name">hexo+next+valine配置博客评论邮件通知（阿里云企业邮箱）</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-05T16:33:10+08:00"
-              content="2021-03-05">
-          03-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/hexo5.0+%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">hexo5.0+安装报错总结</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-03-05T00:22:50+08:00"
-              content="2021-03-05">
-          03-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/" itemprop="url">
-            <span itemprop="name">人为什么而活2</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p><em>文章来源：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7a5b0043b035">什么是面向对象（OOP） - 简书</a></em></p>
+<p><em>本文也就这段话是复制的了，本来想做个资源帖的收集，写着写着发现，还是自己写的东西有趣，干脆就不参考了。<br>至于那些非常专业的文章，大家在看了我的文章后，建立了对面向对象思想的理解，也就看得懂其他文章了，自行查阅就好。</em></p>
+<p>狭义地理解，面向过程就是，<strong>以过程为中心</strong>，就像做数学题那样，定义了解题的一个个步骤。<br>面向对象就是，抽象出一个个的模型，已经预定义了这个类型有哪些属性，能做些什么，直接调用就好。 </p>
+<h3 id="1-2-面向对象再解释"><a href="#1-2-面向对象再解释" class="headerlink" title="1.2 面向对象再解释"></a>1.2 面向对象再解释</h3><p>上面我们通过一个例子感性得理解了面向对象的整体，下面我们继续举例，带大家理解面向对象的细节。  </p>
+<p>直接来个实际的例子，例如，我们要实现一个查询学生电话号码的接口。  </p>
+<p><strong>面向过程的实现方法：</strong><br>写个 <code>getStudentInfo</code> 函数，形参是学生的唯一标识符（如学号）。<br>先不考虑数据库，那么我们需要维护一个学生信息的数组，然后一个个比对。  </p>
+<p>如果我们又要实现，查询学生寝室号、辅导员，又要再写两个函数吗？而且这些函数的形参，全是学生ID。  </p>
+<p>有没有更好的解决方案呢？</p>
+<p>这时候你可能会质疑，我学过 C 啊，你讲的这玩意，压根不用定义函数啊？  </p>
+<p>我直接进行一个结构体的定义，一个 <code>Student</code> 结构体，然后把学号、姓名、电话、辅导员信息都塞里面，<br>想查询信息的时候，只要用 <code>student.name</code> 就能获取到姓名了。  </p>
+<p>其实，这便是一种非常简单的面向对象的思想。前面讲过，面向对象，在我的理解中，最浅层的，<br>就是把一些属性和能做什么聚在一起，形成一个类。而 C语言 的结构体，就是做到了属性的聚合。  </p>
+<p>继续给需求，如果主人又来任务了，这时候给了个，「上课签到记录」的接口，怎么办？<br>结构体成员变量实现这个功能吧？</p>
+<p>一个声音浮现在脑海：用函数啊！直接定义一个签到函数！</p>
+<p>可是函数，它就，不优雅了啊，它是面向过程！</p>
+<p>那么，我们既然已经把属性塞到结构体里面了，采用 <code>变量.属性名</code> 的方式获取。<br>我们可不可以，把函数也塞到结构体里面呢？采用 <code>变量.函数名</code> 的方式获取？</p>
+<p>大聪明鬼，这就是 Go 语言面向对象的简单实现了！！！</p>
+<p>把属性和行为塞（封装）到结构体里面之后，和之前的面向过程有什么不一样？</p>
+<p>之前的函数调用，学生属于形参，是传进去的。 <code>getInfo(user)</code> ，<br>而现在，学生是调用方，是主体， <code>user.GetInfo()</code>。</p>
+<p>换句话说，之前的函数调用， 操作的是外部的数据信息。而现在，变量（属性）操作（方法）<br>成为了类型的一部分，是固有的。一旦这个类型建立了，那它对应的变量什么的，也都直接附带上了。<br>同时，利用对象调用方法，更像是一种「操作」，什么叫操作？就是，我这个对象，里面有些数据，<br>通过调用某个方法，修改了对象内的一些信息，「操作」了一下。就这么先这么狭义理解。</p>
+<p>有个小细节需要注意，当函数和对象结合的时候，它就不叫函数了，叫「方法」。任何语言都是如此。  </p>
+<p>不同语言面向对象的实现方法都不一样，大部分面向对象的语言，都是用 <code>class</code> 关键字实现的，<br>Go 语言的实现比较奇葩，是用 <code>Struct</code> 和 <code>receiver</code> 来结合实现的，它不是纯粹的面向对象语言。  </p>
+<p>所以在初学面向对象思想的时候，不建议一开始就拿 Go 语言学习面向对象，容易走火入魔。<br>比较建议看看 <code>C++</code> 或 <code>Java</code> 的面向对象的实现。不过话说回来，虽然 Go 的面向对象实现有点显得歪门邪道，<br>但是，当它和 Go 的接口结合起来的时候，一切就都会变得非常有趣。<br>我更愿意称 Go 语言的面向对象是灵活的面向对象。</p>
+<h2 id="面向对象概念解释"><a href="#面向对象概念解释" class="headerlink" title="面向对象概念解释"></a>面向对象概念解释</h2><p>首先是 <code>类</code> 的概念。类，你可以理解为，类型的意思。<br>或者说，他们是同一类的，他们有相似的行为（函数），相似的特征（属性），那他们就是一类。<br>比如，人类，动物类，学生类。  </p>
+<p>然后是 <code>对象</code> 的概念，这个对象不是那种，冬天了可以抱抱的对象。是 <code>类</code> 的 <code>实例</code>。<br>类，概括出了同一种类型的事物，对象，就是这一类事物中，具体的某个个体。<br>比如，<code>人类</code> 是个 <code>类</code>，张三就是个对象，或者说 <code>实例</code>。利用类建立对象的过程，就叫 <code>实例化</code>。</p>
+<p>然后是 <code>继承</code>。我不说啥意思，就举例子，你自己体会。哺乳动物类继承动物类，人类继承哺乳动物类，<br>男人类继承人类，爸爸类继承男人类。</p>
+<p>A类 <code>继承</code> B类，表明，A类拥有B类的所有属性（特征）和方法（行为、能做的事）。并且自己可以加些新的属性和方法。<br>比如，女人类拥有人类的一切属性，又能做任何人能做的事，她又可以有些特殊的属性或方法。<br>而程序员类不是继承了男人类或女人类的。被继承的类叫 <code>父类</code>，另外一个叫 <code>子类</code>。</p>
+<p>再解释一下什么叫 <code>封装</code>。先贴个专业解释：</p>
+<blockquote>
+<p>通过对象隐藏程序的具体实现细节，将数据与操作包装在一起，<br>对象与对象之间通过消息传递机制实现互相通信（方法调用），<br>具体的表现就是通过提供访问接口实现消息的传入传出。</p>
+</blockquote>
+<p>麻了吧？</p>
+<p>其实前面讲的那些，把属性和方法放在一起，就是封装的一部分。也就是被引用的内容中提到的<br>「将数据和操作包装在一起」。数据就是属性，操作就是方法、行为。</p>
+<p>什么叫隐藏实现细节呢？简单说两点：</p>
+<p>第一，C语言的结构体，任何类型都是可以直接访问的，<br>我想让外部调用者没法直接访问某些数据怎么办？用类可以实现。<br>第二，别人写好的东西，我才不管你具体怎么实现的，我只要知道怎么用就行。<br>甚至，我只要知道哪个方法能查成绩就行，我就这么写了，<br>如果你想修改查成绩的内部实现，和我无关，因为接口已经定死了。</p>
+<p>其实这个和函数封装差不多。</p>
+<p>最后解释一下，<code>多态</code>。</p>
+<p>还是举例子吧，前面讲到，我想查询学生的基本信息，写了个方法。</p>
+<p>现在，我又想查询老师的基本信息了，再写个方法？</p>
+<p>那这样的话，要针对不同的类型写不同的方法，但他们实际执行的操作差不多啊？<br>而且，我如果想用一个函数就能查询老师或学生的信息，要写一堆 <code>if</code> 吗？</p>
+<p>能优雅一点吗？</p>
+<p>面向对象，类似的属性和操作，都能封装。他们都叫「查询某个人的基本信息」。</p>
+<p>其实，我们可以定义一个「学校师生」父类，「学生类」和「教职工」类分别继承它。<br>「学校师生」类可以定义一个「查询信息」方法，然后另外两个类 <code>重写</code> 这个方法。<br>即，父类有个 <code>getInfo()</code> 的方法，两个子类也各有一个 <code>getInfo()</code> 的同名方法。</p>
+<p>这么做有什么好处？怎么还不讲多态？？？</p>
+<p>多态有很多种，这里讲一种。比如，你可以定义一个基类的变量（指针），它是可以引用（指向）<br>所有父类的。换句话说，你可以定义一个「学校师生」类的变量，<br>然后查询信息的时候，直接调用 <code>父类.getInfo()</code><br>无论你是通过「学生类」还是「教职工」类的对象调用的这个方法，<br>编译器都能找到对应的方法，即，它知道该调用哪个查询信息的方法，即，<br>如果是学生调用这个方法，就查询学生信息，如果是老师就查询老师信息。非常的阳间。</p>
+<p>未完待续。。。</p>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/" rel="prev" title="一个简单的提交统计工具">
+      <i class="fa fa-chevron-left"></i> 一个简单的提交统计工具
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2021/03/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2021/03/">1</a><span class="page-number current">2</span>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -332,6 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BD%A2%E8%B1%A1%E8%A7%A3%E9%87%8A%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">一、形象解释什么是面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%B0%8F%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 小例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%86%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 面向对象再解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A"><span class="nav-number">2.</span> <span class="nav-text">面向对象概念解释</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
