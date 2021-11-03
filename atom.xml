@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-11-03T07:01:50.437Z</updated>
+  <updated>2021-11-03T07:06:42.544Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="http://bird.blog.tcualhp.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/"/>
     <id>http://bird.blog.tcualhp.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/</id>
     <published>2021-11-03T02:25:49.000Z</published>
-    <updated>2021-11-03T07:01:50.437Z</updated>
+    <updated>2021-11-03T07:06:42.544Z</updated>
     
     
     <summary type="html">&lt;p&gt;你永远想象不到代码能被重构成什么样子，重构之路充满了惊喜。——我自己&lt;/p&gt;
-&lt;p&gt;如何不信，请直接跳转到文末。&lt;/p&gt;
+&lt;p&gt;如果不信，请直接跳转到文末。&lt;/p&gt;
 &lt;p&gt;这本是我交给社团新人的一个重构任务，但后面自己手痒，在他的基础上，又重构了几版。个人自大一波，认为从本次重构中领悟了很多东西，希望也能给读者带来些帮助。本文是基于 Go 语言的，但是在解释思想时，绝大部分内容不涉及特定语法，适合所有开发者阅读。在此感谢 Atom 、Eson 与我进行的讨论、提供的建议，给我带来了非常大的帮助与启发（尤其是代码直观性方面的保持，不要为了重构而重构）。也感谢 Dolt 的初次重构。&lt;/p&gt;</summary>
     
     
