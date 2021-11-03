@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/ukulele16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="SzFlcDH-1N6SvMJ27lapzWdttiOcoDs7SHVqroj6Jso">
+  <meta name="baidu-site-verification" content="code-aONLTKUdkd">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="你永远想象不到代码能被重构成什么样子，重构之路充满了惊喜。——我自己 如何不信，请直接跳转到文末。 这本是我交给社团新人的一个重构任务，但后面自己手痒，在他的基础上，又重构了几版。个人自大一波，认为从本次重构中领悟了很多东西，希望也能给读者带来些帮助。本文是基于 Go 语言的，但是在解释思想时，绝大部分内容不涉及特定语法，适合所有开发者阅读。在此感谢 Atom 、Eson 与我进行的讨论、提供的建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码重构实战（一）课表查询">
+<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:site_name" content="Bird&#39;s Blog">
+<meta property="og:description" content="你永远想象不到代码能被重构成什么样子，重构之路充满了惊喜。——我自己 如何不信，请直接跳转到文末。 这本是我交给社团新人的一个重构任务，但后面自己手痒，在他的基础上，又重构了几版。个人自大一波，认为从本次重构中领悟了很多东西，希望也能给读者带来些帮助。本文是基于 Go 语言的，但是在解释思想时，绝大部分内容不涉及特定语法，适合所有开发者阅读。在此感谢 Atom 、Eson 与我进行的讨论、提供的建">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/LHP/AppData/Roaming/Typora/typora-user-images/image-20211103112808000.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103134755254.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145522461.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145610548.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145740364.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145835752.png">
+<meta property="article:published_time" content="2021-11-03T02:25:49.000Z">
+<meta property="article:modified_time" content="2021-11-03T07:01:50.437Z">
+<meta property="article:author" content="Bird">
+<meta property="article:tag" content="重构">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/LHP/AppData/Roaming/Typora/typora-user-images/image-20211103112808000.png">
+
+<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>代码重构实战（一）课表查询 | Bird's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bird's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bird's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录「技术与温度」</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-readnotes">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="section"><i class="fa fa-book fa-fw"></i>读书笔记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+      <meta itemprop="name" content="Bird">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bird's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          代码重构实战（一）课表查询
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-03 10:25:49 / 修改时间：15:01:50" itemprop="dateCreated datePublished" datetime="2021-11-03T10:25:49+08:00">2021-11-03</time>
+            </span>
+
+          
+            <span id="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="post-meta-item leancloud_visitors" data-flag-title="代码重构实战（一）课表查询" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>你永远想象不到代码能被重构成什么样子，重构之路充满了惊喜。——我自己</p>
+<p>如何不信，请直接跳转到文末。</p>
+<p>这本是我交给社团新人的一个重构任务，但后面自己手痒，在他的基础上，又重构了几版。个人自大一波，认为从本次重构中领悟了很多东西，希望也能给读者带来些帮助。本文是基于 Go 语言的，但是在解释思想时，绝大部分内容不涉及特定语法，适合所有开发者阅读。在此感谢 Atom 、Eson 与我进行的讨论、提供的建议，给我带来了非常大的帮助与启发（尤其是代码直观性方面的保持，不要为了重构而重构）。也感谢 Dolt 的初次重构。</p>
+<span id="more"></span>
+
+<h2 id="一、项目背景介绍"><a href="#一、项目背景介绍" class="headerlink" title="一、项目背景介绍"></a>一、项目背景介绍</h2><p>本项目是社团微信公众号的后台代码，本文只关注 <code>schedule</code> 模块：根据微信传来的学号，以及触发词，返回「今日课表」或「明日课表」。</p>
+<p>微信端主要是调用了社团上游的课表查询接口，处理初始课表信息，以及封装至微信公众号内。</p>
+<p>本模块原始代码因为大佬写得比较赶，所以没有注意封装，大家勿喷。项目其他地方，例如模块可插拔，设计得非常非常优雅，实在佩服。</p>
+<p>更确切地说，本次代码重构只针对模块的消息路由注册部分。</p>
+<h2 id="二、原始代码"><a href="#二、原始代码" class="headerlink" title="二、原始代码"></a>二、原始代码</h2><p>Hexo 貌似没有原生代码折叠语法支持，就先全部展开吧。：）还是 Github 折叠香</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(message.MsgTypeText), <span class="string">&quot;今日课表&quot;</span>, server.KeywordTypeEqual, <span class="number">1</span>, <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(m.generateScheduleTodayMessage(msg.GetUserID()))&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(message.MsgTypeText), <span class="string">&quot;明日课表&quot;</span>, server.KeywordTypeEqual, <span class="number">1</span>, <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(m.generateScheduleTomorrowMessage(msg.GetUserID()))&#125;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(message.EventClick, <span class="string">&quot;今日课表&quot;</span>, server.KeywordTypeEqual, <span class="number">1</span>, <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(m.generateScheduleTodayMessage(msg.GetUserID()))&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(message.EventClick, <span class="string">&quot;明日课表&quot;</span>, server.KeywordTypeEqual, <span class="number">1</span>, <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(m.generateScheduleTomorrowMessage(msg.GetUserID()))&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这串代码，主要传入了两个变量  </p>
+<ul>
+<li>查哪天的课表：目前有两种可能，<code>今日课表</code>、<code>明日课表</code>。以后可能会加。</li>
+<li>支持的微信触发类型：<code>MsgTypeText</code> ：发文字消息触发，<code>MsgTypeClick</code>：菜单点击触发</li>
+</ul>
+<p>两两组合，一共组合出了四种消息处理路由。  </p>
+<p>赶 ddl 赶出来的代码，可重构的点太多，大家都应该有自己的想法，就不讲了。</p>
+<h2 id="三、新人重构后"><a href="#三、新人重构后" class="headerlink" title="三、新人重构后"></a>三、新人重构后</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	setMsgHandler(s, m, <span class="string">&quot;今日课表&quot;</span>, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, <span class="string">&quot;明日课表&quot;</span>, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, <span class="string">&quot;今日课表&quot;</span>, message.EventClick)</span><br><span class="line">	setMsgHandler(s, m, <span class="string">&quot;明日课表&quot;</span>, message.EventClick)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMsgHandler</span><span class="params">(s *server.Server, m *module, key <span class="keyword">string</span>, msgType message.MsgType)</span></span> &#123;</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(msgType), key, server.KeywordTypeEqual, <span class="number">1</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">server</span>.<span class="title">MessageHandlerFunc</span></span> &#123;</span><br><span class="line">		method := m.generateScheduleTodayMessage</span><br><span class="line">		<span class="keyword">if</span> key == <span class="string">&quot;明日课表&quot;</span> &#123;</span><br><span class="line">			method = m.generateScheduleTomorrowMessage</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(method(msg.GetUserID()))&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;())</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>先看看 Dolt 的重构逻辑，简单粗暴地把那四种组合，封装成了一个函数，即 <code>setMsgHandler</code>，传参就传在变动的两个内容：「天数」和「消息」类型。</p>
+<p>好处在于，未绑定消息提示只有一份了，以后想改话术不用改多次也不用担心话术不一致问题。以及，封装了重复的函数。</p>
+<h3 id="3-1-对新人重构的修改一"><a href="#3-1-对新人重构的修改一" class="headerlink" title="3.1 对新人重构的修改一"></a>3.1 对新人重构的修改一</h3><p>先看这段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(<span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span>)&#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(method(msg.GetUserID()))&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先来分析下这段代码做了什么。</p>
+<p>判断 <code>userID</code> 是否是空</p>
+<ul>
+<li>如果是空，那么就返回 <code>message.Reply</code> 结构体<ul>
+<li>消息设置为未绑定提示</li>
+</ul>
+</li>
+<li>非空，返回 <code>message.Reply</code> 结构体<ul>
+<li>消息设置为格式化后的课表字符串</li>
+</ul>
+</li>
+</ul>
+<p>我认为，上述代码段的两个 <code>return</code>，应当合并为一个，理由如下：</p>
+<p><strong>从代码阅读者视角说</strong>  </p>
+<p>首先，后面阅读该代码的人，需要先明白这是个 <code>if else</code> 结构。然后，正常人，会非常仔细地对比这两个 <code>return message.Reply</code> 内的结构体元素，是否完全一致，到底是哪个元素发生了变化。光是这两行代码的元素对比，起码就要耗时 10 秒。  </p>
+<p>既然代码编写者知道这两行函数只有最后发送的消息不同，那么为什么在写代码的时候就体现出来？而不是说，在其他人日后阅读代码的时候，一个一个元素对比。我觉得这非常不优雅。  </p>
+<p>**从代码整洁度视角说 ** </p>
+<p>代码发生了大幅度相似、重复，整洁度不言而喻。      </p>
+<p>以及，未绑定信息提示太长了，已经超出 80 列了，建议定义成一个常量，传入函数调用中。</p>
+<p>我是这么改的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">unBind := <span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span></span><br><span class="line"><span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line"><span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">	messageReply = unBind</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	messageReply = scheduleString</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先从感官上，这段代码，没有被浏览器渲染成两行，看起来非常舒适。  </p>
+<p>然后，读代码的时候，不会有任何歧义，也不会有干瞪眼比对元素是否相同的情况。  </p>
+<h3 id="3-2-对新人重构的修改二"><a href="#3-2-对新人重构的修改二" class="headerlink" title="3.2 对新人重构的修改二"></a>3.2 对新人重构的修改二</h3><p>再看看这段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">method := m.generateScheduleTodayMessage</span><br><span class="line"><span class="keyword">if</span> key == <span class="string">&quot;明日课表&quot;</span> &#123;</span><br><span class="line">	method = m.generateScheduleTomorrowMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相信读者看到这段的感受都是迷惑的，看了半天，才反映到，这是个 <code>if else</code>。如果传 <code>今日课表</code> ，就调用查询今天课表的函数， 如果传 <code>明日课表</code> ，就调用查询明天课表的函数。</p>
+<p>他先定义了一个默认值 <code>今日课表</code>，然后用 <code>if</code> 判断，如果命中了就覆盖。</p>
+<p>如果后来的调用者，传了个 <code>后天课表</code> ，而没有注意到这个函数的内部实现，那么，就崩了啊，bro~ 最后返回的，是 <code>今日课表</code> 。</p>
+<p>如果改成这样呢：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> key = <span class="string">&quot;今日课表&quot;</span> &#123;</span><br><span class="line">    method := m.generateScheduleTodayMessage</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	method = m.generateScheduleTomorrowMessage</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果后面的调用者，又没看你函数的内部实现，传了个 <code>后天课表</code>，又炸了呀，宝友，这可不兴写！  </p>
+<p>你返回的，会是，明天的课表。</p>
+<p>所以我个人推荐，<strong>所有的已知的判断条件，全部手动硬匹</strong>，<code>else</code> 只用来处理未知情况。代码如下：  </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> key == <span class="string">&quot;今日课表&quot;</span> &#123;</span><br><span class="line">    method := m.generateScheduleTodayMessage</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> key == <span class="string">&quot;明日课表&quot;</span> &#123;</span><br><span class="line">	method = m.generateScheduleTomorrowMessage</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 报错或直接返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，如果有人调用函数，传了个非法值，会直接收到报错。</p>
+<h3 id="3-3-对新人重构的修改三"><a href="#3-3-对新人重构的修改三" class="headerlink" title="3.3 对新人重构的修改三"></a>3.3 对新人重构的修改三</h3><p>这段涉及到 Go 的语法了，不会 Go 的读者可以跳过。</p>
+<p>新人的问题主要在于，写了无必要的函数嵌套。本来只要返回个函数就行，而他写了个匿名函数来返回这个函数。不但增加了无必要的代码层级，还大大降低了可读性。（我太菜了，那天 review 了半天，才注意到后面有个 <code>()</code>）</p>
+<p>怎么改的话，直接贴个示意图吧，应该能看懂。  </p>
+<p><img src="C:\Users\LHP\AppData\Roaming\Typora\typora-user-images\image-20211103112808000.png" alt="image-20211103112808000"></p>
+<h2 id="四、继续重构？"><a href="#四、继续重构？" class="headerlink" title="四、继续重构？"></a>四、继续重构？</h2><p>按照之前的修改，改完后是这样的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	setMsgHandler(s, m, today, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, today, message.EventClick)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.EventClick)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMsgHandler</span><span class="params">(s *server.Server, m *module, offset dayOffset, msgType message.MsgType)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> key <span class="keyword">string</span> <span class="comment">// 微信触发消息</span></span><br><span class="line">    <span class="keyword">var</span> method <span class="function"><span class="keyword">func</span><span class="params">(<span class="keyword">string</span>)</span><span class="title">string</span> // 通过学生 <span class="title">id</span> 获取课表字符串的函数签名</span></span><br><span class="line">    <span class="keyword">if</span> dayOffset == today &#123;</span><br><span class="line">        method := m.generateScheduleTodayMessage</span><br><span class="line">        key = <span class="string">&quot;今日课表&quot;</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> dayOffset == tomorrow &#123;</span><br><span class="line">        method = m.generateScheduleTomorrowMessage</span><br><span class="line">        key == <span class="string">&quot;明日课表&quot;</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 报错或直接返回</span></span><br><span class="line">	&#125;</span><br><span class="line">	msgHandleFunc := <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		unBind := <span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span></span><br><span class="line">		<span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			messageReply = unBind</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            messageReply = method(msg.GetUserID())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(msgType), key, server.KeywordTypeEqual, <span class="number">1</span>, msgHandleFunc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>还能再优化吗？</p>
+<p>其实在重构这个文件前，我已经重构过本模块的另外一份代码，其中采纳了 Atom 的建议，感谢。  </p>
+<p>项目中，生成今日课表或明日课表的代码，其实是这样的：  </p>
+<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103134755254.png" alt="image-20211103134755254"></p>
+<p>之前对今日课表和明日课表的查询是完全独立的两个函数，在这次重构之前，我重构了课表消息缝合函数（就是前文说的两个获取今日课表获取明日课表函数）。写了个通过日期偏移，获取任何一天课表的函数。<code>dayOffset</code> 是我为了增强可读性而定义的新类型，本质就是 <code>int</code>，没学过 Go 的读者可以这么理解。</p>
+<p>当时为了不影响调用方（即今天重构的消息路由注册函数），只改了函数体，函数头保留了。</p>
+<p>今天算是看完了整个模块。既然消息路由的传参是日期偏移，同学查课表的参数也是偏移，那么为什么不统一一下？  这样的话，不但能删除这两个「生成今日课表」、「生成明日课表」的函数，以后如果要增加支持课表查询的天数，也不需要新增函数。</p>
+<p>改完之后是这样的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMsgHandler</span><span class="params">(s *server.Server, m *module, offset dayOffset, msgType message.MsgType)</span></span> &#123;</span><br><span class="line">	msgHandleFunc := <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> dayOffset == today &#123;</span><br><span class="line">        	key = <span class="string">&quot;今日课表&quot;</span></span><br><span class="line">    	&#125; <span class="keyword">else</span> <span class="keyword">if</span> dayOffset == tomorrow &#123;</span><br><span class="line">        	key == <span class="string">&quot;明日课表&quot;</span></span><br><span class="line">    	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="comment">// 报错或直接返回</span></span><br><span class="line">		&#125;</span><br><span class="line">		unBind := <span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span></span><br><span class="line">        <span class="comment">// 这里以后就不用再写 if 了</span></span><br><span class="line">		scheduleString := m.generateScheduleMessageByOffset(msg.GetUserID(), offset)</span><br><span class="line">		<span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			messageReply = unBind</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			messageReply = scheduleString</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(msgType), offset.String(), server.KeywordTypeEqual, <span class="number">1</span>, msgHandleFunc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="五、还能再优化吗"><a href="#五、还能再优化吗" class="headerlink" title="五、还能再优化吗"></a>五、还能再优化吗</h3><p>对于大部分人来说，优化到现在就差不多了。</p>
+<p>但我们现在再从程序的<strong>拓展修改</strong>角度，或者有点像，「开闭原则」，评价一下这个程序。</p>
+<p>看看上面这段代码，<code>setMsgHandler</code> 内有一个将 <code>dayOffset</code> 的数值转化成中文 <code>今日课表</code>、<code>明日课表</code> 的判断。</p>
+<p>如果我们想增加或删减课表查询的天数，比如增加「明日课表」，必须要对 <code>setMsgHandler</code> 进行一个修改。</p>
+<p>这又有个同步问题，如果新开发者调用了 <code>setMsgHandler</code> 函数，传入了 <code>后天</code> 的 <code>dayOffset</code> ，却没有修改函数内 <code>dayOffset</code> → 中文触发词（如 <code>后天课表</code>）的转化。</p>
+<p>那就，又寄了啊，姐妹！</p>
+<p>我们能不能做到，在拓展功能的情况下，不修改 <code>setMsgHandler</code> 函数？</p>
+<p>即，后面的调用者，能不能把 <code>setMsgHandler</code>，当成一个类似于 <code>包内函数</code> 的东西，完全不用关心内部实现，调用的时候不做任何修改？并且不会出现任何同步问题？</p>
+<p>很简单，维护一个 键为 <code>dayOffset</code>，值为 <code>今日课表</code>、<code>明日课表</code> 等的 <code>map</code> 就行。函数体内，只要实现 <code>map[key]</code> 语法就好。  </p>
+<p>通用实现是用 <code>map</code>，但 Go 有更优雅的方式，用接口。  </p>
+<p>当前版本完整代码如下：  </p>
+<p>（上下两部分在两个文件源文件内，为了阅读方便，函数放到了一起）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	today dayOffset = <span class="literal">iota</span></span><br><span class="line">	tomorrow</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里就是我所谓的 Go 的接口实现</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(offset dayOffset)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">map</span>[dayOffset]<span class="keyword">string</span>&#123;</span><br><span class="line">		today:    <span class="string">&quot;今日课表&quot;</span>,</span><br><span class="line">		tomorrow: <span class="string">&quot;明日课表&quot;</span>,</span><br><span class="line">	&#125;[offset]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	setMsgHandler(s, m, today, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, today, message.EventClick)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.EventClick)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMsgHandler</span><span class="params">(s *server.Server, m *module, offset dayOffset, msgType message.MsgType)</span></span> &#123;</span><br><span class="line">	msgHandleFunc := <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		unBind := <span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span></span><br><span class="line">		scheduleString := m.generateScheduleMessageByOffset(msg.GetUserID(), offset)</span><br><span class="line">		<span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line">		<span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			messageReply = unBind</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			messageReply = scheduleString</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">// offset 调用 String 接口，实现类似 map 效果，直接获得 天数偏移对应的  中文</span></span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(msgType), offset.String(), server.KeywordTypeEqual, <span class="number">1</span>, msgHandleFunc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="六、什么，还能更优雅？"><a href="#六、什么，还能更优雅？" class="headerlink" title="六、什么，还能更优雅？"></a>六、什么，还能更优雅？</h3><p>继续从拓展与修改的角度来看，我们来看看 <code>Server</code> 函数，这个函数是我们之前四个路由注册函数的调用方。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	setMsgHandler(s, m, today, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.MsgTypeText)</span><br><span class="line">	setMsgHandler(s, m, today, message.EventClick)</span><br><span class="line">	setMsgHandler(s, m, tomorrow, message.EventClick)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>确实以后不用修改 <code>setMsgHandler</code> 了，但是每次，还需要加两行。比如加个 <code>后天课表</code>功能，我们需要破坏 <code>Serve</code> 函数，加一行日期为后天、消息类型为<code>文本(msgTypeText)</code>的函数调用，再加一行日期为后天，消息类型为<code>点击(msgTypeText)</code>的函数调用。</p>
+<p>这么多行长得相似的，重复了！</p>
+<p>怎么优化？！</p>
+<p>最简单的，数组！</p>
+<p>Show your the code.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 微信课表查询接口支持的天数，可跨天添加</span></span><br><span class="line"><span class="keyword">var</span> supportDays = []dayOffset&#123;today, tomorrow&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *module)</span> <span class="title">Serve</span><span class="params">(s *server.Server)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> _, err := m.cron.AddFunc(<span class="string">&quot;5 0 * * *&quot;</span>, m.updateTime); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	m.cron.Start()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, supportDay := <span class="keyword">range</span> supportDays &#123;</span><br><span class="line">		setMsgHandler(s, m, supportDay, message.MsgTypeText) <span class="comment">// 发消息触发</span></span><br><span class="line">		setMsgHandler(s, m, supportDay, message.EventClick)  <span class="comment">// 点击触发</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以后再要删改支持查询的天数，只要删改常量，改一下 <code>String()</code> 接口，再把需要支持的天数放到 <code>supportDays</code> 切片（数组）里就好。</p>
+<h3 id="七、再来点性能优化？"><a href="#七、再来点性能优化？" class="headerlink" title="七、再来点性能优化？"></a>七、再来点性能优化？</h3><p>这部分的优化，是 Atom 提出的建议，涉及一点项目细节，但读者应该能理解。  </p>
+<p>我们关注 <code>setMsgHandler</code> 中的一小段：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scheduleString := m.generateScheduleMessageByOffset(msg.GetUserID(), offset)</span><br><span class="line"><span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line"><span class="keyword">if</span> msg.GetUserID() == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">messageReply = unBind</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">messageReply = scheduleString</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我来解读一下，第一行是调用了获取课表字符串的接口，这个接口是请求上游服务器的，是<strong>本模块最耗时的操作</strong>。  </p>
+<p>但是，当 <code>userID</code> 为空时，并不会用到课表信息，白请求了一次网络。所以我们调用一下查询课表和判断 <code>userID</code> 是否为空的顺序。  </p>
+<p>于是整个代码就成了这样：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setMsgHandler</span><span class="params">(s *server.Server, m *module, offset dayOffset, msgType message.MsgType)</span></span> &#123;</span><br><span class="line">	msgHandleFunc := <span class="function"><span class="keyword">func</span><span class="params">(msg *server.Message)</span> *<span class="title">message</span>.<span class="title">Reply</span></span> &#123;</span><br><span class="line">		<span class="keyword">var</span> messageReply <span class="keyword">string</span></span><br><span class="line">		userID := msg.GetUserID()</span><br><span class="line">		<span class="keyword">if</span> userID == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			messageReply = <span class="string">&quot;小助手无法获得您的绑定信息呢，请确认微信绑定情况，如有疑问加入杭电助手答疑群咨询哦~&quot;</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当 userID 不为空时，才发起网络请求</span></span><br><span class="line">			messageReply = m.generateScheduleMessageByOffset(userID, offset)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> &amp;message.Reply&#123;MsgType: message.MsgTypeText, MsgData: message.NewText(messageReply)&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	s.MessageHandler.SetMsgHandlerRouter(<span class="keyword">string</span>(msgType), offset.String(), server.KeywordTypeEqual, <span class="number">1</span>, msgHandleFunc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="八、再加点细节？"><a href="#八、再加点细节？" class="headerlink" title="八、再加点细节？"></a>八、再加点细节？</h3><p>这个时候，Eson 又说，你的 <code>setMsgHandler</code> ，关于 <code>userID</code> 的内容，足足占了四行，还有 <code>if</code> ，能不能优化一下？</p>
+<p>？？？</p>
+<p>我们先来分析一下，我特地声明了一个 <code>userID</code> 变量，是因为 <code>userID</code> 在「判空」和「课表查询」的时候都用到了。与其调用两次函数，不如调用一次然后保存。</p>
+<p>这怎么优化？</p>
+<p>Eson 说，或许能利用被调用函数抛出 <code>error</code>？</p>
+<p>懂了，瞬间懂了。</p>
+<p>光速改了，贴代码。还是贴图吧，Goland 的代码高亮比较阳间。</p>
+<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145522461.png" alt="image-20211103145522461"></p>
+<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145610548.png" alt="image-20211103145610548"></p>
+<p>用 <code>generateScheduleMessageByOffset</code> 处理空 ID 确实是优雅的，这样能保证它再次被别人调用的时候，被调皮小子传了空 ID ，能返回错误。</p>
+<h3 id="九、最后重构后的效果"><a href="#九、最后重构后的效果" class="headerlink" title="九、最后重构后的效果"></a>九、最后重构后的效果</h3><p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145740364.png" alt="image-20211103145740364"></p>
+<p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20211103145835752.png" alt="image-20211103145835752"></p>
+<h4 id="9-1-简单总结一下"><a href="#9-1-简单总结一下" class="headerlink" title="9.1 简单总结一下"></a>9.1 简单总结一下</h4><p>别的不说，光凭两张图就能截下完整代码这一点，就够诱人了。</p>
+<p>之前想要添加新的支持的课程查询天数，要改一堆东西，各种变量和函数，极容易出错。</p>
+<p><strong>现在只要改一下常量，把要支持的天数常量加到数组里就好</strong>。除非要改内部实现，否则完全不用改动其他地方的代码。</p>
+<p>（其实还是能优化的，比如把数组的定义，放在靠近循环的位置）</p>
+<h3 id="十、最后再说一句"><a href="#十、最后再说一句" class="headerlink" title="十、最后再说一句"></a>十、最后再说一句</h3><p>优雅啊，哥哥！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%87%8D%E6%9E%84/" rel="tag"># 重构</a>
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" rel="prev" title="面向对象思想入门">
+      <i class="fa fa-chevron-left"></i> 面向对象思想入门
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、项目背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8E%9F%E5%A7%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">二、原始代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E4%BA%BA%E9%87%8D%E6%9E%84%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">三、新人重构后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AF%B9%E6%96%B0%E4%BA%BA%E9%87%8D%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%80"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 对新人重构的修改一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%AF%B9%E6%96%B0%E4%BA%BA%E9%87%8D%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9%E4%BA%8C"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 对新人重构的修改二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%AF%B9%E6%96%B0%E4%BA%BA%E9%87%8D%E6%9E%84%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%89"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 对新人重构的修改三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%BB%A7%E7%BB%AD%E9%87%8D%E6%9E%84%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">四、继续重构？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%BF%98%E8%83%BD%E5%86%8D%E4%BC%98%E5%8C%96%E5%90%97"><span class="nav-number">4.1.</span> <span class="nav-text">五、还能再优化吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E4%BB%80%E4%B9%88%EF%BC%8C%E8%BF%98%E8%83%BD%E6%9B%B4%E4%BC%98%E9%9B%85%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">六、什么，还能更优雅？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%86%8D%E6%9D%A5%E7%82%B9%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">七、再来点性能优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%86%8D%E5%8A%A0%E7%82%B9%E7%BB%86%E8%8A%82%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">八、再加点细节？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%9C%80%E5%90%8E%E9%87%8D%E6%9E%84%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">4.5.</span> <span class="nav-text">九、最后重构后的效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-1-%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B"><span class="nav-number">4.5.1.</span> <span class="nav-text">9.1 简单总结一下</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E6%9C%80%E5%90%8E%E5%86%8D%E8%AF%B4%E4%B8%80%E5%8F%A5"><span class="nav-number">4.6.</span> <span class="nav-text">十、最后再说一句</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bird"
+      src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+  <p class="site-author-name" itemprop="name">Bird</p>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+    <div class="links-of-blogroll motion-element links-of-blogroll-block">
+      <div class="links-of-blogroll-title">
+        <!-- modify icon to fire by szw -->
+        <i class="fa fa-history fa-" aria-hidden="true"></i>
+        近期文章
+      </div>
+      <ul class="links-of-blogroll-list">
+        
+        
+          <li>
+            <a href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" title="代码重构实战（一）课表查询" target="_blank">代码重构实战（一）课表查询</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" title="面向对象思想入门" target="_blank">面向对象思想入门</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/" title="一个简单的提交统计工具" target="_blank">一个简单的提交统计工具</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" title="浅析Golang之T与*T方法集及receiver" target="_blank">浅析Golang之T与*T方法集及receiver</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" title="使用 Golang 解析专利审查指南" target="_blank">使用 Golang 解析专利审查指南</a>
+          </li>
+        
+      </ul>
+    </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bird</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">70k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va","app_key":"irTJuJuhBG8Pn6zKBvxEmCMN","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '6cFBYSBByznVqCkdTS34QR8b-9Nh9j0Va',
+      appKey     : 'irTJuJuhBG8Pn6zKBvxEmCMN',
+      placeholder: "欢迎留言~ (填写email可接受回复通知）",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":120,"height":210},"mobile":{"show":true}});</script></body>
+</html>
