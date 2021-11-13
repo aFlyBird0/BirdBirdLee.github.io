@@ -6,7 +6,7 @@
   <link href="http://bird.blog.tcualhp.cn/atom.xml" rel="self"/>
   
   <link href="http://bird.blog.tcualhp.cn/"/>
-  <updated>2021-11-04T09:53:49.021Z</updated>
+  <updated>2021-11-13T16:06:46.283Z</updated>
   <id>http://bird.blog.tcualhp.cn/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我与阿德勒</title>
+    <link href="http://bird.blog.tcualhp.cn/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/"/>
+    <id>http://bird.blog.tcualhp.cn/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/</id>
+    <published>2021-11-13T15:36:59.000Z</published>
+    <updated>2021-11-13T16:06:46.283Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;很早就想写写关于「阿德勒」的一些东西了，前些天交了心理作业，所谓的契机就这么来了。我是从《被讨厌的勇气》一书知晓阿德勒的，对话体，作者是「岸见一郎」与「古贺史健」。可以说，是阿德勒赋予了我新生。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="阿德勒" scheme="http://bird.blog.tcualhp.cn/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/"/>
+    
+  </entry>
   
   <entry>
     <title>代码重构实战（一）课表查询</title>
@@ -392,24 +409,6 @@
     <category term="CS" scheme="http://bird.blog.tcualhp.cn/categories/CS/"/>
     
     <category term="hexo" scheme="http://bird.blog.tcualhp.cn/categories/CS/hexo/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>人为什么而活2</title>
-    <link href="http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/"/>
-    <id>http://bird.blog.tcualhp.cn/2021/03/%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%80%8C%E6%B4%BB2/</id>
-    <published>2021-03-04T16:22:50.000Z</published>
-    <updated>2021-10-05T17:46:34.583Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;现在是2021年3月5日，早在2019年8月4日，我就已经思考过这个话题，当时的答案是：「&lt;strong&gt;做你想做的，做你该做的&lt;/strong&gt;」，现在想想这个答案未免有些泛泛而谈，没有啥意义。当时的想法是，「想做的」即为一个人喜欢做的；「该做的」是一个人的责任，我认为这构成了人活着的意义。  &lt;/p&gt;
-&lt;p&gt;有趣的是，在2020年7月18日，我在知乎回答了这样一个问题：「是什么让你坚持活下去（限10个字之内）？」，我的回答是，「&lt;strong&gt;我爱的人，爱我的人&lt;/strong&gt;」。当时的我应该是处于心情的低谷期，每天的焦虑、自卑、抑郁、逃避充斥着我。可以看得出来，当时的我更加注重「人」的意义。或许你会觉得，当时的我，是个重情重义的人——事实确实如此，但另一方面，这短短的八个字，也体现了我的焦虑型依恋的本质，换句话说，这个时候，我已经迷失自我了：我们把这八个字做一下小学时常考的「缩句」，那么我的回答就成了「（别）人，（别）人」，&lt;strong&gt;给出这个答案时候的我，根本不是为自己而活着&lt;/strong&gt;，换句话说，我看不到自己活着的意义，心中对于「我」的概念已经很微弱了。  &lt;/p&gt;</summary>
-    
-    
-    
-    <category term="think" scheme="http://bird.blog.tcualhp.cn/categories/think/"/>
     
     
   </entry>
