@@ -19,13 +19,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="专利审查指南解析本项目代码地址：BirdBirdLee&#x2F;parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库 〇、本项目的由来、意义由来导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。师兄说建议用 Java 的 Apache POI，但我刚学了 Golang 一星期，就">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Golang 解析专利审查指南">
-<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:url" content="https://blog.aflybird.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
 <meta property="og:description" content="专利审查指南解析本项目代码地址：BirdBirdLee&#x2F;parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库 〇、本项目的由来、意义由来导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。师兄说建议用 Java 的 Apache POI，但我刚学了 Golang 一星期，就">
 <meta property="og:locale" content="zh_CN">
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210915223953307.png">
 
-<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
+<link rel="canonical" href="https://blog.aflybird.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
 
 
 <script id="page-configurations">
@@ -205,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
@@ -486,7 +486,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/aFlyBird0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aFlyBird0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>

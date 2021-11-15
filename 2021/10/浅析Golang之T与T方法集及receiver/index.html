@@ -19,13 +19,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析Golang之T与*T方法集及receiver">
-<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/index.html">
+<meta property="og:url" content="https://blog.aflybird.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
 <meta property="og:description" content="到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博">
 <meta property="og:locale" content="zh_CN">
@@ -43,7 +43,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/%5BQJUH5B6I~%60~X96GWO%5D@IP3.jpg">
 
-<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
+<link rel="canonical" href="https://blog.aflybird.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
 
 
 <script id="page-configurations">
@@ -211,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
@@ -465,7 +465,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/aFlyBird0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aFlyBird0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>

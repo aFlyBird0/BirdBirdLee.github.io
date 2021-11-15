@@ -19,13 +19,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"bird.blog.tcualhp.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。采用模块化的设计，拥有流程控制模块、错误重爬模块、任务分发模块，任务监督模块等。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scrapy知网爬虫（一）整体理论篇">
-<meta property="og:url" content="http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/index.html">
+<meta property="og:url" content="https://blog.aflybird.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
 <meta property="og:description" content="简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。采用模块化的设计，拥有流程控制模块、错误重爬模块、任务分发模块，任务监督模块等。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有m">
 <meta property="og:locale" content="zh_CN">
@@ -56,7 +56,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/d98d59fc3e58e6364ae032e43ab0851d.png">
 
-<link rel="canonical" href="http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/">
+<link rel="canonical" href="https://blog.aflybird.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/">
 
 
 <script id="page-configurations">
@@ -224,7 +224,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://bird.blog.tcualhp.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
@@ -651,7 +651,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/BirdBirdLee" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BirdBirdLee" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/aFlyBird0" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aFlyBird0" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="/1606251360@qq.com" title="E-Mail → 1606251360@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
