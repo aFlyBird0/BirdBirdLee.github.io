@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟 以下正文： 副标题：配合示例详解 Go 语言类型系统 我们先从一个基本问题开始吧！   为什么我们需要类型系统？在回答这个问题之前，我们先看看平日里我们不需要接触的编程语言的原">
+  <meta name="description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。 找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。 看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="细窥Golang类型系统">
 <meta property="og:url" content="https://blog.aflybird.cn/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟 以下正文： 副标题：配合示例详解 Go 语言类型系统 我们先从一个基本问题开始吧！   为什么我们需要类型系统？在回答这个问题之前，我们先看看平日里我们不需要接触的编程语言的原">
+<meta property="og:description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。 找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。 看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/binary0_1.jpeg">
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/matrix.gif">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/underlying_types.png">
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_twitter.png">
 <meta property="article:published_time" content="2021-12-20T13:09:47.000Z">
-<meta property="article:modified_time" content="2021-12-20T16:33:28.690Z">
+<meta property="article:modified_time" content="2021-12-20T16:41:13.419Z">
 <meta property="article:author" content="Bird">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="好文翻译">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-21 00:33:28" itemprop="dateModified" datetime="2021-12-21T00:33:28+08:00">2021-12-21</time>
+                <time title="修改时间：2021-12-21 00:41:13" itemprop="dateModified" datetime="2021-12-21T00:41:13+08:00">2021-12-21</time>
               </span>
 
           
@@ -274,7 +274,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.6k</span>
+              <span>6.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -293,7 +293,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，<strong>逐字斟酌，并补充了许多内容</strong>，标示「译者注」。——by 爱飞的鸟</p>
+        <p>本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。</p>
+<p>找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。</p>
+<p>看完就忍不住翻译下来，<strong>逐字斟酌，并补充了许多内容</strong>，标示「译者注」。——by 爱飞的鸟</p>
+<span id="more"></span>
+
 <p>以下正文：</p>
 <p><strong>副标题：配合示例详解 Go 语言类型系统</strong></p>
 <p>我们先从一个基本问题开始吧！  </p>
@@ -403,7 +407,7 @@
 <p><code>S</code> 的底层类型是 <code>string</code>，所以，难道 <code>T</code> 的底层类型不应该是 <code>map[string]int</code> 吗？为什么是 <code>map[S]int</code> ？</p>
 <p>因为我们在谈论 <code>map[S]int</code> 的底层无名类型时，在遇到第一个无名类型时就停止追溯（译注：<code>map[S]int</code>就是我们在递归寻找 <code>T</code> 的底层类型时遇到的第一个无名类型，立即停止）。或者正如 Go 语言规范上写的，如果 <code>T</code> 是类型字面量，那么它的类型就是它本身。</p>
 <p>你可能会好奇，为什么我这么重视「无名类型」、「有名类型（定义类型）」和「底层类型」。因为它们在 Go 语言规范中扮演着重要的角色，使得我们的讨论能够继续。它能帮助我们理解，为什么上面贴的那些代码，有些长得几乎一样，但甚至过不了编译。</p>
-<h2 id="可赋值性"><a href="#可赋值性" class="headerlink" title="可赋值性"></a>可赋值性</h2><p>关于一个值 <code>x</code> 是否可以赋值给一个 类型为 <code>T</code> 的变量，满足以下规则之一就可赋值（[译自Go语言可赋值性规则](<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Assignability">The Go Programming Language Specification - go.dev</a>)）：</p>
+<h2 id="可赋值性"><a href="#可赋值性" class="headerlink" title="可赋值性"></a>可赋值性</h2><p>关于一个值 <code>x</code> 是否可以赋值给一个 类型为 <code>T</code> 的变量，满足以下规则之一就可赋值（<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Assignability">译自Go语言可赋值性规则</a>）：</p>
 <ul>
 <li><p>x 的类型 与 T 相同。</p>
 </li>
@@ -439,7 +443,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Firgure 4</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyMap <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>)</span><br><span class="line">	<span class="keyword">var</span> mMap MyMap</span><br><span class="line">	mMap = m</span><br><span class="line">	printMyMapType(mMap)</span><br><span class="line">	<span class="built_in">print</span>(m)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printMyMapType</span><span class="params">(mMap MyMap)</span></span> &#123;</span><br><span class="line">	<span class="built_in">print</span>(mMap)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>代码片段 4 能通过编译。因为 <code>m</code> 是无名类型 <code>map[int]int</code>，<code>mMap</code> 的底层类型和类型声明原类型 <code>MyMap</code> 的底层类型相同，都是 <code>map[int]int</code>， 即 <code>m</code> 和 <code>mMap</code> 的底层类型相同。</p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>一个非 常量的值 <code>x</code> 能被转换成类型 <code>T</code> ，当满足以下任何条件之一：[译自 Go 语言类型转换规则](<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Conversions">The Go Programming Language Specification - go.dev</a>)</p>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>一个非 常量的值 <code>x</code> 能被转换成类型 <code>T</code> ，当满足以下任何条件之一：<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Conversions">译自 Go 语言类型转换规则</a></p>
 <ul>
 <li><p>x 可赋值给 T</p>
 </li>
@@ -472,8 +476,8 @@
 <p>所以，在 Go 语言里面，一个已定义的类型（有名类型），永远和其他类型不相同。因为两个有名类型的名字不可能相同。</p>
 <p><strong>结构相同</strong>：两个类型当且仅当它们拥有相同的「结构（structure）」时才相同。</p>
 <p>在 Go 语言中，当两个类型结构相同且不是有名类型时，类型才相同。</p>
-<p>所以，甚至 Go 语言中预定义的 有名类型/定义类型，例如，<code>int</code> 和 <code>int64</code> 也不是相同类型。并且，Go 语言接口类型的可赋值性也取决于 [结构类型系统（Structural type system）](<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Structural_type_system">Structural type system - Wikipedia</a>) 。 <strong>Go 语言没有 Duck Type</strong>。</p>
-<p>(下面是[原作者义愤填膺的推特](<a target="_blank" rel="noopener" href="https://twitter.com/in_aanand/status/1072476894308773888?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1072476894308773888%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https://cdn.embedly.com/widgets/media.html?type=text2Fhtmlkey=a19fcc184b9711e1b4764040d3dc5c07schema=twitterurl=https3A//twitter.com/in_aanand/status/1072476894308773888image=https3A//i.embed.ly/1/image3Furl3Dhttps253A252F252Fpbs.twimg.com252Fprofile_images252F1097738091530342400252FFS0a8_YX_400x400.png26key3Da19fcc184b9711e1b4764040d3dc5c07">Ankur Anand 在 Twitter: “There is No “Duck typing in @golang”. Go uses “structural typing” on methods to determine the compatibility of a type with an interface, not “Duck Typing”. I Repeat There is <em>NO</em> Duck Typing in #golang. Unfortunately, many articles on the web have got it wrong. 😇” / Twitter</a>)) 译者保留意见。</p>
+<p>所以，甚至 Go 语言中预定义的 有名类型/定义类型，例如，<code>int</code> 和 <code>int64</code> 也不是相同类型。并且，Go 语言接口类型的可赋值性也取决于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Structural_type_system">结构类型系统（Structural type system）</a> 。 <strong>Go 语言没有 Duck Type</strong>。</p>
+<p>(下面是<a target="_blank" rel="noopener" href="https://twitter.com/in_aanand/status/1072476894308773888?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1072476894308773888%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https://cdn.embedly.com/widgets/media.html?type=text2Fhtmlkey=a19fcc184b9711e1b4764040d3dc5c07schema=twitterurl=https3A//twitter.com/in_aanand/status/1072476894308773888image=https3A//i.embed.ly/1/image3Furl3Dhttps253A252F252Fpbs.twimg.com252Fprofile_images252F1097738091530342400252FFS0a8_YX_400x400.png26key3Da19fcc184b9711e1b4764040d3dc5c07">原作者义愤填膺的推特</a>)  译者保留意见。</p>
 <p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_twitter.png" alt="type_system_twitter"></p>
 <p>下面我们来看看结构体的转换：</p>
 <p>规则：忽略结构体 tag，x 的类型和 T 拥有相同的底层类型。</p>
@@ -683,7 +687,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">82k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
