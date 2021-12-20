@@ -22,30 +22,42 @@
     var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="热爱可抵岁月漫长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bird&#39;s Blog">
-<meta property="og:url" content="https://blog.aflybird.cn/index.html">
+  <meta name="description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟 以下正文： 副标题：配合示例详解 Go 语言类型系统 我们先从一个基本问题开始吧！   为什么我们需要类型系统？在回答这个问题之前，我们先看看平日里我们不需要接触的编程语言的原">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细窥Golang类型系统">
+<meta property="og:url" content="https://blog.aflybird.cn/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="热爱可抵岁月漫长">
+<meta property="og:description" content="本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，逐字斟酌，并补充了许多内容，标示「译者注」。——by 爱飞的鸟 以下正文： 副标题：配合示例详解 Go 语言类型系统 我们先从一个基本问题开始吧！   为什么我们需要类型系统？在回答这个问题之前，我们先看看平日里我们不需要接触的编程语言的原">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/binary0_1.jpeg">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/matrix.gif">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/assembly.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_figure1.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_figure2.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/underlying_types.png">
+<meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_twitter.png">
+<meta property="article:published_time" content="2021-12-20T13:09:47.000Z">
+<meta property="article:modified_time" content="2021-12-20T16:33:28.690Z">
 <meta property="article:author" content="Bird">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="好文翻译">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/binary0_1.jpeg">
 
-<link rel="canonical" href="https://blog.aflybird.cn/">
+<link rel="canonical" href="https://blog.aflybird.cn/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Bird's Blog</title>
+  <title>细窥Golang类型系统 | Bird's Blog</title>
   
 
 
@@ -193,122 +205,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/" class="post-title-link" itemprop="url">Scrapy知网爬虫（一）整体理论篇</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-              <i class="fa fa-thumb-tack"></i>
-              <font color="RED">置顶</font>
-              <span class="post-meta-divider">|</span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-07-02 10:19:31" itemprop="dateCreated datePublished" datetime="2021-07-02T10:19:31+08:00">2021-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
-              </span>
-
-          
-            <span id="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="Scrapy知网爬虫（一）整体理论篇" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
-            </span>
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简要介绍：本系列是基于scrapy开发的知网爬虫（专利、论文、项目），已经爬了百万级别的数据，程序健壮性、速度均得到了验证。采用模块化的设计，拥有流程控制模块、错误重爬模块、任务分发模块，任务监督模块等。该系列预计分为：理论篇（整体介绍）、详细设计篇（披露代码细节，完整代码不一定开源）等。本文为理论篇，整体介绍了爬虫的理念、概要设计。本文由原word论文直接导出而后简单修改，所以部分样式可能没有md原汁原味。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/Scrapy%E7%9F%A5%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E4%BD%93%E7%90%86%E8%AE%BA%E7%AF%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -324,10 +224,9 @@
       <meta itemprop="name" content="Bird's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">细窥Golang类型系统</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          细窥Golang类型系统
+        </h1>
 
         <div class="post-meta">
 
@@ -394,7 +293,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，<strong>逐字斟酌，并补充了许多内容</strong>，标示「译者注」。——by 爱飞的鸟</p>
+        <p>本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，<strong>逐字斟酌，并补充了许多内容</strong>，标示「译者注」。——by 爱飞的鸟</p>
 <p>以下正文：</p>
 <p><strong>副标题：配合示例详解 Go 语言类型系统</strong></p>
 <p>我们先从一个基本问题开始吧！  </p>
@@ -595,910 +494,41 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/golang101/golang101">golang101——第14章 go 类型系统概述</a></li>
 </ol>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
+              <a href="/tags/%E5%A5%BD%E6%96%87%E7%BF%BB%E8%AF%91/" rel="tag"># 好文翻译</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">厚脸皮：从入门到实践</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-11-21 01:23:04 / 修改时间：02:26:05" itemprop="dateCreated datePublished" datetime="2021-11-21T01:23:04+08:00">2021-11-21</time>
-            </span>
-
-          
-            <span id="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" class="post-meta-item leancloud_visitors" data-flag-title="厚脸皮：从入门到实践" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文是我克服社交恐惧的一些个人经验，希望能给读这篇文章的你带来些帮助。</p>
-<p>我所指的厚脸皮是在<strong>真诚与尊重他人</strong>的基础上，能勇敢地做自己，拥有被讨厌的勇气。让别人感到不舒服的行为，不叫厚脸皮，叫冒犯。</p>
-<h2 id="心法一：别人没有那么在意你"><a href="#心法一：别人没有那么在意你" class="headerlink" title="心法一：别人没有那么在意你"></a>心法一：别人没有那么在意你</h2><p>又名：<strong>每个人的中心都是自己</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/" class="post-title-link" itemprop="url">我与阿德勒</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-13 23:36:59" itemprop="dateCreated datePublished" datetime="2021-11-13T23:36:59+08:00">2021-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-21 01:24:13" itemprop="dateModified" datetime="2021-11-21T01:24:13+08:00">2021-11-21</time>
-              </span>
-
-          
-            <span id="/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/" class="post-meta-item leancloud_visitors" data-flag-title="我与阿德勒" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>很早就想写写关于「阿德勒」的一些东西了，前些天交了心理作业，所谓的契机就这么来了。我是从《被讨厌的勇气》一书知晓阿德勒的，对话体，作者是「岸见一郎」与「古贺史健」。可以说，是阿德勒赋予了我新生。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/%E6%88%91%E4%B8%8E%E9%98%BF%E5%BE%B7%E5%8B%92/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/%E5%8E%9A%E8%84%B8%E7%9A%AE%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E8%B7%B5/" rel="prev" title="厚脸皮：从入门到实践">
+      <i class="fa fa-chevron-left"></i> 厚脸皮：从入门到实践
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">代码重构实战（一）课表查询</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-03 10:25:49" itemprop="dateCreated datePublished" datetime="2021-11-03T10:25:49+08:00">2021-11-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-04 17:53:49" itemprop="dateModified" datetime="2021-11-04T17:53:49+08:00">2021-11-04</time>
-              </span>
-
-          
-            <span id="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="post-meta-item leancloud_visitors" data-flag-title="代码重构实战（一）课表查询" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>你永远想象不到代码能被重构成什么样子，重构之路充满了惊喜。——我自己</p>
-<p>如果不信，请直接跳转到文末。</p>
-<p>这本是我交给社团新人的一个重构任务，但后面自己手痒，在他的基础上，又重构了几版。个人自大一波，认为从本次重构中领悟了很多东西，希望也能给读者带来些帮助。本文是基于 Go 语言的，但是在解释思想时，绝大部分内容不涉及特定语法，适合所有开发者阅读。在此感谢 Atom 、Eson 与我进行的讨论、提供的建议，给我带来了非常大的帮助与启发（尤其是代码直观性方面的保持，不要为了重构而重构）。也感谢 Dolt 的初次重构。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">面向对象思想入门</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-30 17:53:42 / 修改时间：17:56:27" itemprop="dateCreated datePublished" datetime="2021-10-30T17:53:42+08:00">2021-10-30</time>
-            </span>
-
-          
-            <span id="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" class="post-meta-item leancloud_visitors" data-flag-title="面向对象思想入门" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、形象解释什么是面向对象"><a href="#一、形象解释什么是面向对象" class="headerlink" title="一、形象解释什么是面向对象"></a>一、形象解释什么是面向对象</h2><h3 id="1-1-小例子"><a href="#1-1-小例子" class="headerlink" title="1.1 小例子"></a>1.1 小例子</h3><p>先来个例子，简单了解一下面向过程和面向对象的区别。</p>
-<blockquote>
-<p>有一天你想吃鱼香肉丝了，怎么办呢？你有两个选择：<br>1、自己买材料，肉，鱼香肉丝调料，蒜苔，胡萝卜等等然后切菜切肉，开炒，盛到盘子里。<br>2、去饭店，张开嘴：老板！来一份鱼香肉丝！<br>看出来区别了吗？1是面向过程，2是面向对象。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">一个简单的提交统计工具</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-10-17 00:15:43" itemprop="dateCreated datePublished" datetime="2021-10-17T00:15:43+08:00">2021-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-30 17:56:25" itemprop="dateModified" datetime="2021-10-30T17:56:25+08:00">2021-10-30</time>
-              </span>
-
-          
-            <span id="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="一个简单的提交统计工具" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>947</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="项目由来"><a href="#项目由来" class="headerlink" title="项目由来"></a>项目由来</h2><p>最近在做一些群内的人员管理工作，经常要下发表格，筛选出没提交的人。<br>众所周知，懒是第一生产力，于是开发了一个可以根据人员信息表与实际提交信息，直接计算出未提交名单的工具。</p>
-<p>目前只做了桌面命令行极简版。仓库地址：<a target="_blank" rel="noopener" href="https://github.com/aFlyBird0/submit_tools">aFlyBird0/submit_tools: 看看谁还没提交！！！</a></p>
-<h3 id="思路介绍"><a href="#思路介绍" class="headerlink" title="思路介绍"></a>思路介绍</h3><p>先考虑最简单的情况：如果所有人的信息，仅提供姓名。</p>
-<p>那么只要先维护一个姓名列表，然后使用某种途径获取已经提交了人的列表。遍历姓名列表，一个个看该姓名是否出现在了提交列表中即可。</p>
-<p>稍微复杂一些：提交列表不一定是规整的数组，可能来源于网页表格；也可能来源于QQ的投票统计，是OCR的结果。即，拥有许多杂乱的内容。这时候可以退而求其次，把提交信息统一转化成一个多行字符串，将列表的对应查询变成了 <code>strings.Contains()</code> 操作。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8F%90%E4%BA%A4%E7%BB%9F%E8%AE%A1%E5%B7%A5%E5%85%B7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" class="post-title-link" itemprop="url">浅析Golang之T与*T方法集及receiver</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-06 00:36:38 / 修改时间：01:50:04" itemprop="dateCreated datePublished" datetime="2021-10-06T00:36:38+08:00">2021-10-06</time>
-            </span>
-
-          
-            <span id="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" class="post-meta-item leancloud_visitors" data-flag-title="浅析Golang之T与*T方法集及receiver" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>到今天为止，差不多正式学 Go 一个月。一直觉得 receiver 的 T 和 *T 的方法集云里雾里，好在通过多次查阅资料和代码实践，终于在表象方面掌握了七七八八。本文涉及 T 与 *T 方法集的关系，编译器自动解引用与取地址，T 与 *T 接口实现等。不一定全对，希望大佬指正错误。本文废话很多，一个概念翻来覆去讲了很多遍，但也是这样，才能使读者从各个角度印证自己的想法是否和我的思想一致，太多博客讲得单一了容易有理解偏差。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/%E6%B5%85%E6%9E%90Golang%E4%B9%8BT%E4%B8%8ET%E6%96%B9%E6%B3%95%E9%9B%86%E5%8F%8Areceiver/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">使用 Golang 解析专利审查指南</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-17 00:28:40" itemprop="dateCreated datePublished" datetime="2021-09-17T00:28:40+08:00">2021-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
-              </span>
-
-          
-            <span id="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" class="post-meta-item leancloud_visitors" data-flag-title="使用 Golang 解析专利审查指南" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="专利审查指南解析"><a href="#专利审查指南解析" class="headerlink" title="专利审查指南解析"></a>专利审查指南解析</h1><p>本项目代码地址：<a target="_blank" rel="noopener" href="https://github.com/BirdBirdLee/parsePatentWord">BirdBirdLee/parsePatentWord: 利用 Golang 解析《专利审查指南 2020…doc》，并将标题、段落层级关系存至数据库</a></p>
-<h2 id="〇、本项目的由来、意义"><a href="#〇、本项目的由来、意义" class="headerlink" title="〇、本项目的由来、意义"></a>〇、本项目的由来、意义</h2><h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p>导师布置了个任务，提取《专利审查指南…》，做成电子书。所以第一步是把标题层级和段落内容提取到数据库里面。<br>师兄说建议用 Java 的 <code>Apache POI</code>，但我刚学了 Golang 一星期，就想用 Golang 做！！！死磕~~~（其实中间反复过两次，真的很想用 Java 或 Python 的 API！还好坚持下来了，收获了很多）</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/%E4%BD%BF%E7%94%A8%20Golang%20%E8%A7%A3%E6%9E%90%E4%B8%93%E5%88%A9%E5%AE%A1%E6%9F%A5%E6%8C%87%E5%8D%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">声昔-读书会-亲密关系</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-03 18:25:16" itemprop="dateCreated datePublished" datetime="2021-05-03T18:25:16+08:00">2021-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" class="post-meta-item leancloud_visitors" data-flag-title="声昔-读书会-亲密关系" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><h3 id="何为亲密关系"><a href="#何为亲密关系" class="headerlink" title="何为亲密关系"></a>何为亲密关系</h3><p>本意是指不限年龄和性别的两人之间和谐、融洽的关系。但目前来说，大多数情况下指的是情侣、夫妻间的爱情。值得注意的是，心理学家认为，两个人之间存在影响与互赖，才称之为关系。所以其实并非所有情侣、婚姻间都存在亲密关系。</p>
-<h3 id="选题原因"><a href="#选题原因" class="headerlink" title="选题原因"></a>选题原因</h3><ol>
-<li>亲密关系的重要性</li>
-<li>我在亲密关系上失败太多次，不想再有更多的人像我一样因为没做好准备，没有把握住甜美的爱情</li>
-<li>本次共读只是个引子，<strong>希望能通过这次主持引起大家对亲密关系的重视，学习爱的能力，恋爱能力不是天赋，也是需要不断学习的</strong></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1545,6 +575,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么我们需要类型系统？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E4%BB%A5%EF%BC%8C%E7%B1%BB%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">所以，类型到底是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-%E8%AF%AD%E8%A8%80%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">Go 语言的类型系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%90%8D%E7%B1%BB%E5%9E%8B%EF%BC%88Named-Types%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">有名类型（Named Types）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E5%90%8D%E7%B1%BB%E5%9E%8B%EF%BC%88Unnamed-Types%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">无名类型（Unnamed Types）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">底层类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%B5%8B%E5%80%BC%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">可赋值性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">7.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text">类型一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">9.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
