@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/underlying_types.png">
 <meta property="og:image" content="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_twitter.png">
 <meta property="article:published_time" content="2021-12-20T13:09:47.000Z">
-<meta property="article:modified_time" content="2021-12-20T16:41:13.419Z">
+<meta property="article:modified_time" content="2021-12-20T23:53:17.446Z">
 <meta property="article:author" content="Bird">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="好文翻译">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-21 00:41:13" itemprop="dateModified" datetime="2021-12-21T00:41:13+08:00">2021-12-21</time>
+                <time title="修改时间：2021-12-21 07:53:17" itemprop="dateModified" datetime="2021-12-21T07:53:17+08:00">2021-12-21</time>
               </span>
 
           
@@ -345,7 +345,7 @@
 <li><p><strong>类型兼容</strong>——</p>
 <ol>
 <li>下面哪个赋值是被类型系统所允许的？<code>a int; b int8; a = b; </code></li>
-<li>如何定义两个类型是否相等？——在[Go的可赋值判断](<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Assignability">The Go Programming Language Specification - go.dev</a>)中主要由类型是否可以互换引用决定。我们等会会详细探讨。</li>
+<li>如何定义两个类型是否相等？——在<a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Assignability">Go的可赋值判断</a>中主要由类型是否可以互换引用决定。我们等会会详细探讨。</li>
 </ol>
 </li>
 </ol>
@@ -355,7 +355,9 @@
 <p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_figure1.png" alt="type_system_figure1"></p>
 <p><img src="https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_figure2.png" alt="type_system_figure2"></p>
 <p>我希望你能写下自己的答案和理由，这样在最后我们就能一起探讨。</p>
-<h2 id="有名类型（Named-Types）"><a href="#有名类型（Named-Types）" class="headerlink" title="有名类型（Named Types）"></a>有名类型（Named Types）</h2><p>也可被译作 「命名类型」。</p>
+<h2 id="有名类型（Named-Types）"><a href="#有名类型（Named-Types）" class="headerlink" title="有名类型（Named Types）"></a>有名类型（Named Types）</h2><blockquote>
+<p>译者注：也可被译作 「命名类型」，又可被叫做「定义类型」（Defined Types）</p>
+</blockquote>
 <p>诸如<code>int</code>, <code>int64</code>, <code>float32</code>, <code>string</code> 和 <code>bool</code> 等类型是预先定义（pre-declare）的。<strong>所有的预先定义的布尔型、数字型，字符串类型都是有名类型。</strong></p>
 <blockquote>
 <p>译者注：</p>
@@ -379,7 +381,9 @@
 </ol>
 </blockquote>
 <p><strong>有名类型与定义类型，与其他类型都是永远不相等的</strong>。</p>
-<h2 id="无名类型（Unnamed-Types）"><a href="#无名类型（Unnamed-Types）" class="headerlink" title="无名类型（Unnamed Types）"></a>无名类型（Unnamed Types）</h2><p>也可被译作「未命名类型」。</p>
+<h2 id="无名类型（Unnamed-Types）"><a href="#无名类型（Unnamed-Types）" class="headerlink" title="无名类型（Unnamed Types）"></a>无名类型（Unnamed Types）</h2><blockquote>
+<p>译者注：也可被译作「未命名类型」，「非定义类型」，非定义类型一定是复合类型</p>
+</blockquote>
 <p><strong>复合（组合）类型</strong>——数组，结构体，指针，函数，接口，切片，映射和 channel ——都是无名类型。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[]<span class="keyword">string</span> <span class="comment">// unnamed type</span></span><br><span class="line"><span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span> <span class="comment">// unnamed type</span></span><br><span class="line">[<span class="number">10</span>]<span class="keyword">int</span> <span class="comment">// unnamed type</span></span><br></pre></td></tr></table></figure>
 
@@ -422,9 +426,9 @@
 </li>
 <li><p>x 是预定义的 <code>nil</code> 值，T 是一个指针，函数，切片，映射，channel 或 接口类型。</p>
 </li>
-<li><p>x 的无类型的可被 T 类型表示的常量值</p>
+<li><p>x 是无类型的可被 T 类型表示的常量值</p>
 <blockquote>
-<p>译者注：如， <code>var num int = 1</code></p>
+<p>译者注：如， <code>var num int = 1</code> 。<code>x</code> 为 无类型常量 <code>1</code>，可被 <code>int</code> 表示。</p>
 </blockquote>
 </li>
 </ul>
