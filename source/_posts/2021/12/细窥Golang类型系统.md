@@ -8,9 +8,19 @@ tags:
 categories:
 ---
 
-本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。看完就忍不住翻译下来，**逐字斟酌，并补充了许多内容**，标示「译者注」。——by 爱飞的鸟
+本文是一篇翻译，源于与好友的一次关于 Golang 底层类型判定的讨论。
 
 
+
+找到了这篇好文，奈何中文翻译欠佳（内容缺、词不达意），就看了原版。
+
+
+
+看完就忍不住翻译下来，**逐字斟酌，并补充了许多内容**，标示「译者注」。——by 爱飞的鸟
+
+
+
+<!--more-->
 
 以下正文：
 
@@ -227,7 +237,7 @@ map[string]string // unnamed type
 
 ## 可赋值性
 
-关于一个值 `x` 是否可以赋值给一个 类型为 `T` 的变量，满足以下规则之一就可赋值（[译自Go语言可赋值性规则]([The Go Programming Language Specification - go.dev](https://go.dev/ref/spec#Assignability))）：
+关于一个值 `x` 是否可以赋值给一个 类型为 `T` 的变量，满足以下规则之一就可赋值（[译自Go语言可赋值性规则](https://go.dev/ref/spec#Assignability)）：
 
 * x 的类型 与 T 相同。
 
@@ -313,7 +323,7 @@ func printMyMapType(mMap MyMap) {
 
 ## 类型转换
 
-一个非 常量的值 `x` 能被转换成类型 `T` ，当满足以下任何条件之一：[译自 Go 语言类型转换规则]([The Go Programming Language Specification - go.dev](https://go.dev/ref/spec#Conversions))
+一个非 常量的值 `x` 能被转换成类型 `T` ，当满足以下任何条件之一：[译自 Go 语言类型转换规则](https://go.dev/ref/spec#Conversions)
 
 
 
@@ -391,11 +401,11 @@ func main() {
 
 
 
-所以，甚至 Go 语言中预定义的 有名类型/定义类型，例如，`int` 和 `int64` 也不是相同类型。并且，Go 语言接口类型的可赋值性也取决于 [结构类型系统（Structural type system）]([Structural type system - Wikipedia](https://en.wikipedia.org/wiki/Structural_type_system)) 。 **Go 语言没有 Duck Type**。
+所以，甚至 Go 语言中预定义的 有名类型/定义类型，例如，`int` 和 `int64` 也不是相同类型。并且，Go 语言接口类型的可赋值性也取决于 [结构类型系统（Structural type system）](https://en.wikipedia.org/wiki/Structural_type_system) 。 **Go 语言没有 Duck Type**。
 
 
 
-(下面是[原作者义愤填膺的推特]([Ankur Anand 在 Twitter: "There is No "Duck typing in @golang". Go uses "structural typing" on methods to determine the compatibility of a type with an interface, not "Duck Typing". I Repeat There is *NO* Duck Typing in #golang. Unfortunately, many articles on the web have got it wrong. 😇" / Twitter](https://twitter.com/in_aanand/status/1072476894308773888?ref_src=twsrc^tfw|twcamp^tweetembed|twterm^1072476894308773888|twgr^|twcon^s1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2Fin_aanand%2Fstatus%2F1072476894308773888image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fpbs.twimg.com252Fprofile_images252F1097738091530342400252FFS0a8_YX_400x400.png26key3Da19fcc184b9711e1b4764040d3dc5c07))) 译者保留意见。
+(下面是[原作者义愤填膺的推特](https://twitter.com/in_aanand/status/1072476894308773888?ref_src=twsrc^tfw|twcamp^tweetembed|twterm^1072476894308773888|twgr^|twcon^s1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2Fin_aanand%2Fstatus%2F1072476894308773888image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fpbs.twimg.com252Fprofile_images252F1097738091530342400252FFS0a8_YX_400x400.png26key3Da19fcc184b9711e1b4764040d3dc5c07))  译者保留意见。
 
 ![type_system_twitter](https://bird-notes.oss-cn-hangzhou.aliyuncs.com/img/type_system_twitter.png)
 
