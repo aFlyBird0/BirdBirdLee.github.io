@@ -312,6 +312,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
+      <meta itemprop="name" content="Bird">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bird's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">谈谈Go与面向对象</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-16 01:07:37 / 修改时间：01:10:45" itemprop="dateCreated datePublished" datetime="2022-01-16T01:07:37+08:00">2022-01-16</time>
+            </span>
+
+          
+            <span id="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-meta-item leancloud_visitors" data-flag-title="谈谈Go与面向对象" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="谈谈Go与面向对象"><a href="#谈谈Go与面向对象" class="headerlink" title="谈谈Go与面向对象"></a>谈谈Go与面向对象</h1><p>本文面向已经会 Go 的基础语法并基本掌握一门面向对象语言的读者。</p>
+<p>先抛个问题：Go 是不是面向对象语言？</p>
+<p>官方的回答是：「Yes and no」。</p>
+<p>Go 语言可以做到绝大多数面向对象语言的特性，但它不是一门「标准」的面向对象语言，它没有「type hierarchy」。</p>
+<p>一开始，我觉得它以自己的奇怪甚至近乎「妖魔」的方式与面向对象打了个擦边球；<br>后来，我反而觉得完美面向对象就应该是这样灵活的，现在的所谓的「标准面向对象」，反而是一种不完美的实现。</p>
+<p>下面来谈谈 Go 如何实现面向对象。因为 Java 是比较「规整」的面向对象实现，所以下文会多次与 Java 进行对比。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装指隐藏对象的属性和实现细节，仅对外提供公共访问方式。</p>
+<p>这个应该不用多讲，Go 使用大小写控制可访问性（包外），大写代表导出（public），小写代表私有（private）。</p>
+<p>方法暴露，使用 <code>receiver</code> ，类型、变量、方法的可见性规则都是用大小写。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="keyword">string</span> <span class="comment">// 大写，导出，包外可见，public</span></span><br><span class="line">    age  <span class="keyword">int</span>    <span class="comment">// 小写，私有，仅包内可见，private</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Speak 暴露公有方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Person)</span> <span class="title">Speak</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello, my name is&quot;</span>, p.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SetAge GetAge 方法略</span></span><br></pre></td></tr></table></figure>
+
+<p>为类增加方法，Go 与 Java 最大的不同是，Java 的方法是在类内的，而 Go 在类外，有点像 struct 上贴了一个个狗皮膏药的感觉。<br>起初可能会不习惯，但这让方法的添加变得更灵活，receiver 的设计更使得所有类都能拥有方法。</p>
+<p>Go 的 receiver 的设计更符合底层的面向对象的思想：为某一类事物，附加一些行为。</p>
+<p>Go 的任何非内置的「定义类型」，都能拥有方法；而 Java，只有类才能拥有方法，或者说，想在一个东西上施加操作，必须定义一个类，显得臃肿。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>我对继承的理解是，子类拥有父类的所有属性和方法。</p>
+<p>Go 的继承使用类似组合的方式实现，与标准面向对象实现最大的区别在于，基类变量不能引用子类变量。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Man <span class="keyword">struct</span> &#123;</span><br><span class="line">	Person              <span class="comment">// 内嵌，继承</span></span><br><span class="line">	otherField <span class="keyword">string</span>   <span class="comment">// 组合</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">man := Man&#123;<span class="string">&quot;bird&quot;</span>&#125;</span><br><span class="line">_ = man.Person.Name</span><br><span class="line">_ = man.Name    <span class="comment">// 省略 Person 匿名字段</span></span><br><span class="line">man.Speak()</span><br></pre></td></tr></table></figure>
+
+<p>如上，在 Man 中加入一个只有类型没有名字的 Person 属性，就是内嵌。Go 的一大特性就是，内嵌字段可以被省略。详见代码。</p>
+<p>所以，Man 可以省略 Person，<strong>直接访问 Person 的所有属性并调用其方法</strong>。所以看起来，就像继承一样。</p>
+<p>总结一下就是，结构体内嵌匿名变量就是继承，无名就是组合。</p>
+<p>和 Java 的区别在于， <code>var p person = Man&#123;&#125;</code> 是不可行的。父类变量无法引用子类对象（但这并不意味着 Go 没有多态）。<br>所以 Go 的继承是不满足「里氏替换」原则的。</p>
+<p>我觉得这个特性挺好，逼迫开发者少使用继承，多面向抽象编程。</p>
+<p>如何实现对方法的重写（Override），即子类覆盖父类的同签名方法，以实现不同表现？</p>
+<p>稍微岔开一下，Go 没有「重载」，即同函数名，函数签名却不同。所以这个问题其实是，Go 如何覆盖父类同名方法？</p>
+<p>这时候就体现 Go 的设计哲学了， less is more。你都不需要知道什么是重写：</p>
+<p>没有那么多的术语和要记的东西，也不需要新的关键字，一切都是自然而然：<br>子类想用父类的，直接继承了不用管；子类想拥有不同的表现形式（行为），那就自己定义一个。</p>
+<p>怎么自己定义一个方法呢，很简单，定义一个以子类作为 receiver 的方法。正如前面的继承，没有新增任何关键字。</p>
+<p>简单理一下逻辑，如果调用方法的时候，子类本身拥有该方法，那就直接调用；如果没有，就看看父类有没有，一层层找上去。</p>
+<p>如何实现多继承？想继承谁，内嵌什么类型就行。</p>
+<p>至此，Go 非常优雅且简单地实现了继承。</p>
+<p>这里还有个面向对象的原则，「使用组合而不是继承」，通俗继承的坏处很多，比如父类改了子类就会被动跟着改动。<br>所以 Go 使用了组合的方式来实现了继承，是不是天生规避了一些继承的缺点？<br>以及继承会暴露父类的实现细节，这个问题 Go 也存在。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>Go 的多态是用 interface 实现的， interface 是 Go 语言的灵魂之一，为静态的 Go 语言增添了动态性。</p>
+<p>我理解的接口，是一种「约定」，接口的方法，约定了一系列操作，某样东西能完成这个操作，它就实现了这个接口。</p>
+<p>下面这段代码演示了许多面向对象的内容，其中，末尾的 <code>AllSpeak</code> 函数是多态的展示。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Speaker <span class="keyword">interface</span> &#123;</span><br><span class="line">	Speak()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">Speak</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello, my name is&quot;</span>, p.Name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Dog <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SingleDog <span class="keyword">struct</span> &#123;</span><br><span class="line">	Dog</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d Dog)</span> <span class="title">Speak</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Wang Wang, my name is&quot;</span>, d.Name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestInf</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> s Speaker</span><br><span class="line">	p := Person&#123;<span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">	s = p       <span class="comment">// 接口变量能指向实现了该接口的对象</span></span><br><span class="line">	s.Speak()</span><br><span class="line"></span><br><span class="line">	person := Person&#123;<span class="string">&quot;Tom&quot;</span>&#125;</span><br><span class="line">	dog := Dog&#123;<span class="string">&quot;Jerry&quot;</span>&#125;</span><br><span class="line">	singleDog := SingleDog&#123;Dog&#123;Name: <span class="string">&quot;SingleDog&quot;</span>&#125;&#125;</span><br><span class="line">	speakers := []Speaker&#123;person, dog, singleDog&#125;</span><br><span class="line">	AllSpeak(speakers)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AllSpeak 多态演示</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AllSpeak</span><span class="params">(s []Speaker)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">		v.Speak()</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Go 语言的接口是非常灵活的，不需要显示声明，Java 需要 <code>implements</code>，而 Go 是 DuckType。</p>
+<p>什么是 DuckType？鸭子会嘎嘎叫，所以会嘎嘎叫的就能当成鸭子。</p>
+<p>翻译成编程语言，接口是一个约定，遵循了这个约定，就实现了接口。这个遵循，只要某个类型的方法签名是某接口定义的方法签名的超集就行。</p>
+<p>所以，一定记住，在编码层面，方法先于接口，即先有了方法，才有了是否实现该接口的判断。而不是 Java 的先明确实现什么接口，挖好坑，再去填。完全相反。</p>
+<p>如果实现多态？接口类型的变量，可以引用实现了该接口的任何类型的变量。</p>
+<p>在 <code>AllSpeak</code> 函数中，形参是 <code>Speaker</code> 接口的切片，实参却是 Person、Dog、SingleDog 类型。<br>为什么能调用成功呢？因为 <code>Person</code> 和 <code>Dog</code> 都拥有 <code>Speak()</code> 方法，满足了 <code>Speaker</code> 接口定义的所有函数的签名。</p>
+<p>那为什么 SingleDog 类型也能传参成功，是不是可以理解为，SingleDog 继承了 Dog 的接口？似乎变得复杂起来了。</p>
+<p>Go 没有那么多术语。紧抓两点：①编码时，先看方法，再看接口 ②某类型拥有的方法是某接口方法的超集，就实现了该接口</p>
+<p>所以，是 SingleDog 先「继承」了Dog的 <code>Speak()</code> 方法，而后该方法刚好又满足了 <code>Speaker()</code> 的约定，自然就实现了该接口。</p>
+<p>许多语言的接口与继承，对于开发者而言其实是迷惑的，可能经常分不清到底该用哪个，而 Go 不会。<br>许多面向对象语言的继承，是被滥用的，而 Go，压根没开这个门，你只能用接口。<br>它以一种非常灵活的方式，实现了多态，并且接口的设计，对「依赖反转（面向抽象编程）」天然友好。</p>
+<p>interface 真的是个好东西，当你不知道怎么设计更优雅的时候，它总能给你带来惊喜。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -345,7 +488,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-21 08:32:11" itemprop="dateModified" datetime="2021-12-21T08:32:11+08:00">2021-12-21</time>
+                <time title="修改时间：2021-12-21 08:37:15" itemprop="dateModified" datetime="2021-12-21T08:37:15+08:00">2021-12-21</time>
               </span>
 
           
@@ -1176,129 +1319,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
-      <meta itemprop="name" content="Bird">
-      <meta itemprop="description" content="热爱可抵岁月漫长">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bird's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">声昔-读书会-亲密关系</a>
-        </h2>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-03 18:25:16" itemprop="dateCreated datePublished" datetime="2021-05-03T18:25:16+08:00">2021-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" class="post-meta-item leancloud_visitors" data-flag-title="声昔-读书会-亲密关系" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><h3 id="何为亲密关系"><a href="#何为亲密关系" class="headerlink" title="何为亲密关系"></a>何为亲密关系</h3><p>本意是指不限年龄和性别的两人之间和谐、融洽的关系。但目前来说，大多数情况下指的是情侣、夫妻间的爱情。值得注意的是，心理学家认为，两个人之间存在影响与互赖，才称之为关系。所以其实并非所有情侣、婚姻间都存在亲密关系。</p>
-<h3 id="选题原因"><a href="#选题原因" class="headerlink" title="选题原因"></a>选题原因</h3><ol>
-<li>亲密关系的重要性</li>
-<li>我在亲密关系上失败太多次，不想再有更多的人像我一样因为没做好准备，没有把握住甜美的爱情</li>
-<li>本次共读只是个引子，<strong>希望能通过这次主持引起大家对亲密关系的重视，学习爱的能力，恋爱能力不是天赋，也是需要不断学习的</strong></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/%E5%A3%B0%E6%98%94-%E8%AF%BB%E4%B9%A6%E4%BC%9A-%E4%BA%B2%E5%AF%86%E5%85%B3%E7%B3%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1370,7 +1390,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1412,6 +1432,10 @@
         
         
           <li>
+            <a href="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="谈谈Go与面向对象" target="_blank">谈谈Go与面向对象</a>
+          </li>
+        
+          <li>
             <a href="/2021/12/%E7%BB%86%E7%AA%A5Golang%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F/" title="细窥Golang类型系统" target="_blank">细窥Golang类型系统</a>
           </li>
         
@@ -1425,10 +1449,6 @@
         
           <li>
             <a href="/2021/11/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84%E5%AE%9E%E6%88%98%EF%BC%88%E4%B8%80%EF%BC%89%E8%AF%BE%E8%A1%A8%E6%9F%A5%E8%AF%A2/" title="代码重构实战（一）课表查询" target="_blank">代码重构实战（一）课表查询</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3%E5%85%A5%E9%97%A8/" title="面向对象思想入门" target="_blank">面向对象思想入门</a>
           </li>
         
       </ul>
@@ -1453,7 +1473,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1462,12 +1482,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:15</span>
+    <span title="站点阅读时长">1:18</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
