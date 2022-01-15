@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-01-15T17:12:21.894Z</updated>
+  <updated>2022-01-15T17:21:58.242Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.aflybird.cn/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     <id>https://blog.aflybird.cn/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</id>
     <published>2022-01-15T17:07:37.000Z</published>
-    <updated>2022-01-15T17:12:21.894Z</updated>
+    <updated>2022-01-15T17:21:58.242Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;谈谈Go与面向对象&quot;&gt;&lt;a href=&quot;#谈谈Go与面向对象&quot; class=&quot;headerlink&quot; title=&quot;谈谈Go与面向对象&quot;&gt;&lt;/a&gt;谈谈Go与面向对象&lt;/h1&gt;&lt;p&gt;本文面向已经会 Go 的基础语法并基本掌握一门面向对象语言的读者。&lt;/p&gt;

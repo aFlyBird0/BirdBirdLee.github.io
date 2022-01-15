@@ -263,14 +263,14 @@
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/tags/DailyLove/</loc>
+    <loc>https://blog.aflybird.cn/tags/docker/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/tags/docker/</loc>
+    <loc>https://blog.aflybird.cn/tags/DailyLove/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -284,13 +284,6 @@
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/tags/Golang/</loc>
-    <lastmod>2022-01-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.aflybird.cn/tags/Go/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
@@ -298,7 +291,21 @@
   </url>
   
   <url>
+    <loc>https://blog.aflybird.cn/tags/Golang/</loc>
+    <lastmod>2022-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.aflybird.cn/tags/%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94/</loc>
+    <lastmod>2022-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.aflybird.cn/tags/%E9%87%8D%E6%9E%84/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -325,17 +332,17 @@
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://blog.aflybird.cn/tags/%E9%87%8D%E6%9E%84/</loc>
+    <loc>https://blog.aflybird.cn/categories/CS/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://blog.aflybird.cn/categories/CS/</loc>
+    <loc>https://blog.aflybird.cn/categories/CS/common/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -356,13 +363,6 @@
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/categories/CS/common/</loc>
-    <lastmod>2022-01-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.aflybird.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
@@ -370,14 +370,14 @@
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/categories/CS/hexo/</loc>
+    <loc>https://blog.aflybird.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.aflybird.cn/categories/CS/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://blog.aflybird.cn/categories/CS/hexo/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
