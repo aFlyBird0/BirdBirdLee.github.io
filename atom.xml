@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-01-15T17:10:45.459Z</updated>
+  <updated>2022-01-15T17:12:21.894Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -21,16 +21,14 @@
     <link href="https://blog.aflybird.cn/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     <id>https://blog.aflybird.cn/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</id>
     <published>2022-01-15T17:07:37.000Z</published>
-    <updated>2022-01-15T17:10:45.459Z</updated>
+    <updated>2022-01-15T17:12:21.894Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;谈谈Go与面向对象&quot;&gt;&lt;a href=&quot;#谈谈Go与面向对象&quot; class=&quot;headerlink&quot; title=&quot;谈谈Go与面向对象&quot;&gt;&lt;/a&gt;谈谈Go与面向对象&lt;/h1&gt;&lt;p&gt;本文面向已经会 Go</summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;谈谈Go与面向对象&quot;&gt;&lt;a href=&quot;#谈谈Go与面向对象&quot; class=&quot;headerlink&quot; title=&quot;谈谈Go与面向对象&quot;&gt;&lt;/a&gt;谈谈Go与面向对象&lt;/h1&gt;&lt;p&gt;本文面向已经会 Go 的基础语法并基本掌握一门面向对象语言的读者。&lt;/p&gt;
+&lt;p&gt;先抛个问题：Go 是不是面向对象语言？&lt;/p&gt;
+&lt;p&gt;官方的回答是：「Yes and no」。&lt;/p&gt;
+&lt;p&gt;Go 语言可以做到绝大多数面向对象语言的特性，但它不是一门「标准」的面向对象语言，它没有「type hierarchy」。&lt;/p&gt;
+&lt;p&gt;一开始，我觉得它以自己的奇怪甚至近乎「妖魔」的方式与面向对象打了个擦边球；&lt;br&gt;后来，我反而觉得完美面向对象就应该是这样灵活的，现在的所谓的「标准面向对象」，反而是一种不完美的实现。&lt;/p&gt;</summary>
     
     
     
