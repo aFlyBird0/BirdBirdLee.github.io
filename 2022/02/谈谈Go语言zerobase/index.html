@@ -22,25 +22,20 @@
     var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="错误定位定位到错误：这条请求标红，并且含有 Counter，我猜是 leancloud 修改访问量的接口  返回是这样的： 应该是Couter类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。">
+  <meta name="description" content="挺早就知道 Go 语言的 zerobase，一直没深入过。正巧前天朋友发来一篇文章，于是乎就借着这个契机稍微研究一番。大概分为敲出来跑跑，简单查查源码，拓展这三块。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决hexo博客leancloud访问量永远是1的错误">
-<meta property="og:url" content="https://blog.aflybird.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/index.html">
+<meta property="og:title" content="谈谈Go语言zerobase">
+<meta property="og:url" content="https://blog.aflybird.cn/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="错误定位定位到错误：这条请求标红，并且含有 Counter，我猜是 leancloud 修改访问量的接口  返回是这样的： 应该是Couter类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。">
+<meta property="og:description" content="挺早就知道 Go 语言的 zerobase，一直没深入过。正巧前天朋友发来一篇文章，于是乎就借着这个契机稍微研究一番。大概分为敲出来跑跑，简单查查源码，拓展这三块。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png">
-<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png">
-<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png">
-<meta property="og:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png">
-<meta property="article:published_time" content="2021-03-13T08:22:27.000Z">
-<meta property="article:modified_time" content="2021-10-05T17:46:34.588Z">
+<meta property="article:published_time" content="2022-02-12T07:32:25.000Z">
+<meta property="article:modified_time" content="2022-02-12T09:27:24.520Z">
 <meta property="article:author" content="Bird">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png">
 
-<link rel="canonical" href="https://blog.aflybird.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/">
+<link rel="canonical" href="https://blog.aflybird.cn/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/">
 
 
 <script id="page-configurations">
@@ -53,7 +48,7 @@
   };
 </script>
 
-  <title>解决hexo博客leancloud访问量永远是1的错误 | Bird's Blog</title>
+  <title>谈谈Go语言zerobase | Bird's Blog</title>
   
 
 
@@ -208,7 +203,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
@@ -221,7 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          解决hexo博客leancloud访问量永远是1的错误
+          谈谈Go语言zerobase
         </h1>
 
         <div class="post-meta">
@@ -232,32 +227,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-03-13 16:22:27" itemprop="dateCreated datePublished" datetime="2021-03-13T16:22:27+08:00">2021-03-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-06 01:46:34" itemprop="dateModified" datetime="2021-10-06T01:46:34+08:00">2021-10-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-                </span>
+              <time title="创建时间：2022-02-12 15:32:25 / 修改时间：17:27:24" itemprop="dateCreated datePublished" datetime="2022-02-12T15:32:25+08:00">2022-02-12</time>
             </span>
 
           
-            <span id="/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="解决hexo博客leancloud访问量永远是1的错误" title="阅读次数">
+            <span id="/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/" class="post-meta-item leancloud_visitors" data-flag-title="谈谈Go语言zerobase" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -272,8 +248,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2leancloud%E8%AE%BF%E9%97%AE%E9%87%8F%E6%B0%B8%E8%BF%9C%E6%98%AF1%E7%9A%84%E9%94%99%E8%AF%AF/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -283,14 +259,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>232</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -302,17 +278,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="错误定位"><a href="#错误定位" class="headerlink" title="错误定位"></a>错误定位</h2><p>定位到错误：这条请求标红，并且含有 <code>Counter</code>，我猜是 <code>leancloud</code> 修改访问量的接口</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162321026.png" alt="image-20210313162321026"></p>
-<p>返回是这样的：<img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162351656.png" alt="image-20210313162351656"></p>
-<p>应该是<code>Couter</code>类的权限设置问题，默认设置是创建所有人可创建，但访问者没有写（更新）的权限，导致阅读量一直是1。</p>
+        <p>挺早就知道 Go 语言的 zerobase，一直没深入过。正巧前天朋友发来一篇文章，于是乎就借着这个契机稍微研究一番。大概分为敲出来跑跑，简单查查源码，拓展这三块。</p>
 <span id="more"></span>
 
-<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h2><p>进入<code>leancloud</code>控制台，【存储】-【结构化数据】-【Counter】，删除 Class</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313162937093.png" alt="image-20210313162937093"></p>
-<p>再创建一个 <code>Counter</code> Class，注意下面选【无限制】</p>
-<p><img src="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/image-20210313163038465.png" alt="image-20210313163038465"></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.ouyanting.com/archives/2018/12/ebe3ded2.html">Forbidden writing by object’s ACL. - Yanting Ou</a></p>
+<h1 id="〇、缘起"><a href="#〇、缘起" class="headerlink" title="〇、缘起"></a>〇、缘起</h1><p>因为朋友发我的这篇文章：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039315999#/">[Golang]空结构体引发的大型打脸现场</a> 聊起了 gozerobase。这里直接截取代码贴出来。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FPrint</span><span class="params">(u User)</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;FPrint %p\n&quot;</span>, &amp;u)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    u := User&#123;&#125;</span><br><span class="line">    FPrint(u)</span><br><span class="line">    fmt.Printf(<span class="string">&quot;main: %p\n&quot;</span>, &amp;u)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">FPrint <span class="number">0x118eff0</span></span><br><span class="line">main: <span class="number">0x118eff0</span></span><br></pre></td></tr></table></figure>
+
+<p>我们都知道，Go 语言的函数参数只有「传值」没有传引用，<code>u</code> 理应被拷贝了一份，可为什么输出的地址相等？  </p>
+<p>原因是，所有的空结构体，指向的都是同一块内存，叫 zerobase。</p>
+<p>于是，我又想到了，我曾经看某篇文章说过，所有的空切片（不为 nil，但长度容量都为 0）的底层数组指针，指向的都是同一块内存。  </p>
+<p>那么，会不会，所有的占据内存为0的类型的变量，都指向了同一块 zerobase 呢？</p>
+<h1 id="一、敲出来跑跑"><a href="#一、敲出来跑跑" class="headerlink" title="一、敲出来跑跑"></a>一、敲出来跑跑</h1><p>于是我就敲了这段代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestZeroBase</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 结论，Go 的零字节内存都会指向同一地点</span></span><br><span class="line">    s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;s1:%p, s2:%p\n&quot;</span>, &amp;s1, &amp;s2)</span><br><span class="line"></span><br><span class="line">    array1 := [<span class="number">0</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    array2 := [<span class="number">0</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;array1:%p, arry2:%p\n&quot;</span>, &amp;array1, &amp;array2)</span><br><span class="line"></span><br><span class="line">    slice1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>)</span><br><span class="line">    slice2 := <span class="built_in">make</span>([]<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line">    sliceHead1 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;slice1))</span><br><span class="line">    sliceHead2 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;slice2))</span><br><span class="line">    data1 := *(*[<span class="number">0</span>]<span class="keyword">int</span>)(unsafe.Pointer(sliceHead1.Data))</span><br><span class="line">    data2 := *(*[<span class="number">0</span>]<span class="keyword">chan</span> <span class="keyword">string</span>)(unsafe.Pointer(sliceHead2.Data))</span><br><span class="line">    fmt.Printf(<span class="string">&quot;slice1.data:%p, slice2.data:%p\n&quot;</span>, &amp;data1, &amp;data2)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出</span></span><br><span class="line">    <span class="comment">//s1:0xad48e8, s2:0xad48e8</span></span><br><span class="line">    <span class="comment">//array1:0xad48e8, array2:0xad48e8</span></span><br><span class="line">    <span class="comment">//slice1.data:0xad48e8, slice2.data:0xad48e8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结论显而易见：<strong>Go 的零字节内存都会指向同一地点(zerobase)</strong></p>
+<h1 id="二、简单查查源码"><a href="#二、简单查查源码" class="headerlink" title="二、简单查查源码"></a>二、简单查查源码</h1><p>这块的源码已经烂大街了，直接贴：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mallocgc</span><span class="params">(size <span class="keyword">uintptr</span>, typ *_type, needzero <span class="keyword">bool</span>)</span> <span class="title">unsafe</span>.<span class="title">Pointer</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> gcphase == _GCmarktermination &#123;</span><br><span class="line">        throw(<span class="string">&quot;mallocgc called with gcphase == _GCmarktermination&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> size == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> unsafe.Pointer(&amp;zerobase)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在分配内存的时候，如果 <code>size</code> 为 0，直接不分配，并将其指向全局变量 zerobase。</p>
+<h1 id="三、拓展"><a href="#三、拓展" class="headerlink" title="三、拓展"></a>三、拓展</h1><p>Go 语言有这样一个 spec : <strong>Pointers to distinct <a target="_blank" rel="noopener" href="https://go.dev/ref/spec#Size_and_alignment_guarantees">zero-size</a> variables may or may not be equal.</strong>  </p>
+<p>即，<strong>指向了零内存对象的不同指针，可能相等也可能不等</strong>。</p>
+<p>比较权威的缘由，可以在 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/23440#issuecomment-357476298">Github 某 issue</a> 找到，如下：</p>
+<blockquote>
+<p>This is an intentional language choice to give implementations flexibility in how they handle pointers to zero-sized objects. If every pointer to a zero-sized object were required to be different, then each allocation of a zero-sized object would have to allocate at least one byte. If every pointer to a zero-sized object were required to be the same, it would be different to handle taking the address of a zero-sized field within a larger struct.</p>
+</blockquote>
+<p>我怎么翻译都觉得别扭，就不翻译了，请读者细细品。</p>
+<p>现在，来看一段代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">s2 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="built_in">println</span>(s1, s2, s1 == s2)</span><br><span class="line"></span><br><span class="line">s3 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">s4 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="built_in">println</span>(s3, s4, s3 == s4)</span><br><span class="line">fmt.Println(s3, s4, s3 == s4)</span><br><span class="line"></span><br><span class="line">s5 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s6 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;s5:%p, s6:%p, s5==s6?:%v\n&quot;</span>, &amp;s5, &amp;s6, &amp;s5 == &amp;s6)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="number">0xc000063ef7</span> <span class="number">0xc000063ef7</span> <span class="literal">false</span></span><br><span class="line"><span class="number">0x10f5908</span> <span class="number">0x10f5908</span> <span class="literal">true</span></span><br><span class="line">&amp;&#123;&#125; &amp;&#123;&#125; <span class="literal">true</span></span><br><span class="line">s5:<span class="number">0x10f5908</span>, s6:<span class="number">0x10f5908</span>, s5==s6?:<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看到，s1==s2 是 false，s3==s4 是 true。他们都是指向了零字节内存的指针，但，有时候地址相等，有时候地址不等。这也就是前面说的，指向了零内存对象的不同指针，可能相等也可能不等。为什么呢？</p>
+<p>同时，通过 s5 与 s6 的输出，可以看到，s3, s4, s5, s6 的地址都是 <code>0x10f5908</code>，这应该就是 zerobase 了。</p>
+<h1 id="四、意外之喜"><a href="#四、意外之喜" class="headerlink" title="四、意外之喜"></a>四、意外之喜</h1><p>又看到了一篇文章，终于解了上面的惑，我简化如下：</p>
+<p>看两段代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码段1</span></span><br><span class="line">s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Println(&amp;s1 == &amp;s2)</span><br></pre></td></tr></table></figure>
+
+<p>代码段1的输出一定是 false。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码段2</span></span><br><span class="line">s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Println(&amp;s1 == &amp;s2)</span><br><span class="line">fmt.Printf(<span class="string">&quot;s1:%p, s2:%p\n&quot;</span>, &amp;s1, &amp;s2)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>代码段2的输出的第一行一定是 true</p>
+<p>是由于 <code>fmt.Printf</code> 导致的，原因如下</p>
+<blockquote>
+<p>其实，fmt.Printf 第二个参数，是一个 interface 类型。而 fmt.Printf 的内部实现，使用了反射 reflect，正是由于 reflect 才导致变量从栈向堆内存的逃逸成为可能（注意，并非所有reflect操作都会导致内存逃逸，具体还得看怎么使用reflect的）。我们简单总结为：</p>
+<p>使用 fmt.Printf 由于其函数第二个参数是接口类型，而函数内部最终实现使用了 reflect 机制，导致变量从栈逃逸到堆内存。</p>
+</blockquote>
+<p>所以纠正一下：<strong>堆上内存分配</strong>调用了 runtime 包的 newobject 函数，而 newobject 函数其实本质上会调用 runtime 包内的 mallocgc 函数，而 mallocgc 函数就是文章最开头讲的 zerobase 那段。</p>
+<p>也就是，零内存对象只有在堆内存分配时才会指向 zerobase。</p>
+<p>代码段1和代码段2的小对象内存分配，应该原本都是分配栈上的。所以代码段1的 s1 和 s2 未指向 zerobase。</p>
+<p>而代码段2因为内存逃逸，对象分配到了堆上，就调用了 mallocgc 函数，指向了 zerobase。</p>
+<p>前文第三大段的「拓展」部分贴的代码，原理也是一样的。</p>
+<p>所以之前只知其一，不知其二。内存分配这块，还是要好好学学！</p>
+<h1 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://studygolang.com/articles/19535?fr=sidebar#/">一个奇怪的golang等值判断问题</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039315999#/">[Golang]空结构体引发的大型打脸现场</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/23440#/">spec: Empty struct address comparison returns false even if addresses are equal · Issue #23440 · golang/go</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd35690#/">Golang最细节篇— struct{} 空结构体究竟是啥？</a></p>
+</li>
+</ul>
 
     </div>
 
@@ -322,7 +348,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/Golang/" rel="tag"># Golang</a>
           </div>
 
         
@@ -331,13 +357,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/%E9%9A%8F%E7%AC%9420200915/" rel="prev" title="随笔20200915">
-      <i class="fa fa-chevron-left"></i> 随笔20200915
+    <a href="/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="prev" title="谈谈Go与面向对象">
+      <i class="fa fa-chevron-left"></i> 谈谈Go与面向对象
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/%E6%80%A6%E7%84%B6%E5%BF%83%E5%8A%A8%E7%9A%84%E4%BA%BA%E7%94%9F%E6%95%B4%E7%90%86%E9%AD%94%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="next" title="怦然心动的人生整理魔法-读书笔记">
-      怦然心动的人生整理魔法-读书笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -397,7 +420,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.</span> <span class="nav-text">错误定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3"><span class="nav-number">2.</span> <span class="nav-text">错误解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E3%80%87%E3%80%81%E7%BC%98%E8%B5%B7"><span class="nav-number">1.</span> <span class="nav-text">〇、缘起</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B2%E5%87%BA%E6%9D%A5%E8%B7%91%E8%B7%91"><span class="nav-number">2.</span> <span class="nav-text">一、敲出来跑跑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AE%80%E5%8D%95%E6%9F%A5%E6%9F%A5%E6%BA%90%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">二、简单查查源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8B%93%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">三、拓展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%84%8F%E5%A4%96%E4%B9%8B%E5%96%9C"><span class="nav-number">5.</span> <span class="nav-text">四、意外之喜</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">6.</span> <span class="nav-text">四、参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -231,6 +231,75 @@
       </tags>
   </entry>
   <entry>
+    <title>谈谈Go语言zerobase</title>
+    <url>/2022/02/%E8%B0%88%E8%B0%88Go%E8%AF%AD%E8%A8%80zerobase/</url>
+    <content><![CDATA[<p>挺早就知道 Go 语言的 zerobase，一直没深入过。正巧前天朋友发来一篇文章，于是乎就借着这个契机稍微研究一番。大概分为敲出来跑跑，简单查查源码，拓展这三块。</p>
+<span id="more"></span>
+
+<h1 id="〇、缘起"><a href="#〇、缘起" class="headerlink" title="〇、缘起"></a>〇、缘起</h1><p>因为朋友发我的这篇文章：<a href="https://segmentfault.com/a/1190000039315999#/">[Golang]空结构体引发的大型打脸现场</a> 聊起了 gozerobase。这里直接截取代码贴出来。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FPrint</span><span class="params">(u User)</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;FPrint %p\n&quot;</span>, &amp;u)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    u := User&#123;&#125;</span><br><span class="line">    FPrint(u)</span><br><span class="line">    fmt.Printf(<span class="string">&quot;main: %p\n&quot;</span>, &amp;u)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">FPrint <span class="number">0x118eff0</span></span><br><span class="line">main: <span class="number">0x118eff0</span></span><br></pre></td></tr></table></figure>
+
+<p>我们都知道，Go 语言的函数参数只有「传值」没有传引用，<code>u</code> 理应被拷贝了一份，可为什么输出的地址相等？  </p>
+<p>原因是，所有的空结构体，指向的都是同一块内存，叫 zerobase。</p>
+<p>于是，我又想到了，我曾经看某篇文章说过，所有的空切片（不为 nil，但长度容量都为 0）的底层数组指针，指向的都是同一块内存。  </p>
+<p>那么，会不会，所有的占据内存为0的类型的变量，都指向了同一块 zerobase 呢？</p>
+<h1 id="一、敲出来跑跑"><a href="#一、敲出来跑跑" class="headerlink" title="一、敲出来跑跑"></a>一、敲出来跑跑</h1><p>于是我就敲了这段代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestZeroBase</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 结论，Go 的零字节内存都会指向同一地点</span></span><br><span class="line">    s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;s1:%p, s2:%p\n&quot;</span>, &amp;s1, &amp;s2)</span><br><span class="line"></span><br><span class="line">    array1 := [<span class="number">0</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">    array2 := [<span class="number">0</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;array1:%p, arry2:%p\n&quot;</span>, &amp;array1, &amp;array2)</span><br><span class="line"></span><br><span class="line">    slice1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>)</span><br><span class="line">    slice2 := <span class="built_in">make</span>([]<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">0</span>)</span><br><span class="line">    sliceHead1 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;slice1))</span><br><span class="line">    sliceHead2 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;slice2))</span><br><span class="line">    data1 := *(*[<span class="number">0</span>]<span class="keyword">int</span>)(unsafe.Pointer(sliceHead1.Data))</span><br><span class="line">    data2 := *(*[<span class="number">0</span>]<span class="keyword">chan</span> <span class="keyword">string</span>)(unsafe.Pointer(sliceHead2.Data))</span><br><span class="line">    fmt.Printf(<span class="string">&quot;slice1.data:%p, slice2.data:%p\n&quot;</span>, &amp;data1, &amp;data2)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出</span></span><br><span class="line">    <span class="comment">//s1:0xad48e8, s2:0xad48e8</span></span><br><span class="line">    <span class="comment">//array1:0xad48e8, array2:0xad48e8</span></span><br><span class="line">    <span class="comment">//slice1.data:0xad48e8, slice2.data:0xad48e8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结论显而易见：<strong>Go 的零字节内存都会指向同一地点(zerobase)</strong></p>
+<h1 id="二、简单查查源码"><a href="#二、简单查查源码" class="headerlink" title="二、简单查查源码"></a>二、简单查查源码</h1><p>这块的源码已经烂大街了，直接贴：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mallocgc</span><span class="params">(size <span class="keyword">uintptr</span>, typ *_type, needzero <span class="keyword">bool</span>)</span> <span class="title">unsafe</span>.<span class="title">Pointer</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> gcphase == _GCmarktermination &#123;</span><br><span class="line">        throw(<span class="string">&quot;mallocgc called with gcphase == _GCmarktermination&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> size == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> unsafe.Pointer(&amp;zerobase)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在分配内存的时候，如果 <code>size</code> 为 0，直接不分配，并将其指向全局变量 zerobase。</p>
+<h1 id="三、拓展"><a href="#三、拓展" class="headerlink" title="三、拓展"></a>三、拓展</h1><p>Go 语言有这样一个 spec : <strong>Pointers to distinct <a href="https://go.dev/ref/spec#Size_and_alignment_guarantees">zero-size</a> variables may or may not be equal.</strong>  </p>
+<p>即，<strong>指向了零内存对象的不同指针，可能相等也可能不等</strong>。</p>
+<p>比较权威的缘由，可以在 <a href="https://github.com/golang/go/issues/23440#issuecomment-357476298">Github 某 issue</a> 找到，如下：</p>
+<blockquote>
+<p>This is an intentional language choice to give implementations flexibility in how they handle pointers to zero-sized objects. If every pointer to a zero-sized object were required to be different, then each allocation of a zero-sized object would have to allocate at least one byte. If every pointer to a zero-sized object were required to be the same, it would be different to handle taking the address of a zero-sized field within a larger struct.</p>
+</blockquote>
+<p>我怎么翻译都觉得别扭，就不翻译了，请读者细细品。</p>
+<p>现在，来看一段代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s1 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">s2 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="built_in">println</span>(s1, s2, s1 == s2)</span><br><span class="line"></span><br><span class="line">s3 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line">s4 := <span class="built_in">new</span>(<span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="built_in">println</span>(s3, s4, s3 == s4)</span><br><span class="line">fmt.Println(s3, s4, s3 == s4)</span><br><span class="line"></span><br><span class="line">s5 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s6 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Printf(<span class="string">&quot;s5:%p, s6:%p, s5==s6?:%v\n&quot;</span>, &amp;s5, &amp;s6, &amp;s5 == &amp;s6)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="number">0xc000063ef7</span> <span class="number">0xc000063ef7</span> <span class="literal">false</span></span><br><span class="line"><span class="number">0x10f5908</span> <span class="number">0x10f5908</span> <span class="literal">true</span></span><br><span class="line">&amp;&#123;&#125; &amp;&#123;&#125; <span class="literal">true</span></span><br><span class="line">s5:<span class="number">0x10f5908</span>, s6:<span class="number">0x10f5908</span>, s5==s6?:<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看到，s1==s2 是 false，s3==s4 是 true。他们都是指向了零字节内存的指针，但，有时候地址相等，有时候地址不等。这也就是前面说的，指向了零内存对象的不同指针，可能相等也可能不等。为什么呢？</p>
+<p>同时，通过 s5 与 s6 的输出，可以看到，s3, s4, s5, s6 的地址都是 <code>0x10f5908</code>，这应该就是 zerobase 了。</p>
+<h1 id="四、意外之喜"><a href="#四、意外之喜" class="headerlink" title="四、意外之喜"></a>四、意外之喜</h1><p>又看到了一篇文章，终于解了上面的惑，我简化如下：</p>
+<p>看两段代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 代码段1</span></span><br><span class="line">s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Println(&amp;s1 == &amp;s2)</span><br></pre></td></tr></table></figure>
+
+<p>代码段1的输出一定是 false。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 代码段2</span></span><br><span class="line">s1 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">s2 := <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">fmt.Println(&amp;s1 == &amp;s2)</span><br><span class="line">fmt.Printf(<span class="string">&quot;s1:%p, s2:%p\n&quot;</span>, &amp;s1, &amp;s2)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>代码段2的输出的第一行一定是 true</p>
+<p>是由于 <code>fmt.Printf</code> 导致的，原因如下</p>
+<blockquote>
+<p>其实，fmt.Printf 第二个参数，是一个 interface 类型。而 fmt.Printf 的内部实现，使用了反射 reflect，正是由于 reflect 才导致变量从栈向堆内存的逃逸成为可能（注意，并非所有reflect操作都会导致内存逃逸，具体还得看怎么使用reflect的）。我们简单总结为：</p>
+<p>使用 fmt.Printf 由于其函数第二个参数是接口类型，而函数内部最终实现使用了 reflect 机制，导致变量从栈逃逸到堆内存。</p>
+</blockquote>
+<p>所以纠正一下：<strong>堆上内存分配</strong>调用了 runtime 包的 newobject 函数，而 newobject 函数其实本质上会调用 runtime 包内的 mallocgc 函数，而 mallocgc 函数就是文章最开头讲的 zerobase 那段。</p>
+<p>也就是，零内存对象只有在堆内存分配时才会指向 zerobase。</p>
+<p>代码段1和代码段2的小对象内存分配，应该原本都是分配栈上的。所以代码段1的 s1 和 s2 未指向 zerobase。</p>
+<p>而代码段2因为内存逃逸，对象分配到了堆上，就调用了 mallocgc 函数，指向了 zerobase。</p>
+<p>前文第三大段的「拓展」部分贴的代码，原理也是一样的。</p>
+<p>所以之前只知其一，不知其二。内存分配这块，还是要好好学学！</p>
+<h1 id="四、参考文献"><a href="#四、参考文献" class="headerlink" title="四、参考文献"></a>四、参考文献</h1><ul>
+<li><p><a href="https://studygolang.com/articles/19535?fr=sidebar#/">一个奇怪的golang等值判断问题</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000039315999#/">[Golang]空结构体引发的大型打脸现场</a></p>
+</li>
+<li><p><a href="https://github.com/golang/go/issues/23440#/">spec: Empty struct address comparison returns false even if addresses are equal · Issue #23440 · golang/go</a></p>
+</li>
+<li><p><a href="https://jishuin.proginn.com/p/763bfbd35690#/">Golang最细节篇— struct{} 空结构体究竟是啥？</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谈谈Go与面向对象</title>
     <url>/2022/01/%E8%B0%88%E8%B0%88Go%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</url>
     <content><![CDATA[<h1 id="谈谈Go与面向对象"><a href="#谈谈Go与面向对象" class="headerlink" title="谈谈Go与面向对象"></a>谈谈Go与面向对象</h1><p>本文面向已经会 Go 的基础语法并基本掌握一门面向对象语言的读者。</p>
