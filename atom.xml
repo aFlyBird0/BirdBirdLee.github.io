@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-02-26T14:53:20.420Z</updated>
+  <updated>2022-02-26T15:28:23.436Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://blog.aflybird.cn/2022/02/%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E7%BB%9F%E8%AE%A1QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
     <id>https://blog.aflybird.cn/2022/02/%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E7%BB%9F%E8%AE%A1QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/</id>
     <published>2022-02-26T13:33:33.000Z</published>
-    <updated>2022-02-26T14:53:20.420Z</updated>
+    <updated>2022-02-26T15:28:23.436Z</updated>
     
     
-    <summary type="html">&lt;p&gt;22考研分数刚出，学校建了个实验室宣传群，我也接过老师的旨意，进去宣传。陆续有考生进群，浙江省未公布排名，所以考生的一大痛点是：知道总体排名情况，提前判断自己是否能进复试。去年我写过一个 python 爬虫分数统计，用起来不是那么舒服。今年我突然想到，直接用 QQ 机器人应该会优雅很多。花了半个下午写了初代版本，后面又迭代了两大版本。没有人推出新的分数排名工具，都在用我的，说明写得还行？哈哈哈。顺便写个文档，方便下届复用。 &lt;a href=&quot;https://github.com/aFlyBird0/bird_qq_bot&quot;&gt;Github 传送门&lt;/a&gt;。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;22考研分数刚出，学校建了个实验室宣传群，我也接过老师的旨意，进去宣传。陆续有考生进群，浙江省未公布排名，所以考生的一大痛点是：知道总体排名情况，提前判断自己是否能进复试。去年我写过一个 python 爬虫分数统计，用起来不是那么舒服。今年我突然想到，直接用 QQ 机器人应该会优雅很多。后面群里人都在用，还蛮受宠若惊的，顺便写个文档，方便下届复用。 &lt;a href=&quot;https://github.com/aFlyBird0/bird_qq_bot&quot;&gt;Github 传送门&lt;/a&gt;。&lt;/p&gt;</summary>
     
     
     
