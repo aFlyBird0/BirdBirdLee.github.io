@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-02-18T15:01:11.511Z</updated>
+  <updated>2022-02-26T14:53:20.420Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一个分数统计QQ机器人</title>
+    <link href="https://blog.aflybird.cn/2022/02/%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E7%BB%9F%E8%AE%A1QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    <id>https://blog.aflybird.cn/2022/02/%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E7%BB%9F%E8%AE%A1QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/</id>
+    <published>2022-02-26T13:33:33.000Z</published>
+    <updated>2022-02-26T14:53:20.420Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;22考研分数刚出，学校建了个实验室宣传群，我也接过老师的旨意，进去宣传。陆续有考生进群，浙江省未公布排名，所以考生的一大痛点是：知道总体排名情况，提前判断自己是否能进复试。去年我写过一个 python 爬虫分数统计，用起来不是那么舒服。今年我突然想到，直接用 QQ 机器人应该会优雅很多。花了半个下午写了初代版本，后面又迭代了两大版本。没有人推出新的分数排名工具，都在用我的，说明写得还行？哈哈哈。顺便写个文档，方便下届复用。 &lt;a href=&quot;https://github.com/aFlyBird0/bird_qq_bot&quot;&gt;Github 传送门&lt;/a&gt;。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Go" scheme="https://blog.aflybird.cn/tags/Go/"/>
+    
+  </entry>
   
   <entry>
     <title>中小型项目紧急维护血泪心得</title>
@@ -370,29 +387,6 @@
     
     
     <summary type="html">&lt;p&gt;向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CS" scheme="https://blog.aflybird.cn/categories/CS/"/>
-    
-    <category term="算法" scheme="https://blog.aflybird.cn/categories/CS/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>hdoj刷题二(java)：2010-2019</title>
-    <link href="https://blog.aflybird.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/"/>
-    <id>https://blog.aflybird.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E4%BA%8C(java)%EF%BC%9A2010-2019/</id>
-    <published>2021-03-07T14:34:47.000Z</published>
-    <updated>2021-10-05T17:46:34.573Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;题目、分析与代码&quot;&gt;&lt;a href=&quot;#题目、分析与代码&quot; class=&quot;headerlink&quot; title=&quot;题目、分析与代码&quot;&gt;&lt;/a&gt;题目、分析与代码&lt;/h2&gt;&lt;h3 id=&quot;Problem-2010-水仙花数&quot;&gt;&lt;a href=&quot;#Problem-2010-水仙花数&quot; class=&quot;headerlink&quot; title=&quot;Problem - 2010 水仙花数&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=2010&quot;&gt;Problem - 2010 水仙花数&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;再跳说不过去了，这里写一下， 个人觉得这里最难的是数位的拆分。有两种方法：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;读取成数字，然后先取余，再除10，循环&lt;/li&gt;
-&lt;li&gt;读取成字符串，获取子串，再用 &lt;code&gt;parseInt()&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary>
     
     
     
