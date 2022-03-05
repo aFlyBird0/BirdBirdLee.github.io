@@ -22,20 +22,23 @@
     var CONFIG = {"hostname":"blog.aflybird.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用">
+  <meta name="description" content="本文是我自然辩证法上的一次演讲，洗澡时想出的演讲主题，挺有意思。也算是又一次对阿德勒老爷子思想的实践与传播，稿子差不多是一次成型，没有故意修改，贵在真情实感，分享一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker安装与使用IDEA部署到远程服务器">
-<meta property="og:url" content="https://blog.aflybird.cn/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:title" content="自然辩证法演讲">
+<meta property="og:url" content="https://blog.aflybird.cn/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/index.html">
 <meta property="og:site_name" content="Bird&#39;s Blog">
-<meta property="og:description" content="Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用">
+<meta property="og:description" content="本文是我自然辩证法上的一次演讲，洗澡时想出的演讲主题，挺有意思。也算是又一次对阿德勒老爷子思想的实践与传播，稿子差不多是一次成型，没有故意修改，贵在真情实感，分享一下。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-08-04T07:50:33.000Z">
-<meta property="article:modified_time" content="2021-03-05T10:37:05.238Z">
+<meta property="article:published_time" content="2022-03-05T08:56:07.000Z">
+<meta property="article:modified_time" content="2022-03-05T09:09:12.949Z">
 <meta property="article:author" content="Bird">
-<meta property="article:tag" content="docker">
+<meta property="article:tag" content="生活">
+<meta property="article:tag" content="演讲">
+<meta property="article:tag" content="被讨厌的勇气">
+<meta property="article:tag" content="阿德勒">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blog.aflybird.cn/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+<link rel="canonical" href="https://blog.aflybird.cn/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/">
 
 
 <script id="page-configurations">
@@ -48,7 +51,7 @@
   };
 </script>
 
-  <title>Docker安装与使用IDEA部署到远程服务器 | Bird's Blog</title>
+  <title>自然辩证法演讲 | Bird's Blog</title>
   
 
 
@@ -203,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://blog.aflybird.cn/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://tcualhp-notes.oss-cn-hangzhou.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.JPG">
@@ -216,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Docker安装与使用IDEA部署到远程服务器
+          自然辩证法演讲
         </h1>
 
         <div class="post-meta">
@@ -227,32 +230,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-08-04 15:50:33" itemprop="dateCreated datePublished" datetime="2019-08-04T15:50:33+08:00">2019-08-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-05 18:37:05" itemprop="dateModified" datetime="2021-03-05T18:37:05+08:00">2021-03-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CS/common/" itemprop="url" rel="index"><span itemprop="name">common</span></a>
-                </span>
+              <time title="创建时间：2022-03-05 16:56:07 / 修改时间：17:09:12" itemprop="dateCreated datePublished" datetime="2022-03-05T16:56:07+08:00">2022-03-05</time>
             </span>
 
           
-            <span id="/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Docker安装与使用IDEA部署到远程服务器" title="阅读次数">
+            <span id="/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/" class="post-meta-item leancloud_visitors" data-flag-title="自然辩证法演讲" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -267,8 +251,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/08/Docker%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8IDEA%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -278,14 +262,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>832</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -297,54 +281,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Docker教程链接与自己总结，涉及教程，安装，远程配置，IDEA调用</p>
+        <p>本文是我自然辩证法上的一次演讲，洗澡时想出的演讲主题，挺有意思。也算是又一次对阿德勒老爷子思想的实践与传播，稿子差不多是一次成型，没有故意修改，贵在真情实感，分享一下。</p>
 <span id="more"></span>
-<blockquote>
-<p>如果是想学习可以跳过这段，首先我想学docker, 查了下好像docker for windows只能win10专业版安装，所以我招了教程利用各种帖子，后来安装失败，于是我在服务器上安装，很成功。之后发现可以用IDEA一键部署到服务器，就配置了一下，因为安全组关系又浪费不少时间，后来链接成功，但打包失败，我以为本地也要装，于是又试了一下，结果一下子就好了。可是IDEA打包还是失败，还来发现了什么，重启了一下IDEA，一切就都可以了，真是吐血，本地应该不需要装Docker，直接调用远程服务器的tcp的2375接口。</p>
-</blockquote>
-<h2 id="Docker-教程"><a href="#Docker-教程" class="headerlink" title="Docker 教程"></a>Docker 教程</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://yeasy.gitbooks.io/docker_practice/introduction/what.html">Docker 从入门到实践</a></li>
-</ul>
-<h2 id="Docker-两个版本区分"><a href="#Docker-两个版本区分" class="headerlink" title="Docker 两个版本区分"></a>Docker 两个版本区分</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/JENREY/article/details/84493812">dockerToolbox和docker for windows的区别</a></li>
-</ul>
-<h2 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h2><h3 id="Docker-for-Windows-安装"><a href="#Docker-for-Windows-安装" class="headerlink" title="Docker for Windows 安装"></a>Docker for Windows 安装</h3><ul>
-<li>安装<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/samwu/p/10360943.html">Windows10家庭版安装Docker for Windows</a></li>
-</ul>
-</li>
-<li>与虚拟机冲突解决办法<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qwsamxy/article/details/50533007">【Hyper-V】与【VirtualBox】【VMware】冲突的解决方法</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="Docker-Toolbox-安装"><a href="#Docker-Toolbox-安装" class="headerlink" title="Docker Toolbox 安装"></a>Docker Toolbox 安装</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jeshy/p/10518857.html">Docker ToolBox安装</a> 无脑安装</li>
-</ul>
-<h3 id="Docker-Linux-安装"><a href="#Docker-Linux-安装" class="headerlink" title="Docker Linux 安装"></a>Docker Linux 安装</h3><ul>
-<li>过于简单，无脑输命令就行， 第一条教程链接里面各个发行版本安装方法都有</li>
-</ul>
-<h2 id="IDEA-连接远程-Docker-进行部署"><a href="#IDEA-连接远程-Docker-进行部署" class="headerlink" title="IDEA 连接远程 Docker 进行部署"></a>IDEA 连接远程 Docker 进行部署</h2><h3 id="远程服务器-Docker-设置-其实就是开放2375端口"><a href="#远程服务器-Docker-设置-其实就是开放2375端口" class="headerlink" title="远程服务器 Docker 设置(其实就是开放2375端口)"></a>远程服务器 Docker 设置(其实就是开放2375端口)</h3><ul>
-<li>docker 配置<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/709151/2406150">Ubuntu配置方法</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012946310/article/details/82315302">CentOS配置方法</a></li>
-</ul>
-</li>
-<li>服务器配置<ul>
-<li>防火墙2375端口打开</li>
-<li>如果是阿里云要新建安全组规则加入2375</li>
-<li>如果是宝塔也要开放2375端口（注意这两个都要开放，我之前以为宝塔能直接改动阿里云的安全组就只开放了宝塔，结果一直连接超时）</li>
-</ul>
-</li>
-</ul>
-<h3 id="IDEA-设置"><a href="#IDEA-设置" class="headerlink" title="IDEA 设置"></a>IDEA 设置</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/forezp/article/details/70198649">docker部署spring cloud项目</a></li>
-<li>记得IDEA在maven引入docker之后重启一下，不然可能会出现我之前的无法连接到 “localhost:2375” 错误</li>
-</ul>
-<h2 id="部分错误文档"><a href="#部分错误文档" class="headerlink" title="部分错误文档"></a>部分错误文档</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ii19910410/article/details/87882917">Dockerfile ADD路径不正确问题</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ChineseYoung/article/details/83107353">这个也不错</a></li>
-</ul>
+
+<p>正如矛盾是对立统一的，很幸运，又很不幸，很高兴能作为第一组上台分享。</p>
+<p>直到上星期六，我们组的题目还没定下来。搜索引擎告诉我，自然辩证法，是马克思主义和恩格斯思想的自然观和自然科学观的反映，体现了马克思主义哲学和恩格斯思想的世界观、认识论、方法论的统一，构成马克思主义哲学的一个组成部分。同组的同学说，最好结合自身的经历吧。所以我一边洗澡一边想，取什么论题好呢？又要结合自身的经历，又要从小事出发，即，接地气，又能尽可能地和自然辩证法搭上边，在故事中体现科学哲理，即，高大上。这也太难了！从我们刚上大学开始，就被要求做各种演讲，竞选班干部要演讲，比赛要演讲，答辩要演讲，英语课要做 presentation。现在，连一门哲学课，都要上台演讲了。不过我转念一想，还是决定上台。因为自然辩证法有一节是，「机遇在科学发现中的意义」，（或许比较冷，删掉吧。我的理解是，人这一辈子，没有多少次，你在一堆人面前讲废话，别人还必须得听的机会。）或许我还真能在本次演讲中，发现些什么。</p>
+<p>终于开始今天的正题，我本次的演讲题目是什么呢？演讲！既然从本科到研究生，乃至漫长的人生旅途，有那么多次的演讲要做，那我们就来演讲演讲，演讲这回事儿。</p>
+<p>马克思主义科学技术方法论的核心就是<strong>辩证思维</strong>与<strong>系统思维</strong>。马克思主义科学技术方法论的基本原则就是把<strong>辩证法贯彻到科学技术研究</strong>中。而辩证法的对立统一原理告诉我们，要抓住事物的主要矛盾。</p>
+<p>那么对于大部分学生来说，一场演讲的主要矛盾，或者说，最难的地方在哪里呢？</p>
+<p>在于 <strong>上台</strong>。 至于技巧什么的，都是后话了，全是感情没有技巧，也不是不行。比如我。</p>
+<p>我写过一篇文章，题目是，厚脸皮，从入门到实践，这里分享给大家。</p>
+<p>一、别人没有你想象的那么在意你  </p>
+<p>我相信，每个人演讲的时候，都会非常紧张，一直在关注台下的人对自己演讲的反馈如何。常常因为认真听的人少而气馁，甚至怕听众因为不协调的肢体语言嘲笑自己，所以越来越越不敢表现自己。但其实，听众压根没有我们想象的那么关注演讲者。每个人在讲话、表演、处于人群焦点的时候，总会误以为别人有多么关心自己。但我们可以换个角度想想，想想我们自己作为听众的时候，是否那么在意当时的那个演讲者。</p>
+<p>二、不要过度期待他人的回应  </p>
+<p>听到这里，你可能又会说，虽然我不怕别人的眼光了，但我还是非常渴望别人的赞赏，如果我演讲之后，没有雷鸣般的掌声，那么我就会非常难受。但大部分的快乐与不自信，就源于此。我们和他人，都是独立的个体，我们想改变一个人，或者说，期望他人完全按照自己的意志行事，是完全不现实的，因为对方的手和脚在自己身上，不由我们控制。我们能做的，只是尽可能地去影响，用激情去感染。至于听众的反馈如何，我们可以关注，以此来提升自己，在下一次做得更好。但我们不能被他人的反馈所绑架，如果我们过度期待他人的回应，那么就是把快乐的权利拱手让人了。</p>
+<p>三、改变价值感的来源  </p>
+<p>问题又来了，不寻求他人的肯定，难道我们要做个无欲无求的人吗？并不是。我们能在受到表扬后获得价值感，但并不意味着只有受了表扬才能获得价值感。不妨想想，我们演讲的动机，是单纯为了获得表扬，还是，为了自我突破，自我实现？如果我们认为，演讲这一过程是重要的，我们的演讲的时候是享受的，那么一旦我们完整地把这场演讲进行下来，甚至当我们决定上台的那一刻，就可以完成自我的肯定，完成自我价值感的获得，完成自我实现。</p>
+<p>四、释放自我的枷锁  </p>
+<p>你可能还会说，道理我都懂，可我就是上不去，就是做不出这个决定，我就是会紧张，我就是这么个人，我和你不一样，你有勇气上去，我没有。我从小到大，就是个胆怯的人，就是个不敢在公共场合上发表讲话的人。我真的做不到！ 我以前也是这样想的。直到后来，我猛得发现，这些所谓的理由，其实不算什么理由，更确切地说，这些只是自己给自己找的借口罢了。不妨想想，从记事到现在，我们有多少事情，其实本可以做，只是因为各种各样的理由，不愿做，不敢做，一切都只是自己给自己戴上的枷锁罢了。</p>
+<p>聊到这里，有同学可能会说，哪怕我有信心上台了，但我为什么要上台呢？换句话说，演讲能给我们带来什么呢？或者说，前文我提到的，那些各种课上不得不的各种演讲，真的有用吗？</p>
+<p>我不想过分关注，我做了某件事，别人能带给我什么。我倾向于关注，我做了某件事，自己能给自己带来什么。所以，我不会说列举那些，获得他人的赞赏，得到他人的肯定，等等好处，以免于陷入，过度在意他人看法的 陷阱。我想谈谈，因为敢于演讲，认真演讲，带来的，那些切实发生在我们自己身上的变化。</p>
+<p>在谈好处之前，我想先扩大一下命题，讲讲广义的演讲。演讲到底是什么，我们能从演讲中获得什么？演讲是一种输出，他的同义词可以是表达，讲述，总结。甚至是撰写，比如写博客也是广义演讲的一种。演讲是一个，让你内心所想，自然地散发出来，经过整理，经过自我对话，逐渐使思想完善的过程，我们需要不断地推演，不断地演绎，不断地理顺逻辑，不断地斟酌字句。最终升华，变成演讲，变成文章。这体现了，第一节课老师提问我的，质量互变定律。</p>
+<p>演讲还是一种交流反馈的过程，无论是面对面的交谈别人给你的言语反馈与肢体反馈，还是别人在你博客下方留的评论，无论是对我们的正向肯定与探讨，还是指出错误，都可以更好地帮助我们调整已有认知，完善自身的理论，调整自身的行为，从而形成一个输出-反馈-认知升级-输出的闭环。这又体现了否定之否定定律。</p>
+<p>最后，让我们回到演讲本身。经常健身的同学应该知道，深蹲被称为健身动作之王，一个非常简单的动作，却能刺激到身体多个肌肉群，不但能锻炼下肢力量，还能强化心肺功能，还有着许许多多网传的特殊功用。那么，如果把人生类比于健身，那么，演讲是否可以类比于深蹲呢？虽然只是台上短短的几分钟，但是综合考察了人的逻辑表达能力、心理素质、知识面等等。虽然演讲只是在台上说上那么几分钟，但我相信，每一个用心演讲的人，在台前写稿时带来的能力的提升，在台上获得的各种激素轮番上阵的极致体验，是很难有其他活动可以比拟的。如果真的有这样的活动的话，那么还有一点，它一定是比不过演讲的。发起一个演讲，不需要买门票，甚至你还能收门票。虽然演讲只是短短几分钟，但是对于大部分而言，一段难忘的演讲经历，会被铭记很久很久，甚至一生。漫漫人生路上，当你犹豫不决的时候，或许会再度回想起过往演讲的那个瞬间，被再度注入勇气。</p>
+<p>试试吧，或许就是当初胆怯的你，萌生了个，或许我也可以试试，去讲上一段的想法，从此一发不可收，从此爱上演讲。</p>
+<p>你若认真对待演讲，演讲定会回报予你惊喜。</p>
 
     </div>
 
@@ -354,7 +315,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"># 生活</a>
+              <a href="/tags/%E6%BC%94%E8%AE%B2/" rel="tag"># 演讲</a>
+              <a href="/tags/%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94/" rel="tag"># 被讨厌的勇气</a>
+              <a href="/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/" rel="tag"># 阿德勒</a>
           </div>
 
         
@@ -363,13 +327,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/hexo%E9%83%A8%E7%BD%B2%E8%B8%A9%E5%9D%91%E6%80%BB%E7%BB%93/" rel="prev" title="hexo部署踩坑总结(文末有自动部署备份脚本)">
-      <i class="fa fa-chevron-left"></i> hexo部署踩坑总结(文末有自动部署备份脚本)
+    <a href="/2022/02/%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E7%BB%9F%E8%AE%A1QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="prev" title="一个分数统计QQ机器人">
+      <i class="fa fa-chevron-left"></i> 一个分数统计QQ机器人
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/08/DailyLove-%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF%E7%BB%86%E8%8A%82%E5%B1%95%E7%8E%B0(springboot)/" rel="next" title="DailyLove-日常记录小程序后端细节展现(springboot)">
-      DailyLove-日常记录小程序后端细节展现(springboot) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -429,7 +390,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E6%95%99%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">Docker 教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">Docker 两个版本区分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">Docker 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-for-Windows-%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">Docker for Windows 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Toolbox-%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">Docker Toolbox 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Linux-%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text">Docker Linux 安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA-%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B-Docker-%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">IDEA 连接远程 Docker 进行部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8-Docker-%E8%AE%BE%E7%BD%AE-%E5%85%B6%E5%AE%9E%E5%B0%B1%E6%98%AF%E5%BC%80%E6%94%BE2375%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.1.</span> <span class="nav-text">远程服务器 Docker 设置(其实就是开放2375端口)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA-%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">IDEA 设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E9%94%99%E8%AF%AF%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">部分错误文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

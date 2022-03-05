@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-02-26T15:28:23.436Z</updated>
+  <updated>2022-03-05T09:09:12.949Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自然辩证法演讲</title>
+    <link href="https://blog.aflybird.cn/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/"/>
+    <id>https://blog.aflybird.cn/2022/03/%E8%87%AA%E7%84%B6%E8%BE%A9%E8%AF%81%E6%B3%95%E6%BC%94%E8%AE%B2/</id>
+    <published>2022-03-05T08:56:07.000Z</published>
+    <updated>2022-03-05T09:09:12.949Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本文是我自然辩证法上的一次演讲，洗澡时想出的演讲主题，挺有意思。也算是又一次对阿德勒老爷子思想的实践与传播，稿子差不多是一次成型，没有故意修改，贵在真情实感，分享一下。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="生活" scheme="https://blog.aflybird.cn/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+    <category term="演讲" scheme="https://blog.aflybird.cn/tags/%E6%BC%94%E8%AE%B2/"/>
+    
+    <category term="被讨厌的勇气" scheme="https://blog.aflybird.cn/tags/%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94/"/>
+    
+    <category term="阿德勒" scheme="https://blog.aflybird.cn/tags/%E9%98%BF%E5%BE%B7%E5%8B%92/"/>
+    
+  </entry>
   
   <entry>
     <title>一个分数统计QQ机器人</title>
@@ -375,25 +398,6 @@
     
     
     <category term="hexo" scheme="https://blog.aflybird.cn/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hdoj刷题六(java)：2050-2059</title>
-    <link href="https://blog.aflybird.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/"/>
-    <id>https://blog.aflybird.cn/2021/03/hdoj%E5%88%B7%E9%A2%98%E5%85%AD(java)%EF%BC%9A2050-2059/</id>
-    <published>2021-03-08T12:40:03.000Z</published>
-    <updated>2021-10-05T17:46:34.575Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;向同学了解到第11页后半段的题才有意思，于是先从 P2050 开始刷了，同时为了保持索引的有序性，名字也先取「六」了，「三四五」先空缺着。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CS" scheme="https://blog.aflybird.cn/categories/CS/"/>
-    
-    <category term="算法" scheme="https://blog.aflybird.cn/categories/CS/%E7%AE%97%E6%B3%95/"/>
-    
     
   </entry>
   
