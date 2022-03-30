@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-03-05T13:30:19.781Z</updated>
+  <updated>2022-03-30T17:03:01.572Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>聊聊第一次外包</title>
+    <link href="https://blog.aflybird.cn/2022/03/%E8%81%8A%E8%81%8A%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%96%E5%8C%85/"/>
+    <id>https://blog.aflybird.cn/2022/03/%E8%81%8A%E8%81%8A%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%96%E5%8C%85/</id>
+    <published>2022-03-30T15:14:39.000Z</published>
+    <updated>2022-03-30T17:03:01.572Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;有个朋友是个外包巨佬，去年几个玩得非常来的朋友建了个几人小群，前后端、产品、设计都有。机缘巧合巨佬接到了一个类商城外包，大概中五位不到点，可能一个人不太敢接，就带着我们一起做了，互相充胆量。正好群里做什么的都有。我是个容易忘事的人，所以去年开始就决定用文字记录经历，这篇文章</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Go" scheme="https://blog.aflybird.cn/tags/Go/"/>
+    
+    <category term="外包" scheme="https://blog.aflybird.cn/tags/%E5%A4%96%E5%8C%85/"/>
+    
+    <category term="感悟" scheme="https://blog.aflybird.cn/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>自然辩证法演讲</title>
@@ -181,9 +208,9 @@
     
     
     
-    <category term="Go" scheme="https://blog.aflybird.cn/tags/Go/"/>
-    
     <category term="重构" scheme="https://blog.aflybird.cn/tags/%E9%87%8D%E6%9E%84/"/>
+    
+    <category term="Go" scheme="https://blog.aflybird.cn/tags/Go/"/>
     
   </entry>
   
@@ -376,28 +403,6 @@
     
     <category term="随笔" scheme="https://blog.aflybird.cn/categories/%E9%9A%8F%E7%AC%94/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>hexo新建菜单并添加文章</title>
-    <link href="https://blog.aflybird.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/"/>
-    <id>https://blog.aflybird.cn/2021/03/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</id>
-    <published>2021-03-08T15:42:41.000Z</published>
-    <updated>2021-10-05T17:46:34.580Z</updated>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;两种不同效果对比&quot;&gt;&lt;a href=&quot;#两种不同效果对比&quot; class=&quot;headerlink&quot; title=&quot;两种不同效果对比&quot;&gt;&lt;/a&gt;两种不同效果对比&lt;/h2&gt;&lt;h2 id=&quot;最终效果&quot;&gt;&lt;a href=&quot;#最终效果&quot; class=&quot;headerlink&quot; title=&quot;最终效果&quot;&gt;&lt;/a&gt;最终效果&lt;/h2&gt;&lt;p&gt;本文章使用的是 &lt;code&gt;next&lt;/code&gt; 主题，其他主题类似。&lt;/p&gt;
-&lt;p&gt;以添加「读书笔记」菜单为例，以下是最终效果&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CS" scheme="https://blog.aflybird.cn/categories/CS/"/>
-    
-    <category term="hexo" scheme="https://blog.aflybird.cn/categories/CS/hexo/"/>
-    
-    
-    <category term="hexo" scheme="https://blog.aflybird.cn/tags/hexo/"/>
     
   </entry>
   
