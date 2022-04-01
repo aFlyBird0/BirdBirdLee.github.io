@@ -6,7 +6,7 @@
   <link href="https://blog.aflybird.cn/atom.xml" rel="self"/>
   
   <link href="https://blog.aflybird.cn/"/>
-  <updated>2022-03-30T17:03:01.572Z</updated>
+  <updated>2022-04-01T15:06:40.339Z</updated>
   <id>https://blog.aflybird.cn/</id>
   
   <author>
@@ -21,16 +21,10 @@
     <link href="https://blog.aflybird.cn/2022/03/%E8%81%8A%E8%81%8A%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%96%E5%8C%85/"/>
     <id>https://blog.aflybird.cn/2022/03/%E8%81%8A%E8%81%8A%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%A4%96%E5%8C%85/</id>
     <published>2022-03-30T15:14:39.000Z</published>
-    <updated>2022-03-30T17:03:01.572Z</updated>
+    <updated>2022-04-01T15:06:40.339Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;有个朋友是个外包巨佬，去年几个玩得非常来的朋友建了个几人小群，前后端、产品、设计都有。机缘巧合巨佬接到了一个类商城外包，大概中五位不到点，可能一个人不太敢接，就带着我们一起做了，互相充胆量。正好群里做什么的都有。我是个容易忘事的人，所以去年开始就决定用文字记录经历，这篇文章</summary>
-        
-      
+    <summary type="html">&lt;p&gt;有个朋友是个外包巨佬，去年几个玩得非常来的朋友建了个几人小群，前后端、产品、设计都有。机缘巧合巨佬接到了一个类商城外包，大概中五位不到点，可能一个人不太敢接，就带着我们一起做了，互相充胆量。正好群里做什么的都有。我是个容易忘事的人，所以去年开始就决定用文字记录经历，这篇文章鸽了这么久也是该写了。&lt;/p&gt;</summary>
     
     
     
@@ -208,9 +202,9 @@
     
     
     
-    <category term="重构" scheme="https://blog.aflybird.cn/tags/%E9%87%8D%E6%9E%84/"/>
-    
     <category term="Go" scheme="https://blog.aflybird.cn/tags/Go/"/>
+    
+    <category term="重构" scheme="https://blog.aflybird.cn/tags/%E9%87%8D%E6%9E%84/"/>
     
   </entry>
   
